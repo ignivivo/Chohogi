@@ -2,11 +2,9 @@
 set -euo pipefail
 
 target_home="${HOME}"
-migrate_legacy=0
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --home) target_home="$2"; shift 2 ;;
-    --migrate-legacy) migrate_legacy=1; shift ;;
     *) echo "Unknown argument: $1" >&2; exit 2 ;;
   esac
 done
@@ -31,7 +29,4 @@ done
 mkdir -p "$codex"
 cp "$assets/codex/AGENTS.md" "$codex/AGENTS.md"
 
-if [[ "$migrate_legacy" == 1 ]]; then
-  rm -rf "$agents/skills/codex-native-meta-harness" "$agents/skills/learning-loop" "$agents/harness"
-fi
 echo 'Chohogi installation complete. Run tooling/doctor.sh.'

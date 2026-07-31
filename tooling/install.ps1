@@ -1,7 +1,6 @@
 [CmdletBinding()]
 param(
   [string]$TargetHome = $HOME,
-  [switch]$MigrateLegacy,
   [switch]$DryRun
 )
 
@@ -38,22 +37,6 @@ if ($DryRun) { Write-Host "Would install $newGlobal -> $oldGlobal" }
 else {
   New-Item -ItemType Directory -Force -Path $codexHome | Out-Null
   Copy-Item -Force -LiteralPath $newGlobal -Destination $oldGlobal
-}
-
-if ($MigrateLegacy) {
-  $legacySkills = @('codex-native-meta-harness', 'learning-loop')
-  foreach ($name in $legacySkills) {
-    $path = Join-Path $agentsHome "skills\$name"
-    if (Test-Path $path) {
-      if ($DryRun) { Write-Host "Would remove legacy discovery asset $path" }
-      else { Remove-Item -Recurse -Force -LiteralPath $path; Write-Host "Removed legacy discovery asset $path" }
-    }
-  }
-  $legacyHarness = Join-Path $agentsHome 'harness'
-  if (Test-Path $legacyHarness) {
-    if ($DryRun) { Write-Host "Would remove legacy harness source $legacyHarness" }
-    else { Remove-Item -Recurse -Force -LiteralPath $legacyHarness; Write-Host "Removed legacy harness source $legacyHarness" }
-  }
 }
 
 Write-Host 'Chohogi installation complete. Run tooling/doctor.ps1 against this target.'

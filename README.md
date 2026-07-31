@@ -31,4 +31,4 @@ Linux/macOS:
 ./tooling/doctor.sh
 ```
 
-기존의 구형 전역 자산을 초호기로 바꾸는 현재 사용자 환경에서는 `-MigrateLegacy` (`--migrate-legacy`)를 명시한다. 일반 설치는 인증·플러그인·MCP·개인 설정을 건드리지 않는다.
+일반 설치는 인증·플러그인·MCP·개인 설정과 기존 사용자 자산을 건드리지 않는다.
