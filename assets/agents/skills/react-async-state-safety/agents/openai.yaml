@@ -1,0 +1,4 @@
+interface:
+  display_name: "React Async State Safety"
+  short_description: "Prevent stale async React state writes."
+  default_prompt: "Audit this React async state flow for stale results, retries, and invalidation."

@@ -1,0 +1,59 @@
+schema_version: 1
+package:
+  id: chohogi
+  name_ko: "초호기"
+  name_hanja: "初號機"
+  portability: "self-contained-method-assets"
+  excludes:
+    - "Codex Desktop plugins"
+    - "MCP configuration and credentials"
+    - "authentication, sessions, and caches"
+    - "personal Codex config.toml"
+components:
+  - id: global-guidance
+    organ: trunk
+    source: assets/codex/AGENTS.md
+    install: .codex/AGENTS.md
+    trigger: "every Codex task"
+    loader: "Codex global guidance"
+  - id: conductor
+    organ: trunk
+    source: assets/agents/chohogi/trunk/conductor.md
+    install: .agents/chohogi/trunk/conductor.md
+    trigger: "substantial task intake"
+    loader: "referenced by global guidance"
+  - id: constitution
+    organ: roots
+    source: assets/agents/chohogi/roots/constitution.md
+    install: .agents/chohogi/roots/constitution.md
+    trigger: "harness policy or installation change"
+    loader: "referenced by conductor and branches"
+  - id: learning
+    organ: branches
+    source: assets/agents/skills/learning
+    install: .agents/skills/learning
+    trigger: "confirmed failure with prevention evidence"
+    loader: "Codex skill discovery"
+  - id: homeostasis
+    organ: branches
+    source: assets/agents/skills/homeostasis
+    install: .agents/skills/homeostasis
+    trigger: "whole-harness health, lifecycle, or routing change"
+    loader: "Codex skill discovery"
+  - id: xylem-skills
+    organ: xylem
+    source: assets/agents/skills
+    install: .agents/skills
+    includes: [accessibility, core-web-vitals, grill-me, performance, react-async-state-safety, security-and-hardening]
+    trigger: "only when the concrete technology boundary matches"
+    loader: "Codex skill discovery"
+  - id: amyloplast
+    organ: amyloplast
+    source: assets/agents/chohogi/amyloplast
+    install: .agents/chohogi/amyloplast
+    trigger: "explicit learning or homeostasis review"
+    loader: "not automatically loaded"
+project_boundary:
+  leaves_location: "<project>/.agents/skills and project-owned contracts/tests"
+  ownership: "the project Git repository"
+  rule: "Project learning stays in its project record unless promoted into amyloplast."

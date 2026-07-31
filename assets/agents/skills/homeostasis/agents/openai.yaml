@@ -1,0 +1,4 @@
+interface:
+  display_name: "Homeostasis"
+  short_description: "Maintain Chohogi policy and reusable operating assets."
+  default_prompt: "Use $homeostasis to review or change Chohogi itself."

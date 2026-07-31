@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learning"
+  short_description: "Turn confirmed failures into the smallest durable prevention."
+  default_prompt: "Use $learning to decide how to prevent this confirmed failure from recurring."
