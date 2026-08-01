@@ -53,6 +53,12 @@ components:
     install: .agents/skills/homeostasis
     trigger: "whole-harness health, lifecycle, or routing change"
     loader: "Codex skill discovery"
+  - id: skill-lifecycle-reference
+    organ: branches
+    source: assets/agents/skills/homeostasis/references/skill-lifecycle.md
+    install: .agents/skills/homeostasis/references/skill-lifecycle.md
+    trigger: "after a reusable SKILL.md lifecycle decision"
+    loader: "read by homeostasis; $skill-creator is preferred when callable"
   - id: xylem-skills
     organ: xylem
     source: assets/agents/skills

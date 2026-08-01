@@ -12,7 +12,8 @@ $requiredSource = @(
   'assets\agents\chohogi\trunk\routes\debugging.md',
   'assets\agents\chohogi\trunk\evals\route-fixtures.json',
   'assets\agents\chohogi\roots\constitution.md',
-  'assets\agents\chohogi\amyloplast\index.yaml'
+  'assets\agents\chohogi\amyloplast\index.yaml',
+  'assets\agents\skills\homeostasis\references\skill-lifecycle.md'
 )
 $requiredSkills = @('learning', 'homeostasis', 'accessibility', 'core-web-vitals', 'grill-me', 'performance', 'react-async-state-safety', 'security-and-hardening')
 $errors = [System.Collections.Generic.List[string]]::new()
@@ -37,6 +38,8 @@ foreach ($name in $requiredSkills) {
   $installed = Join-Path $TargetHome ".agents\skills\$name\SKILL.md"
   if (-not (Test-Path $installed)) { $errors.Add("Missing installed skill: $name") }
 }
+$installedLifecycle = Join-Path $TargetHome '.agents\skills\homeostasis\references\skill-lifecycle.md'
+if (-not (Test-Path $installedLifecycle)) { $errors.Add('Missing installed skill lifecycle reference.') }
 $installedConductor = Join-Path $TargetHome '.agents\chohogi\trunk\conductor.md'
 if (-not (Test-Path $installedConductor)) { $errors.Add('Missing installed conductor.') }
 elseif (-not (Get-Content -LiteralPath $installedConductor -Raw -Encoding utf8).Contains('routes/<flow>.md')) { $errors.Add('Installed conductor does not reference daily route contracts.') }

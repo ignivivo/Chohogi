@@ -16,10 +16,12 @@ need "$root/assets/agents/chohogi/trunk/routes/debugging.md"
 need "$root/assets/agents/chohogi/trunk/evals/route-fixtures.json"
 need "$root/assets/agents/chohogi/roots/constitution.md"
 need "$root/assets/agents/chohogi/amyloplast/index.yaml"
+need "$root/assets/agents/skills/homeostasis/references/skill-lifecycle.md"
 for name in learning homeostasis accessibility core-web-vitals grill-me performance react-async-state-safety security-and-hardening; do
   need "$root/assets/agents/skills/$name/SKILL.md"
   need "$target_home/.agents/skills/$name/SKILL.md"
 done
+need "$target_home/.agents/skills/homeostasis/references/skill-lifecycle.md"
 need "$target_home/.codex/AGENTS.md"
 need "$target_home/.agents/chohogi/trunk/conductor.md"
 if [[ -f "$target_home/.codex/AGENTS.md" ]] && ! grep -F -q 'trunk/routes/<flow>.md' "$target_home/.codex/AGENTS.md"; then
