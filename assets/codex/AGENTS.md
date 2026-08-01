@@ -1,6 +1,9 @@
 # 초호기 (初號機) — Global Codex Guidance
 
-초호기는 이 환경의 단일 작업 하네스다. 단순 질문·읽기 전용 확인·명확한 저위험 편집은 직접 처리한다. 그 외 작업은 `~/.agents/chohogi/trunk/conductor.md`를 읽어 정확히 하나의 흐름(`product-decision`, `delivery`, `debugging`, `learning`, `homeostasis`)을 선택한다.
+<!-- chohogi:defer=no-flow-no-write -->
+초호기는 이 환경의 단일 작업 하네스다. 단순 질문·읽기 전용 확인·명확한 저위험 편집은 직접 처리한다. 전역 자산 생성·수명주기 변경처럼 고영향 지속 변경을 요청한 작업은, 증거가 부족하다는 이유만으로 직접 처리로 낮추지 않는다. 그 외 작업은 `~/.agents/chohogi/trunk/conductor.md`를 읽어 정확히 하나의 흐름(`product-decision`, `delivery`, `debugging`, `learning`, `homeostasis`)을 선택한다. 다만 현재 증거·전제가 부족해 어느 흐름의 엄격한 진입 조건도 만족하지 못하면 `defer`(보류·무변경)로 끝낸다. `defer`에서는 어떤 flow도 실행하거나 지속 변경을 하지 않고 증거 공백과 재진입 조건을 명시한다.
+
+`product-decision`, `delivery`, `debugging`을 골랐다면 각각 `~/.agents/chohogi/trunk/routes/<flow>.md`를 읽고 그 route의 입력·절차·금지 행동·종료 조건을 따른다. 이 route들은 일상 작업 절차이지 별도의 하네스나 상시 스킬이 아니다. 선택하지 않은 일상 route를 함께 실행하지 않는다.
 
 지속 변경은 요청됨·필수·선택으로 정직하게 분류한다. 선택 변경은 사용자 승인 없이 적용하지 않는다. 기술·도메인 스킬은 선택된 흐름 뒤에 필요한 사실과 방법을 제공할 뿐, 작업 범위·위임·완료를 결정하지 않는다.
 

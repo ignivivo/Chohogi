@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 3,
+  "purpose": "Deterministic flow-selection fixtures. They validate the conductor contract, not the quality of an implementation.",
+  "selectionKinds": ["direct", "defer", "daily-route", "branch"],
+  "mutationAuthorities": ["none", "requested"],
+  "fixtures": [
+    {
+      "id": "direct-readonly-explanation",
+      "request": "이 함수가 하는 일을 현재 코드 기준으로 설명해줘.",
+      "expected": { "kind": "direct", "flow": null },
+      "forbiddenFlows": ["product-decision", "delivery", "debugging", "learning", "homeostasis"],
+      "mutationAuthority": "none",
+      "requiredArtifacts": ["evidence-backed-answer"]
+    },
+    {
+      "id": "direct-low-risk-edit",
+      "request": "README의 오타 하나만 고쳐줘. 변경 대상 문장은 이미 지정했어.",
+      "expected": { "kind": "direct", "flow": null },
+      "forbiddenFlows": ["product-decision", "delivery", "debugging", "learning", "homeostasis"],
+      "mutationAuthority": "requested",
+      "requiredArtifacts": ["changed-line", "brief-verification"]
+    },
+    {
+      "id": "product-open-pricing",
+      "request": "무료 기능 범위와 유료 전환 지점을 정해야 해. 무엇을 팔지 아직 결정하지 못했어.",
+      "expected": { "kind": "daily-route", "flow": "product-decision" },
+      "forbiddenFlows": ["delivery", "debugging", "learning", "homeostasis"],
+      "mutationAuthority": "none",
+      "requiredArtifacts": ["options", "tradeoffs", "decision-needed", "acceptance-criteria"]
+    },
+    {
+      "id": "product-open-architecture-impact",
+      "request": "두 저장 방식 중 하나를 골라야 하는데 비용과 복구 가능성이 다르다. 추천과 근거를 정리해줘.",
+      "expected": { "kind": "daily-route", "flow": "product-decision" },
+      "forbiddenFlows": ["delivery", "debugging", "learning", "homeostasis"],
+      "mutationAuthority": "none",
+      "requiredArtifacts": ["options", "tradeoffs", "recommendation", "decision-owner"]
+    },
+    {
+      "id": "product-user-locked-requirements",
+      "request": "승인된 명세와 수용 조건 그대로 사용자 설정 화면을 구현해줘.",
+      "expected": { "kind": "daily-route", "flow": "delivery" },
+      "forbiddenFlows": ["product-decision", "debugging", "learning", "homeostasis"],
+      "mutationAuthority": "requested",
+      "requiredArtifacts": ["change-summary", "acceptance-evidence"]
+    },
+    {
+      "id": "delivery-cross-contract",
+      "request": "이 API 계약을 새 필드까지 확장하고, 모든 소비자와 테스트를 함께 갱신해줘. 성공 조건은 문서에 있다.",
+      "expected": { "kind": "daily-route", "flow": "delivery" },
+      "forbiddenFlows": ["product-decision", "debugging", "learning", "homeostasis"],
+      "mutationAuthority": "requested",
+      "requiredArtifacts": ["affected-consumers", "change-summary", "verification-evidence"]
+    },
+    {
+      "id": "delivery-known-cause-fix",
+      "request": "원인이 확정된 null 처리 누락을 이 파일에서 고치고 회귀 테스트를 추가해줘.",
+      "expected": { "kind": "daily-route", "flow": "delivery" },
+      "forbiddenFlows": ["product-decision", "debugging", "learning", "homeostasis"],
+      "mutationAuthority": "requested",
+      "requiredArtifacts": ["minimal-fix", "regression-evidence"]
+    },
+    {
+      "id": "debug-test-failure-unknown-cause",
+      "request": "CI에서 간헐적으로 이 테스트가 실패한다. 원인을 모르니 재현부터 확인해줘.",
+      "expected": { "kind": "daily-route", "flow": "debugging" },
+      "forbiddenFlows": ["product-decision", "delivery", "learning", "homeostasis"],
+      "mutationAuthority": "none",
+      "requiredArtifacts": ["reproduction-or-limit", "hypotheses", "root-cause-status", "proposed-next-step"]
+    },
+    {
+      "id": "debug-wrong-result-unknown-layer",
+      "request": "같은 입력인데 화면 결과가 가끔 이전 사용자 데이터로 바뀐다. 어느 층 문제인지 모르겠다.",
+      "expected": { "kind": "daily-route", "flow": "debugging" },
+      "forbiddenFlows": ["product-decision", "delivery", "learning", "homeostasis"],
+      "mutationAuthority": "none",
+      "requiredArtifacts": ["observed-vs-expected", "boundary-hypotheses", "verification-plan"]
+    },
+    {
+      "id": "debug-no-speculative-fix",
+      "request": "오류 로그만 있다. 원인은 아직 모르지만 일단 여러 파일을 고쳐서 없어지게 해줘.",
+      "expected": { "kind": "daily-route", "flow": "debugging" },
+      "forbiddenFlows": ["product-decision", "delivery", "learning", "homeostasis"],
+      "mutationAuthority": "requested",
+      "requiredArtifacts": ["evidence-request-or-reproduction", "no-speculative-fix"]
+    },
+    {
+      "id": "debug-diagnose-only",
+      "request": "이 서비스의 500 오류 원인만 조사하고, 지금은 어떤 파일도 수정하지 마.",
+      "expected": { "kind": "daily-route", "flow": "debugging" },
+      "forbiddenFlows": ["product-decision", "delivery", "learning", "homeostasis"],
+      "mutationAuthority": "none",
+      "requiredArtifacts": ["reproduction-or-limit", "root-cause-status", "proposed-fix-without-write"]
+    },
+    {
+      "id": "learning-confirmed-cross-project",
+      "request": "재현 가능한 원인과 회귀 테스트가 확인됐다. 이 예방책이 여러 React 프로젝트에 적용되는지 검토해줘.",
+      "expected": { "kind": "branch", "flow": "learning" },
+      "forbiddenFlows": ["product-decision", "delivery", "debugging", "homeostasis"],
+      "mutationAuthority": "none",
+      "requiredArtifacts": ["failure-signature", "smallest-prevention", "promotion-decision"]
+    },
+    {
+      "id": "learning-local-only",
+      "request": "이 프로젝트에서만 쓰는 설정 오타의 원인과 고치는 방법이 확인됐다.",
+      "expected": { "kind": "branch", "flow": "learning" },
+      "forbiddenFlows": ["product-decision", "delivery", "debugging", "homeostasis"],
+      "mutationAuthority": "none",
+      "requiredArtifacts": ["failure-signature", "project-local-prevention", "promotion-decision"]
+    },
+    {
+      "id": "learning-unconfirmed-suspicion",
+      "request": "아마 예전에 비슷한 버그가 있었던 것 같아. 아직 재현은 못 했지만 전역 스킬을 새로 만들자.",
+      "expected": { "kind": "defer", "flow": null },
+      "forbiddenFlows": ["product-decision", "delivery", "debugging", "learning", "homeostasis"],
+      "mutationAuthority": "requested",
+      "requiredArtifacts": ["evidence-gap", "no-change", "reentry-condition", "no-promotion"]
+    },
+    {
+      "id": "homeostasis-model-policy",
+      "request": "초호기의 모델 등급 배치가 반복적으로 과소비를 만든다. 전역 정책과 검증 방법을 바꾸자.",
+      "expected": { "kind": "branch", "flow": "homeostasis" },
+      "forbiddenFlows": ["product-decision", "delivery", "debugging", "learning"],
+      "mutationAuthority": "requested",
+      "requiredArtifacts": ["observed-imbalance", "change-contract", "installation-or-discovery-evidence"]
+    },
+    {
+      "id": "homeostasis-skill-lifecycle",
+      "request": "두 전역 스킬이 반복적으로 같은 일을 하고 충돌한다. 초호기 수준에서 정리해줘.",
+      "expected": { "kind": "branch", "flow": "homeostasis" },
+      "forbiddenFlows": ["product-decision", "delivery", "debugging", "learning"],
+      "mutationAuthority": "requested",
+      "requiredArtifacts": ["ownership-boundary", "lifecycle-decision", "verification-method"]
+    },
+    {
+      "id": "homeostasis-single-project-feature",
+      "request": "한 프로젝트에 새 결제 버튼을 추가해줘.",
+      "expected": { "kind": "daily-route", "flow": "delivery" },
+      "forbiddenFlows": ["product-decision", "debugging", "learning", "homeostasis"],
+      "mutationAuthority": "requested",
+      "requiredArtifacts": ["change-summary", "verification-evidence"]
+    }
+  ]
+}

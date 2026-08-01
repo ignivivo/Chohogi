@@ -7,6 +7,10 @@ $requiredSource = @(
   'manifest.yaml',
   'assets\codex\AGENTS.md',
   'assets\agents\chohogi\trunk\conductor.md',
+  'assets\agents\chohogi\trunk\routes\product-decision.md',
+  'assets\agents\chohogi\trunk\routes\delivery.md',
+  'assets\agents\chohogi\trunk\routes\debugging.md',
+  'assets\agents\chohogi\trunk\evals\route-fixtures.json',
   'assets\agents\chohogi\roots\constitution.md',
   'assets\agents\chohogi\amyloplast\index.yaml'
 )
@@ -28,11 +32,19 @@ if ($matches.Count -gt 0) { $errors.Add('Active source still contains retired co
 
 $installedGuidance = Join-Path $TargetHome '.codex\AGENTS.md'
 if (-not (Test-Path $installedGuidance)) { $errors.Add("Missing installed global guidance: $installedGuidance") }
+elseif (-not (Get-Content -LiteralPath $installedGuidance -Raw -Encoding utf8).Contains('trunk/routes/<flow>.md')) { $errors.Add('Installed global guidance does not reference the selected daily route contract.') }
 foreach ($name in $requiredSkills) {
   $installed = Join-Path $TargetHome ".agents\skills\$name\SKILL.md"
   if (-not (Test-Path $installed)) { $errors.Add("Missing installed skill: $name") }
 }
-if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\conductor.md'))) { $errors.Add('Missing installed conductor.') }
+$installedConductor = Join-Path $TargetHome '.agents\chohogi\trunk\conductor.md'
+if (-not (Test-Path $installedConductor)) { $errors.Add('Missing installed conductor.') }
+elseif (-not (Get-Content -LiteralPath $installedConductor -Raw -Encoding utf8).Contains('routes/<flow>.md')) { $errors.Add('Installed conductor does not reference daily route contracts.') }
+foreach ($route in @('product-decision', 'delivery', 'debugging')) {
+  $installedRoute = Join-Path $TargetHome ".agents\chohogi\trunk\routes\$route.md"
+  if (-not (Test-Path $installedRoute)) { $errors.Add("Missing installed route: $route") }
+}
+if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\route-fixtures.json'))) { $errors.Add('Missing installed route fixtures.') }
 
 if ($errors.Count -gt 0) {
   $errors | ForEach-Object { Write-Error $_ }

@@ -22,6 +22,19 @@ components:
     install: .agents/chohogi/trunk/conductor.md
     trigger: "substantial task intake"
     loader: "referenced by global guidance"
+  - id: daily-routes
+    organ: trunk
+    source: assets/agents/chohogi/trunk/routes
+    install: .agents/chohogi/trunk/routes
+    includes: [product-decision, delivery, debugging]
+    trigger: "after conductor selects one daily route"
+    loader: "referenced by global guidance and conductor"
+  - id: route-evaluations
+    organ: trunk
+    source: assets/agents/chohogi/trunk/evals
+    install: .agents/chohogi/trunk/evals
+    trigger: "explicit route conformance or outcome comparison"
+    loader: "not automatically loaded"
   - id: constitution
     organ: roots
     source: assets/agents/chohogi/roots/constitution.md
