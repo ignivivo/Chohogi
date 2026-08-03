@@ -8,6 +8,8 @@ errors=0
 need() { [[ -f "$1" ]] || { echo "Missing: $1" >&2; errors=1; }; }
 
 need "$root/manifest.yaml"
+need "$root/tooling/resolve-python.ps1"
+need "$root/tooling/verify-replay-evaluation.py"
 need "$root/assets/codex/AGENTS.md"
 need "$root/assets/agents/chohogi/trunk/conductor.md"
 need "$root/assets/agents/chohogi/trunk/execution-allocation.md"
@@ -22,6 +24,8 @@ need "$root/assets/agents/chohogi/trunk/routes/debugging.md"
 need "$root/assets/agents/chohogi/trunk/evals/route-fixtures.json"
 need "$root/assets/agents/chohogi/trunk/evals/execution-fixtures.json"
 need "$root/assets/agents/chohogi/trunk/evals/capability-fixtures.json"
+need "$root/assets/agents/chohogi/trunk/evals/replay-result.schema.json"
+need "$root/assets/agents/chohogi/trunk/evals/replay-result.example.json"
 need "$root/assets/agents/chohogi/roots/constitution.md"
 need "$root/assets/agents/chohogi/amyloplast/index.yaml"
 need "$root/assets/agents/skills/homeostasis/references/skill-lifecycle.md"
@@ -56,6 +60,8 @@ done
 need "$target_home/.agents/chohogi/trunk/evals/route-fixtures.json"
 need "$target_home/.agents/chohogi/trunk/evals/execution-fixtures.json"
 need "$target_home/.agents/chohogi/trunk/evals/capability-fixtures.json"
+need "$target_home/.agents/chohogi/trunk/evals/replay-result.schema.json"
+need "$target_home/.agents/chohogi/trunk/evals/replay-result.example.json"
 if [[ -f "$target_home/.agents/chohogi/trunk/execution-allocation.md" ]] && ! grep -F -q '<!-- chohogi:execution-choice=internal -->' "$target_home/.agents/chohogi/trunk/execution-allocation.md"; then
   echo 'Installed execution-allocation contract does not retain controller boundary.' >&2
   errors=1

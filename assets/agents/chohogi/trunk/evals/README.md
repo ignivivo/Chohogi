@@ -76,6 +76,16 @@ baseline과 Chohogi를 비교할 때는 같은 작업 설명, 모델, 추론 강
 저장소 상태를 사용한다. 한 번의 응답으로 승패를 정하지 말고, 중요한 fixture는
 반복 실행하거나 독립 검토로 채점한다.
 
+## 구조화된 replay 기록
+
+각 실행 결과는 `replay-result.schema.json`의 필드만 가진 JSON으로 별도 평가 저장소나
+비밀 없는 작업 기록에 남긴다. 원문 프롬프트·출생정보·고객정보·비밀값·도구 payload는
+기록하지 않는다. `validate-replay-result.py <result.json>`은 필수 필드와 결과 축을
+검사한다. baseline과 chohogi는 같은 fixture·model·effort·toolCondition·repoCondition
+조합으로 최소 두 번씩 실행한 뒤에만 비용·재작업·controller 침범을 비교한다.
+`replay-result.example.json`은 결과 형식 검증용일 뿐 성능 증거가 아니며,
+`summarize-replays.py`는 검증된 결과 파일만 profile별 지표로 집계한다.
+
 ## 실제 작업 성능 평가
 
 실제 작업이 충분히 쌓인 뒤에는 같은 유형의 작업군에서 다음을 비교한다.

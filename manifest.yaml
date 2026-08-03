@@ -71,6 +71,18 @@ components:
     install: .agents/chohogi/trunk/evals/capability-fixtures.json
     trigger: "explicit capability-boundary conformance or outcome comparison"
     loader: "not automatically loaded"
+  - id: replay-result-schema
+    organ: trunk
+    source: assets/agents/chohogi/trunk/evals/replay-result.schema.json
+    install: .agents/chohogi/trunk/evals/replay-result.schema.json
+    trigger: "recording or reviewing real Chohogi replay evidence"
+    loader: "not automatically loaded"
+  - id: replay-evaluation-verifier
+    organ: trunk
+    source: tooling/verify-replay-evaluation.py
+    install: tooling/verify-replay-evaluation.py
+    trigger: "changing replay evidence schema, validation, or aggregation"
+    loader: "manual repository verification"
   - id: constitution
     organ: roots
     source: assets/agents/chohogi/roots/constitution.md

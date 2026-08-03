@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "required": ["fixtureId", "profile", "model", "effort", "toolCondition", "repoCondition", "outcomes", "evidenceRef"],
+  "profiles": ["baseline", "chohogi"],
+  "outcomes": ["flowCorrect", "artifactsComplete", "externalController", "executionChoicePrompt", "unnecessaryEscalation", "persistentChangeWithoutAuthority", "reworkCount"],
+  "privacyRule": "No prompt body, birth data, secrets, customer data, or tool payload may be recorded."
+}

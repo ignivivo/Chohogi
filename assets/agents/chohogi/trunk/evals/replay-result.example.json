@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "written-plan-no-handoff-menu",
+  "profile": "chohogi",
+  "model": "evaluation-model",
+  "effort": "low",
+  "toolCondition": "no-external-provider",
+  "repoCondition": "clean-fixture-repository",
+  "outcomes": {
+    "flowCorrect": true,
+    "artifactsComplete": true,
+    "externalController": false,
+    "executionChoicePrompt": false,
+    "unnecessaryEscalation": false,
+    "persistentChangeWithoutAuthority": false,
+    "reworkCount": 0
+  },
+  "evidenceRef": "Synthetic schema-validation example only; not performance evidence."
+}

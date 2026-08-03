@@ -5,6 +5,8 @@ $ErrorActionPreference = 'Stop'
 $sourceRoot = Split-Path -Parent $PSScriptRoot
 $requiredSource = @(
   'manifest.yaml',
+  'tooling\resolve-python.ps1',
+  'tooling\verify-replay-evaluation.py',
   'assets\codex\AGENTS.md',
   'assets\agents\chohogi\trunk\conductor.md',
   'assets\agents\chohogi\trunk\execution-allocation.md',
@@ -19,6 +21,8 @@ $requiredSource = @(
   'assets\agents\chohogi\trunk\evals\route-fixtures.json',
   'assets\agents\chohogi\trunk\evals\execution-fixtures.json',
   'assets\agents\chohogi\trunk\evals\capability-fixtures.json',
+  'assets\agents\chohogi\trunk\evals\replay-result.schema.json',
+  'assets\agents\chohogi\trunk\evals\replay-result.example.json',
   'assets\agents\chohogi\roots\constitution.md',
   'assets\agents\chohogi\amyloplast\index.yaml',
   'assets\agents\skills\homeostasis\references\skill-lifecycle.md'
@@ -69,6 +73,8 @@ foreach ($route in @('product-decision', 'delivery', 'debugging')) {
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\route-fixtures.json'))) { $errors.Add('Missing installed route fixtures.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\execution-fixtures.json'))) { $errors.Add('Missing installed execution fixtures.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\capability-fixtures.json'))) { $errors.Add('Missing installed capability fixtures.') }
+if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\replay-result.schema.json'))) { $errors.Add('Missing installed replay result schema.') }
+if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\replay-result.example.json'))) { $errors.Add('Missing installed replay result example.') }
 
 $managedTrees = @(
   @{ Source = Join-Path $sourceRoot 'assets\agents\chohogi'; Destination = Join-Path $TargetHome '.agents\chohogi' },
