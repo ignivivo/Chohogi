@@ -22,6 +22,18 @@ components:
     install: .agents/chohogi/trunk/conductor.md
     trigger: "substantial task intake"
     loader: "referenced by global guidance"
+  - id: execution-allocation
+    organ: trunk
+    source: assets/agents/chohogi/trunk/execution-allocation.md
+    install: .agents/chohogi/trunk/execution-allocation.md
+    trigger: "after a daily route is selected"
+    loader: "referenced by conductor and global guidance"
+  - id: context-packet
+    organ: trunk
+    source: assets/agents/chohogi/trunk/context-packet.md
+    install: .agents/chohogi/trunk/context-packet.md
+    trigger: "multi-boundary work or context-continuity risk"
+    loader: "referenced by conductor"
   - id: daily-routes
     organ: trunk
     source: assets/agents/chohogi/trunk/routes
@@ -34,6 +46,12 @@ components:
     source: assets/agents/chohogi/trunk/evals
     install: .agents/chohogi/trunk/evals
     trigger: "explicit route conformance or outcome comparison"
+    loader: "not automatically loaded"
+  - id: execution-evaluations
+    organ: trunk
+    source: assets/agents/chohogi/trunk/evals/execution-fixtures.json
+    install: .agents/chohogi/trunk/evals/execution-fixtures.json
+    trigger: "explicit execution-allocation conformance or outcome comparison"
     loader: "not automatically loaded"
   - id: constitution
     organ: roots
@@ -66,6 +84,12 @@ components:
     includes: [accessibility, core-web-vitals, grill-me, performance, react-async-state-safety, security-and-hardening]
     trigger: "only when the concrete technology boundary matches"
     loader: "Codex skill discovery"
+  - id: execution-methods
+    organ: xylem
+    source: assets/agents/chohogi/xylem/execution-methods.md
+    install: .agents/chohogi/xylem/execution-methods.md
+    trigger: "after execution allocation selects a method need"
+    loader: "referenced by conductor"
   - id: amyloplast
     organ: amyloplast
     source: assets/agents/chohogi/amyloplast

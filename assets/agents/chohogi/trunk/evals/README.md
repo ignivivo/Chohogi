@@ -22,6 +22,11 @@
 `tooling/verify-routes.ps1` 또는 `tooling/verify-routes.py`는 fixture와 route 문서의
 정적 계약을 검증한다. 실제 모델의 선택은 아래 replay로 확인한다.
 
+`execution-fixtures.json`은 실행 배정의 별도 행동 계약이다. 모든 fixture는 외부
+controller와 불필요한 실행 방식 질문을 금지한다. `tooling/verify-execution-allocation.ps1`
+또는 `tooling/verify-execution-allocation.py`는 실행 형태 전부의 coverage, 금지 결과,
+실행 배정·xylem·연속성 봉투 문서의 경계를 검사한다.
+
 ## Replay 평가
 
 각 fixture를 새 세션에서 실행해 다음 형식으로 결과를 남긴다. 개인 정보, 비밀값,
@@ -39,6 +44,17 @@ unnecessary model escalation: none | ...
 evidence and notes: ...
 ```
 
+실행 배정 replay에는 아래도 남긴다.
+
+```text
+fixture: written-plan-no-handoff-menu
+selected allocation: direct | sequential | scoped-delegation
+role ownership: ...
+asked user to choose execution method: no | yes
+external skill acted as controller: no | yes
+parallel implementation on shared files: no | yes
+```
+
 baseline과 Chohogi를 비교할 때는 같은 작업 설명, 모델, 추론 강도, 도구 조건,
 저장소 상태를 사용한다. 한 번의 응답으로 승패를 정하지 말고, 중요한 fixture는
 반복 실행하거나 독립 검토로 채점한다.
@@ -51,6 +67,7 @@ baseline과 Chohogi를 비교할 때는 같은 작업 설명, 모델, 추론 강
 - 사용자 정정·재작업 횟수
 - 검증 누락과 같은 실패의 재발
 - 불필요한 고비용 모델·위임 호출
+- 실행 방식 질문·외부 controller 재발
 - 완료까지 걸린 반복 횟수와 사용 가능한 토큰·비용 정보
 
 효과 없는 skill·규칙은 보유 수를 늘리기 위해 유지하지 않는다. 확인된 실패만

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Execution-allocation behavior fixtures. They prevent external method skills from becoming a controller or creating an unnecessary user choice.",
+  "modes": ["direct", "sequential", "scoped-delegation"],
+  "fixtures": [
+    {
+      "id": "clear-low-risk-edit",
+      "request": "지정한 README 오타 한 줄을 고쳐줘.",
+      "expectedMode": "direct",
+      "requiredArtifacts": ["changed-line", "brief-verification"],
+      "forbiddenOutcomes": ["ask-user-execution-choice", "external-controller"]
+    },
+    {
+      "id": "coupled-contract-implementation",
+      "request": "승인된 API 계약 변경을 생산자·소비자·테스트에 반영해줘.",
+      "expectedMode": "sequential",
+      "requiredArtifacts": ["ownership", "acceptance-evidence"],
+      "forbiddenOutcomes": ["parallel-implementation", "ask-user-execution-choice", "external-controller"]
+    },
+    {
+      "id": "independent-readonly-investigation",
+      "request": "두 독립 모듈의 로그 패턴을 조사해 원인 후보를 비교해줘. 파일은 수정하지 마.",
+      "expectedMode": "scoped-delegation",
+      "requiredArtifacts": ["read-only-ownership", "evidence-comparison"],
+      "forbiddenOutcomes": ["persistent-change", "ask-user-execution-choice", "external-controller"]
+    },
+    {
+      "id": "high-risk-review-after-change",
+      "request": "승인된 결제 계약 변경을 구현하고 독립 검토와 검증까지 마쳐줘.",
+      "expectedMode": "scoped-delegation",
+      "requiredArtifacts": ["implementer-ownership", "review-evidence", "acceptance-evidence"],
+      "forbiddenOutcomes": ["parallel-implementation", "ask-user-execution-choice", "external-controller"]
+    },
+    {
+      "id": "written-plan-no-handoff-menu",
+      "request": "승인된 구현 계획을 실행해줘.",
+      "expectedMode": "sequential",
+      "requiredArtifacts": ["allocation", "progress-evidence"],
+      "forbiddenOutcomes": ["ask-user-execution-choice", "external-controller", "mandatory-worktree"]
+    }
+  ]
+}
