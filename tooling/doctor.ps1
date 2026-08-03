@@ -42,6 +42,7 @@ if ($matches.Count -gt 0) { $errors.Add('Active source still contains retired co
 $installedGuidance = Join-Path $TargetHome '.codex\AGENTS.md'
 if (-not (Test-Path $installedGuidance)) { $errors.Add("Missing installed global guidance: $installedGuidance") }
 elseif (-not (Get-Content -LiteralPath $installedGuidance -Raw -Encoding utf8).Contains('trunk/routes/<flow>.md')) { $errors.Add('Installed global guidance does not reference the selected daily route contract.') }
+elseif (-not (Get-Content -LiteralPath $installedGuidance -Raw -Encoding utf8).Contains('<!-- chohogi:global-guidance:start -->')) { $errors.Add('Installed global guidance does not retain the managed Chohogi adapter block.') }
 foreach ($name in $requiredSkills) {
   $installed = Join-Path $TargetHome ".agents\skills\$name\SKILL.md"
   if (-not (Test-Path $installed)) { $errors.Add("Missing installed skill: $name") }
@@ -70,7 +71,6 @@ if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\executio
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\capability-fixtures.json'))) { $errors.Add('Missing installed capability fixtures.') }
 
 $managedTrees = @(
-  @{ Source = Join-Path $sourceRoot 'assets\codex'; Destination = Join-Path $TargetHome '.codex' },
   @{ Source = Join-Path $sourceRoot 'assets\agents\chohogi'; Destination = Join-Path $TargetHome '.agents\chohogi' },
   @{ Source = Join-Path $sourceRoot 'assets\agents\skills'; Destination = Join-Path $TargetHome '.agents\skills' }
 )

@@ -42,6 +42,10 @@ if [[ -f "$target_home/.codex/AGENTS.md" ]] && ! grep -F -q 'trunk/routes/<flow>
   echo 'Installed global guidance does not reference the selected daily route contract.' >&2
   errors=1
 fi
+if [[ -f "$target_home/.codex/AGENTS.md" ]] && ! grep -F -q '<!-- chohogi:global-guidance:start -->' "$target_home/.codex/AGENTS.md"; then
+  echo 'Installed global guidance does not retain the managed Chohogi adapter block.' >&2
+  errors=1
+fi
 if [[ -f "$target_home/.agents/chohogi/trunk/conductor.md" ]] && ! grep -F -q 'routes/<flow>.md' "$target_home/.agents/chohogi/trunk/conductor.md"; then
   echo 'Installed conductor does not reference daily route contracts.' >&2
   errors=1
@@ -75,7 +79,6 @@ compare_tree() {
     fi
   done < <(find "$source" -type f -print0)
 }
-compare_tree "$root/assets/codex" "$target_home/.codex"
 compare_tree "$root/assets/agents/chohogi" "$target_home/.agents/chohogi"
 compare_tree "$root/assets/agents/skills" "$target_home/.agents/skills"
 if grep -R -E -q 'codex-native-meta-harness|learning-loop|operating-harness|adoption-ledger' "$root/assets"; then

@@ -16,9 +16,30 @@ codex="$target_home/.codex"
 stamp="$(date +%Y%m%d-%H%M%S)"
 
 copy_dir() { rm -rf "$2"; mkdir -p "$(dirname "$2")"; cp -R "$1" "$2"; }
+install_global_guidance() {
+  local source="$1" destination="$2" begin='<!-- chohogi:global-guidance:start -->' end='<!-- chohogi:global-guidance:end -->' old temp
+  mkdir -p "$(dirname "$destination")"
+  [[ -f "$destination" ]] || { cp "$source" "$destination"; return; }
+  old="$(cat "$destination")"
+  if grep -F -q "$begin" "$destination" && grep -F -q "$end" "$destination"; then
+    temp="$(mktemp "${destination}.tmp.XXXXXX")"
+    awk -v source="$source" -v begin="$begin" -v end="$end" '
+      $0 == begin { while ((getline line < source) > 0) print line; close(source); replacing=1; next }
+      $0 == end { replacing=0; next }
+      !replacing { print }
+    ' "$destination" > "$temp"
+    mv "$temp" "$destination"
+  elif grep -F -q 'chohogi:defer=no-flow-no-write' "$destination"; then
+    cp "$source" "$destination"
+  else
+    printf '\n\n' >> "$destination"
+    cat "$source" >> "$destination"
+    printf '\n' >> "$destination"
+  fi
+}
 [[ -f "$root/manifest.yaml" ]] || { echo 'Run from a complete Chohogi checkout.' >&2; exit 1; }
 
-if [[ -f "$codex/AGENTS.md" ]]; then
+if [[ -f "$codex/AGENTS.md" ]] && ! grep -F -q 'chohogi:global-guidance:start' "$codex/AGENTS.md"; then
   mkdir -p "$codex"
   cp "$codex/AGENTS.md" "$codex/AGENTS.pre-chohogi-$stamp.md"
 fi
@@ -26,7 +47,6 @@ copy_dir "$assets/agents/chohogi" "$agents/chohogi"
 for skill in "$assets/agents/skills"/*; do
   [[ -d "$skill" ]] && copy_dir "$skill" "$agents/skills/$(basename "$skill")"
 done
-mkdir -p "$codex"
-cp "$assets/codex/AGENTS.md" "$codex/AGENTS.md"
+install_global_guidance "$assets/codex/AGENTS.md" "$codex/AGENTS.md"
 
 echo 'Chohogi installation complete. Run tooling/verify-install.sh.'

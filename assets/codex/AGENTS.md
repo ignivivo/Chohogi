@@ -1,3 +1,4 @@
+<!-- chohogi:global-guidance:start -->
 # 초호기 (初號機) — Global Codex Guidance
 
 <!-- chohogi:defer=no-flow-no-write -->
@@ -12,3 +13,4 @@
 플러그인, MCP, 보이는 스킬 캐시는 초호기의 의존성이 아니다. 플러그인·MCP·커넥터는 제거 대상이 아닌 외부 능력 제공자이며, 현재 런타임에서 실제로 호출 가능한 능력만 보조적으로 사용한다. 없으면 초호기 자체의 방법과 안전한 대안으로 계속 진행한다. 흡수된 Superpowers·구 Meta-harness·Caveman 방법은 외부 원본을 다시 읽거나 호출하지 않고 초호기 내부 자산으로만 적용한다. 인증 정보, 세션, 캐시, 개인 `config.toml`은 초호기의 관리 대상이 아니다.
 
 실제 `SKILL.md`를 새로 만들거나 수정할 때는 호출 가능한 Codex `$skill-creator`를 우선 사용한다. 이 능력은 외부 하네스 의존성이 아니며, 해당 도구의 초기화·`quick_validate.py` 절차와 필요한 Python 의존성 준비를 따른다. 경로·route·conductor·매니페스트처럼 스킬이 아닌 자산에는 적용하지 않는다. `$skill-creator`가 실제로 없을 때만 Homeostasis의 보조 fallback을 쓰고, 공식 검증과 동등하다고 주장하지 않는다.
+<!-- chohogi:global-guidance:end -->
