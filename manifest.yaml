@@ -34,6 +34,12 @@ components:
     install: .agents/chohogi/trunk/capability-selection.md
     trigger: "after flow and execution allocation when a native skill, external provider, or project leaf may be needed"
     loader: "referenced by conductor and global guidance"
+  - id: skill-adoption
+    organ: trunk
+    source: assets/agents/chohogi/trunk/skill-adoption.md
+    install: .agents/chohogi/trunk/skill-adoption.md
+    trigger: "homeostasis review of an external skill, method bundle, or provider"
+    loader: "referenced by homeostasis and capability selection"
   - id: context-packet
     organ: trunk
     source: assets/agents/chohogi/trunk/context-packet.md
@@ -96,6 +102,12 @@ components:
     includes: [accessibility, core-web-vitals, grill-me, performance, react-async-state-safety, security-and-hardening]
     trigger: "only when the concrete technology boundary matches"
     loader: "Codex skill discovery"
+  - id: xylem-provenance
+    organ: xylem
+    source: assets/agents/chohogi/xylem/provenance.json
+    install: .agents/chohogi/xylem/provenance.json
+    trigger: "external-skill adoption, update, or reference-integrity review"
+    loader: "referenced by homeostasis"
   - id: execution-methods
     organ: xylem
     source: assets/agents/chohogi/xylem/execution-methods.md

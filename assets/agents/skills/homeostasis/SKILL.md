@@ -18,8 +18,10 @@ Classify each persistent change as requested, necessary, or optional.
 
 Use this skill for a proven issue in workflow routing, role/model allocation,
 skill overlap or discovery, installation portability, amyloplast promotion, or
-an external capability boundary. Do not use it merely because a project needs a
-new feature, one bug needs a regression test, or an optional tool exists.
+an external capability boundary. Use it to decide whether an external skill is
+absorbed, mirrored, attached, project-local, or rejected. Do not use it merely
+because a project needs a new feature, one bug needs a regression test, or an
+optional tool exists.
 
 ## Method
 
@@ -44,6 +46,9 @@ new feature, one bug needs a regression test, or an optional tool exists.
    unavailable, use the supplemental fallback in
    `references/skill-lifecycle.md` and record that limitation with the result.
 8. Validate source assets, a clean installation target, and active discovery.
+9. For an external asset, read `trunk/skill-adoption.md`; record its adoption
+   state, provenance, required resources, non-trigger, verification, and review
+   signal. Do not make an external source a runtime controller.
 
 ## Result
 

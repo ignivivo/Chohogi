@@ -9,8 +9,10 @@ $requiredSource = @(
   'assets\agents\chohogi\trunk\conductor.md',
   'assets\agents\chohogi\trunk\execution-allocation.md',
   'assets\agents\chohogi\trunk\capability-selection.md',
+  'assets\agents\chohogi\trunk\skill-adoption.md',
   'assets\agents\chohogi\trunk\context-packet.md',
   'assets\agents\chohogi\xylem\execution-methods.md',
+  'assets\agents\chohogi\xylem\provenance.json',
   'assets\agents\chohogi\trunk\routes\product-decision.md',
   'assets\agents\chohogi\trunk\routes\delivery.md',
   'assets\agents\chohogi\trunk\routes\debugging.md',
@@ -55,8 +57,10 @@ elseif (-not (Get-Content -LiteralPath $installedAllocation -Raw -Encoding utf8)
 $installedCapability = Join-Path $TargetHome '.agents\chohogi\trunk\capability-selection.md'
 if (-not (Test-Path $installedCapability)) { $errors.Add('Missing installed capability-selection contract.') }
 elseif (-not (Get-Content -LiteralPath $installedCapability -Raw -Encoding utf8).Contains('<!-- chohogi:provider-authority=capability-only -->')) { $errors.Add('Installed capability-selection contract does not retain provider boundary.') }
+if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\skill-adoption.md'))) { $errors.Add('Missing installed skill-adoption contract.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\context-packet.md'))) { $errors.Add('Missing installed context packet contract.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\xylem\execution-methods.md'))) { $errors.Add('Missing installed xylem execution methods.') }
+if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\xylem\provenance.json'))) { $errors.Add('Missing installed xylem provenance.') }
 foreach ($route in @('product-decision', 'delivery', 'debugging')) {
   $installedRoute = Join-Path $TargetHome ".agents\chohogi\trunk\routes\$route.md"
   if (-not (Test-Path $installedRoute)) { $errors.Add("Missing installed route: $route") }

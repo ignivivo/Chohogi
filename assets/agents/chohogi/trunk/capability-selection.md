@@ -28,6 +28,8 @@ Conductor가 flow를, `execution-allocation.md`가 실행 형태를 정한 뒤�
    권한을 명시한다.
 5. 사용자가 특정 provider를 명시적으로 요청했고 현재 호출 가능하면 그 요청을 우선한다.
    그래도 provider는 능력만 수행하며 controller가 되지 않는다.
+6. 순수 Markdown 전문 skill은 `skill-adoption.md`의 상태가 `attach-specialist`일 때만
+   외부 원본으로 사용한다. `absorb-core`와 `mirror-baseline`은 초호기 정본만 사용한다.
 
 ## 흡수 원칙
 

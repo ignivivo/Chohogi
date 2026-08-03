@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {"id":"security-and-hardening","adoption":"mirror-baseline","origin":"https://github.com/addyosmani/agent-skills","source_path":"skills/security-and-hardening","license":"MIT","baseline_revision":"unpinned","local_delta":true,"required_resources":["references/security-checklist.md"],"review_when":["upstream-security-change","missing-reference","confirmed-security-failure"]},
+    {"id":"accessibility","adoption":"mirror-baseline","origin":"web-quality-skills","license":"MIT","baseline_revision":"unpinned","local_delta":"unknown","required_resources":["references/WCAG.md","references/A11Y-PATTERNS.md"],"review_when":["wcag-update","missing-reference"]},
+    {"id":"core-web-vitals","adoption":"mirror-baseline","origin":"web-quality-skills","license":"MIT","baseline_revision":"unpinned","local_delta":"unknown","required_resources":["references/LCP.md"],"review_when":["web-platform-change","missing-reference"]},
+    {"id":"performance","adoption":"mirror-baseline","origin":"web-quality-skills","license":"MIT","baseline_revision":"unpinned","local_delta":"unknown","required_resources":[],"review_when":["measurement-failure","duplicate-guidance"]},
+    {"id":"grill-me","adoption":"attach-specialist","origin":"unverified","license":"unverified","baseline_revision":"unverified","local_delta":"unknown","required_resources":[],"review_when":["origin-confirmed","repeated-conflict","no-effective-use"]},
+    {"id":"react-async-state-safety","adoption":"mirror-baseline","origin":"chohogi-derived","license":"repository","baseline_revision":"LRN-0001-route-contract-audit","local_delta":false,"required_resources":[],"review_when":["confirmed-async-state-failure","duplicate-react-skill"]}
+  ]
+}

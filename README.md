@@ -17,6 +17,10 @@
 
 이 개념 구조와 Codex의 실제 탐색 경로는 다릅니다. `manifest.yaml`과 설치 스크립트가 둘을 연결합니다.
 
+전체 호출 경계·provider·프로젝트 leaf의 관계는 [운영 지도](docs/OPERATING-MAP.md)에
+있다. 외부 skill을 초호기에 들일지, 외부 specialist로 둘지, provider로 둘지는
+`trunk/skill-adoption.md`와 `xylem/provenance.json`으로 Homeostasis가 판정한다.
+
 ## 빠른 시작
 
 Windows PowerShell:

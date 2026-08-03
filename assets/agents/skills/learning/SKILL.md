@@ -10,9 +10,10 @@ signature without governing unrelated work.
 
 ## Required evidence
 
-Capture the failure signature, affected boundary, reproduction or review
-evidence, root cause, and why the previous guard missed it. A symptom alone is
-not a reusable lesson.
+Capture the failure signature, affected boundary and layer (language, framework,
+project contract, provider, or harness), reproduction or review evidence, root
+cause, before/after code when useful, and why the previous guard missed it. A
+symptom alone is not a reusable lesson.
 
 ## Choose the smallest prevention
 
@@ -39,6 +40,10 @@ promotion needs a confirmed cause, cross-project applicability, a bounded
 trigger, and a verification method. Store the global asset and its concise
 promotion record in Chohogi `amyloplast`; the project record then references the
 asset ID instead of duplicating the whole history.
+
+Every promoted prevention has a review signal and retirement condition. If it
+repeatedly adds work without catching its signature, demote or retire it through
+`$homeostasis`; do not preserve it merely because it exists.
 
 If promotion changes Chohogi's conductor, roles, model policy, skill lifecycle,
 or installation/discovery policy, invoke `$homeostasis` with the learning

@@ -28,7 +28,7 @@ Conductor는 초호기의 일상 진입점이다. 이 문서는 작업을 수행
 초호기 내부에서 직접·순차·제한적 위임 중 하나와 역할 소유권을 정한다. 이 문서들은
 별도 controller·하네스·상시 스킬이 아니다. `learning`과 `homeostasis`는 branch skill이므로 각각의 엄격한 진입 조건을 만족할 때만 선택한다.
 
-현재 흐름의 산출물 또는 증거가 생기기 전에는 다른 흐름으로 옮기지 않는다. 기술·도메인 스킬과 도구는 흐름과 실행 형태를 정한 뒤에만 필요한 것 하나씩 고른다. 이들은 범위, 위임, 완료를 스스로 결정하지 않는다. 외부 능력이 필요한지와 흡수된 방법론의 경계는 `capability-selection.md`를 따른다. 실행 방법이 필요하면 `xylem/execution-methods.md`를 읽고, 긴 작업은 `context-packet.md`로 현재 상태만 압축한다.
+현재 흐름의 산출물 또는 증거가 생기기 전에는 다른 흐름으로 옮기지 않는다. 기술·도메인 스킬과 도구는 흐름과 실행 형태를 정한 뒤에만 필요한 것 하나씩 고른다. 이들은 범위, 위임, 완료를 스스로 결정하지 않는다. 외부 능력이 필요한지와 흡수된 방법론의 경계는 `capability-selection.md`를 따른다. 외부 skill의 이식·외부 유지·leaf·폐기는 Homeostasis가 `skill-adoption.md`로만 결정한다. 실행 방법이 필요하면 `xylem/execution-methods.md`를 읽고, 긴 작업은 `context-packet.md`로 현재 상태만 압축한다.
 
 ## 가지 호출
 
