@@ -27,6 +27,12 @@ controller와 불필요한 실행 방식 질문을 금지한다. `tooling/verify
 또는 `tooling/verify-execution-allocation.py`는 실행 형태 전부의 coverage, 금지 결과,
 실행 배정·xylem·연속성 봉투 문서의 경계를 검사한다.
 
+`capability-fixtures.json`은 초호기 내부 방법, Codex 기본 능력, 현재 호출 가능한 외부
+provider, 프로젝트 leaf, provider 불가 시 fallback을 구분하는 행동 계약이다. 모든
+fixture는 외부 controller를 금지한다. `tooling/verify-capability-boundary.ps1` 또는
+`tooling/verify-capability-boundary.py`는 이 분류·금지 결과·원본 방법론 재호출 금지를
+정적으로 검사한다. 이 검사는 실제 플러그인 설치·인증 상태를 검사하거나 바꾸지 않는다.
+
 ## Replay 평가
 
 각 fixture를 새 세션에서 실행해 다음 형식으로 결과를 남긴다. 개인 정보, 비밀값,
@@ -53,6 +59,17 @@ role ownership: ...
 asked user to choose execution method: no | yes
 external skill acted as controller: no | yes
 parallel implementation on shared files: no | yes
+```
+
+능력 경계 replay에는 아래도 남긴다.
+
+```text
+fixture: authenticated-live-action
+selected capability classification: ...
+runtime availability evidence: ...
+external provider acted as controller: no | yes
+assumed cache means authorization: no | yes
+fallback changed private config or authentication: no | yes
 ```
 
 baseline과 Chohogi를 비교할 때는 같은 작업 설명, 모델, 추론 강도, 도구 조건,

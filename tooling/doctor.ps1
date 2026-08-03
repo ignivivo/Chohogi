@@ -8,6 +8,7 @@ $requiredSource = @(
   'assets\codex\AGENTS.md',
   'assets\agents\chohogi\trunk\conductor.md',
   'assets\agents\chohogi\trunk\execution-allocation.md',
+  'assets\agents\chohogi\trunk\capability-selection.md',
   'assets\agents\chohogi\trunk\context-packet.md',
   'assets\agents\chohogi\xylem\execution-methods.md',
   'assets\agents\chohogi\trunk\routes\product-decision.md',
@@ -15,6 +16,7 @@ $requiredSource = @(
   'assets\agents\chohogi\trunk\routes\debugging.md',
   'assets\agents\chohogi\trunk\evals\route-fixtures.json',
   'assets\agents\chohogi\trunk\evals\execution-fixtures.json',
+  'assets\agents\chohogi\trunk\evals\capability-fixtures.json',
   'assets\agents\chohogi\roots\constitution.md',
   'assets\agents\chohogi\amyloplast\index.yaml',
   'assets\agents\skills\homeostasis\references\skill-lifecycle.md'
@@ -50,6 +52,9 @@ elseif (-not (Get-Content -LiteralPath $installedConductor -Raw -Encoding utf8).
 $installedAllocation = Join-Path $TargetHome '.agents\chohogi\trunk\execution-allocation.md'
 if (-not (Test-Path $installedAllocation)) { $errors.Add('Missing installed execution-allocation contract.') }
 elseif (-not (Get-Content -LiteralPath $installedAllocation -Raw -Encoding utf8).Contains('<!-- chohogi:execution-choice=internal -->')) { $errors.Add('Installed execution-allocation contract does not retain controller boundary.') }
+$installedCapability = Join-Path $TargetHome '.agents\chohogi\trunk\capability-selection.md'
+if (-not (Test-Path $installedCapability)) { $errors.Add('Missing installed capability-selection contract.') }
+elseif (-not (Get-Content -LiteralPath $installedCapability -Raw -Encoding utf8).Contains('<!-- chohogi:provider-authority=capability-only -->')) { $errors.Add('Installed capability-selection contract does not retain provider boundary.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\context-packet.md'))) { $errors.Add('Missing installed context packet contract.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\xylem\execution-methods.md'))) { $errors.Add('Missing installed xylem execution methods.') }
 foreach ($route in @('product-decision', 'delivery', 'debugging')) {
@@ -58,6 +63,7 @@ foreach ($route in @('product-decision', 'delivery', 'debugging')) {
 }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\route-fixtures.json'))) { $errors.Add('Missing installed route fixtures.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\execution-fixtures.json'))) { $errors.Add('Missing installed execution fixtures.') }
+if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\capability-fixtures.json'))) { $errors.Add('Missing installed capability fixtures.') }
 
 $managedTrees = @(
   @{ Source = Join-Path $sourceRoot 'assets\codex'; Destination = Join-Path $TargetHome '.codex' },

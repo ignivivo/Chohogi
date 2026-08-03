@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Capability-boundary fixtures. They distinguish Chohogi-owned methods from native skills and live external capability providers without making a provider a controller.",
+  "resolutions": ["chohogi-internal", "native-system", "capability-provider", "safe-fallback", "project-leaf"],
+  "fixtures": [
+    {
+      "id": "new-reusable-skill",
+      "request": "반복되는 전역 작업 경계를 위한 새 SKILL.md를 검증 가능하게 만들어줘.",
+      "expectedResolution": "native-system",
+      "requiredArtifacts": ["skill-lifecycle-evidence", "native-authoring-check"],
+      "forbiddenOutcomes": ["external-controller", "copy-native-system-skill", "invoke-absorbed-method-source"]
+    },
+    {
+      "id": "authenticated-live-action",
+      "request": "현재 연결되고 인증된 외부 서비스에서 필요한 정보를 확인해줘.",
+      "expectedResolution": "capability-provider",
+      "requiredArtifacts": ["runtime-availability-evidence", "narrow-provider-action"],
+      "forbiddenOutcomes": ["external-controller", "assume-cache-is-authorized", "mutate-private-config"]
+    },
+    {
+      "id": "absorbed-method-plan",
+      "request": "승인된 구현 계획을 실행하고 검증해줘.",
+      "expectedResolution": "chohogi-internal",
+      "requiredArtifacts": ["internal-allocation", "verification-evidence"],
+      "forbiddenOutcomes": ["external-controller", "invoke-absorbed-method-source", "ask-user-execution-choice"]
+    },
+    {
+      "id": "provider-unavailable",
+      "request": "현재 사용할 수 없는 외부 provider가 필요한 작업을 처리해줘.",
+      "expectedResolution": "safe-fallback",
+      "requiredArtifacts": ["availability-failure", "safe-alternative-or-authority-gap"],
+      "forbiddenOutcomes": ["external-controller", "assume-cache-is-authorized", "mutate-private-config"]
+    },
+    {
+      "id": "project-domain-contract",
+      "request": "선택된 흐름 뒤 프로젝트의 도메인 계약과 회귀 검증을 적용해줘.",
+      "expectedResolution": "project-leaf",
+      "requiredArtifacts": ["project-contract", "affected-boundary-verification"],
+      "forbiddenOutcomes": ["external-controller", "promote-project-leaf-globally", "invoke-absorbed-method-source"]
+    }
+  ]
+}

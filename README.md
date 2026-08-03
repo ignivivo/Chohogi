@@ -60,6 +60,12 @@ Linux/macOS:
 공급하고, 후자는 긴 작업의 최소 상태를 잇는다. 둘 다 controller·별도 팀·실행 방식
 선택지를 만들지 않는다.
 
+`trunk/capability-selection.md`는 이 내부 방법과 실제 외부 능력을 구분한다. Codex 기본
+스킬은 현재 표면에 노출됐을 때 사용하고, 플러그인·MCP·커넥터는 외부 데이터·인증된
+작업·브라우저 같은 실제 능력이 필요할 때만 provider로 사용한다. provider는 삭제 대상도
+controller도 아니다. 반면 Superpowers·구 Meta-harness·Caveman에서 흡수한 방법은
+초호기 내부 자산만 사용하며 원본을 실행 중 다시 읽거나 호출하지 않는다.
+
 route 문서·fixture의 정합성은 다음으로 확인한다.
 
 Windows PowerShell:
@@ -89,6 +95,20 @@ Linux/macOS:
 
 ```bash
 python3 ./tooling/verify-execution-allocation.py
+```
+
+능력 선택 경계와 fixture는 다음으로 검증한다.
+
+Windows PowerShell:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tooling\verify-capability-boundary.ps1
+```
+
+Linux/macOS:
+
+```bash
+python3 ./tooling/verify-capability-boundary.py
 ```
 
 ## 스킬 수명주기와 검증

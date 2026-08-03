@@ -11,6 +11,7 @@ need "$root/manifest.yaml"
 need "$root/assets/codex/AGENTS.md"
 need "$root/assets/agents/chohogi/trunk/conductor.md"
 need "$root/assets/agents/chohogi/trunk/execution-allocation.md"
+need "$root/assets/agents/chohogi/trunk/capability-selection.md"
 need "$root/assets/agents/chohogi/trunk/context-packet.md"
 need "$root/assets/agents/chohogi/xylem/execution-methods.md"
 need "$root/assets/agents/chohogi/trunk/routes/product-decision.md"
@@ -18,6 +19,7 @@ need "$root/assets/agents/chohogi/trunk/routes/delivery.md"
 need "$root/assets/agents/chohogi/trunk/routes/debugging.md"
 need "$root/assets/agents/chohogi/trunk/evals/route-fixtures.json"
 need "$root/assets/agents/chohogi/trunk/evals/execution-fixtures.json"
+need "$root/assets/agents/chohogi/trunk/evals/capability-fixtures.json"
 need "$root/assets/agents/chohogi/roots/constitution.md"
 need "$root/assets/agents/chohogi/amyloplast/index.yaml"
 need "$root/assets/agents/skills/homeostasis/references/skill-lifecycle.md"
@@ -29,6 +31,7 @@ need "$target_home/.agents/skills/homeostasis/references/skill-lifecycle.md"
 need "$target_home/.codex/AGENTS.md"
 need "$target_home/.agents/chohogi/trunk/conductor.md"
 need "$target_home/.agents/chohogi/trunk/execution-allocation.md"
+need "$target_home/.agents/chohogi/trunk/capability-selection.md"
 need "$target_home/.agents/chohogi/trunk/context-packet.md"
 need "$target_home/.agents/chohogi/xylem/execution-methods.md"
 if [[ -f "$target_home/.codex/AGENTS.md" ]] && ! grep -F -q 'trunk/routes/<flow>.md' "$target_home/.codex/AGENTS.md"; then
@@ -44,8 +47,13 @@ for route in product-decision delivery debugging; do
 done
 need "$target_home/.agents/chohogi/trunk/evals/route-fixtures.json"
 need "$target_home/.agents/chohogi/trunk/evals/execution-fixtures.json"
+need "$target_home/.agents/chohogi/trunk/evals/capability-fixtures.json"
 if [[ -f "$target_home/.agents/chohogi/trunk/execution-allocation.md" ]] && ! grep -F -q '<!-- chohogi:execution-choice=internal -->' "$target_home/.agents/chohogi/trunk/execution-allocation.md"; then
   echo 'Installed execution-allocation contract does not retain controller boundary.' >&2
+  errors=1
+fi
+if [[ -f "$target_home/.agents/chohogi/trunk/capability-selection.md" ]] && ! grep -F -q '<!-- chohogi:provider-authority=capability-only -->' "$target_home/.agents/chohogi/trunk/capability-selection.md"; then
+  echo 'Installed capability-selection contract does not retain provider boundary.' >&2
   errors=1
 fi
 compare_tree() {

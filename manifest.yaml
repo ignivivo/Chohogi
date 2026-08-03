@@ -28,6 +28,12 @@ components:
     install: .agents/chohogi/trunk/execution-allocation.md
     trigger: "after a daily route is selected"
     loader: "referenced by conductor and global guidance"
+  - id: capability-selection
+    organ: trunk
+    source: assets/agents/chohogi/trunk/capability-selection.md
+    install: .agents/chohogi/trunk/capability-selection.md
+    trigger: "after flow and execution allocation when a native skill, external provider, or project leaf may be needed"
+    loader: "referenced by conductor and global guidance"
   - id: context-packet
     organ: trunk
     source: assets/agents/chohogi/trunk/context-packet.md
@@ -52,6 +58,12 @@ components:
     source: assets/agents/chohogi/trunk/evals/execution-fixtures.json
     install: .agents/chohogi/trunk/evals/execution-fixtures.json
     trigger: "explicit execution-allocation conformance or outcome comparison"
+    loader: "not automatically loaded"
+  - id: capability-evaluations
+    organ: trunk
+    source: assets/agents/chohogi/trunk/evals/capability-fixtures.json
+    install: .agents/chohogi/trunk/evals/capability-fixtures.json
+    trigger: "explicit capability-boundary conformance or outcome comparison"
     loader: "not automatically loaded"
   - id: constitution
     organ: roots
