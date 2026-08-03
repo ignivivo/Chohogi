@@ -10,8 +10,10 @@
 
 - `roots`: 변하지 않는 경계와 소유권
 - `trunk`: 매 작업을 하나의 작업 흐름으로 분류하는 `conductor`
-- `branches`: `learning`, `homeostasis` 같은 유지·개선 흐름
-- `xylem`: 프로젝트를 넘어서 재사용하는 기술 스킬과 실행 방법
+- `branches`: product-decision, delivery, debugging 일상 흐름
+- `vascular bundle`: xylem은 문맥·근거를 전달하고 phloem은 검증된 결과를 환류
+- `leaves`: 조건부로 발현되는 기술·도메인 capability
+- `meristem`: 반복 증거가 있는 role·skill 후보의 시험·승격·퇴화 gate
 - `leaves`: 각 프로젝트 Git 저장소의 도메인 스킬·계약·회귀 테스트
 - `amyloplast`: 검증되어 전역 자산 후보가 된 학습 결과의 저장소
 
@@ -51,18 +53,18 @@ Linux/macOS:
 - `delivery`: 요구사항과 성공 조건이 확정된 구현을 변경·검증 증거까지 완성한다.
 - `debugging`: 관측 가능한 실패의 원인을 재현과 증거로 확인한 뒤 최소 수정한다.
 
-`learning`과 `homeostasis`는 이 일상 route와 다른 branch다. 확인된 실패를 예방
-자산으로 바꾸거나, 초호기 자체를 조정할 때만 선택한다.
+`learning`과 `homeostasis`는 이 일상 route와 경쟁하지 않는 유지 과정이다. 확인된 실패는
+phloem의 비식별 return contract로 learning에 환류하고, Homeostasis는 전역 정책·수명주기
+변경 요청 또는 초호기 경계의 확인된 결함이 scope/evidence gate를 모두 통과할 때만 시작한다.
 
 흐름이 선택되면 `trunk/execution-allocation.md`가 실행 형태를 하나 정한다.
 `direct`는 짧은 한 경계 작업, `sequential`은 공유 구현의 기본값, `scoped-delegation`은
 독립적인 읽기 조사 또는 변경 뒤 검토에만 쓴다. 이 선택은 사용자 메뉴가 아니다. 역할,
 파일 소유권, 모델 수준, 검증 경계는 이 계약 안에서 정하며 주 에이전트가 통합한다.
 
-외부 하네스에서 배운 절차는 `xylem/execution-methods.md`와
-`trunk/context-packet.md`로 흡수했다. 전자는 계획·TDD·디버깅·검토·검증 방법만
-공급하고, 후자는 긴 작업의 최소 상태를 잇는다. 둘 다 controller·별도 팀·실행 방식
-선택지를 만들지 않는다.
+외부 하네스에서 배운 절차는 `trunk/leaf-methods.md`와 `trunk/context-packet.md`로
+흡수했다. 전자는 leaf가 쓸 계획·TDD·디버깅·검토·검증 방법만 공급하고, 후자는 긴 작업의
+최소 상태를 잇는다. 둘 다 controller·별도 팀·실행 방식 선택지를 만들지 않는다.
 
 `trunk/capability-selection.md`는 이 내부 방법과 실제 외부 능력을 구분한다. Codex 기본
 스킬은 현재 표면에 노출됐을 때 사용하고, 플러그인·MCP·커넥터는 외부 데이터·인증된
@@ -86,6 +88,16 @@ python3 ./tooling/verify-routes.py
 
 `assets/agents/chohogi/trunk/evals/README.md`는 지금 할 수 있는 route 적합성 검증과,
 실제 작업이 쌓인 뒤 수행할 성능 비교를 분리해 설명한다.
+
+Learning–Phloem–Amyloplast의 scope·민감 정보·승격 fixture는 다음으로 확인한다.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tooling\verify-learning-contract.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tooling\verify-homeostasis-policy.ps1
+```
+
+후보는 자동 호출되지 않으며, 전역 amyloplast 자산은 독립된 실제 프로젝트 두 곳에서의
+검증과 trigger/non-trigger·퇴역 조건이 있어야 활성화한다.
 
 실행 배정 계약과 행동 fixture는 다음으로 검증한다.
 
@@ -120,6 +132,10 @@ python3 ./tooling/verify-capability-boundary.py
 새 전역 스킬은 반복 가능한 경계와 검증 근거가 있을 때만 `homeostasis` 또는 `learning`의
 결정으로 만든다. 실제 스킬 생성·수정은 `$skill-creator`를 우선 사용하고, 그
 `quick_validate.py`를 실행한다. 이 저장소의 보조 포장 검사는 다음과 같다.
+
+전역 skill·route·role/model 정책 후보의 비교 평가는
+`trunk/evals/evaluation-budget-policy.md`의 제한된 Paired Replay만 사용한다. 일반 사용자
+작업을 baseline과 candidate로 이중 실행하지 않는다.
 
 Windows PowerShell:
 

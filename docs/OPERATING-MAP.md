@@ -2,9 +2,9 @@
 
 ## 호출 순서
 
-`AGENTS.md` → trunk — workflow router(정확히 하나의 flow) → execution allocation → capability selection
-→ 필요한 xylem 또는 project leaf → 검증 → confirmed failure면 learning → 초호기 정책
-문제면 homeostasis.
+`AGENTS.md` → trunk — 하나의 일상 route → execution allocation → xylem context handoff
+→ 필요한 leaf 또는 provider → 검증 → phloem feedback → learning 또는 Homeostasis admission
+gate.
 
 ## 자산 경계
 
@@ -12,8 +12,11 @@
 | --- | --- | --- |
 | roots — foundation policy | constitution | 초호기 Git |
 | trunk — workflow control | router, route, allocation, capability selection | 초호기 Git |
-| branches — adaptive control | learning, homeostasis | 초호기 Git |
-| xylem — reusable methods | security, accessibility, execution methods | 초호기 Git + provenance |
+| branches — workflow organs | product-decision, delivery, debugging | 초호기 Git |
+| vascular bundle — context and feedback | xylem context, phloem feedback | 초호기 Git |
+| leaves — reusable capabilities | security, accessibility, verification methods | 초호기 Git + provenance |
+| meristem — capability lifecycle | candidate, trial, promote, retire | 초호기 Git |
+| regulatory processes | learning, homeostasis | 초호기 Git |
 | leaves — project extensions | Sazu 계약·도메인 skill | 프로젝트 Git |
 | amyloplast — learned assets | 승격된 검사·계약 | 초호기 Git |
 | provider — live capability | browser, MCP, scanner, connector | 현재 런타임 |
@@ -26,7 +29,8 @@
 - 구조: route, execution allocation, capability boundary, provenance verifier
 - 설치: clean target install 뒤 `verify-install` (설치 무결성 검사)
 - 행동: fixture를 새 세션에서 replay하여 flow·위임·provider controller 침범을 기록
-- 개선: confirmed cause만 learning으로, 전역 수명주기 변경은 homeostasis로 올린다.
+- 개선: confirmed cause만 learning으로, 명시 요청 또는 확인된 전역 경계 증거가 scope/evidence
+  gate를 통과할 때만 homeostasis로 올린다. Paired Replay는 전역 정책 후보에만 제한한다.
 
 ## 환경 지원
 

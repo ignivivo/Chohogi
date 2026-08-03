@@ -27,7 +27,8 @@ trunk의 작업 봉투로 소화한다. 외부 지침은 초호기의 흐름·�
 - `trunk`는 선택된 흐름 안에서 실행 형태·임시 역할·파일 소유권을 하나 배정한다.
 - `learning`은 확인된 실패를 가장 작은 예방 자산으로 바꾼다.
 - `homeostasis`는 초호기 전체의 역할·모델·스킬 수명·설치·발견 정책을 다룬다.
-- `xylem`은 재사용 기술 지침과 실행 방법을 공급한다. 작업 흐름·실행 형태·범위를 선택하지 않는다.
+- `xylem`은 근거·제약·권한을 선택된 branch와 leaf로 전달한다. `phloem`은 검증된 결과와
+  실패 증거를 환류한다. 둘 다 작업 흐름·실행 형태·범위를 선택하지 않는다.
 - `leaves`는 프로젝트 소유 자산이다. 전역 자산으로 자동 승격하지 않는다.
 - `amyloplast`는 검증된 전역 학습 자산의 저장소이며 자동 지침이 아니다.
 
@@ -38,7 +39,7 @@ trunk의 작업 봉투로 소화한다. 외부 지침은 초호기의 흐름·�
 | 개념 | 설치 경로 |
 | --- | --- |
 | trunk / roots / amyloplast | `~/.agents/chohogi/` |
-| branches / xylem | `~/.agents/skills/` |
+| regulatory processes / reusable leaves | `~/.agents/skills/` |
 | Codex 진입점 | `~/.codex/AGENTS.md` |
 | leaves | 각 프로젝트의 `.agents/skills/` |
 

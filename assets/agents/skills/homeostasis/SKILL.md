@@ -1,12 +1,27 @@
 ---
 name: homeostasis
-description: "Use only when changing Chohogi itself: its conductor flow, role or model policy, reusable-skill lifecycle, installation/discovery policy, or a recurring cross-project orchestration imbalance. Do not use for ordinary product delivery, product decisions, or a single project bug."
+description: "Use only to maintain Chohogi itself when a requested or evidenced whole-harness issue affects conductor routing, role/model policy, reusable-skill lifecycle, installation/discovery, evaluation policy, or a recurring cross-project orchestration imbalance. Do not use for ordinary product delivery, product decisions, or a single project bug."
 ---
 
 # Homeostasis
 
 Homeostasis keeps 초호기 healthy as a whole. It is a branch of Chohogi, not a
 second harness and not a routine code-review workflow.
+
+## Admission
+
+Enter only when both gates pass:
+
+1. **Scope gate:** the possible change belongs to Chohogi's conductor, policy,
+   reusable capability lifecycle, installer/discovery adapter, amyloplast, or
+   evaluation policy—not a single product repository.
+2. **Evidence gate:** there is either an explicit request for that persistent
+   change, or observable evidence of a recurring/system-level imbalance.
+
+If the scope gate fails, use the owning project route. If the evidence gate
+fails, do not create a durable Chohogi asset; state the missing observation and
+the re-entry condition. Read `references/admission-policy.md` when classifying
+an ambiguous case.
 
 ## Required input
 
@@ -17,19 +32,20 @@ Classify each persistent change as requested, necessary, or optional.
 ## Trigger and negative scope
 
 Use this skill for a proven issue in workflow routing, role/model allocation,
-skill overlap or discovery, installation portability, amyloplast promotion, or
-an external capability boundary. Use it to decide whether an external skill is
-absorbed, mirrored, attached, project-local, or rejected. Do not use it merely
-because a project needs a new feature, one bug needs a regression test, or an
-optional tool exists.
+skill overlap or discovery, installation portability, amyloplast promotion,
+evaluation governance, or an external capability boundary. Use it to decide
+whether an external skill is absorbed, mirrored, attached, project-local, or
+rejected. Do not use it merely because a project needs a new feature, one bug
+needs a regression test, or an optional tool exists.
 
 ## Method
 
-1. State the current boundary and the observable failure or unnecessary cost.
-2. Identify the smallest owning organ: conductor, branch, xylem, amyloplast,
-   installer, or project leaf.
+1. State the admission evidence, current boundary, and observable failure or
+   unnecessary cost.
+2. Identify the smallest owning asset: conductor, route contract, vascular
+   contract, capability lifecycle, amyloplast, installer/adapter, or project leaf.
 3. Give each changed asset a trigger, negative scope, owner, input, output,
-   and verification method.
+   expiry/review condition, and verification method.
 4. Preserve the self-contained boundary: do not make a plugin, MCP, cache,
    credential, session, or private configuration a required controller.
 5. Prefer adapting one existing asset. Create a role or skill only for a
@@ -45,14 +61,17 @@ optional tool exists.
    a different check and call it equivalent. If `$skill-creator` is genuinely
    unavailable, use the supplemental fallback in
    `references/skill-lifecycle.md` and record that limitation with the result.
-8. Validate source assets, a clean installation target, and active discovery.
+8. Read `trunk/evals/evaluation-budget-policy.md` before approving an explicit
+   paired replay; run the relevant static policy check. For
+   installation/discovery changes, also validate source assets, a clean
+   installation target, and active discovery.
 9. For an external asset, read `trunk/skill-adoption.md`; record its adoption
    state, provenance, required resources, non-trigger, verification, and review
    signal. Do not make an external source a runtime controller.
 
 ## Result
 
-Produce either a bounded change with installation evidence, or a decision not
-to change Chohogi. When a confirmed failure is being made durable, let
-`$learning` decide the smallest prevention first; use Homeostasis only if that
-decision changes Chohogi's own policy or lifecycle.
+Produce either a bounded change with the required verification evidence, or a
+decision not to change Chohogi. When a confirmed failure is being made durable,
+let `$learning` decide the smallest prevention first; use Homeostasis only if
+that decision changes Chohogi's own policy or lifecycle.

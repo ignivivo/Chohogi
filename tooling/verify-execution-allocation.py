@@ -29,8 +29,8 @@ REQUIRED_ALLOCATION_TERMS = (
     "외부 스킬의 handoff",
 )
 REQUIRED_METHOD_TERMS = (
-    "<!-- chohogi:xylem=execution-methods -->",
-    "<!-- chohogi:xylem-authority=methods-only -->",
+    "<!-- chohogi:leaf-methods -->",
+    "Branch는 순서·산출물·종료 조건",
     "원인 확인 전",
     "별도 controller",
 )
@@ -94,7 +94,7 @@ def main() -> int:
     errors: list[str] = []
     files = {
         root / "assets/agents/chohogi/trunk/execution-allocation.md": REQUIRED_ALLOCATION_TERMS,
-        root / "assets/agents/chohogi/xylem/execution-methods.md": REQUIRED_METHOD_TERMS,
+        root / "assets/agents/chohogi/trunk/leaf-methods.md": REQUIRED_METHOD_TERMS,
         root / "assets/agents/chohogi/trunk/context-packet.md": REQUIRED_PACKET_TERMS,
     }
     for path, required_terms in files.items():
@@ -132,7 +132,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
-    print("Chohogi execution allocation verification: PASS (allocation contract, xylem methods, packet, and fixtures are valid).")
+    print("Chohogi execution allocation verification: PASS (allocation contract, leaf methods, packet, and fixtures are valid).")
     return 0
 
 

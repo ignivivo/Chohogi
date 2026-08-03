@@ -1,50 +1,43 @@
 ---
 name: learning
-description: "Use only after a confirmed reproducible defect or high-signal review finding has an evidenced root cause and a candidate prevention. Choose and validate the smallest durable prevention; do not use for an unproven suspicion or every routine bug fix."
+description: "Use only after a confirmed reproducible defect or high-signal review finding has an evidenced root cause and a verified smallest prevention. Classify the prevention scope, return a redacted phloem record, and keep the asset local unless independent evidence justifies promotion. Do not use for suspicions, routine fixes, or automatic global skill creation."
 ---
 
 # Learning
 
 Turn a confirmed failure into the smallest prevention that catches the same
-signature without governing unrelated work.
+signature without governing unrelated work. A failure is an observation, not an
+asset: only its verified prevention can become reusable memory.
 
-## Required evidence
+## Entry and boundary
 
-Capture the failure signature, affected boundary and layer (language, framework,
-project contract, provider, or harness), reproduction or review evidence, root
-cause, before/after code when useful, and why the previous guard missed it. A
-symptom alone is not a reusable lesson.
+Enter only after Delivery or Debugging is terminal and all are true:
 
-## Choose the smallest prevention
+- root cause is `confirmed` by reproduction or high-signal review;
+- a smallest prevention exists and catches the signature;
+- trigger, non-trigger, ownership, and sensitive-data boundary are known.
 
-Prefer, in order:
+Otherwise return `closed-no-learning`. Learning is a maintenance process, not a
+daily route, second controller, automatic skill generator, or permanent-agent
+factory.
 
-1. focused regression test or fixture;
-2. type, schema, lint, contract, or automation check;
-3. project rule or reference update;
-4. update to one existing reusable skill or operating component;
-5. a narrowly triggered new reusable skill or role.
+## Procedure
 
-Validate that the guard catches the signature and does not impose unrelated
-work. Do not create duplicate skills for overlapping failures.
+1. Read `references/learning-record.md` and produce a redacted phloem return.
+2. Classify mechanism layer, primary prevention scope, applicability, and
+   contributing context separately. Keep the prevention at the narrowest owner.
+3. Prefer: regression test/fixture → type/schema/lint/contract → project rule
+   → existing reusable asset → narrowly triggered candidate.
+4. Verify the guard catches the signature and does not create unrelated work.
+5. Choose exactly one destination: `closed-no-learning`, project record,
+   project leaf, provisional global candidate, amyloplast asset, or Homeostasis
+   escalation.
 
-## Project record and global promotion
+## Promotion and retirement
 
-The detailed history belongs once in the affected project's Git history and
-its project work-log record: problem, suspected and confirmed cause, before/
-after code when useful, prevention, and regression evidence. Append later
-evidence to that one record.
-
-Promote only when the cause and prevention are useful beyond the project. A
-promotion needs a confirmed cause, cross-project applicability, a bounded
-trigger, and a verification method. Store the global asset and its concise
-promotion record in Chohogi `amyloplast`; the project record then references the
-asset ID instead of duplicating the whole history.
-
-Every promoted prevention has a review signal and retirement condition. If it
-repeatedly adds work without catching its signature, demote or retire it through
-`$homeostasis`; do not preserve it merely because it exists.
-
-If promotion changes Chohogi's conductor, roles, model policy, skill lifecycle,
-or installation/discovery policy, invoke `$homeostasis` with the learning
-evidence. Otherwise keep the prevention local.
+Project evidence remains in that project's Git and work-log. A provisional
+global candidate is not auto-discovered or auto-applied. Promote to amyloplast
+only after independent cross-project evidence, bounded trigger/non-trigger, and
+verification. Use `$homeostasis` for core policy, role, model, installation, or
+discovery changes. Retire stale, duplicate, or repeatedly false-positive assets
+with evidence; do not preserve them merely because they exist.

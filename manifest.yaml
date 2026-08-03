@@ -28,6 +28,18 @@ components:
     install: .agents/chohogi/trunk/execution-allocation.md
     trigger: "after a daily route is selected"
     loader: "referenced by conductor and global guidance"
+  - id: state-transition
+    organ: trunk
+    source: assets/agents/chohogi/trunk/state-transition.md
+    install: .agents/chohogi/trunk/state-transition.md
+    trigger: "daily route transition or maintenance handoff"
+    loader: "referenced by conductor"
+  - id: authority-lattice
+    organ: trunk
+    source: assets/agents/chohogi/trunk/authority-lattice.md
+    install: .agents/chohogi/trunk/authority-lattice.md
+    trigger: "persistent change, external effect, or global asset decision"
+    loader: "referenced by conductor and execution allocation"
   - id: capability-selection
     organ: trunk
     source: assets/agents/chohogi/trunk/capability-selection.md
@@ -46,6 +58,30 @@ components:
     install: .agents/chohogi/trunk/context-packet.md
     trigger: "multi-boundary work or context-continuity risk"
     loader: "referenced by conductor"
+  - id: xylem-context
+    organ: vascular-bundle
+    source: assets/agents/chohogi/trunk/vascular-bundle/xylem-context.md
+    install: .agents/chohogi/trunk/vascular-bundle/xylem-context.md
+    trigger: "substantial work needs grounded context handoff"
+    loader: "referenced by conductor"
+  - id: phloem-feedback
+    organ: vascular-bundle
+    source: assets/agents/chohogi/trunk/vascular-bundle/phloem-feedback.md
+    install: .agents/chohogi/trunk/vascular-bundle/phloem-feedback.md
+    trigger: "terminal delivery or debugging has confirmed prevention evidence"
+    loader: "referenced by conductor and learning"
+  - id: leaf-methods
+    organ: leaves
+    source: assets/agents/chohogi/trunk/leaf-methods.md
+    install: .agents/chohogi/trunk/leaf-methods.md
+    trigger: "after branch selection when a method choice is needed"
+    loader: "referenced by conductor"
+  - id: meristem-lifecycle
+    organ: trunk
+    source: assets/agents/chohogi/trunk/meristem-capability-lifecycle.md
+    install: .agents/chohogi/trunk/meristem-capability-lifecycle.md
+    trigger: "homeostasis review of a role or reusable-skill candidate"
+    loader: "referenced by homeostasis"
   - id: daily-routes
     organ: trunk
     source: assets/agents/chohogi/trunk/routes
@@ -77,6 +113,12 @@ components:
     install: .agents/chohogi/trunk/evals/replay-result.schema.json
     trigger: "recording or reviewing real Chohogi replay evidence"
     loader: "not automatically loaded"
+  - id: evaluation-budget-policy
+    organ: trunk
+    source: assets/agents/chohogi/trunk/evals/evaluation-budget-policy.md
+    install: .agents/chohogi/trunk/evals/evaluation-budget-policy.md
+    trigger: "homeostasis review of a global-policy candidate or explicit paired replay"
+    loader: "referenced by homeostasis; not automatically loaded"
   - id: replay-evaluation-verifier
     organ: trunk
     source: tooling/verify-replay-evaluation.py
@@ -90,13 +132,13 @@ components:
     trigger: "harness policy or installation change"
     loader: "referenced by conductor and branches"
   - id: learning
-    organ: branches
+    organ: regulatory-processes
     source: assets/agents/skills/learning
     install: .agents/skills/learning
     trigger: "confirmed failure with prevention evidence"
     loader: "Codex skill discovery"
   - id: homeostasis
-    organ: branches
+    organ: regulatory-processes
     source: assets/agents/skills/homeostasis
     install: .agents/skills/homeostasis
     trigger: "whole-harness health, lifecycle, or routing change"
@@ -107,25 +149,19 @@ components:
     install: .agents/skills/homeostasis/references/skill-lifecycle.md
     trigger: "after a reusable SKILL.md lifecycle decision"
     loader: "read by homeostasis; $skill-creator is preferred when callable"
-  - id: xylem-skills
-    organ: xylem
+  - id: reusable-leaves
+    organ: leaves
     source: assets/agents/skills
     install: .agents/skills
     includes: [accessibility, core-web-vitals, grill-me, performance, react-async-state-safety, security-and-hardening]
     trigger: "only when the concrete technology boundary matches"
     loader: "Codex skill discovery"
-  - id: xylem-provenance
-    organ: xylem
+  - id: reusable-skill-provenance
+    organ: leaves
     source: assets/agents/chohogi/xylem/provenance.json
     install: .agents/chohogi/xylem/provenance.json
     trigger: "external-skill adoption, update, or reference-integrity review"
     loader: "referenced by homeostasis"
-  - id: execution-methods
-    organ: xylem
-    source: assets/agents/chohogi/xylem/execution-methods.md
-    install: .agents/chohogi/xylem/execution-methods.md
-    trigger: "after execution allocation selects a method need"
-    loader: "referenced by conductor"
   - id: amyloplast
     organ: amyloplast
     source: assets/agents/chohogi/amyloplast

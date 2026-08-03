@@ -19,8 +19,11 @@ task: <식별자와 목표>
 flow / allocation: <flow> / <direct|sequential|scoped-delegation>
 accepted constraints: <수용 조건·제외 범위>
 ownership: <역할: 파일 또는 읽기 전용 경계>
+authority: <read|specified-write|shared-contract-write|external-side-effect|global-asset-change>
+baseline: <기준 revision·공유 계약·테스트 환경>
 decisions: <결정과 근거>
 evidence: <명령·결과·관측>
+handoff: <수신자·고정 diff 또는 phloem return 여부>
 next: <완료 항목 또는 다음 하나의 경계>
 ```
 

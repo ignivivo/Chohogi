@@ -9,11 +9,22 @@ function Resolve-ChohogiPython {
     return [pscustomobject]@{ Executable = $env:CHOHOGI_PYTHON; Arguments = @() }
   }
 
+  function Test-PythonExecutable([string]$Executable, [string[]]$Arguments) {
+    try {
+      & $Executable @Arguments -c 'import sys; assert sys.version_info >= (3, 8)'
+      return $LASTEXITCODE -eq 0
+    } catch { return $false }
+  }
+
   $python = Get-Command python -ErrorAction SilentlyContinue
-  if ($python) { return [pscustomobject]@{ Executable = $python.Source; Arguments = @() } }
+  if ($python -and (Test-PythonExecutable $python.Source @())) {
+    return [pscustomobject]@{ Executable = $python.Source; Arguments = @() }
+  }
 
   $launcher = Get-Command py -ErrorAction SilentlyContinue
-  if ($launcher) { return [pscustomobject]@{ Executable = $launcher.Source; Arguments = @('-3') } }
+  if ($launcher -and (Test-PythonExecutable $launcher.Source @('-3'))) {
+    return [pscustomobject]@{ Executable = $launcher.Source; Arguments = @('-3') }
+  }
 
   # Codex Desktop's bundled runtime is a last-resort, current-session capability.
   # It is discovered dynamically and is never an installation requirement.
@@ -22,7 +33,7 @@ function Resolve-ChohogiPython {
     $runtimeDirectories = @(Get-ChildItem -LiteralPath $runtimeRoot -Directory | Sort-Object LastWriteTimeUtc -Descending)
     foreach ($runtimeDirectory in $runtimeDirectories) {
       $candidate = Join-Path $runtimeDirectory.FullName 'dependencies\python\python.exe'
-      if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+      if ((Test-Path -LiteralPath $candidate -PathType Leaf) -and (Test-PythonExecutable $candidate @())) {
         return [pscustomobject]@{ Executable = $candidate; Arguments = @() }
       }
     }

@@ -11,9 +11,9 @@ from typing import Any
 
 
 DAILY_ROUTES = frozenset(("product-decision", "delivery", "debugging"))
-BRANCHES = frozenset(("learning", "homeostasis"))
-FLOWS = DAILY_ROUTES | BRANCHES
-SELECTION_KINDS = frozenset(("direct", "defer", "daily-route", "branch"))
+MAINTENANCE_PROCESSES = frozenset(("learning", "homeostasis"))
+FLOWS = DAILY_ROUTES | MAINTENANCE_PROCESSES
+SELECTION_KINDS = frozenset(("direct", "defer", "daily-route", "maintenance-process"))
 MUTATION_AUTHORITIES = frozenset(("none", "requested"))
 DEFER_MARKER = "<!-- chohogi:defer=no-flow-no-write -->"
 DEFER_REQUIRED_ARTIFACTS = frozenset(("evidence-gap", "no-change", "reentry-condition"))
@@ -70,15 +70,15 @@ def validate_fixture_document(data: Any) -> list[str]:
     errors: list[str] = []
     if not isinstance(data, dict):
         return ["Route fixture document must be a JSON object."]
-    if data.get("schemaVersion") != 3:
-        errors.append("Route fixture schemaVersion must be 3.")
+    if data.get("schemaVersion") != 4:
+        errors.append("Route fixture schemaVersion must be 4.")
     selection_kinds = data.get("selectionKinds")
     if (
         not isinstance(selection_kinds, list)
         or len(selection_kinds) != len(SELECTION_KINDS)
         or set(selection_kinds) != SELECTION_KINDS
     ):
-        errors.append("Route fixture selectionKinds must exactly declare direct, defer, daily-route, and branch.")
+        errors.append("Route fixture selectionKinds must exactly declare direct, defer, daily-route, and maintenance-process.")
     mutation_authorities = data.get("mutationAuthorities")
     if (
         not isinstance(mutation_authorities, list)
@@ -93,7 +93,7 @@ def validate_fixture_document(data: Any) -> list[str]:
 
     ids: set[str] = set()
     covered_daily: set[str] = set()
-    covered_branches: set[str] = set()
+    covered_maintenance: set[str] = set()
     direct_count = 0
     defer_count = 0
 
@@ -121,7 +121,7 @@ def validate_fixture_document(data: Any) -> list[str]:
         kind = expected.get("kind")
         flow = expected.get("flow")
         if kind not in SELECTION_KINDS:
-            errors.append(f"{fixture_id}: expected.kind must be direct, defer, daily-route, or branch.")
+            errors.append(f"{fixture_id}: expected.kind must be direct, defer, daily-route, or maintenance-process.")
         elif kind in {"direct", "defer"}:
             if kind == "direct":
                 direct_count += 1
@@ -134,11 +134,11 @@ def validate_fixture_document(data: Any) -> list[str]:
                 errors.append(f"{fixture_id}: daily-route must select a daily route.")
             else:
                 covered_daily.add(flow)
-        elif kind == "branch":
-            if flow not in BRANCHES:
-                errors.append(f"{fixture_id}: branch must select a branch.")
+        elif kind == "maintenance-process":
+            if flow not in MAINTENANCE_PROCESSES:
+                errors.append(f"{fixture_id}: maintenance-process must select a known maintenance process.")
             else:
-                covered_branches.add(flow)
+                covered_maintenance.add(flow)
 
         forbidden = fixture.get("forbiddenFlows")
         if not isinstance(forbidden, list) or not forbidden or not all(isinstance(item, str) and item in FLOWS for item in forbidden):
@@ -162,15 +162,15 @@ def validate_fixture_document(data: Any) -> list[str]:
             errors.append(f"{fixture_id}: defer must require evidence-gap, no-change, and reentry-condition (missing: {missing_artifacts}).")
 
     missing_daily = DAILY_ROUTES - covered_daily
-    missing_branches = BRANCHES - covered_branches
+    missing_maintenance = MAINTENANCE_PROCESSES - covered_maintenance
     if direct_count == 0:
         errors.append("Fixtures must cover at least one direct outcome.")
     if defer_count == 0:
         errors.append("Fixtures must cover at least one defer outcome.")
     if missing_daily:
         errors.append("Fixtures do not cover daily routes: " + ", ".join(sorted(missing_daily)))
-    if missing_branches:
-        errors.append("Fixtures do not cover branches: " + ", ".join(sorted(missing_branches)))
+    if missing_maintenance:
+        errors.append("Fixtures do not cover maintenance processes: " + ", ".join(sorted(missing_maintenance)))
     return errors
 
 
@@ -190,9 +190,9 @@ def run_negative_mutation_checks(
     contradictory_flow["fixtures"][2]["expected"]["flow"] = "delivery"
     mutations.append(("selected flow forbidden by its fixture", contradictory_flow))
 
-    branch_as_daily_route = copy.deepcopy(data)
-    branch_as_daily_route["fixtures"][2]["expected"] = {"kind": "daily-route", "flow": "homeostasis"}
-    mutations.append(("branch encoded as a daily route", branch_as_daily_route))
+    maintenance_as_daily_route = copy.deepcopy(data)
+    maintenance_as_daily_route["fixtures"][2]["expected"] = {"kind": "daily-route", "flow": "homeostasis"}
+    mutations.append(("maintenance process encoded as a daily route", maintenance_as_daily_route))
 
     defer_with_flow = copy.deepcopy(data)
     for fixture in defer_with_flow["fixtures"]:

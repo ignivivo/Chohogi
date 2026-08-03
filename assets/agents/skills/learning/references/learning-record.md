@@ -1,36 +1,52 @@
-# Learning Record Contract
+# Learning record and phloem return contract
 
-Use this reference only after the learning loop has confirmed a reusable
-failure and selected a prevention. Project guidance chooses the destination and
-stable ID; do not create a second generic ledger.
+Use this reference only after the learning entry conditions are met. Store the
+detailed incident once in the affected project's Git/work-log. An amyloplast
+record stores only a concise asset, scope, evidence references, and retirement
+conditions.
 
-## Required sections
+## Candidate lifecycle
 
-1. **Case metadata:** stable ID, dates, state, source evidence, and affected
-   producer/consumer boundary.
-2. **Observed problem:** impact and a reproduction or review finding. Keep it
-   separate from the cause.
-3. **Hypotheses and disposition:** list material candidate causes as
-   `suspected`, `rejected`, or `confirmed`, each with evidence.
-4. **Classification stack:** language/runtime, framework, library/platform,
-   product/domain boundary, failure class, primary cause, and prevention scope.
-   A framework or vendor is context, not blame, unless its behavior is the
-   evidenced primary cause.
-5. **Correction evidence:** minimal before/after excerpts, each tied to a file
-   and commit, diff, test, log, or review reference. Label pseudocode as such.
-   If original code is unavailable, state that evidence limit instead of
-   reconstructing it.
-6. **Verification and learning disposition:** checks actually run; selected
-   prevention; why it is the smallest durable choice; negative scope.
-7. **Later review:** append dated evidence when the record is confirmed,
-   revised, or superseded.
+```text
+observed → classified → confirmed → guarded → trial → resolution
+```
+
+`observed`, `classified`, or `plausible` incidents are not durable assets.
+Candidates are not auto-discovered or auto-applied and must have an expiry.
+
+## Required record
+
+1. **Metadata:** stable ID, state, owner, dates, expiry, impact, redaction and retention class.
+2. **Failure signature:** minimal non-sensitive symptom, producer/consumer boundary, reproduction or high-signal review reference.
+3. **Cause:** `confirmed`, alternatives considered or rejected, and evidence limit. Do not infer a reusable cause from a symptom.
+4. **Scope axes:**
+   - `mechanismLayer`: `language`, `framework`, `runtime`, `library-provider`, `application-contract`, or `harness`;
+   - `primaryPreventionScope`: the narrowest owner that can prevent recurrence;
+   - `applicability`: `one-off`, `project`, `pattern`, `provisional-global`, or `active-global`;
+   - `contributingContexts`: versions, environment, ordering, or domain context that contributed but are not the primary cause.
+5. **Prevention:** smallest guard, trigger/non-trigger, expected cost and false-positive harm, existing-asset overlap check.
+6. **Verification:** evidence that the guard catches the signature, negative scope, comparator or holdout when applicable, and actual checks run.
+7. **Disposition:** `closed-no-learning`, project record, project leaf, candidate, amyloplast, or Homeostasis; include rollback/prune and next review date.
+
+## Promotion thresholds
+
+| Destination | Required evidence |
+| --- | --- |
+| Project record or guard | confirmed cause, focused regression evidence, bounded trigger/non-trigger |
+| Project leaf | above plus a repeatable project-local boundary |
+| Provisional global candidate | above plus an independent holdout case; no automatic discovery or application |
+| Active amyloplast asset | independent successful application in two real projects, bounded trigger/non-trigger, and a verification method |
+| Core policy or permanent role | Homeostasis review, independent cases, adversarial negative case, comparison evidence, owner, and retirement plan |
+
+High-impact security or financial incidents may receive an immediate local guard
+or candidate, but not automatic global activation.
 
 ## Evidence hygiene
 
-- Keep excerpts small and omit secrets, personal inputs, provider prompts,
-  complete report prose, and unrelated code.
-- Prefer a focused regression test. If historical evidence contains only a
-  review or manual reproduction, say so plainly.
-- Do not promote a defect merely because it occurred in JavaScript, React,
-  Next.js, Vercel, or a domain module. Classify the actual ownership boundary
-  and choose the narrowest prevention that catches it.
+- Never store API keys, sessions, customer or birth information, raw prompts,
+  complete tool payloads, or unrelated logs.
+- Keep code excerpts minimal and point to commits, tests, diffs, or review IDs.
+- A React, Next.js, Vercel, Python, or JavaScript context is not itself proof of
+  ownership. Record negative scope and rejected explanations.
+- Retire assets as `superseded`, `rejected`, or `retired` with a reason rather
+  than silently deleting the history.

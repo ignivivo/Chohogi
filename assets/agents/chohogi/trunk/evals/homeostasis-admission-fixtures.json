@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "fixtures": [
+    {
+      "id": "requested-global-model-policy",
+      "case": "사용자가 전역 모델 승격·fallback 정책의 변경을 요청했다.",
+      "expected": "enter",
+      "reason": "durable global policy + explicit request"
+    },
+    {
+      "id": "single-project-react-bug",
+      "case": "한 React 화면의 stale response 버그가 재현되었다.",
+      "expected": "do-not-enter",
+      "reason": "project debugging/learning boundary"
+    },
+    {
+      "id": "install-discovery-divergence",
+      "case": "Git source와 clean-install 대상의 skill discovery 결과가 다르다.",
+      "expected": "enter",
+      "reason": "adapter and discovery boundary"
+    },
+    {
+      "id": "interesting-external-plugin",
+      "case": "흥미로운 외부 플러그인을 발견했지만 실패 증거나 사용 요구는 없다.",
+      "expected": "do-not-enter",
+      "reason": "optional capability alone is insufficient"
+    },
+    {
+      "id": "project-candidate-without-global-effect",
+      "case": "Learning이 프로젝트 후보 기록을 만들었지만 초호기 정책 변경 근거는 없다.",
+      "expected": "do-not-enter",
+      "reason": "candidate is not automatic global admission"
+    },
+    {
+      "id": "paired-replay-for-global-route-candidate",
+      "case": "Conductor route 정책 후보를 활성화하기 위한 제한된 paired replay를 요청한다.",
+      "expected": "enter",
+      "reason": "global evaluation-policy decision"
+    }
+  ]
+}

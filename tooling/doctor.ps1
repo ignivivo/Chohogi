@@ -7,13 +7,19 @@ $requiredSource = @(
   'manifest.yaml',
   'tooling\resolve-python.ps1',
   'tooling\verify-replay-evaluation.py',
+  'tooling\verify-homeostasis-policy.py',
   'assets\codex\AGENTS.md',
   'assets\agents\chohogi\trunk\conductor.md',
   'assets\agents\chohogi\trunk\execution-allocation.md',
   'assets\agents\chohogi\trunk\capability-selection.md',
   'assets\agents\chohogi\trunk\skill-adoption.md',
   'assets\agents\chohogi\trunk\context-packet.md',
-  'assets\agents\chohogi\xylem\execution-methods.md',
+  'assets\agents\chohogi\trunk\state-transition.md',
+  'assets\agents\chohogi\trunk\authority-lattice.md',
+  'assets\agents\chohogi\trunk\leaf-methods.md',
+  'assets\agents\chohogi\trunk\meristem-capability-lifecycle.md',
+  'assets\agents\chohogi\trunk\vascular-bundle\xylem-context.md',
+  'assets\agents\chohogi\trunk\vascular-bundle\phloem-feedback.md',
   'assets\agents\chohogi\xylem\provenance.json',
   'assets\agents\chohogi\trunk\routes\product-decision.md',
   'assets\agents\chohogi\trunk\routes\delivery.md',
@@ -21,11 +27,15 @@ $requiredSource = @(
   'assets\agents\chohogi\trunk\evals\route-fixtures.json',
   'assets\agents\chohogi\trunk\evals\execution-fixtures.json',
   'assets\agents\chohogi\trunk\evals\capability-fixtures.json',
+  'assets\agents\chohogi\trunk\evals\learning-fixtures.json',
   'assets\agents\chohogi\trunk\evals\replay-result.schema.json',
   'assets\agents\chohogi\trunk\evals\replay-result.example.json',
+  'assets\agents\chohogi\trunk\evals\evaluation-budget-policy.md',
+  'assets\agents\chohogi\trunk\evals\homeostasis-admission-fixtures.json',
   'assets\agents\chohogi\roots\constitution.md',
   'assets\agents\chohogi\amyloplast\index.yaml',
-  'assets\agents\skills\homeostasis\references\skill-lifecycle.md'
+  'assets\agents\skills\homeostasis\references\skill-lifecycle.md',
+  'assets\agents\skills\homeostasis\references\admission-policy.md'
 )
 $requiredSkills = @('learning', 'homeostasis', 'accessibility', 'core-web-vitals', 'grill-me', 'performance', 'react-async-state-safety', 'security-and-hardening')
 $errors = [System.Collections.Generic.List[string]]::new()
@@ -53,6 +63,8 @@ foreach ($name in $requiredSkills) {
 }
 $installedLifecycle = Join-Path $TargetHome '.agents\skills\homeostasis\references\skill-lifecycle.md'
 if (-not (Test-Path $installedLifecycle)) { $errors.Add('Missing installed skill lifecycle reference.') }
+$installedAdmission = Join-Path $TargetHome '.agents\skills\homeostasis\references\admission-policy.md'
+if (-not (Test-Path $installedAdmission)) { $errors.Add('Missing installed Homeostasis admission policy.') }
 $installedConductor = Join-Path $TargetHome '.agents\chohogi\trunk\conductor.md'
 if (-not (Test-Path $installedConductor)) { $errors.Add('Missing installed conductor.') }
 elseif (-not (Get-Content -LiteralPath $installedConductor -Raw -Encoding utf8).Contains('routes/<flow>.md')) { $errors.Add('Installed conductor does not reference daily route contracts.') }
@@ -64,7 +76,14 @@ if (-not (Test-Path $installedCapability)) { $errors.Add('Missing installed capa
 elseif (-not (Get-Content -LiteralPath $installedCapability -Raw -Encoding utf8).Contains('<!-- chohogi:provider-authority=capability-only -->')) { $errors.Add('Installed capability-selection contract does not retain provider boundary.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\skill-adoption.md'))) { $errors.Add('Missing installed skill-adoption contract.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\context-packet.md'))) { $errors.Add('Missing installed context packet contract.') }
-if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\xylem\execution-methods.md'))) { $errors.Add('Missing installed xylem execution methods.') }
+foreach ($asset in @(
+  '.agents\chohogi\trunk\state-transition.md',
+  '.agents\chohogi\trunk\authority-lattice.md',
+  '.agents\chohogi\trunk\leaf-methods.md',
+  '.agents\chohogi\trunk\meristem-capability-lifecycle.md',
+  '.agents\chohogi\trunk\vascular-bundle\xylem-context.md',
+  '.agents\chohogi\trunk\vascular-bundle\phloem-feedback.md'
+)) { if (-not (Test-Path (Join-Path $TargetHome $asset))) { $errors.Add("Missing installed asset: $asset") } }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\xylem\provenance.json'))) { $errors.Add('Missing installed xylem provenance.') }
 foreach ($route in @('product-decision', 'delivery', 'debugging')) {
   $installedRoute = Join-Path $TargetHome ".agents\chohogi\trunk\routes\$route.md"
@@ -73,8 +92,11 @@ foreach ($route in @('product-decision', 'delivery', 'debugging')) {
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\route-fixtures.json'))) { $errors.Add('Missing installed route fixtures.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\execution-fixtures.json'))) { $errors.Add('Missing installed execution fixtures.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\capability-fixtures.json'))) { $errors.Add('Missing installed capability fixtures.') }
+if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\learning-fixtures.json'))) { $errors.Add('Missing installed learning fixtures.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\replay-result.schema.json'))) { $errors.Add('Missing installed replay result schema.') }
 if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\replay-result.example.json'))) { $errors.Add('Missing installed replay result example.') }
+if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\evaluation-budget-policy.md'))) { $errors.Add('Missing installed evaluation budget policy.') }
+if (-not (Test-Path (Join-Path $TargetHome '.agents\chohogi\trunk\evals\homeostasis-admission-fixtures.json'))) { $errors.Add('Missing installed Homeostasis admission fixtures.') }
 
 $managedTrees = @(
   @{ Source = Join-Path $sourceRoot 'assets\agents\chohogi'; Destination = Join-Path $TargetHome '.agents\chohogi' },

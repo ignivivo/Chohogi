@@ -1,4 +1,15 @@
-schema_version: 1
+schema_version: 2
 assets: []
 promotion_rule: >-
-  A candidate needs a confirmed root cause, evidence that the prevention is useful beyond one project, a bounded trigger, and a verification method.
+  An active asset needs a confirmed root cause, a verified prevention, bounded trigger and non-trigger, a verification method, and independent successful application in two real projects. Candidates are not automatically discovered or applied.
+required_asset_fields:
+  - id
+  - state
+  - source_record_ids
+  - trigger
+  - non_trigger
+  - verification
+  - owner
+  - expiry
+  - review_signal
+  - retirement_condition

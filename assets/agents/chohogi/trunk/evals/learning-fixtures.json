@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Scope, retention, and promotion fixtures for Learning–Phloem–Amyloplast.",
+  "fixtures": [
+    {
+      "id": "react-async-not-next-or-vercel",
+      "mechanismLayer": "framework",
+      "primaryPreventionScope": "react-async-request-lifecycle",
+      "applicability": "pattern",
+      "mustNotPromoteTo": ["nextjs", "vercel"],
+      "expectedDestination": "provisional-global-candidate"
+    },
+    {
+      "id": "domain-contract-stays-project-local",
+      "mechanismLayer": "application-contract",
+      "primaryPreventionScope": "project-interpretation-contract",
+      "applicability": "project",
+      "mustNotPromoteTo": ["language", "framework", "active-amyloplast"],
+      "expectedDestination": "project-record"
+    },
+    {
+      "id": "readonly-diagnosis-no-durable-record",
+      "causeStatus": "confirmed",
+      "hasWriteAuthority": false,
+      "expectedDestination": "closed-no-learning"
+    },
+    {
+      "id": "sensitive-payload-redacted",
+      "containsSensitivePayload": true,
+      "expectedDestination": "redact-before-return"
+    },
+    {
+      "id": "candidate-expiry-prunes",
+      "state": "candidate",
+      "expired": true,
+      "expectedDestination": "retired"
+    }
+  ]
+}

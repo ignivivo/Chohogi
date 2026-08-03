@@ -1,9 +1,9 @@
 # Amyloplast
 
-Amyloplast는 여러 프로젝트에서 재사용할 가치가 검증된 학습 결과를 보관하는 초호기의 저장 기관이다. 자동으로 읽히거나 모든 작업에 주입되지 않는다.
+Amyloplast는 여러 프로젝트에서 재사용할 가치가 검증된 **예방 자산**을 보관하는 초호기의 저장 기관이다. 실패 원문이나 단순 관찰을 저장하지 않으며, 자동으로 읽히거나 모든 작업에 주입되지 않는다.
 
 - `records/`: 왜 승격되었는지, 증거·범위·한계를 기록한 전역 승격 기록
 - `assets/`: 실제 재사용 자산(스킬, 검사 스크립트, 계약 템플릿 등)
 - `index.yaml`: 자산의 상태와 명시적 호출 조건
 
-프로젝트에서 발생한 사건의 자세한 전후 코드와 회귀 증거는 그 프로젝트의 Git과 `docs/work-log/records/`에 한 번만 남긴다. 전역 승격이 필요하면 프로젝트 기록은 amyloplast 자산 ID만 가리키고, 같은 역사를 중복 복사하지 않는다.
+프로젝트에서 발생한 사건의 자세한 전후 코드와 회귀 증거는 그 프로젝트의 Git과 `docs/work-log/records/`에 한 번만 남긴다. 전역 승격이 필요하면 프로젝트 기록은 amyloplast 자산 ID만 가리키고, 같은 역사를 중복 복사하지 않는다. 모든 자산은 trigger/non-trigger, source record ID, 검증, owner, review signal, expiry와 retirement condition을 가진다.
