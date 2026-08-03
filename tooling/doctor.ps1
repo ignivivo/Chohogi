@@ -90,4 +90,4 @@ if ($errors.Count -gt 0) {
   $errors | ForEach-Object { Write-Error $_ }
   exit 1
 }
-Write-Host 'Chohogi doctor: PASS (source and installed assets are self-contained and synchronized).'
+Write-Host 'Chohogi install integrity: PASS (source and installed assets are self-contained and synchronized).'

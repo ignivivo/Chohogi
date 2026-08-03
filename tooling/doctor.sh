@@ -83,4 +83,4 @@ if grep -R -E -q 'codex-native-meta-harness|learning-loop|operating-harness|adop
   errors=1
 fi
 [[ "$errors" == 0 ]] || exit 1
-echo 'Chohogi doctor: PASS (source and installed assets are self-contained and synchronized).'
+echo 'Chohogi install integrity: PASS (source and installed assets are self-contained and synchronized).'

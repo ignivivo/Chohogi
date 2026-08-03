@@ -27,14 +27,14 @@ Windows PowerShell:
 
 ```powershell
 ./tooling/install.ps1
-./tooling/doctor.ps1
+./tooling/verify-install.ps1
 ```
 
 Linux/macOS:
 
 ```bash
 ./tooling/install.sh
-./tooling/doctor.sh
+./tooling/verify-install.sh
 ```
 
 일반 설치는 인증·플러그인·MCP·개인 설정과 기존 사용자 자산을 건드리지 않는다.

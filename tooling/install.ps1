@@ -39,4 +39,4 @@ else {
   Copy-Item -Force -LiteralPath $newGlobal -Destination $oldGlobal
 }
 
-Write-Host 'Chohogi installation complete. Run tooling/doctor.ps1 against this target.'
+Write-Host 'Chohogi installation complete. Run tooling/verify-install.ps1 against this target.'

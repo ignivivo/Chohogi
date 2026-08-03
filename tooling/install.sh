@@ -29,4 +29,4 @@ done
 mkdir -p "$codex"
 cp "$assets/codex/AGENTS.md" "$codex/AGENTS.md"
 
-echo 'Chohogi installation complete. Run tooling/doctor.sh.'
+echo 'Chohogi installation complete. Run tooling/verify-install.sh.'
