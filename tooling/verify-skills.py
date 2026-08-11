@@ -9,7 +9,10 @@ from pathlib import Path
 
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 ROOT = Path(__file__).resolve().parent.parent
-SKILLS = ROOT / "assets" / "agents" / "skills"
+SKILL_ROOTS = (
+    ROOT / "assets" / "agents" / "leaves_capabilities",
+    ROOT / "assets" / "agents" / "adaptive-regulation",
+)
 
 
 def fail(message: str, errors: list[str]) -> None:
@@ -54,11 +57,12 @@ def check_skill(directory: Path, errors: list[str]) -> None:
 
 def main() -> int:
     errors: list[str] = []
-    if not SKILLS.is_dir():
-        print(f"Missing Chohogi skills directory: {SKILLS}")
+    if not all(path.is_dir() for path in SKILL_ROOTS):
+        print("Missing Chohogi skill roots: " + ", ".join(str(path) for path in SKILL_ROOTS))
         return 1
-    for directory in sorted(path for path in SKILLS.iterdir() if path.is_dir()):
-        check_skill(directory, errors)
+    for skill_root in SKILL_ROOTS:
+        for directory in sorted(path for path in skill_root.iterdir() if path.is_dir()):
+            check_skill(directory, errors)
     if errors:
         print("Chohogi supplemental skill verification: FAIL")
         print("\n".join(f"- {error}" for error in errors))

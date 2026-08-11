@@ -1,0 +1,1131 @@
+{
+  "schemaVersion": 1,
+  "sourceDigest": "c25db93d2fd3740d9abc87723774e51a76924645703f5dc19238a802c04e7ce5",
+  "nodes": [
+    {
+      "id": "asset:README.md",
+      "kind": "asset",
+      "path": "README.md"
+    },
+    {
+      "id": "asset:assets/agents",
+      "kind": "asset",
+      "path": "assets/agents"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/homeostasis",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/homeostasis"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/homeostasis/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/homeostasis/references/admission-policy.md",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/homeostasis/references/admission-policy.md"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/homeostasis/references/skill-lifecycle.md",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/homeostasis/references/skill-lifecycle.md"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/learning",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/learning"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/learning/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/learning/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/learning/references/learning-record.md",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/learning/references/learning-record.md"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/README.md",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/README.md"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/index_registry.yaml",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/index_registry.yaml"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/retired_assets/grill-me",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/retired_assets/grill-me"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/retired_assets/grill-me/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/retired_assets/grill-me/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/xylem_provenance/provenance.json",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/xylem_provenance/provenance.json"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities/accessibility/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities/accessibility/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities/accessibility/references/A11Y-PATTERNS.md",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities/accessibility/references/A11Y-PATTERNS.md"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities/accessibility/references/WCAG.md",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities/accessibility/references/WCAG.md"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities/core-web-vitals/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities/core-web-vitals/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities/core-web-vitals/references/LCP.md",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities/core-web-vitals/references/LCP.md"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities/performance/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities/performance/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities/react-async-state-safety/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities/react-async-state-safety/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities/react-async-state-safety/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities/react-async-state-safety/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities/security-and-hardening/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities/security-and-hardening/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/leaves_capabilities/security-and-hardening/references/security-checklist.md",
+      "kind": "asset",
+      "path": "assets/agents/leaves_capabilities/security-and-hardening/references/security-checklist.md"
+    },
+    {
+      "id": "asset:assets/agents/roots_constitution/constitution.md",
+      "kind": "asset",
+      "path": "assets/agents/roots_constitution/constitution.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/authority-lattice.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/authority-lattice.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/branches_workflows/debugging.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/branches_workflows/debugging.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/branches_workflows/delivery.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/branches_workflows/product-decision.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/branches_workflows/product-decision.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/capability-selection.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/capability-selection.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/conductor.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/context-packet.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/README.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/README.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/capability-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/execution-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/learning-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/learning-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/replay-result.example.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/replay-result.example.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/replay-result.schema.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/replay-result.schema.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/route-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/route-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/execution-allocation.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/horizontal-transfer_adoption.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/horizontal-transfer_adoption.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/leaf-methods.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/leaf-methods.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/meristem_differentiation/capability-lifecycle.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/meristem_differentiation/capability-lifecycle.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/state-transition.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/state-transition.md"
+    },
+    {
+      "id": "asset:assets/agents/vascular-bundle_circulation/phloem-feedback.md",
+      "kind": "asset",
+      "path": "assets/agents/vascular-bundle_circulation/phloem-feedback.md"
+    },
+    {
+      "id": "asset:assets/agents/vascular-bundle_circulation/xylem-context.md",
+      "kind": "asset",
+      "path": "assets/agents/vascular-bundle_circulation/xylem-context.md"
+    },
+    {
+      "id": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "kind": "asset",
+      "path": "assets/epidermis_entrypoint/AGENTS.md"
+    },
+    {
+      "id": "asset:docs/chohogi/genome-map.graph.json",
+      "kind": "asset",
+      "path": "docs/chohogi/genome-map.graph.json"
+    },
+    {
+      "id": "asset:docs/chohogi/genome-map.md",
+      "kind": "asset",
+      "path": "docs/chohogi/genome-map.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "id": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "kind": "asset",
+      "path": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
+    },
+    {
+      "id": "asset:manifest.json",
+      "kind": "asset",
+      "path": "manifest.json"
+    },
+    {
+      "id": "asset:tooling/doctor.sh",
+      "kind": "asset",
+      "path": "tooling/doctor.sh"
+    },
+    {
+      "id": "asset:tooling/genome_map.py",
+      "kind": "asset",
+      "path": "tooling/genome_map.py"
+    },
+    {
+      "id": "asset:tooling/install.sh",
+      "kind": "asset",
+      "path": "tooling/install.sh"
+    },
+    {
+      "id": "asset:tooling/manifest_registry.py",
+      "kind": "asset",
+      "path": "tooling/manifest_registry.py"
+    },
+    {
+      "id": "asset:tooling/prune-backups.sh",
+      "kind": "asset",
+      "path": "tooling/prune-backups.sh"
+    },
+    {
+      "id": "asset:tooling/summarize-replays.py",
+      "kind": "asset",
+      "path": "tooling/summarize-replays.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_genome_map.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_genome_map.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_graft_compatibility_audit.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_graft_compatibility_audit.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_manifest_registry.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_manifest_registry.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_posix_only.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_source_layout.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_source_layout.py"
+    },
+    {
+      "id": "asset:tooling/validate-replay-result.py",
+      "kind": "asset",
+      "path": "tooling/validate-replay-result.py"
+    },
+    {
+      "id": "asset:tooling/verify-capability-boundary.py",
+      "kind": "asset",
+      "path": "tooling/verify-capability-boundary.py"
+    },
+    {
+      "id": "asset:tooling/verify-execution-allocation.py",
+      "kind": "asset",
+      "path": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "id": "asset:tooling/verify-homeostasis-policy.py",
+      "kind": "asset",
+      "path": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "id": "asset:tooling/verify-install.sh",
+      "kind": "asset",
+      "path": "tooling/verify-install.sh"
+    },
+    {
+      "id": "asset:tooling/verify-learning-contract.py",
+      "kind": "asset",
+      "path": "tooling/verify-learning-contract.py"
+    },
+    {
+      "id": "asset:tooling/verify-provenance.py",
+      "kind": "asset",
+      "path": "tooling/verify-provenance.py"
+    },
+    {
+      "id": "asset:tooling/verify-replay-evaluation.py",
+      "kind": "asset",
+      "path": "tooling/verify-replay-evaluation.py"
+    },
+    {
+      "id": "asset:tooling/verify-routes.py",
+      "kind": "asset",
+      "path": "tooling/verify-routes.py"
+    },
+    {
+      "id": "asset:tooling/verify-skills.py",
+      "kind": "asset",
+      "path": "tooling/verify-skills.py"
+    },
+    {
+      "id": "asset:tooling/verify-source-layout.py",
+      "kind": "asset",
+      "path": "tooling/verify-source-layout.py"
+    },
+    {
+      "id": "component:chohogi-organs",
+      "kind": "component",
+      "path": "assets/agents",
+      "state": "active"
+    },
+    {
+      "id": "component:global-guidance",
+      "kind": "component",
+      "path": "assets/epidermis_entrypoint/AGENTS.md",
+      "state": "active"
+    },
+    {
+      "id": "component:grill-me",
+      "kind": "component",
+      "path": "assets/agents/genome_inheritance/retired_assets/grill-me",
+      "state": "retired"
+    },
+    {
+      "id": "component:homeostasis",
+      "kind": "component",
+      "path": "assets/agents/adaptive-regulation/homeostasis",
+      "state": "active"
+    },
+    {
+      "id": "component:learning",
+      "kind": "component",
+      "path": "assets/agents/adaptive-regulation/learning",
+      "state": "active"
+    },
+    {
+      "id": "component:reusable-leaves",
+      "kind": "component",
+      "path": "assets/agents/leaves_capabilities",
+      "state": "active"
+    },
+    {
+      "id": "document:README.md",
+      "kind": "document",
+      "path": "README.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "id": "document:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "kind": "document",
+      "path": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
+    },
+    {
+      "id": "endpoint:.agents/chohogi",
+      "kind": "endpoint",
+      "path": ".agents/chohogi"
+    },
+    {
+      "id": "endpoint:.agents/skills",
+      "kind": "endpoint",
+      "path": ".agents/skills"
+    },
+    {
+      "id": "endpoint:.agents/skills/homeostasis",
+      "kind": "endpoint",
+      "path": ".agents/skills/homeostasis"
+    },
+    {
+      "id": "endpoint:.agents/skills/learning",
+      "kind": "endpoint",
+      "path": ".agents/skills/learning"
+    },
+    {
+      "id": "endpoint:.codex/AGENTS.md",
+      "kind": "endpoint",
+      "path": ".codex/AGENTS.md"
+    },
+    {
+      "id": "skill:accessibility",
+      "kind": "skill",
+      "path": "assets/agents/leaves_capabilities/accessibility/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:core-web-vitals",
+      "kind": "skill",
+      "path": "assets/agents/leaves_capabilities/core-web-vitals/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:performance",
+      "kind": "skill",
+      "path": "assets/agents/leaves_capabilities/performance/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:react-async-state-safety",
+      "kind": "skill",
+      "path": "assets/agents/leaves_capabilities/react-async-state-safety/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:security-and-hardening",
+      "kind": "skill",
+      "path": "assets/agents/leaves_capabilities/security-and-hardening/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "verifier:capability-boundary",
+      "kind": "verifier",
+      "path": "tooling/verify-capability-boundary.py"
+    },
+    {
+      "id": "verifier:execution-allocation",
+      "kind": "verifier",
+      "path": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "id": "verifier:graft-compatibility_install-audit",
+      "kind": "verifier",
+      "path": "tooling/graft-compatibility_install-audit.sh"
+    },
+    {
+      "id": "verifier:homeostasis-policy",
+      "kind": "verifier",
+      "path": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "id": "verifier:learning-contract",
+      "kind": "verifier",
+      "path": "tooling/verify-learning-contract.py"
+    },
+    {
+      "id": "verifier:provenance",
+      "kind": "verifier",
+      "path": "tooling/verify-provenance.py"
+    },
+    {
+      "id": "verifier:replay-evaluation",
+      "kind": "verifier",
+      "path": "tooling/verify-replay-evaluation.py"
+    },
+    {
+      "id": "verifier:routes",
+      "kind": "verifier",
+      "path": "tooling/verify-routes.py"
+    },
+    {
+      "id": "verifier:skills",
+      "kind": "verifier",
+      "path": "tooling/verify-skills.py"
+    },
+    {
+      "id": "verifier:source-layout",
+      "kind": "verifier",
+      "path": "tooling/verify-source-layout.py"
+    }
+  ],
+  "edges": [
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/agents/leaves_capabilities/security-and-hardening/SKILL.md",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/agents",
+      "target": "component:chohogi-organs",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/adaptive-regulation/homeostasis",
+      "target": "component:homeostasis",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/adaptive-regulation/learning",
+      "target": "component:learning",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/genome_inheritance/retired_assets/grill-me",
+      "target": "component:grill-me",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/leaves_capabilities",
+      "target": "component:reusable-leaves",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/leaves_capabilities/security-and-hardening/SKILL.md",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/product-decision.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "target": "component:global-guidance",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/genome-map.graph.json",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:docs/chohogi/genome-map.md",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/product-decision.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:chohogi-organs",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:global-guidance",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:grill-me",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:homeostasis",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:learning",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:reusable-leaves",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:tooling/doctor.sh",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/genome_map.py",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:tooling/install.sh",
+      "target": "asset:manifest.json",
+      "relation": "requires",
+      "evidence": "tooling/install.sh"
+    },
+    {
+      "source": "asset:tooling/install.sh",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:tooling/install.sh",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/install.sh",
+      "target": "verifier:graft-compatibility_install-audit",
+      "relation": "requires",
+      "evidence": "tooling/graft-compatibility_install-audit.sh"
+    },
+    {
+      "source": "asset:tooling/manifest_registry.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/prune-backups.sh",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:tooling/prune-backups.sh",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_genome_map.py",
+      "target": "asset:assets/agents/leaves_capabilities/security-and-hardening/SKILL.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_genome_map.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_posix_only.py",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_posix_only.py",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/references/skill-lifecycle.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_posix_only.py",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/README.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "source": "asset:tooling/verify-capability-boundary.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-execution-allocation.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-homeostasis-policy.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-install.sh",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:tooling/verify-install.sh",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-learning-contract.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-provenance.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-replay-evaluation.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-routes.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-skills.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-source-layout.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "component:chohogi-organs",
+      "target": "endpoint:.agents/chohogi",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:global-guidance",
+      "target": "endpoint:.codex/AGENTS.md",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:homeostasis",
+      "target": "endpoint:.agents/skills/homeostasis",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:learning",
+      "target": "endpoint:.agents/skills/learning",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:reusable-leaves",
+      "target": "endpoint:.agents/skills",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "skill:accessibility",
+      "target": "asset:assets/agents/leaves_capabilities/accessibility/references/A11Y-PATTERNS.md",
+      "relation": "requires",
+      "evidence": "assets/agents/leaves_capabilities/accessibility/SKILL.md"
+    },
+    {
+      "source": "skill:accessibility",
+      "target": "asset:assets/agents/leaves_capabilities/accessibility/references/WCAG.md",
+      "relation": "requires",
+      "evidence": "assets/agents/leaves_capabilities/accessibility/SKILL.md"
+    },
+    {
+      "source": "skill:accessibility",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-leaves"
+    },
+    {
+      "source": "skill:accessibility",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:core-web-vitals",
+      "target": "asset:assets/agents/leaves_capabilities/core-web-vitals/references/LCP.md",
+      "relation": "requires",
+      "evidence": "assets/agents/leaves_capabilities/core-web-vitals/SKILL.md"
+    },
+    {
+      "source": "skill:core-web-vitals",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-leaves"
+    },
+    {
+      "source": "skill:core-web-vitals",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:performance",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-leaves"
+    },
+    {
+      "source": "skill:performance",
+      "target": "document:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
+    },
+    {
+      "source": "skill:performance",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:react-async-state-safety",
+      "target": "asset:assets/agents/leaves_capabilities/react-async-state-safety/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/leaves_capabilities/react-async-state-safety/SKILL.md"
+    },
+    {
+      "source": "skill:react-async-state-safety",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-leaves"
+    },
+    {
+      "source": "skill:react-async-state-safety",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:security-and-hardening",
+      "target": "asset:assets/agents/leaves_capabilities/security-and-hardening/references/security-checklist.md",
+      "relation": "requires",
+      "evidence": "assets/agents/leaves_capabilities/security-and-hardening/SKILL.md"
+    },
+    {
+      "source": "skill:security-and-hardening",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "skill:security-and-hardening",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-leaves"
+    },
+    {
+      "source": "skill:security-and-hardening",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "verifier:capability-boundary",
+      "target": "asset:assets/agents/trunk_orchestration/capability-selection.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-capability-boundary.py"
+    },
+    {
+      "source": "verifier:capability-boundary",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/capability-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-capability-boundary.py"
+    },
+    {
+      "source": "verifier:execution-allocation",
+      "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "source": "verifier:execution-allocation",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "source": "verifier:execution-allocation",
+      "target": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "source": "verifier:execution-allocation",
+      "target": "asset:assets/agents/trunk_orchestration/leaf-methods.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/references/admission-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/trunk_orchestration/state-transition.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:learning-contract",
+      "target": "asset:assets/agents/adaptive-regulation/learning/SKILL.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:learning-contract",
+      "target": "asset:assets/agents/adaptive-regulation/learning/references/learning-record.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:learning-contract",
+      "target": "asset:assets/agents/genome_inheritance/index_registry.yaml",
+      "relation": "requires",
+      "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:learning-contract",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/learning-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:learning-contract",
+      "target": "asset:assets/agents/vascular-bundle_circulation/phloem-feedback.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:provenance",
+      "target": "asset:assets/agents/genome_inheritance/xylem_provenance/provenance.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "verifier:routes",
+      "target": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-routes.py"
+    },
+    {
+      "source": "verifier:routes",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/route-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-routes.py"
+    },
+    {
+      "source": "verifier:routes",
+      "target": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-routes.py"
+    }
+  ]
+}

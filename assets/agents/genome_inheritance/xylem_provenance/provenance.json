@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "assets": [
+    {
+      "id": "security-and-hardening",
+      "adoption": "absorb-core",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/leaves_capabilities/security-and-hardening",
+      "license": "MIT",
+      "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
+      "local_delta": "owned-baseline",
+      "required_resources": ["references/security-checklist.md"],
+      "trigger": "handling untrusted input, authentication, data storage, or external integration",
+      "non_trigger": "general style review without a security boundary",
+      "owner": "Chohogi maintainers",
+      "review_signal": ["confirmed-security-failure", "missing-reference", "license-change"],
+      "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
+    },
+    {
+      "id": "accessibility",
+      "adoption": "absorb-core",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/leaves_capabilities/accessibility",
+      "license": "MIT",
+      "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
+      "local_delta": "owned-baseline",
+      "required_resources": ["references/WCAG.md", "references/A11Y-PATTERNS.md"],
+      "trigger": "a requested WCAG, keyboard, screen-reader, or accessibility improvement",
+      "non_trigger": "a visual-only change with no accessibility claim",
+      "owner": "Chohogi maintainers",
+      "review_signal": ["wcag-update", "missing-reference", "confirmed-accessibility-failure"],
+      "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
+    },
+    {
+      "id": "core-web-vitals",
+      "adoption": "absorb-core",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/leaves_capabilities/core-web-vitals",
+      "license": "MIT",
+      "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
+      "local_delta": "owned-baseline",
+      "required_resources": ["references/LCP.md"],
+      "trigger": "a requested Core Web Vitals, LCP, INP, or CLS improvement",
+      "non_trigger": "general performance work without a page-experience metric boundary",
+      "owner": "Chohogi maintainers",
+      "review_signal": ["web-platform-change", "missing-reference", "measurement-failure"],
+      "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
+    },
+    {
+      "id": "performance",
+      "adoption": "absorb-core",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/leaves_capabilities/performance",
+      "license": "MIT",
+      "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
+      "local_delta": "owned-baseline",
+      "required_resources": [],
+      "trigger": "a requested load-time, rendering, or runtime performance improvement",
+      "non_trigger": "a metric-free code cleanup",
+      "owner": "Chohogi maintainers",
+      "review_signal": ["measurement-failure", "duplicate-guidance", "runtime-regression"],
+      "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
+    },
+    {
+      "id": "react-async-state-safety",
+      "adoption": "absorb-core",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/leaves_capabilities/react-async-state-safety",
+      "license": "repository",
+      "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
+      "local_delta": "owned-baseline",
+      "required_resources": [],
+      "trigger": "React client async requests, stale-result handling, retries, or invalidation",
+      "non_trigger": "React code with no asynchronous state transition",
+      "owner": "Chohogi maintainers",
+      "review_signal": ["confirmed-async-state-failure", "duplicate-react-skill"],
+      "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
+    }
+  ],
+  "retired": [
+    {
+      "id": "grill-me",
+      "adoption": "retired",
+      "origin": "unverified",
+      "license": "unverified",
+      "baseline_revision": "unverified",
+      "retirement_reason": "unverified active provenance and conflicting interaction contract"
+    }
+  ]
+}

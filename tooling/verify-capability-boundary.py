@@ -85,7 +85,7 @@ def validate_fixture_document(data: Any) -> list[str]:
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     errors: list[str] = []
-    contract_path = root / "assets/agents/chohogi/trunk/capability-selection.md"
+    contract_path = root / "assets/agents/trunk_orchestration/capability-selection.md"
     if not contract_path.is_file():
         errors.append(f"Missing capability-selection contract: {contract_path}")
     else:
@@ -93,7 +93,7 @@ def main() -> int:
         for term in REQUIRED_TERMS:
             if term not in text:
                 errors.append(f"capability-selection.md is missing contract term: {term}")
-    fixture_path = root / "assets/agents/chohogi/trunk/evals/capability-fixtures.json"
+    fixture_path = root / "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json"
     data: dict[str, Any] | None = None
     if not fixture_path.is_file():
         errors.append(f"Missing capability fixtures: {fixture_path}")

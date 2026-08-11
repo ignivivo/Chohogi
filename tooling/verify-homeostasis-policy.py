@@ -23,21 +23,28 @@ def require_terms(path: Path, terms: tuple[str, ...], errors: list[str]) -> None
 
 def main() -> int:
     errors: list[str] = []
-    skill = ROOT / "assets/agents/skills/homeostasis/SKILL.md"
-    admission = ROOT / "assets/agents/skills/homeostasis/references/admission-policy.md"
-    conductor = ROOT / "assets/agents/chohogi/trunk/conductor.md"
-    transition = ROOT / "assets/agents/chohogi/trunk/state-transition.md"
-    budget = ROOT / "assets/agents/chohogi/trunk/evals/evaluation-budget-policy.md"
-    manifest = ROOT / "manifest.yaml"
+    skill = ROOT / "assets/agents/adaptive-regulation/homeostasis/SKILL.md"
+    admission = ROOT / "assets/agents/adaptive-regulation/homeostasis/references/admission-policy.md"
+    conductor = ROOT / "assets/agents/trunk_orchestration/conductor.md"
+    transition = ROOT / "assets/agents/trunk_orchestration/state-transition.md"
+    budget = ROOT / "assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md"
+    manifest = ROOT / "manifest.json"
 
     require_terms(skill, ("Scope gate", "Evidence gate", "evaluation-budget-policy.md"), errors)
     require_terms(admission, ("## Enter", "## Do not enter", "approved-global-change"), errors)
     require_terms(conductor, ("`learning`과 `homeostasis`는 일상 흐름과 경쟁하는 route가 아니다",), errors)
     require_terms(transition, ("scope gate", "evidence gate", "자동 시작되지는 않는다"), errors)
     require_terms(budget, ("Never run baseline and candidate for every task", "Shared skill", "Route, role, or model policy", "25%"), errors)
-    require_terms(manifest, ("id: evaluation-budget-policy", "id: homeostasis"), errors)
+    try:
+        manifest_document = json.loads(manifest.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"Invalid manifest registry: {exc}")
+    else:
+        component_ids = {item.get("id") for item in manifest_document.get("components", []) if isinstance(item, dict)}
+        if not {"chohogi-organs", "reusable-leaves"}.issubset(component_ids):
+            errors.append("Manifest registry does not declare the owned Chohogi organs and reusable leaves.")
 
-    fixture_path = ROOT / "assets/agents/chohogi/trunk/evals/homeostasis-admission-fixtures.json"
+    fixture_path = ROOT / "assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json"
     try:
         fixture_doc = json.loads(fixture_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:

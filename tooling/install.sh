@@ -12,51 +12,150 @@ while [[ $# -gt 0 ]]; do
 done
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-assets="$root/assets"
 agents="$target_home/.agents"
 codex="$target_home/.codex"
-stamp="$(date +%Y%m%d-%H%M%S)"
+live_root="$agents/chohogi"
+backup_root="$agents/chohogi-backups"
 marker_name='.chohogi-owner.json'
+stamp="$(date -u +%Y%m%d-%H%M%S)"
+mkdir -p "$agents"
+stage="$(mktemp -d "$agents/.chohogi-stage.XXXXXX")"
+backup=''
+moved_live=''
 
-is_chohogi_owned() { [[ -f "$1/$marker_name" ]] && grep -F -q '"package": "chohogi"' "$1/$marker_name"; }
-install_managed_dir() {
-  local source="$1" destination="$2"
-  if [[ -e "$destination" ]]; then
-    [[ -d "$destination" ]] || { echo "Installation collision: $destination is not a directory." >&2; exit 1; }
-    if ! is_chohogi_owned "$destination" && [[ "$adopt_existing" != true ]]; then
-      echo "Installation collision: $destination is not marked as Chohogi-owned. Inspect it, then rerun with --adopt-existing only for a prior Chohogi installation." >&2
-      exit 1
-    fi
-    rm -rf "$destination"
+cleanup() {
+  local status=$?
+  if [[ "$status" != 0 && -n "$moved_live" && ! -e "$live_root" ]]; then
+    mv "$moved_live" "$live_root" || true
   fi
+  [[ -d "$stage" ]] && rm -rf "$stage"
+  exit "$status"
+}
+trap cleanup EXIT
+
+is_chohogi_owned() { [[ -f "$1/$marker_name" ]] && grep -E -q '"package"[[:space:]]*:[[:space:]]*"chohogi"' "$1/$marker_name"; }
+marker_is_current() { grep -F -q "\"registryDigest\": \"$registry_digest\"" "$1/$marker_name"; }
+layout_version() {
+  local value
+  value="$(sed -nE 's/.*"layoutVersion"[[:space:]]*:[[:space:]]*([0-9]+).*/\1/p' "$1/$marker_name" | head -n 1)"
+  printf '%s\n' "${value:-1}"
+}
+tree_matches() { [[ -d "$2" ]] && diff -qr --exclude="$marker_name" "$1" "$2" >/dev/null; }
+ensure_backup() {
+  local version="$1"
+  [[ -n "$backup" ]] && return
+  backup="$backup_root/layout-v${version}-${stamp}"
+  mkdir -p "$backup"
+}
+copy_to_stage() {
+  local source="$1" destination="$2" mode="$3"
   mkdir -p "$(dirname "$destination")"
-  cp -R "$source" "$destination"
-  printf '{\n  "package": "chohogi",\n  "installedAt": "%s"\n}\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$destination/$marker_name"
+  case "$mode" in
+    file) cp "$source" "$destination" ;;
+    tree) cp -R "$source" "$destination" ;;
+    *) echo "Unsupported registry install mode: $mode" >&2; exit 1 ;;
+  esac
 }
 install_global_guidance() {
-  local source="$1" destination="$2" begin='<!-- chohogi:global-guidance:start -->' end='<!-- chohogi:global-guidance:end -->' old temp
+  local source="$1" destination="$2" begin='<!-- chohogi:global-guidance:start -->' end='<!-- chohogi:global-guidance:end -->' temp
   mkdir -p "$(dirname "$destination")"
   [[ -f "$destination" ]] || { cp "$source" "$destination"; return; }
-  old="$(cat "$destination")"
   if grep -F -q "$begin" "$destination" && grep -F -q "$end" "$destination"; then
     temp="$(mktemp "${destination}.tmp.XXXXXX")"
     awk -v source="$source" -v begin="$begin" -v end="$end" '
-      $0 == begin { while ((getline line < source) > 0) print line; close(source); replacing=1; next }
-      $0 == end { replacing=0; next }
+      index($0, begin) { while ((getline line < source) > 0) print line; close(source); replacing=1; next }
+      index($0, end) { replacing=0; next }
       !replacing { print }
     ' "$destination" > "$temp"
     mv "$temp" "$destination"
   elif grep -F -q 'chohogi:defer=no-flow-no-write' "$destination"; then
     cp "$source" "$destination"
   else
+    cp "$destination" "$destination.pre-chohogi-$stamp.md"
     printf '\n\n' >> "$destination"; cat "$source" >> "$destination"; printf '\n' >> "$destination"
   fi
 }
-[[ -f "$root/manifest.yaml" ]] || { echo 'Run from a complete Chohogi checkout.' >&2; exit 1; }
-if [[ -f "$codex/AGENTS.md" ]] && ! grep -F -q 'chohogi:global-guidance:start' "$codex/AGENTS.md"; then
-  mkdir -p "$codex"; cp "$codex/AGENTS.md" "$codex/AGENTS.pre-chohogi-$stamp.md"
+
+[[ -f "$root/manifest.json" ]] || { echo 'Run from a complete Chohogi checkout.' >&2; exit 1; }
+plan="$(python3 "$root/tooling/manifest_registry.py" install-plan)"
+registry_digest="$(python3 -c 'import json,sys; print(json.load(sys.stdin)["registryDigest"])' <<<"$plan")"
+component_ids="$(python3 -c 'import json,sys; print(json.dumps(json.load(sys.stdin)["managedComponentIds"]))' <<<"$plan")"
+
+while IFS=$'\t' read -r source destination mode; do
+  [[ "$destination" == .codex/* ]] && continue
+  stage_destination="$stage/${destination#.agents/}"
+  copy_to_stage "$root/$source" "$stage_destination" "$mode"
+done < <(python3 -c 'import json,sys
+for action in json.load(sys.stdin)["actions"]:
+    print("\t".join((action["source"], action["destination"], action["mode"])))' <<<"$plan")
+
+stage_root="$stage/chohogi"
+python3 -c 'import json,sys
+path, digest, ids = sys.argv[1:]
+with open(path, "w", encoding="utf-8") as handle:
+    json.dump({"package": "chohogi", "layoutVersion": 2, "managedComponentIds": json.loads(ids), "registryDigest": digest, "installedAt": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}, handle, indent=2)
+    handle.write("\n")' "$stage_root/$marker_name" "$registry_digest" "$component_ids"
+for staged_skill in "$stage/skills"/*; do
+  [[ -d "$staged_skill" ]] && cp "$stage_root/$marker_name" "$staged_skill/$marker_name"
+done
+
+if [[ -e "$live_root" ]]; then
+  [[ -d "$live_root" ]] || { echo "Installation collision: $live_root is not a directory." >&2; exit 1; }
+  if ! is_chohogi_owned "$live_root" && [[ "$adopt_existing" != true ]]; then
+    echo "Installation collision: $live_root is not marked as Chohogi-owned." >&2; exit 1
+  fi
+  if tree_matches "$stage_root" "$live_root"; then
+    marker_is_current "$live_root" || cp "$stage_root/$marker_name" "$live_root/$marker_name"
+  else
+    old_version="$(layout_version "$live_root")"
+    ensure_backup "$old_version"
+    mv "$live_root" "$backup/chohogi"
+    moved_live="$backup/chohogi"
+    mv "$stage_root" "$live_root"
+    moved_live=''
+  fi
+else
+  mv "$stage_root" "$live_root"
 fi
-install_managed_dir "$assets/agents/chohogi" "$agents/chohogi"
-for skill in "$assets/agents/skills"/*; do [[ -d "$skill" ]] && install_managed_dir "$skill" "$agents/skills/$(basename "$skill")"; done
-install_global_guidance "$assets/codex/AGENTS.md" "$codex/AGENTS.md"
-echo 'Chohogi installation complete. Run tooling/verify-install.sh.'
+
+while IFS=$'\t' read -r source destination mode; do
+  [[ "$destination" == .agents/chohogi ]] && continue
+  [[ "$destination" == .codex/* ]] && continue
+  staged="$stage/${destination#.agents/}"
+  live="$target_home/$destination"
+  if [[ -e "$live" ]]; then
+    [[ -d "$live" ]] || { echo "Installation collision: $live is not a directory." >&2; exit 1; }
+    if ! is_chohogi_owned "$live" && [[ "$adopt_existing" != true ]]; then
+      echo "Installation collision: $live is not marked as Chohogi-owned." >&2; exit 1
+    fi
+    if tree_matches "$staged" "$live"; then
+      marker_is_current "$live" || cp "$staged/$marker_name" "$live/$marker_name"
+      continue
+    fi
+    ensure_backup "$(layout_version "$live")"
+    mkdir -p "$backup/skills"
+    mv "$live" "$backup/skills/$(basename "$live")"
+  else
+    mkdir -p "$(dirname "$live")"
+  fi
+  mv "$staged" "$live"
+done < <(python3 -c 'import json,sys
+for action in json.load(sys.stdin)["actions"]:
+    print("\t".join((action["source"], action["destination"], action["mode"])))' <<<"$plan")
+
+retired="$agents/skills/grill-me"
+if [[ -e "$retired" ]]; then
+  [[ -d "$retired" ]] && is_chohogi_owned "$retired" || { echo "Retired skill collision: $retired is not Chohogi-owned." >&2; exit 1; }
+  ensure_backup "$(layout_version "$retired")"
+  mkdir -p "$backup/skills"
+  mv "$retired" "$backup/skills/grill-me"
+fi
+
+while IFS=$'\t' read -r source destination mode; do
+  [[ "$destination" == .codex/* ]] || continue
+  install_global_guidance "$root/$source" "$target_home/$destination"
+done < <(python3 -c 'import json,sys
+for action in json.load(sys.stdin)["actions"]:
+    print("\t".join((action["source"], action["destination"], action["mode"])))' <<<"$plan")
+
+if [[ -n "$backup" ]]; then echo "Chohogi installation complete. Backup: $backup"; else echo 'Chohogi installation complete.'; fi

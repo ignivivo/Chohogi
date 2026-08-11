@@ -44,16 +44,16 @@ def require_terms(path: Path, terms: tuple[str, ...], errors: list[str]) -> None
 
 def main() -> int:
     errors: list[str] = []
-    learning = ROOT / "assets/agents/skills/learning/SKILL.md"
-    record = ROOT / "assets/agents/skills/learning/references/learning-record.md"
-    phloem = ROOT / "assets/agents/chohogi/trunk/vascular-bundle/phloem-feedback.md"
-    amyloplast = ROOT / "assets/agents/chohogi/amyloplast/index.yaml"
+    learning = ROOT / "assets/agents/adaptive-regulation/learning/SKILL.md"
+    record = ROOT / "assets/agents/adaptive-regulation/learning/references/learning-record.md"
+    phloem = ROOT / "assets/agents/vascular-bundle_circulation/phloem-feedback.md"
+    genome_inheritance = ROOT / "assets/agents/genome_inheritance/index_registry.yaml"
     require_terms(learning, REQUIRED_LEARNING_TERMS, errors)
     require_terms(record, REQUIRED_RECORD_TERMS, errors)
     require_terms(phloem, REQUIRED_PHLOEM_TERMS, errors)
-    require_terms(amyloplast, ("required_asset_fields", "retirement_condition"), errors)
+    require_terms(genome_inheritance, ("required_asset_fields", "retirement_condition"), errors)
 
-    fixture_path = ROOT / "assets/agents/chohogi/trunk/evals/learning-fixtures.json"
+    fixture_path = ROOT / "assets/agents/trunk_orchestration/evaluation/learning-fixtures.json"
     try:
         data = json.loads(fixture_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:

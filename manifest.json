@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 2,
+  "package": {
+    "id": "chohogi",
+    "layoutVersion": 2,
+    "portability": "self-governing-method-assets"
+  },
+  "components": [
+    {
+      "id": "global-guidance",
+      "organ": "epidermis_entrypoint",
+      "function": "global-guidance",
+      "source": "assets/epidermis_entrypoint/AGENTS.md",
+      "destination": ".codex/AGENTS.md",
+      "ownership": "runtime-endpoint",
+      "activation": "every Codex task",
+      "state": "active",
+      "installMode": "file"
+    },
+    {
+      "id": "chohogi-organs",
+      "organ": "organ-library",
+      "function": "internal-contracts",
+      "source": "assets/agents",
+      "destination": ".agents/chohogi",
+      "ownership": "managed",
+      "activation": "selected Chohogi contract",
+      "state": "active",
+      "installMode": "tree"
+    },
+    {
+      "id": "reusable-leaves",
+      "organ": "leaves_capabilities",
+      "function": "reusable-skills",
+      "source": "assets/agents/leaves_capabilities",
+      "destination": ".agents/skills",
+      "ownership": "managed",
+      "activation": "matching concrete capability boundary",
+      "state": "active",
+      "installMode": "children",
+      "exclude": []
+    },
+    {
+      "id": "learning",
+      "organ": "adaptive-regulation",
+      "function": "confirmed-failure-prevention",
+      "source": "assets/agents/adaptive-regulation/learning",
+      "destination": ".agents/skills/learning",
+      "ownership": "managed",
+      "activation": "confirmed root cause and prevention evidence",
+      "state": "active",
+      "installMode": "tree"
+    },
+    {
+      "id": "homeostasis",
+      "organ": "adaptive-regulation",
+      "function": "whole-harness-maintenance",
+      "source": "assets/agents/adaptive-regulation/homeostasis",
+      "destination": ".agents/skills/homeostasis",
+      "ownership": "managed",
+      "activation": "whole-harness policy, lifecycle, or installation boundary",
+      "state": "active",
+      "installMode": "tree"
+    },
+    {
+      "id": "grill-me",
+      "organ": "horizontal-transfer",
+      "function": "design-interview",
+      "source": "assets/agents/genome_inheritance/retired_assets/grill-me",
+      "destination": ".agents/skills/grill-me",
+      "ownership": "retired",
+      "activation": "none",
+      "state": "retired",
+      "installMode": "none",
+      "retirementReason": "unverified active provenance and conflicting interaction contract"
+    }
+  ]
+}

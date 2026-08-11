@@ -239,22 +239,22 @@ def main() -> int:
     guidance_text: str | None = None
     conductor_text: str | None = None
 
-    guidance = root / "assets/codex/AGENTS.md"
+    guidance = root / "assets/epidermis_entrypoint/AGENTS.md"
     if not guidance.is_file():
         errors.append(f"Missing global guidance: {guidance}")
     else:
         guidance_text = guidance.read_text(encoding="utf-8")
-        if "trunk/routes/<flow>.md" not in guidance_text:
-            errors.append("Global guidance does not direct selected daily routes to trunk/routes/<flow>.md.")
+        if "trunk_orchestration/branches_workflows/<flow>.md" not in guidance_text:
+            errors.append("Global guidance does not direct selected daily routes to trunk_orchestration/branches_workflows/<flow>.md.")
         errors.extend(validate_defer_policy_text("Global guidance", guidance_text))
 
-    conductor = root / "assets/agents/chohogi/trunk/conductor.md"
+    conductor = root / "assets/agents/trunk_orchestration/conductor.md"
     if not conductor.is_file():
         errors.append(f"Missing conductor: {conductor}")
     else:
         conductor_text = conductor.read_text(encoding="utf-8")
-        if "routes/<flow>.md" not in conductor_text:
-            errors.append("Conductor does not direct selected daily routes to routes/<flow>.md.")
+        if "branches_workflows/<flow>.md" not in conductor_text:
+            errors.append("Conductor does not direct selected daily routes to branches_workflows/<flow>.md.")
         errors.extend(validate_defer_policy_text("Conductor", conductor_text))
         for route in DAILY_ROUTES:
             if f"`{route}`" not in conductor_text:
@@ -262,14 +262,14 @@ def main() -> int:
 
     route_texts: dict[str, str] = {}
     for route in DAILY_ROUTES:
-        route_path = root / f"assets/agents/chohogi/trunk/routes/{route}.md"
+        route_path = root / f"assets/agents/trunk_orchestration/branches_workflows/{route}.md"
         if not route_path.is_file():
             errors.append(f"Missing route: {route_path}")
             continue
         route_texts[route] = route_path.read_text(encoding="utf-8")
         errors.extend(validate_route_text(route, route_texts[route]))
 
-    fixture_path = root / "assets/agents/chohogi/trunk/evals/route-fixtures.json"
+    fixture_path = root / "assets/agents/trunk_orchestration/evaluation/route-fixtures.json"
     data: dict[str, Any] | None = None
     if not fixture_path.is_file():
         errors.append(f"Missing route fixture file: {fixture_path}")
