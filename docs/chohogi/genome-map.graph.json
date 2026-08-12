@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "5fa938bf05f4b9f070f73554346f3c3a5edec089abfd0610ca64037f5f6ef8be",
+  "sourceDigest": "c2964c7b11f358afd030bd02c7236973c86f4cd6b92aa88c2c0c33cb5232dda8",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -873,6 +873,11 @@
       "path": "assets/agents/trunk_orchestration/method-selection.md"
     },
     {
+      "id": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/model-policy.md"
+    },
+    {
       "id": "asset:assets/agents/trunk_orchestration/project-leaves.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/project-leaves.md"
@@ -953,6 +958,11 @@
       "path": "tooling/manifest_registry.py"
     },
     {
+      "id": "asset:tooling/model-policy.py",
+      "kind": "asset",
+      "path": "tooling/model-policy.py"
+    },
+    {
       "id": "asset:tooling/prune-backups.sh",
       "kind": "asset",
       "path": "tooling/prune-backups.sh"
@@ -996,6 +1006,11 @@
       "id": "asset:tooling/tests/test_manifest_registry.py",
       "kind": "asset",
       "path": "tooling/tests/test_manifest_registry.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_model_policy.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_model_policy.py"
     },
     {
       "id": "asset:tooling/tests/test_posix_only.py",
@@ -1265,6 +1280,11 @@
       "id": "verifier:learning-contract",
       "kind": "verifier",
       "path": "tooling/verify-learning-contract.py"
+    },
+    {
+      "id": "verifier:model-policy",
+      "kind": "verifier",
+      "path": "tooling/verify-model-policy.py"
     },
     {
       "id": "verifier:provenance",
@@ -2748,6 +2768,18 @@
       "target": "asset:assets/agents/vascular-bundle_circulation/phloem-feedback.md",
       "relation": "requires",
       "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:model-policy",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-model-policy.py"
+    },
+    {
+      "source": "verifier:model-policy",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-model-policy.py"
     },
     {
       "source": "verifier:provenance",

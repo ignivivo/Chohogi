@@ -36,7 +36,10 @@ Conductor가 흐름을 고른 뒤, substantial 작업은 이 계약으로 정확
 - `reviewer`: 구현과 독립적으로 계약·보안·회귀 위험을 검토한다. 파일을 바꾸지 않는다.
 
 가장 낮은 비용의 충분한 모델을 고른다. 기계적 구현·테스트는 저비용, 불명 원인·다중
-계약은 중간 수준, 독립 고위험 검토만 높은 판단 수준을 쓴다. escalation 이유, 재시도
+계약은 중간 수준, 독립 고위험 검토만 높은 판단 수준을 쓴다. 모델명만이 아니라
+provider·model·reasoning effort를 함께 배정하며, 세션 시작의 사람 확정 Model Session
+Policy 안에서만 선택한다. `model-policy.md`의 catalog 갱신·learning escalation·정책 밖
+요구가 있으면 새 후보와 비용 근거를 사람에게 다시 제시한다. escalation 이유, 재시도
 상한, 예상 비용 상한과 fallback을 작업 봉투에 남긴다. 역할을 만들 수 없거나 현재 표면이
 지원하지 않으면 주 에이전트가 같은 경계를 순차 처리한다.
 

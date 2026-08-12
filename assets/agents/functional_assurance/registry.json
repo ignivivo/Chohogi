@@ -22,8 +22,8 @@
       "nonTrigger": "does not replace project implementation or external provider authority",
       "output": "one workflow, allocation, and evidence boundary",
       "execution": "assets/agents/trunk_orchestration/conductor.md",
-      "verifiers": ["tooling/verify-routes.py", "tooling/verify-execution-allocation.py", "tooling/verify-capability-boundary.py"],
-      "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json", "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json", "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json"],
+      "verifiers": ["tooling/verify-routes.py", "tooling/verify-execution-allocation.py", "tooling/verify-capability-boundary.py", "tooling/verify-model-policy.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json", "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json", "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json", "tooling/tests/test_model_policy.py"],
       "limits": "static contracts require bounded replay for durable behavior changes"
     },
     {
@@ -253,6 +253,18 @@
       "verifiers": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py"],
       "fixtures": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py"],
       "limits": "doctor reports state; graft audit establishes source/install parity"
+    },
+    {
+      "id": "model-policy-evaluator",
+      "kind": "deterministic-check",
+      "sources": ["tooling/model-policy.py", "tooling/verify-model-policy.py"],
+      "trigger": "an officially exposed model catalog, task role, prior catalog, or verified learning escalation requires a session-policy recommendation or comparison",
+      "nonTrigger": "does not discover providers, inspect credentials or private settings, change model selection, or send asynchronous notifications",
+      "output": "machine-readable candidates or catalog-change/learning reconfirmation requirement",
+      "execution": "python3 tooling/model-policy.py recommend|compare|learning-escalation",
+      "verifiers": ["tooling/verify-model-policy.py", "tooling/tests/test_model_policy.py"],
+      "fixtures": ["tooling/tests/test_model_policy.py"],
+      "limits": "only supplied official observations are compared; a ranking is not a quality benchmark, a provider probe, or a billing guarantee"
     },
     {
       "id": "verification-and-topology-tools",

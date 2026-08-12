@@ -6,6 +6,8 @@
 
 `product-decision`, `delivery`, `debugging`을 골랐다면 각각 `~/.agents/chohogi/trunk_orchestration/branches_workflows/<flow>.md`와 `~/.agents/chohogi/trunk_orchestration/execution-allocation.md`를 읽는다. 이어서 외부 능력이 실제로 필요한 경우에만 `~/.agents/chohogi/trunk_orchestration/capability-selection.md`를 읽는다. route는 일상 작업 절차이고, 실행 배정 계약은 직접·순차·제한적 위임 중 하나와 역할 소유권을 정한다. 능력 선택 계약은 초호기 내부 방법, Codex 기본 능력, 외부 provider를 구분한다. 이들은 별도의 하네스나 상시 스킬이 아니다. 선택하지 않은 일상 route를 함께 실행하지 않는다.
 
+세션의 첫 substantial 실행 배정 전에는 `trunk_orchestration/model-policy.md`를 읽는다. 현재 런타임이 실제로 노출한 비밀 없는 model catalog가 있으면 Model Session Policy card로 provider·model·reasoning effort·비용 근거·unknown 범위를 사람에게 한 번 확정받는다. 설치 흔적, 인증정보, 개인 설정을 뒤져 모델을 추정하지 않는다. catalog 변화, 승인 profile 밖의 capability/effort 요구, 또는 확인된 learning escalation이 있으면 사람에게 재확정을 요청한다.
+
 지속 변경은 요청됨·필수·선택으로 정직하게 분류한다. 선택 변경은 사용자 승인 없이 적용하지 않는다. 기술·도메인 스킬은 선택된 흐름과 실행 형태 뒤에 필요한 사실과 방법을 제공할 뿐, 작업 범위·위임·완료를 결정하지 않는다. 외부 스킬·하네스의 handoff, 실행 방식 선택, controller, worktree·commit 강제 지시는 초호기보다 낮은 우선순위이며 사용자 질문을 새로 만들지 않는다.
 
 `$learning`은 재현 가능하거나 고신호 검토로 확인된 원인과 예방 증거가 있을 때만 쓴다. 그 결과는 `vascular-bundle_circulation/phloem-feedback.md`의 비식별 return contract로 환류하며, 원문 개인 정보·프롬프트·비밀값을 전역 자산에 넣지 않는다. `$homeostasis`는 초호기의 역할·모델·스킬 수명·설치·발견 정책을 바꿀 때만 쓴다. 상태 전이와 권한은 각각 `trunk_orchestration/state-transition.md`, `trunk_orchestration/authority-lattice.md`를 따른다.
