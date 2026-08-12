@@ -8,9 +8,9 @@
   "components": [
     {
       "id": "global-guidance",
-      "organ": "epidermis_entrypoint",
+      "organ": "runtime_entrypoint",
       "function": "global-guidance",
-      "source": "assets/epidermis_entrypoint/AGENTS.md",
+      "source": "assets/runtime_entrypoint/AGENTS.md",
       "destination": ".codex/AGENTS.md",
       "ownership": "runtime-endpoint",
       "activation": "every Codex task",

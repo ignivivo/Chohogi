@@ -239,7 +239,7 @@ def main() -> int:
     guidance_text: str | None = None
     conductor_text: str | None = None
 
-    guidance = root / "assets/epidermis_entrypoint/AGENTS.md"
+    guidance = root / "assets/runtime_entrypoint/AGENTS.md"
     if not guidance.is_file():
         errors.append(f"Missing global guidance: {guidance}")
     else:

@@ -3,13 +3,13 @@
   "purpose": "Active Chohogi assets may claim only capabilities backed by the declared evidence path.",
   "assurances": [
     {
-      "id": "epidermis-guidance",
+      "id": "runtime-guidance",
       "kind": "policy-gate",
-      "sources": ["assets/epidermis_entrypoint/AGENTS.md"],
+      "sources": ["assets/runtime_entrypoint/AGENTS.md"],
       "trigger": "every Codex task",
       "nonTrigger": "does not select a daily workflow itself",
       "output": "direct handling, defer, or conductor handoff",
-      "execution": "assets/epidermis_entrypoint/AGENTS.md",
+      "execution": "assets/runtime_entrypoint/AGENTS.md",
       "verifiers": ["tooling/verify-routes.py"],
       "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json"],
       "limits": "does not prove fresh-session model behavior"

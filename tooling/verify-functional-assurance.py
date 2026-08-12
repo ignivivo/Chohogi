@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_REGISTRY = ROOT / "assets/agents/functional_assurance/registry.json"
 KINDS = {"advisory", "deterministic-check", "policy-gate", "provider-backed", "reference"}
 ORGAN_ROOTS = {
-    "assets/epidermis_entrypoint",
+    "assets/runtime_entrypoint",
     "assets/agents/trunk_orchestration",
     "assets/agents/adaptive-regulation",
     "assets/agents/genome_inheritance",

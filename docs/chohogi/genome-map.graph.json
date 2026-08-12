@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "6bbfff5c2afdf301b4cb7a6325494694936a30a3e40537f1df3858176b92f809",
+  "sourceDigest": "ca952df57968656c9da32a736c7b40b1d4a1f2cafe88db05806810d2eb8d04e0",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -338,9 +338,9 @@
       "path": "assets/agents/vascular-bundle_circulation/xylem-context.md"
     },
     {
-      "id": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "id": "asset:assets/runtime_entrypoint/AGENTS.md",
       "kind": "asset",
-      "path": "assets/epidermis_entrypoint/AGENTS.md"
+      "path": "assets/runtime_entrypoint/AGENTS.md"
     },
     {
       "id": "asset:docs/chohogi/genome-map.graph.json",
@@ -526,7 +526,7 @@
     {
       "id": "component:global-guidance",
       "kind": "component",
-      "path": "assets/epidermis_entrypoint/AGENTS.md",
+      "path": "assets/runtime_entrypoint/AGENTS.md",
       "state": "active"
     },
     {
@@ -819,7 +819,7 @@
     },
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
-      "target": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
     },
@@ -866,16 +866,10 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
-      "source": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
       "target": "component:global-guidance",
       "relation": "activates",
       "evidence": "manifest.json"
-    },
-    {
-      "source": "asset:assets/epidermis_entrypoint/AGENTS.md",
-      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
-      "relation": "documents",
-      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
       "source": "asset:docs/chohogi/genome-map.graph.json",
@@ -920,12 +914,6 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
-      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
-      "target": "asset:assets/epidermis_entrypoint/AGENTS.md",
-      "relation": "requires",
-      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
-    },
-    {
       "source": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
@@ -933,7 +921,7 @@
     },
     {
       "source": "asset:manifest.json",
-      "target": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "manifest.json"
     },
@@ -1509,7 +1497,7 @@
     },
     {
       "source": "verifier:routes",
-      "target": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "tooling/verify-routes.py"
     },

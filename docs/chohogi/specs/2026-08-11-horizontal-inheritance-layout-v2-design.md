@@ -87,7 +87,7 @@ The source layout becomes:
 
 ```text
 assets/
-  epidermis_entrypoint/
+  runtime_entrypoint/
     AGENTS.md
   agents/
     roots_constitution/
@@ -137,7 +137,7 @@ names their combined role.
 The installer maps these source paths to the existing Codex endpoints:
 
 ```text
-epidermis_entrypoint/AGENTS.md  -> ~/.codex/AGENTS.md
+runtime_entrypoint/AGENTS.md    -> ~/.codex/AGENTS.md
 reusable_methods/<skill>/       -> ~/.agents/skills/<skill>/
 agents/<organ>/                 -> ~/.agents/chohogi/<organ>/
 ```
@@ -339,7 +339,7 @@ replay schema fields plus the selected immunity response when applicable.
 It does not turn every user task into a duplicated evaluation, and it follows
 the evaluation-budget policy for paired comparisons.
 
-## Thin epidermis entrypoint
+## Thin runtime entrypoint
 
 The global `AGENTS.md` becomes a minimal interface: direct handling,
 substantial-task intake, `defer`, and the conductor entrypoint. Detailed

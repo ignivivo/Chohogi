@@ -13,6 +13,7 @@ FORBIDDEN = {
     "manifest.yaml": "v1 manifest must not remain beside manifest.json",
     "assets/agents/chohogi": "v1 Chohogi source path remains active",
     "assets/agents/skills": "v1 reusable-skill source path remains active",
+    "assets/epidermis_entrypoint": "runtime endpoint must not use the misleading epidermis name",
     "leaves_capabilities": "global reusable methods must not masquerade as project leaves",
     "reusable-leaves": "manifest component must use reusable-methods, not project leaves",
     "leaf-methods.md": "reusable method catalog must not be named as a project leaf",

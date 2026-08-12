@@ -23,6 +23,16 @@ class SourceLayoutTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_active_source_has_no_misleading_epidermis_entrypoint_reference(self) -> None:
+        result = subprocess.run(
+            [sys.executable, "tooling/verify-source-layout.py"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()
