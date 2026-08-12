@@ -20,6 +20,12 @@ fi
 if ! python3 "$root/tooling/verify-source-layout.py" >/dev/null; then
   echo 'Source layout is invalid.' >&2; exit 1
 fi
+if ! python3 "$root/tooling/verify-skills.py" >/dev/null; then
+  echo 'Active skill resource graph is invalid.' >&2; exit 1
+fi
+if ! python3 "$root/tooling/verify-functional-assurance.py" >/dev/null; then
+  echo 'Functional assurance registry is invalid.' >&2; exit 1
+fi
 
 plan="$(python3 "$root/tooling/manifest_registry.py" install-plan)"
 registry_digest="$(python3 -c 'import json,sys; print(json.load(sys.stdin)["registryDigest"])' <<<"$plan")"

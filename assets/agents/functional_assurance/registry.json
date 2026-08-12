@@ -27,16 +27,28 @@
       "limits": "static contracts require bounded replay for durable behavior changes"
     },
     {
-      "id": "adaptive-regulation",
+      "id": "learning-method",
       "kind": "policy-gate",
-      "sources": ["assets/agents/adaptive-regulation"],
-      "trigger": "confirmed prevention evidence or whole-harness change evidence",
-      "nonTrigger": "ordinary delivery and unconfirmed incidents",
-      "output": "bounded learning or Homeostasis disposition",
+      "sources": ["assets/agents/adaptive-regulation/learning"],
+      "trigger": "a confirmed failure has a bounded, verified smallest prevention",
+      "nonTrigger": "ordinary delivery, unconfirmed incidents, and automatic global promotion",
+      "output": "bounded learning disposition and redacted phloem return",
+      "execution": "assets/agents/adaptive-regulation/learning/SKILL.md",
+      "verifiers": ["tooling/verify-learning-contract.py", "tooling/verify-skills.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/learning-fixtures.json", "tooling/tests/test_skills.py"],
+      "limits": "does not automatically promote a project observation or prove future model behavior"
+    },
+    {
+      "id": "homeostasis-method",
+      "kind": "policy-gate",
+      "sources": ["assets/agents/adaptive-regulation/homeostasis"],
+      "trigger": "a whole-harness policy, lifecycle, installation, discovery, or evaluation boundary changes",
+      "nonTrigger": "ordinary delivery, product decisions, and a single project bug",
+      "output": "bounded Homeostasis disposition and repair packet",
       "execution": "assets/agents/adaptive-regulation/homeostasis/SKILL.md",
-      "verifiers": ["tooling/verify-learning-contract.py", "tooling/verify-homeostasis-policy.py"],
-      "fixtures": ["assets/agents/trunk_orchestration/evaluation/learning-fixtures.json", "assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json"],
-      "limits": "does not automatically promote a project observation"
+      "verifiers": ["tooling/verify-homeostasis-policy.py", "tooling/verify-skills.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json", "tooling/tests/test_skills.py"],
+      "limits": "does not itself repair assets or prove fresh-session model behavior"
     },
     {
       "id": "genome-inheritance",
@@ -62,15 +74,125 @@
       "limits": "does not execute a scanner or release gate"
     },
     {
-      "id": "reusable-methods",
+      "id": "accessibility-method",
       "kind": "advisory",
-      "sources": ["assets/agents/reusable_methods"],
-      "trigger": "a matching concrete capability boundary",
-      "nonTrigger": "does not select route, authority, or completion",
-      "output": "scoped method, checklist, or review guidance",
-      "verifiers": ["tooling/verify-skills.py", "tooling/verify-functional-assurance.py"],
-      "fixtures": ["tooling/tests/test_functional_assurance.py"],
-      "limits": "advisory skills do not claim automatic detection, blocking, or scanner execution"
+      "sources": ["assets/agents/reusable_methods/accessibility"],
+      "trigger": "a delivery changes an interface or requests an accessibility review",
+      "nonTrigger": "does not select route, authority, or automatically certify WCAG conformance",
+      "output": "scoped accessibility method and review guidance",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not execute an accessibility scanner or establish legal compliance"
+    },
+    {
+      "id": "agent-security-audit-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/agent-security-audit"],
+      "trigger": "agent orchestration, tool calling, MCP use, or agent runtime boundaries change",
+      "nonTrigger": "does not select route, approve an agent, or execute a security gate",
+      "output": "scoped agent security review method",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not prove an agent is free of vulnerabilities"
+    },
+    {
+      "id": "core-web-vitals-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/core-web-vitals"],
+      "trigger": "a delivery requests Core Web Vitals analysis or improvement",
+      "nonTrigger": "does not select route or automatically measure production performance",
+      "output": "scoped Core Web Vitals optimization method",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not produce field-performance evidence"
+    },
+    {
+      "id": "dependency-scanning-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/dependency-scanning"],
+      "trigger": "dependency, lockfile, package-manager, or supply-chain risk changes",
+      "nonTrigger": "does not select route or execute a dependency scanner itself",
+      "output": "scoped dependency-risk review and scanner interpretation method",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not establish that a dependency audit ran"
+    },
+    {
+      "id": "mcp-server-review-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/mcp-server-review"],
+      "trigger": "an MCP server is installed, exposed, or materially changed",
+      "nonTrigger": "does not select route, authorize an MCP server, or execute a scanner",
+      "output": "scoped MCP security review method",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not prove a server is safe"
+    },
+    {
+      "id": "performance-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/performance"],
+      "trigger": "a delivery requests web performance analysis or improvement",
+      "nonTrigger": "does not select route or automatically measure production performance",
+      "output": "scoped web performance optimization method",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not produce field-performance evidence"
+    },
+    {
+      "id": "prompt-injection-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/prompt-injection"],
+      "trigger": "an LLM, RAG, agent, MCP, tool-calling, browsing, or retrieved-content feature changes",
+      "nonTrigger": "does not select route or execute an agent-security regression suite itself",
+      "output": "scoped prompt-injection review and regression-design method",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not prove resistance to every prompt injection"
+    },
+    {
+      "id": "react-async-state-safety-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/react-async-state-safety"],
+      "trigger": "React or TypeScript client async state behavior changes",
+      "nonTrigger": "does not select route or execute browser regression tests itself",
+      "output": "scoped async-state safety method",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not prove runtime race freedom"
+    },
+    {
+      "id": "secure-code-review-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/secure-code-review"],
+      "trigger": "security-sensitive code changes require review",
+      "nonTrigger": "does not select route, approve code, or execute a scanner",
+      "output": "scoped secure-code review method",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not prove absence of vulnerabilities"
+    },
+    {
+      "id": "security-and-hardening-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/security-and-hardening"],
+      "trigger": "a delivery handles untrusted data, authentication, storage, or external integration",
+      "nonTrigger": "does not select route or execute SAST, secret scanning, DAST, or release blocking",
+      "output": "scoped security hardening method",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not establish that a project security gate ran"
+    },
+    {
+      "id": "threat-modeling-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/threat-modeling"],
+      "trigger": "a risk-bearing architecture, API, authentication, external integration, or data flow is designed",
+      "nonTrigger": "does not select route or automatically validate an implementation",
+      "output": "scoped STRIDE threat-modeling method",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not prove implementation controls are present"
     },
     {
       "id": "functional-assurance",

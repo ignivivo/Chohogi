@@ -104,9 +104,7 @@ def main() -> int:
     expected_skills = {relative(path.parent) for root in skill_roots for path in root.glob("*/SKILL.md")}
     covered_skill_roots: set[str] = set()
     for skill in expected_skills:
-        matches = [item for item in assurances if isinstance(item, dict) and any(
-            source == skill or skill.startswith(f"{source}/") for source in item.get("sources", []) if isinstance(source, str)
-        )]
+        matches = [item for item in assurances if isinstance(item, dict) and skill in item.get("sources", [])]
         if len(matches) != 1:
             errors.append(f"{skill}: must map to exactly one assurance record")
             continue

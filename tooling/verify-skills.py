@@ -4,15 +4,20 @@
 from __future__ import annotations
 
 import re
+import subprocess
+import sys
+import tempfile
+from argparse import ArgumentParser
 from pathlib import Path
 
 
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 ROOT = Path(__file__).resolve().parent.parent
-SKILL_ROOTS = (
+DEFAULT_SKILL_ROOTS = (
     ROOT / "assets" / "agents" / "reusable_methods",
     ROOT / "assets" / "agents" / "adaptive-regulation",
 )
+INTAKE = ROOT / "tooling" / "scan-skill-intake.py"
 
 
 def fail(message: str, errors: list[str]) -> None:
@@ -55,14 +60,37 @@ def check_skill(directory: Path, errors: list[str]) -> None:
         fail(f"Skill exceeds 500-line guidance: {skill} ({len(lines)} lines)", errors)
 
 
+def check_resource_graph(directory: Path, skill_root: Path, errors: list[str]) -> None:
+    """Require every active skill's reachable local resources to resolve in its install root."""
+    entry = directory.joinpath("SKILL.md").relative_to(skill_root)
+    with tempfile.TemporaryDirectory(prefix="chohogi-skill-resource-") as temporary:
+        report = Path(temporary) / "inventory.json"
+        result = subprocess.run(
+            [sys.executable, str(INTAKE), str(skill_root), "--entry", str(entry), "--output", str(report)],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or result.stdout.strip() or "unknown intake failure"
+        fail(f"Skill resource graph invalid for {directory.name}: {detail}", errors)
+
+
 def main() -> int:
+    parser = ArgumentParser(description=__doc__)
+    parser.add_argument("--reusable-root", type=Path, default=DEFAULT_SKILL_ROOTS[0])
+    parser.add_argument("--adaptive-root", type=Path, default=DEFAULT_SKILL_ROOTS[1])
+    arguments = parser.parse_args()
+    skill_roots = (arguments.reusable_root.resolve(), arguments.adaptive_root.resolve())
     errors: list[str] = []
-    if not all(path.is_dir() for path in SKILL_ROOTS):
-        print("Missing Chohogi skill roots: " + ", ".join(str(path) for path in SKILL_ROOTS))
+    if not all(path.is_dir() for path in skill_roots):
+        print("Missing Chohogi skill roots: " + ", ".join(str(path) for path in skill_roots))
         return 1
-    for skill_root in SKILL_ROOTS:
+    for skill_root in skill_roots:
         for directory in sorted(path for path in skill_root.iterdir() if path.is_dir()):
             check_skill(directory, errors)
+            check_resource_graph(directory, skill_root, errors)
     if errors:
         print("Chohogi supplemental skill verification: FAIL")
         print("\n".join(f"- {error}" for error in errors))

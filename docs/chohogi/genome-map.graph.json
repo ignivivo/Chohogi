@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "a54c765886d3c57cabc92fccccf1a69f88839dc6ee263b2184658befe19b7a9b",
+  "sourceDigest": "8856ecaf32da822ed0d6e30a06d9e9e40fcf6a2a7e0d8af8819f7eff345ace15",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -448,6 +448,11 @@
       "path": "tooling/tests/test_security_gate.py"
     },
     {
+      "id": "asset:tooling/tests/test_skills.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_skills.py"
+    },
+    {
       "id": "asset:tooling/tests/test_source_layout.py",
       "kind": "asset",
       "path": "tooling/tests/test_source_layout.py"
@@ -749,6 +754,12 @@
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/adaptive-regulation/learning/SKILL.md",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
     },

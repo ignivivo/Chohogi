@@ -51,7 +51,7 @@ class FunctionalAssuranceTests(unittest.TestCase):
 
     def test_skill_assurance_marker_must_match_its_registry_claim(self) -> None:
         registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
-        methods = next(item for item in registry["assurances"] if item["id"] == "reusable-methods")
+        methods = next(item for item in registry["assurances"] if item["id"] == "accessibility-method")
         methods["kind"] = "reference"
         with tempfile.TemporaryDirectory() as temporary_directory:
             mutated = Path(temporary_directory) / "functional-assurance.json"
@@ -59,6 +59,17 @@ class FunctionalAssuranceTests(unittest.TestCase):
             result = self.run_verifier(mutated)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("chohogi-assurance marker must match registry kind", result.stderr)
+
+    def test_each_active_skill_requires_its_own_assurance_record(self) -> None:
+        registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
+        target = next(item for item in registry["assurances"] if item["id"] == "accessibility-method")
+        target["sources"] = ["assets/agents/reusable_methods"]
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            mutated = Path(temporary_directory) / "functional-assurance.json"
+            mutated.write_text(json.dumps(registry), encoding="utf-8")
+            result = self.run_verifier(mutated)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("must map to exactly one assurance record", result.stderr)
 
 
 if __name__ == "__main__":
