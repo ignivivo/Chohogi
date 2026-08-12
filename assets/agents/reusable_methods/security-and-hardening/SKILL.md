@@ -11,6 +11,10 @@ description: Hardens code against vulnerabilities. Use when handling user input,
 
 Security-first development practices for web applications. Treat every external input as hostile, every secret as sacred, and every authorization check as mandatory. Security isn't a phase — it's a constraint on every line of code that touches user data, authentication, or external systems.
 
+## Assurance boundary
+
+This is an **advisory reusable method**: it supplies threat-modeling and review procedure, but it does not run SAST, secret scanning, dependency scanning, DAST, or release blocking by itself. For a risk-bearing delivery, first apply `trunk_orchestration/security-boundary.md`. A project may claim an execution gate only after its project leaf supplies an actual scanner command, machine-readable observation, required report artifact, and nonzero failure exit path through `tooling/run-security-gate.py`.
+
 ## When to Use
 
 - Building anything that accepts user input

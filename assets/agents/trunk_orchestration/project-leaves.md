@@ -24,3 +24,4 @@ Project leaf는 전역 reusable method의 이름·복사본·별칭이 아니다
   근거 없이는 전역 reusable method나 정책으로 이동하지 않는다.
 - leaf가 scanner·gate를 주장하면 실제 실행 경로, 결과 산출물, positive·negative fixture,
   실패 exit path를 프로젝트 CI에 연결한다.
+- 프로젝트는 scanner·gate를 실행할 때 `python3 tooling/run-security-gate.py --project <project> --plan <project-plan> --output <project-observation> --execute`처럼 명시적으로 실행하고, 생성된 observation을 release evidence로 보존한다.

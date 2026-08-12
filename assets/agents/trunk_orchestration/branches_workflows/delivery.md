@@ -38,15 +38,19 @@
    장황하게 만들지 않는다.
 3. 기능·버그 수정에서 테스트가 의미 있는 보호막이면 실패 조건을 먼저 명확히 하고
    구현한다. 기계적 문서 변경처럼 해당하지 않는 경우에는 억지 TDD를 적용하지 않는다.
-4. 초호기 기관·reusable method·tooling·설치/검증 adapter를 새로 만들거나 바꾸면,
+4. 코드 전에 `../security-boundary.md`의 risk signal을 분류한다. 신호가 있으면
+   `pre-code-security-acceptance`를 수용 조건으로 먼저 남기고 해당 reusable method를 적용한다.
+   scanner·release gate를 주장하면 프로젝트가 `project-execution-gate-required`의 실제 command,
+   결과, fixture, nonzero failure path를 제공할 때만 그렇게 주장한다.
+5. 초호기 기관·reusable method·tooling·설치/검증 adapter를 새로 만들거나 바꾸면,
    `../functional_assurance/registry.json`에서 기능 claim·실행 경로·resource·verifier·fixture·산출물·한계를 갱신하고
    `python3 tooling/verify-functional-assurance.py`를 실행한다. 이 검증 없이 해당 자산이
    실제 기능을 제공하거나 release를 막는다고 주장하지 않는다.
-5. 필요한 기술·도메인 reusable method와 도구만 선택한다. 방법 선택은 `../method-selection.md`를
+6. 필요한 기술·도메인 reusable method와 도구만 선택한다. 방법 선택은 `../method-selection.md`를
    따르되, 프로젝트 leaf는 해당 프로젝트에 실제 코드·CI·fixture가 필요한 반복 적응일 때만 만든다. route는 수용 조건·회귀 위험·검증 증거만 강제한다. 병렬 위임은 경계가
    독립적일 때만 한다.
-6. 변경 후 직접 영향 범위와 교차 계약을 검증한다.
-7. 실제 실행한 검증, 결과, 남은 위험을 사실대로 보고한다.
+7. 변경 후 직접 영향 범위와 교차 계약을 검증한다.
+8. 실제 실행한 검증, 결과, 남은 위험을 사실대로 보고한다.
 
 <!-- chohogi:section=optional-capabilities -->
 ## 선택적 능력

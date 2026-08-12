@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "78b351917313c9854de9572ba8f4d19a6dcdf6d1a284afefc8f931e18500b4e3",
+  "sourceDigest": "029503acaa656285a622fccd680f4472812369069ca5749c5fa7552beb57e773",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -218,6 +218,11 @@
       "path": "assets/agents/trunk_orchestration/evaluation/route-fixtures.json"
     },
     {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/security-boundary-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/security-boundary-fixtures.json"
+    },
+    {
       "id": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/execution-allocation.md"
@@ -241,6 +246,11 @@
       "id": "asset:assets/agents/trunk_orchestration/project-leaves.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/project-leaves.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/security-boundary.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/security-boundary.md"
     },
     {
       "id": "asset:assets/agents/trunk_orchestration/state-transition.md",
@@ -318,6 +328,16 @@
       "path": "tooling/prune-backups.sh"
     },
     {
+      "id": "asset:tooling/run-security-gate.py",
+      "kind": "asset",
+      "path": "tooling/run-security-gate.py"
+    },
+    {
+      "id": "asset:tooling/scan-skill-intake.py",
+      "kind": "asset",
+      "path": "tooling/scan-skill-intake.py"
+    },
+    {
       "id": "asset:tooling/summarize-replays.py",
       "kind": "asset",
       "path": "tooling/summarize-replays.py"
@@ -346,6 +366,11 @@
       "id": "asset:tooling/tests/test_posix_only.py",
       "kind": "asset",
       "path": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_security_gate.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_security_gate.py"
     },
     {
       "id": "asset:tooling/tests/test_source_layout.py",
@@ -396,6 +421,11 @@
       "id": "asset:tooling/verify-routes.py",
       "kind": "asset",
       "path": "tooling/verify-routes.py"
+    },
+    {
+      "id": "asset:tooling/verify-security-boundary.py",
+      "kind": "asset",
+      "path": "tooling/verify-security-boundary.py"
     },
     {
       "id": "asset:tooling/verify-skills.py",
@@ -559,6 +589,11 @@
       "path": "tooling/verify-routes.py"
     },
     {
+      "id": "verifier:security-boundary",
+      "kind": "verifier",
+      "path": "tooling/verify-security-boundary.py"
+    },
+    {
       "id": "verifier:skills",
       "kind": "verifier",
       "path": "tooling/verify-skills.py"
@@ -650,7 +685,19 @@
     },
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/security-boundary-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "asset:assets/agents/trunk_orchestration/project-leaves.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/security-boundary.md",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
     },
@@ -895,6 +942,12 @@
       "evidence": "tooling/tests/test_posix_only.py"
     },
     {
+      "source": "asset:tooling/tests/test_security_gate.py",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/security-boundary-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_security_gate.py"
+    },
+    {
       "source": "asset:tooling/verify-capability-boundary.py",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
@@ -947,6 +1000,12 @@
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-security-boundary.py",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
     },
     {
       "source": "asset:tooling/verify-skills.py",
@@ -1223,6 +1282,30 @@
       "target": "asset:assets/epidermis_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "tooling/verify-routes.py"
+    },
+    {
+      "source": "verifier:security-boundary",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-security-boundary.py"
+    },
+    {
+      "source": "verifier:security-boundary",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/security-boundary-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-security-boundary.py"
+    },
+    {
+      "source": "verifier:security-boundary",
+      "target": "asset:assets/agents/trunk_orchestration/project-leaves.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-security-boundary.py"
+    },
+    {
+      "source": "verifier:security-boundary",
+      "target": "asset:assets/agents/trunk_orchestration/security-boundary.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-security-boundary.py"
     }
   ]
 }

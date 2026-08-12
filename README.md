@@ -30,6 +30,7 @@ AI agent는 같은 내용의 `docs/chohogi/genome-map.graph.json`을 읽어 변�
 python3 tooling/genome_map.py build
 python3 tooling/genome_map.py impact assets/agents/reusable_methods/security-and-hardening/SKILL.md
 python3 tooling/genome_map.py check
+python3 tooling/verify-security-boundary.py
 ```
 
 ## 운영 원칙

@@ -20,8 +20,12 @@ controller가 아니며, 현재 작업에서 이미 호출 가능한 능력을 �
 ## 최소 증거
 
 채택 전 원본 주소, 라이선스, 기준 revision 또는 `unverified`, trigger와 non-trigger,
-필요 리소스, 충돌 가능성, 검증 방법을 기록한다. 한 번의 인상적인 응답만으로 전역
-자산으로 승격하지 않는다. 외부 원본의 controller·사용자 질문·역할 배정은 흡수하지 않는다.
+필요 리소스, 충돌 가능성, 검증 방법을 기록한다. 원본 root 전체에
+`python3 tooling/scan-skill-intake.py <source-root> --output <redacted-inventory.json>`를 실행해
+SKILL.md, script, reference, URL, 누락 resource, symlink를 함께 inventory한다. inventory는
+승인·안전성 증명이 아니며, 실행 전 review·provenance·sandbox 경계를 대체하지 않는다. 한 번의
+인상적인 응답이나 SKILL.md 한 파일만으로 전역 자산으로 승격하지 않는다. 외부 원본의
+controller·사용자 질문·역할 배정은 흡수하지 않는다.
 
 ## 재평가와 폐기
 
