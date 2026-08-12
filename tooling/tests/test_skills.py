@@ -64,6 +64,19 @@ class SkillResourceIntegrityTests(unittest.TestCase):
             result = self.run_verifier(reusable, adaptive)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_long_skill_emits_a_review_signal_without_failing(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            reusable = base / "reusable"
+            adaptive = base / "adaptive"
+            body = "\n".join("instruction" for _ in range(501))
+            self.make_skill(reusable, "long-sample", body)
+            self.make_skill(adaptive, "adaptive-sample", "method")
+            result = self.run_verifier(reusable, adaptive)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("review signal", result.stdout)
+        self.assertIn("long-sample", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()
