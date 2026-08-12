@@ -73,6 +73,30 @@
       "state": "retired",
       "installMode": "none",
       "retirementReason": "unverified active provenance and conflicting interaction contract"
+    },
+    {
+      "id": "frontend-surface",
+      "organ": "epidermal-tissue-system",
+      "function": "frontend-preflight",
+      "source": "assets/agents/reusable_methods/frontend-surface",
+      "destination": ".agents/skills/frontend-surface",
+      "ownership": "retired",
+      "activation": "none",
+      "state": "retired",
+      "installMode": "none",
+      "retirementReason": "superseded by the complete Hallmark frontend expression method"
+    },
+    {
+      "id": "react-async-state-safety",
+      "organ": "genome-inheritance",
+      "function": "unpromoted-learning-candidate",
+      "source": "assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
+      "destination": ".agents/skills/react-async-state-safety",
+      "ownership": "retired",
+      "activation": "none",
+      "state": "retired",
+      "installMode": "none",
+      "retirementReason": "single-project learned prevention lacks the independent multi-project evidence required for active global discovery"
     }
   ]
 }

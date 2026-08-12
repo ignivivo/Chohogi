@@ -85,26 +85,15 @@
       "limits": "advisory guidance does not execute an accessibility scanner or establish legal compliance"
     },
     {
-      "id": "frontend-surface-method",
-      "kind": "advisory",
-      "sources": ["assets/agents/reusable_methods/frontend-surface"],
-      "trigger": "a delivery adds, redesigns, or materially changes a user-facing visual or interactive surface",
-      "nonTrigger": "does not select route or certify design, accessibility, performance, or user research outcomes",
-      "output": "a compact surface packet and specialist-review handoffs",
-      "verifiers": ["tooling/verify-skills.py"],
-      "fixtures": ["tooling/tests/test_skills.py"],
-      "limits": "advisory guidance cannot prove that an interface feels human or that users are not fatigued"
-    },
-    {
       "id": "hallmark-method",
       "kind": "advisory",
       "sources": ["assets/agents/reusable_methods/hallmark"],
       "trigger": "a delivery needs a substantive frontend design, visual audit, bounded redesign, or non-copying study of a user-supplied screenshot or public URL",
       "nonTrigger": "does not select route, overwrite project boundaries, run a visual gate, or certify design, legal, accessibility, performance, or user-research outcomes",
-      "output": "a design packet, ranked audit, bounded redesign rationale, or non-copying study diagnosis with specialist handoffs",
+      "output": "a design packet, ranked audit, bounded redesign rationale, or non-copying study diagnosis with specialist handoffs and structured manual review",
       "verifiers": ["tooling/verify-skills.py"],
       "fixtures": ["tooling/tests/test_skills.py"],
-      "limits": "advisory guidance does not execute Hallmark's upstream natural-language gates and cannot prove fatigue reduction, originality, or reference-use permission"
+      "limits": "advisory guidance cannot prove fatigue reduction, originality, legal permission, or that its structured manual review was mechanically executed"
     },
     {
       "id": "agent-security-audit-method",
@@ -171,17 +160,6 @@
       "verifiers": ["tooling/verify-skills.py"],
       "fixtures": ["tooling/tests/test_skills.py"],
       "limits": "advisory guidance does not prove resistance to every prompt injection"
-    },
-    {
-      "id": "react-async-state-safety-method",
-      "kind": "advisory",
-      "sources": ["assets/agents/reusable_methods/react-async-state-safety"],
-      "trigger": "React or TypeScript client async state behavior changes",
-      "nonTrigger": "does not select route or execute browser regression tests itself",
-      "output": "scoped async-state safety method",
-      "verifiers": ["tooling/verify-skills.py"],
-      "fixtures": ["tooling/tests/test_skills.py"],
-      "limits": "advisory guidance does not prove runtime race freedom"
     },
     {
       "id": "secure-code-review-method",

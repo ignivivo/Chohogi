@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "9a1dfa5ecd5acf12e4c0ffb158d81a5b9c9cbb1b72ead1800399a375204b0b37",
+  "sourceDigest": "5fa938bf05f4b9f070f73554346f3c3a5edec089abfd0610ca64037f5f6ef8be",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -61,6 +61,11 @@
       "id": "asset:assets/agents/genome_inheritance/README.md",
       "kind": "asset",
       "path": "assets/agents/genome_inheritance/README.md"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/candidates/react-async-state-safety.md"
     },
     {
       "id": "asset:assets/agents/genome_inheritance/index_registry.yaml",
@@ -133,14 +138,9 @@
       "path": "assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml"
     },
     {
-      "id": "asset:assets/agents/reusable_methods/frontend-surface/SKILL.md",
+      "id": "asset:assets/agents/reusable_methods/frontend-surface",
       "kind": "asset",
-      "path": "assets/agents/reusable_methods/frontend-surface/SKILL.md"
-    },
-    {
-      "id": "asset:assets/agents/reusable_methods/frontend-surface/agents/openai.yaml",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/frontend-surface/agents/openai.yaml"
+      "path": "assets/agents/reusable_methods/frontend-surface"
     },
     {
       "id": "asset:assets/agents/reusable_methods/hallmark/LICENSE",
@@ -158,14 +158,539 @@
       "path": "assets/agents/reusable_methods/hallmark/agents/openai.yaml"
     },
     {
-      "id": "asset:assets/agents/reusable_methods/hallmark/references/review-rubric.md",
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/anti-patterns.md",
       "kind": "asset",
-      "path": "assets/agents/reusable_methods/hallmark/references/review-rubric.md"
+      "path": "assets/agents/reusable_methods/hallmark/references/anti-patterns.md"
     },
     {
-      "id": "asset:assets/agents/reusable_methods/hallmark/references/study-protocol.md",
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/assets.md",
       "kind": "asset",
-      "path": "assets/agents/reusable_methods/hallmark/references/study-protocol.md"
+      "path": "assets/agents/reusable_methods/hallmark/references/assets.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/color.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/color.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/component-cookbook.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/component-cookbook.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/c1-outlined-chip.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/c1-outlined-chip.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/c2-inline-form-as-cta.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/c2-inline-form-as-cta.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/c3-typographic-link.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/c3-typographic-link.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/c4-sticky-bottom-bar.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/c4-sticky-bottom-bar.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f1-bento-grid.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f1-bento-grid.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f2-sticky-scroll-stack.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f2-sticky-scroll-stack.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f3-tabular-spec-sheet.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f3-tabular-spec-sheet.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f4-step-sequence.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f4-step-sequence.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f5-annotated-screenshot.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f5-annotated-screenshot.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f6-product-card-grid.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f6-product-card-grid.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft1-mast-headed.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft1-mast-headed.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft2-inline-rule-single-line.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft2-inline-rule-single-line.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft3-index-style-category-list.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft3-index-style-category-list.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft4-dense-typographic.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft4-dense-typographic.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft5-statement.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft5-statement.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft6-letter-close.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft6-letter-close.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft7-newsletter-first.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft7-newsletter-first.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft8-marquee-scroll.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft8-marquee-scroll.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h1-marquee.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h1-marquee.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h2-split-diptych.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h2-split-diptych.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h3-quote-led.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h3-quote-led.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h4-stat-led.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h4-stat-led.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h5-letter-hero.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h5-letter-hero.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h6-photographic-fold.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h6-photographic-fold.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h7-demo-video-clipped-by-viewport-edge.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h7-demo-video-clipped-by-viewport-edge.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h8-mockup-split-browser-framed.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h8-mockup-split-browser-framed.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h9-custom-illustration-centerpiece.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h9-custom-illustration-centerpiece.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n1-wordmark-2-links.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n1-wordmark-2-links.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n10-floating-on-scroll-morph.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n10-floating-on-scroll-morph.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n11-mega-menu.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n11-mega-menu.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n12-banner-retract.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n12-banner-retract.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n13-inline-cmdk-pill.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n13-inline-cmdk-pill.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n1b-saas-three-section.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n1b-saas-three-section.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n2-floating-chip.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n2-floating-chip.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n3-side-rail.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n3-side-rail.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n4-hidden-behind-k.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n4-hidden-behind-k.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n5-floating-pill.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n5-floating-pill.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n6-newspaper-masthead.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n6-newspaper-masthead.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n7-brutal-slab.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n7-brutal-slab.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n8-terminal-command.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n8-terminal-command.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n9-edge-aligned-minimal.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n9-edge-aligned-minimal.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/s1-left-margin-numbered.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/s1-left-margin-numbered.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/s2-hanging.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/s2-hanging.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/s3-sticky-pinned.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/s3-sticky-pinned.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/s4-inline-no-break.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/s4-inline-no-break.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/s5-bottom-anchored.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/s5-bottom-anchored.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/t1-pull-quote-with-marginalia.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/t1-pull-quote-with-marginalia.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/t2-logo-wall-hairline.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/t2-logo-wall-hairline.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/t3-single-huge-quote.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/t3-single-huge-quote.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/t4-numbered-stat-strip.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/t4-numbered-stat-strip.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/contract.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/contract.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/copy.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/copy.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/custom-craft.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/custom-craft.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/custom-theme.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/custom-theme.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/design-md.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/design-md.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/export-formats.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/export-formats.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/floating-nav.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/floating-nav.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/genres/atmospheric.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/genres/atmospheric.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/genres/editorial.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/genres/editorial.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/genres/modern-minimal.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/genres/modern-minimal.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/genres/playful.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/genres/playful.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/hero-enrichment.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/hero-enrichment.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/imagery-kit.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/imagery-kit.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/interaction-and-states.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/interaction-and-states.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/layout-and-space.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/layout-and-space.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/01-bento-grid.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/01-bento-grid.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/02-long-document.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/02-long-document.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/03-marquee-hero.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/03-marquee-hero.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/04-stat-led.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/04-stat-led.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/05-workbench.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/05-workbench.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/06-conversational-faq.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/06-conversational-faq.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/07-manifesto.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/07-manifesto.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/08-photographic.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/08-photographic.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/09-quote-led.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/09-quote-led.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/10-specimen.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/10-specimen.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/11-catalogue.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/11-catalogue.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/12-letter.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/12-letter.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/13-index-first.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/13-index-first.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/14-narrative-workflow.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/14-narrative-workflow.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/15-split-studio.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/15-split-studio.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/16-feature-stack.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/16-feature-stack.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/17-type-specimen.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/17-type-specimen.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/18-portfolio-grid.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/18-portfolio-grid.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/19-map-diagram.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/19-map-diagram.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/20-ecosystem-index.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/20-ecosystem-index.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/21-component-playground.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/21-component-playground.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/microinteractions.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/microinteractions.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/motion.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/motion.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/preview-examples.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/preview-examples.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/responsive.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/responsive.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/slop-test.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/slop-test.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/structure.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/structure.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/study.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/study.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/themes/carnival.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/themes/carnival.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/themes/cobalt.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/themes/cobalt.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/themes/grid.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/themes/grid.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/themes/hum.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/themes/hum.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/themes/lumen.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/themes/lumen.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/tokens.css",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/tokens.css"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/typography.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/typography.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/verbs/audit.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/verbs/audit.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/verbs/redesign.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/verbs/redesign.md"
     },
     {
       "id": "asset:assets/agents/reusable_methods/mcp-server-review/SKILL.md",
@@ -191,16 +716,6 @@
       "id": "asset:assets/agents/reusable_methods/prompt-injection/agents/openai.yaml",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/prompt-injection/agents/openai.yaml"
-    },
-    {
-      "id": "asset:assets/agents/reusable_methods/react-async-state-safety/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/react-async-state-safety/SKILL.md"
-    },
-    {
-      "id": "asset:assets/agents/reusable_methods/react-async-state-safety/agents/openai.yaml",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/react-async-state-safety/agents/openai.yaml"
     },
     {
       "id": "asset:assets/agents/reusable_methods/secure-code-review/SKILL.md",
@@ -574,6 +1089,12 @@
       "state": "active"
     },
     {
+      "id": "component:frontend-surface",
+      "kind": "component",
+      "path": "assets/agents/reusable_methods/frontend-surface",
+      "state": "retired"
+    },
+    {
       "id": "component:global-guidance",
       "kind": "component",
       "path": "assets/runtime_entrypoint/AGENTS.md",
@@ -596,6 +1117,12 @@
       "kind": "component",
       "path": "assets/agents/adaptive-regulation/learning",
       "state": "active"
+    },
+    {
+      "id": "component:react-async-state-safety",
+      "kind": "component",
+      "path": "assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
+      "state": "retired"
     },
     {
       "id": "component:reusable-methods",
@@ -668,12 +1195,6 @@
       "state": "active"
     },
     {
-      "id": "skill:frontend-surface",
-      "kind": "skill",
-      "path": "assets/agents/reusable_methods/frontend-surface/SKILL.md",
-      "state": "active"
-    },
-    {
       "id": "skill:hallmark",
       "kind": "skill",
       "path": "assets/agents/reusable_methods/hallmark/SKILL.md",
@@ -695,12 +1216,6 @@
       "id": "skill:prompt-injection",
       "kind": "skill",
       "path": "assets/agents/reusable_methods/prompt-injection/SKILL.md",
-      "state": "active"
-    },
-    {
-      "id": "skill:react-async-state-safety",
-      "kind": "skill",
-      "path": "assets/agents/reusable_methods/react-async-state-safety/SKILL.md",
       "state": "active"
     },
     {
@@ -897,6 +1412,12 @@
       "evidence": "assets/agents/functional_assurance/registry.json"
     },
     {
+      "source": "asset:assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
+      "target": "component:react-async-state-safety",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "asset:assets/agents/genome_inheritance/retired_assets/grill-me",
       "target": "component:grill-me",
       "relation": "activates",
@@ -905,6 +1426,12 @@
     {
       "source": "asset:assets/agents/reusable_methods",
       "target": "component:reusable-methods",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/reusable_methods/frontend-surface",
+      "target": "component:frontend-surface",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -994,6 +1521,12 @@
     },
     {
       "source": "asset:manifest.json",
+      "target": "asset:assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
       "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "manifest.json"
@@ -1001,6 +1534,12 @@
     {
       "source": "asset:manifest.json",
       "target": "component:chohogi-organs",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:frontend-surface",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -1025,6 +1564,12 @@
     {
       "source": "asset:manifest.json",
       "target": "component:learning",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:react-async-state-safety",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -1317,24 +1862,6 @@
       "evidence": "tooling/verify-provenance.py"
     },
     {
-      "source": "skill:frontend-surface",
-      "target": "asset:assets/agents/reusable_methods/frontend-surface/agents/openai.yaml",
-      "relation": "requires",
-      "evidence": "assets/agents/reusable_methods/frontend-surface/SKILL.md"
-    },
-    {
-      "source": "skill:frontend-surface",
-      "target": "document:README.md",
-      "relation": "documents",
-      "evidence": "manifest.json: reusable-methods"
-    },
-    {
-      "source": "skill:frontend-surface",
-      "target": "verifier:provenance",
-      "relation": "verifies",
-      "evidence": "tooling/verify-provenance.py"
-    },
-    {
       "source": "skill:hallmark",
       "target": "asset:assets/agents/reusable_methods/hallmark/LICENSE",
       "relation": "requires",
@@ -1348,13 +1875,643 @@
     },
     {
       "source": "skill:hallmark",
-      "target": "asset:assets/agents/reusable_methods/hallmark/references/review-rubric.md",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/anti-patterns.md",
       "relation": "requires",
       "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
     },
     {
       "source": "skill:hallmark",
-      "target": "asset:assets/agents/reusable_methods/hallmark/references/study-protocol.md",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/assets.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/color.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/component-cookbook.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/c1-outlined-chip.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/c2-inline-form-as-cta.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/c3-typographic-link.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/c4-sticky-bottom-bar.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f1-bento-grid.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f2-sticky-scroll-stack.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f3-tabular-spec-sheet.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f4-step-sequence.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f5-annotated-screenshot.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f6-product-card-grid.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft1-mast-headed.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft2-inline-rule-single-line.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft3-index-style-category-list.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft4-dense-typographic.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft5-statement.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft6-letter-close.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft7-newsletter-first.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft8-marquee-scroll.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h1-marquee.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h2-split-diptych.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h3-quote-led.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h4-stat-led.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h5-letter-hero.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h6-photographic-fold.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h7-demo-video-clipped-by-viewport-edge.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h8-mockup-split-browser-framed.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h9-custom-illustration-centerpiece.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n1-wordmark-2-links.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n10-floating-on-scroll-morph.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n11-mega-menu.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n12-banner-retract.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n13-inline-cmdk-pill.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n1b-saas-three-section.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n2-floating-chip.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n3-side-rail.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n4-hidden-behind-k.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n5-floating-pill.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n6-newspaper-masthead.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n7-brutal-slab.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n8-terminal-command.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n9-edge-aligned-minimal.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/s1-left-margin-numbered.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/s2-hanging.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/s3-sticky-pinned.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/s4-inline-no-break.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/s5-bottom-anchored.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/t1-pull-quote-with-marginalia.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/t2-logo-wall-hairline.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/t3-single-huge-quote.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/t4-numbered-stat-strip.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/contract.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/copy.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/custom-craft.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/custom-theme.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/design-md.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/export-formats.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/floating-nav.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/genres/atmospheric.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/genres/editorial.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/genres/modern-minimal.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/genres/playful.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/hero-enrichment.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/imagery-kit.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/interaction-and-states.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/layout-and-space.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/01-bento-grid.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/02-long-document.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/03-marquee-hero.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/04-stat-led.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/05-workbench.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/06-conversational-faq.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/07-manifesto.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/08-photographic.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/09-quote-led.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/10-specimen.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/11-catalogue.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/12-letter.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/13-index-first.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/14-narrative-workflow.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/15-split-studio.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/16-feature-stack.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/17-type-specimen.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/18-portfolio-grid.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/19-map-diagram.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/20-ecosystem-index.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/21-component-playground.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/microinteractions.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/motion.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/preview-examples.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/responsive.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/slop-test.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/structure.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/study.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/themes/carnival.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/themes/cobalt.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/themes/grid.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/themes/hum.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/themes/lumen.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/tokens.css",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/typography.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/verbs/audit.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/verbs/redesign.md",
       "relation": "requires",
       "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
     },
@@ -1420,24 +2577,6 @@
     },
     {
       "source": "skill:prompt-injection",
-      "target": "verifier:provenance",
-      "relation": "verifies",
-      "evidence": "tooling/verify-provenance.py"
-    },
-    {
-      "source": "skill:react-async-state-safety",
-      "target": "asset:assets/agents/reusable_methods/react-async-state-safety/agents/openai.yaml",
-      "relation": "requires",
-      "evidence": "assets/agents/reusable_methods/react-async-state-safety/SKILL.md"
-    },
-    {
-      "source": "skill:react-async-state-safety",
-      "target": "document:README.md",
-      "relation": "documents",
-      "evidence": "manifest.json: reusable-methods"
-    },
-    {
-      "source": "skill:react-async-state-safety",
       "target": "verifier:provenance",
       "relation": "verifies",
       "evidence": "tooling/verify-provenance.py"

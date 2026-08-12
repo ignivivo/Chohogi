@@ -1,6 +1,6 @@
 # INT-0002 · Hallmark repair fork
 
-**State:** mirror-baseline
+**State:** mirror-baseline · complete internal integration
 
 ## Admission and source
 
@@ -10,13 +10,15 @@ The upstream HEAD was rechecked on 2026-08-12 and remained at that revision. Its
 
 ## Repair boundary
 
-The installed `hallmark` mirror retains only four reusable advisory functions: intentional frontend design, non-editing audit, bounded redesign, and non-copying study of a user-provided screenshot or public URL.
+The installed `hallmark` mirror retains the complete upstream frontend corpus: the entry method, 106 design references, and a self-contained local token catalog. It is the primary frontend-expression method for intentional design, non-editing audit, bounded redesign, and non-copying study of a user-provided screenshot or public URL.
 
-The mirror deliberately excludes the broken upstream documentation payload, forced `tokens.css`, `design.md`, and `.hallmark` project writes, a required `WebFetch` provider, controller-like user questioning, the 58-gate execution claim, and conflicting fake-browser-chrome and italic-display prescriptions. Its study method has an explicit public-read-only provider boundary and prompt-injection handling.
+The integration repairs every broken local path and deliberately removes the upstream human-only documentation links from the runtime payload. `tokens.css`, `design.md`, and `.hallmark` writes are opt-in project changes; WebFetch is replaced by an available read-only provider boundary; controller-like user questioning is subordinate to Delivery; and the 58 gates are structured manual review rather than an execution claim.
+
+The integration resolves the upstream conflict by forbidding hand-drawn browser/device/IDE/terminal chrome while permitting a real screenshot with minimal border or no frame. Italic display is neither globally required nor banned: it needs a legible established-system or explicit editorial rationale.
 
 ## Evidence and limit
 
-The repaired payload contains the MIT license plus its own direct `review-rubric.md` and `study-protocol.md` resources. It must pass strict frontmatter parsing, full local resource-graph intake, functional assurance, provenance, a clean installation, and installation parity before release.
+The repaired payload contains the MIT license, all integrated references, and the local token catalog. It must pass strict frontmatter parsing, full local resource-graph intake, functional assurance, provenance, a clean installation, and installation parity before release.
 
 This is an advisory method, not an automated visual quality gate. It cannot establish originality, legal permission, accessibility or performance conformance, or that users experience less fatigue. Those require project evidence and the corresponding specialist methods.
 

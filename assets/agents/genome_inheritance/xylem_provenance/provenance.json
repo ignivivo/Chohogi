@@ -115,32 +115,18 @@
       "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
     },
     {
-      "id": "frontend-surface",
-      "adoption": "absorb-core",
-      "origin": "https://github.com/ignivivo/Chohogi/tree/f7f49e278f6bd614a923a82b4b202ad8cb9400dd/assets/agents/reusable_methods",
-      "license": "MIT",
-      "baseline_revision": "f7f49e278f6bd614a923a82b4b202ad8cb9400dd",
-      "local_delta": "new Chohogi-owned frontend pre-implementation method; the externally audited Hallmark source was not copied, installed, or made a controller",
-      "required_resources": [],
-      "trigger": "a delivery adds, redesigns, or materially changes a user-facing visual or interactive surface",
-      "non_trigger": "a non-user-facing implementation change or a visual decision already bounded by a prior surface packet without material change",
-      "owner": "Chohogi maintainers",
-      "review_signal": ["repeated-generic-ui-rework", "design-system-change", "surface-packet-handoff-failure"],
-      "retirement_condition": "a verified replacement frontend surface method supersedes it"
-    },
-    {
       "id": "hallmark",
       "adoption": "mirror-baseline",
       "origin": "https://github.com/nutlope/hallmark",
       "license": "MIT",
       "baseline_revision": "13ac0ec7e148655948100b6396439e481361d690",
-      "local_delta": "Chohogi-managed repair fork: retained design, audit, bounded redesign, and non-copying study methods; removed broken upstream payload references, project-memory and forced-file behavior, provider assumptions, conflicting chrome/italic guidance, and unexecutable 58-gate claims",
-      "required_resources": ["LICENSE", "references/review-rubric.md", "references/study-protocol.md"],
+      "local_delta": "Chohogi-owned complete integration of the upstream 106-reference frontend corpus plus a local token catalog; repaired broken resource paths, resolved chrome/italic contradictions, made project writes opt-in, bounded URL study to an available read-only provider, and classified 58 gates as structured manual review",
+      "required_resources": ["LICENSE", "references/tokens.css", "references/slop-test.md", "references/study.md", "references/macrostructures.md", "references/component-cookbook.md"],
       "trigger": "a delivery needs a substantive frontend design, visual audit, bounded redesign, or non-copying study of a user-supplied screenshot or public URL",
       "non_trigger": "routine UI change without a design-method boundary, inaccessible/private URL analysis, or any task needing an automated visual gate",
       "owner": "Chohogi maintainers",
-      "review_signal": ["upstream-revision-change", "broken-local-resource", "hallmark-project-boundary-conflict", "repeated-unhelpful-audit"],
-      "retirement_condition": "a verified replacement frontend design method supersedes it or the repaired local payload no longer provides distinct reusable value"
+      "review_signal": ["upstream-revision-change", "broken-local-resource", "hallmark-project-boundary-conflict", "manual-review-misrepresentation", "repeated-unhelpful-audit"],
+      "retirement_condition": "a verified replacement frontend expression method supersedes it or the integrated corpus no longer provides distinct reusable value"
     },
     {
       "id": "core-web-vitals",
@@ -168,20 +154,6 @@
       "non_trigger": "a metric-free code cleanup",
       "owner": "Chohogi maintainers",
       "review_signal": ["measurement-failure", "duplicate-guidance", "runtime-regression"],
-      "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
-    },
-    {
-      "id": "react-async-state-safety",
-      "adoption": "absorb-core",
-      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/reusable_methods/react-async-state-safety",
-      "license": "repository",
-      "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
-      "local_delta": "owned-baseline",
-      "required_resources": [],
-      "trigger": "React client async requests, stale-result handling, retries, or invalidation",
-      "non_trigger": "React code with no asynchronous state transition",
-      "owner": "Chohogi maintainers",
-      "review_signal": ["confirmed-async-state-failure", "duplicate-react-skill"],
       "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
     }
   ],

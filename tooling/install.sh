@@ -143,13 +143,17 @@ done < <(python3 -c 'import json,sys
 for action in json.load(sys.stdin)["actions"]:
     print("\t".join((action["source"], action["destination"], action["mode"])))' <<<"$plan")
 
-retired="$agents/skills/grill-me"
-if [[ -e "$retired" ]]; then
-  [[ -d "$retired" ]] && is_chohogi_owned "$retired" || { echo "Retired skill collision: $retired is not Chohogi-owned." >&2; exit 1; }
+while IFS= read -r retired_destination; do
+  [[ -n "$retired_destination" ]] || continue
+  retired="$target_home/$retired_destination"
+  [[ -e "$retired" ]] || continue
+  [[ -d "$retired" ]] && is_chohogi_owned "$retired" || { echo "Retired component collision: $retired is not Chohogi-owned." >&2; exit 1; }
   ensure_backup "$(layout_version "$retired")"
-  mkdir -p "$backup/skills"
-  mv "$retired" "$backup/skills/grill-me"
-fi
+  retired_relative="${retired_destination#.agents/}"
+  mkdir -p "$backup/$(dirname "$retired_relative")"
+  mv "$retired" "$backup/$retired_relative"
+done < <(python3 -c 'import json,sys
+for destination in json.load(sys.stdin)["retiredDestinations"]: print(destination)' <<<"$plan")
 
 while IFS=$'\t' read -r source destination mode; do
   [[ "$destination" == .codex/* ]] || continue

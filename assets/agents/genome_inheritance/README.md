@@ -6,6 +6,9 @@ Genome inheritance는 여러 프로젝트에서 재사용할 가치가 검증된
 
 - `records_promotions/`: 왜 승격되었는지, 증거·범위·한계를 기록한 전역 승격 기록
 - `assets_inherited/`: 실제 재사용 자산(스킬, 검사 스크립트, 계약 템플릿 등)
+- `candidates/`: 확인된 예방이지만 독립 적용 증거가 부족해 자동 발견·설치되지 않는 승격 후보
 - `index_registry.yaml`: 자산의 상태와 명시적 호출 조건
 
 프로젝트에서 발생한 사건의 자세한 전후 코드와 회귀 증거는 그 프로젝트의 Git과 `docs/work-log/records/`에 한 번만 남긴다. 전역 승격이 필요하면 프로젝트 기록은 genome_inheritance 자산 ID만 가리키고, 같은 역사를 중복 복사하지 않는다. 모든 자산은 trigger/non-trigger, source record ID, 검증, owner, review signal, expiry와 retirement condition을 가진다.
+
+`candidates/`는 활성 skill이 아니며 `index_registry.yaml`의 promotion rule을 만족하기 전에는 Codex discovery 경로나 전역 방법 카탈로그에 넣지 않는다.

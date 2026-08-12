@@ -138,6 +138,36 @@ class GraftCompatibilityAuditTests(unittest.TestCase):
             self.assertEqual(reinstall.returncode, 0, reinstall.stderr)
             self.assertEqual(len(list((target_home / ".agents" / "chohogi-backups").glob("layout-v1-*"))), 1)
 
+    def test_installer_retires_every_manifest_declared_owned_skill(self) -> None:
+        self.build_genome_map()
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            target_home = Path(temporary_directory)
+            retired = [
+                target_home / ".agents" / "skills" / "frontend-surface",
+                target_home / ".agents" / "skills" / "react-async-state-safety",
+            ]
+            for skill in retired:
+                skill.mkdir(parents=True)
+                (skill / ".chohogi-owner.json").write_text('{"package":"chohogi"}\n', encoding="utf-8")
+                (skill / "SKILL.md").write_text("legacy\n", encoding="utf-8")
+            install = subprocess.run(
+                ["bash", "tooling/install.sh", "--home", str(target_home)],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(install.returncode, 0, install.stderr)
+            self.assertTrue(all(not skill.exists() for skill in retired))
+            audit = subprocess.run(
+                ["bash", str(AUDIT), "--home", str(target_home)],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(audit.returncode, 0, audit.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()

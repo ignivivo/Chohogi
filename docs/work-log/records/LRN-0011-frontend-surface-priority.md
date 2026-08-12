@@ -10,9 +10,9 @@ The external Hallmark candidate initially failed intake: its package payload omi
 
 ## Bounded prevention
 
-`frontend-surface` is a Chohogi-owned advisory method that runs first for substantive user-facing UI additions, redesigns, and visual interaction changes. It requires a compact surface packet—task and audience, hierarchy, composition and density, system fit, one functional distinctive choice, and specialist handoffs—before components are selected.
+The small `frontend-surface` preflight was retired after Hallmark was expanded into the complete frontend expression method. Hallmark now owns this design packet alongside structure, type, density, component voice, audit, redesign, and non-copying study.
 
-The method-selection catalog gives it precedence only inside frontend review. It does not select a route, controller, authority, or completion condition. Accessibility remains required for changed user-facing semantic or interactive surfaces; performance, Core Web Vitals, and async-state review remain independently triggered by their actual boundaries.
+The method-selection catalog gives Hallmark precedence only inside frontend expression. It does not select a route, controller, authority, or completion condition. Accessibility remains required for changed user-facing semantic or interactive surfaces; performance and Core Web Vitals remain independently triggered by their actual boundaries.
 
 ## Evidence and limits
 
