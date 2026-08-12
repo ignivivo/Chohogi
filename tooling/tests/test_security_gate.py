@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 GATE = ROOT / "tooling/run-security-gate.py"
 INTAKE = ROOT / "tooling/scan-skill-intake.py"
 BOUNDARY = ROOT / "tooling/verify-security-boundary.py"
+CLASSIFIER = ROOT / "tooling/classify-security-boundary.py"
 
 
 class SecurityGateTests(unittest.TestCase):
@@ -133,7 +134,7 @@ class SecurityGateTests(unittest.TestCase):
             self.assertEqual(json.loads(output.read_text(encoding="utf-8"))["coverage"]["reachableResourceCount"], 1)
 
     def test_security_boundary_rejects_a_risk_fixture_without_pre_code_disposition(self) -> None:
-        fixtures = ROOT / "assets/agents/trunk_orchestration/evaluation/security-boundary-fixtures.json"
+        fixtures = ROOT / "assets/agents/security_immune_system/boundary-fixtures.json"
         document = json.loads(fixtures.read_text(encoding="utf-8"))
         target = next(item for item in document["fixtures"] if item["id"] == "agent-tool-change")
         target["expectedDisposition"] = "no-special-security-boundary"
@@ -143,6 +144,25 @@ class SecurityGateTests(unittest.TestCase):
             result = subprocess.run([sys.executable, str(BOUNDARY), "--fixtures", str(mutated)], text=True, capture_output=True, check=False)
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("must require pre-code security acceptance", result.stderr)
+
+    def test_classifier_requires_pre_code_acceptance_for_agent_tool_risk(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            profile = Path(temporary) / "profile.json"
+            profile.write_text(json.dumps({"riskSignals": ["agent-tool", "external-fetch"]}), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(CLASSIFIER), str(profile)], text=True, capture_output=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            observation = json.loads(result.stdout)
+            self.assertEqual(observation["disposition"], "pre-code-security-acceptance")
+            self.assertIn("prompt-injection-tests", observation["requirements"])
+            self.assertIn("ssrf-controls", observation["requirements"])
+
+    def test_classifier_rejects_an_unknown_risk_signal(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            profile = Path(temporary) / "profile.json"
+            profile.write_text(json.dumps({"riskSignals": ["imaginary-risk"]}), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(CLASSIFIER), str(profile)], text=True, capture_output=True, check=False)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("unknown risk signals", result.stderr)
 
 
 if __name__ == "__main__":

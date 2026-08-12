@@ -39,6 +39,8 @@ python3 tooling/verify-security-boundary.py
 - capability와 provider는 선택된 workflow 뒤에만 사용하며 controller가 될 수 없다.
 - `learning`은 확인된 실패의 최소 예방을 다루고, `homeostasis`는 초호기 자체의
   정책·수명주기·설치·발견·정합성을 다룬다.
+- `security_immune_system`은 위험 신호를 코드 전 수용 조건으로 분류하고, 전 프로젝트가
+  공유하는 scanner/CI gate protocol을 소유한다. 프로젝트별 scanner 설정은 adapter이지 leaf가 아니다.
 - Homeostasis repair loop는 변경점의 영향 집합을 계산하고, 선언 대비 실제 상태를
   검사한 뒤 repair packet을 낸다. 수리와 재검증은 정상 권한 절차로 수행한다.
 

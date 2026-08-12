@@ -11,7 +11,7 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_FIXTURES = ROOT / "assets/agents/trunk_orchestration/evaluation/security-boundary-fixtures.json"
+DEFAULT_FIXTURES = ROOT / "assets/agents/security_immune_system/boundary-fixtures.json"
 REQUIRED_BOUNDARY_TERMS = (
     "pre-code-security-acceptance",
     "project-execution-gate-required",
@@ -27,13 +27,13 @@ def main() -> int:
     parser.add_argument("--fixtures", type=Path, default=DEFAULT_FIXTURES)
     arguments = parser.parse_args()
     errors: list[str] = []
-    boundary = ROOT / "assets/agents/trunk_orchestration/security-boundary.md"
+    boundary = ROOT / "assets/agents/security_immune_system/boundary-policy.md"
     delivery = ROOT / "assets/agents/trunk_orchestration/branches_workflows/delivery.md"
-    project_leaves = ROOT / "assets/agents/trunk_orchestration/project-leaves.md"
+    adapter = ROOT / "assets/agents/security_immune_system/project-adapter-contract.md"
     for path, terms in (
         (boundary, REQUIRED_BOUNDARY_TERMS),
-        (delivery, ("security-boundary.md", "pre-code-security-acceptance")),
-        (project_leaves, ("scanner·gate", "실제 verifier 또는 CI/fixture")),
+        (delivery, ("security_immune_system/boundary-policy.md", "pre-code-security-acceptance")),
+        (adapter, ("not a project leaf", "nonzero command exit")),
     ):
         text = path.read_text(encoding="utf-8") if path.is_file() else ""
         for term in terms:

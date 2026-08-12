@@ -38,7 +38,7 @@
    장황하게 만들지 않는다.
 3. 기능·버그 수정에서 테스트가 의미 있는 보호막이면 실패 조건을 먼저 명확히 하고
    구현한다. 기계적 문서 변경처럼 해당하지 않는 경우에는 억지 TDD를 적용하지 않는다.
-4. 코드 전에 `../security-boundary.md`의 risk signal을 분류한다. 신호가 있으면
+4. 코드 전에 `../../security_immune_system/boundary-policy.md`의 risk signal을 분류한다. 신호가 있으면
    `pre-code-security-acceptance`를 수용 조건으로 먼저 남기고 해당 reusable method를 적용한다.
    scanner·release gate를 주장하면 프로젝트가 `project-execution-gate-required`의 실제 command,
    결과, fixture, nonzero failure path를 제공할 때만 그렇게 주장한다.

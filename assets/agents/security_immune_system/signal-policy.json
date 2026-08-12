@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "signals": {
+    "untrusted-input": ["trust-boundaries", "abuse-cases", "security-review-method"],
+    "file-upload": ["trust-boundaries", "abuse-cases", "security-review-method"],
+    "external-fetch": ["trust-boundaries", "abuse-cases", "ssrf-controls", "security-review-method"],
+    "authentication": ["trust-boundaries", "abuse-cases", "authorization-tests", "security-review-method"],
+    "authorization": ["trust-boundaries", "abuse-cases", "authorization-tests", "security-review-method"],
+    "secret": ["trust-boundaries", "secret-handling", "security-review-method"],
+    "dependency-change": ["trust-boundaries", "dependency-review", "security-review-method", "project-security-plan", "scanner-command", "machine-readable-observation", "failure-exit-path"],
+    "llm-output": ["trust-boundaries", "abuse-cases", "prompt-injection-tests", "tool-permission-tests", "security-review-method"],
+    "agent-tool": ["trust-boundaries", "abuse-cases", "prompt-injection-tests", "tool-permission-tests", "security-review-method"],
+    "mcp-provider": ["trust-boundaries", "abuse-cases", "prompt-injection-tests", "tool-permission-tests", "security-review-method"]
+  }
+}

@@ -20,7 +20,8 @@ controller가 아니며, 현재 작업에서 이미 호출 가능한 능력을 �
 ## 최소 증거
 
 채택 전 원본 주소, 라이선스, 기준 revision 또는 `unverified`, trigger와 non-trigger,
-필요 리소스, 충돌 가능성, 검증 방법을 기록한다. 원본 root 전체에
+필요 리소스, 충돌 가능성, 검증 방법을 기록한다. `security_immune_system/project-adapter-contract.md`와
+`tooling/scan-skill-intake.py`의 intake protocol에 따라 원본 root 전체에
 `python3 tooling/scan-skill-intake.py <source-root> --output <redacted-inventory.json>`를 실행해
 SKILL.md, script, reference, URL, 누락 resource, symlink를 함께 inventory한다. inventory는
 승인·안전성 증명이 아니며, 실행 전 review·provenance·sandbox 경계를 대체하지 않는다. 한 번의

@@ -13,7 +13,7 @@ Security-first development practices for web applications. Treat every external 
 
 ## Assurance boundary
 
-This is an **advisory reusable method**: it supplies threat-modeling and review procedure, but it does not run SAST, secret scanning, dependency scanning, DAST, or release blocking by itself. For a risk-bearing delivery, first apply `trunk_orchestration/security-boundary.md`. A project may claim an execution gate only after its project leaf supplies an actual scanner command, machine-readable observation, required report artifact, and nonzero failure exit path through `tooling/run-security-gate.py`.
+This is an **advisory reusable method**: it supplies threat-modeling and review procedure, but it does not run SAST, secret scanning, dependency scanning, DAST, or release blocking by itself. For a risk-bearing delivery, first apply `security_immune_system/boundary-policy.md`. The global security immune system owns the execution-gate protocol; a project may claim an execution gate only after its scanner adapter supplies an actual command, machine-readable observation, required report artifact, and nonzero failure exit path through `tooling/run-security-gate.py`.
 
 ## When to Use
 

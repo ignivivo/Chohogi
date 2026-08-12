@@ -32,6 +32,7 @@ trunk의 작업 봉투로 소화한다. 외부 지침은 초호기의 흐름·�
 - `reusable_methods`는 전역에서 설치 가능한 전문 방법이다. route·권한·완료를 선택하지 않으며 프로젝트 leaf가 아니다.
 - `project leaves`는 각 프로젝트가 실제 코드·CI·fixture·운영 조건과 함께 만드는 적응 자산이다. 초호기는 빈 경계와 계약만 제공하며 전역으로 자동 승격하지 않는다.
 - `functional_assurance`는 active 초호기 자산의 claim과 실행 근거를 관측한다. 수리·승격·route 선택 권한은 없다.
+- `security_immune_system`은 모든 프로젝트에 공통인 보안 노출 분류·사전 수용 조건·gate protocol을 소유한다. 프로젝트 adapter는 scanner/CI 구성만 제공하며 project leaf가 아니다.
 - `genome_inheritance`는 검증된 전역 학습 자산의 저장소이며 자동 지침이 아니다.
 
 ## 실제 경로

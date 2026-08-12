@@ -87,23 +87,23 @@
     {
       "id": "security-boundary",
       "kind": "policy-gate",
-      "sources": ["assets/agents/trunk_orchestration/security-boundary.md", "assets/agents/trunk_orchestration/evaluation/security-boundary-fixtures.json"],
+      "sources": ["assets/agents/security_immune_system"],
       "trigger": "a delivery changes a security risk boundary or claims a scanner/release gate",
       "nonTrigger": "ordinary low-risk changes and unexecuted project plans",
       "output": "pre-code security acceptance criteria or a project execution-gate requirement",
       "execution": "python3 tooling/verify-security-boundary.py",
       "verifiers": ["tooling/verify-security-boundary.py", "tooling/tests/test_security_gate.py"],
-      "fixtures": ["assets/agents/trunk_orchestration/evaluation/security-boundary-fixtures.json", "tooling/tests/test_security_gate.py"],
+      "fixtures": ["assets/agents/security_immune_system/boundary-fixtures.json", "tooling/tests/test_security_gate.py"],
       "limits": "static boundary classification does not prove a project scanner ran"
     },
     {
       "id": "security-execution-tools",
       "kind": "deterministic-check",
-      "sources": ["tooling/run-security-gate.py", "tooling/scan-skill-intake.py", "tooling/verify-security-boundary.py"],
+      "sources": ["tooling/classify-security-boundary.py", "tooling/run-security-gate.py", "tooling/scan-skill-intake.py", "tooling/verify-security-boundary.py"],
       "trigger": "a project security plan must execute or an external skill payload must be inventoried",
       "nonTrigger": "does not approve external code, replace project review, or execute a plan without --execute",
       "output": "machine-readable project security observation or full skill-payload inventory",
-      "execution": "python3 tooling/run-security-gate.py ... --execute or python3 tooling/scan-skill-intake.py ...",
+      "execution": "python3 tooling/classify-security-boundary.py ...; python3 tooling/run-security-gate.py ... --execute; or python3 tooling/scan-skill-intake.py ...",
       "verifiers": ["tooling/tests/test_security_gate.py"],
       "fixtures": ["tooling/tests/test_security_gate.py"],
       "limits": "a gate proves configured commands and artifacts, not absence of every vulnerability"

@@ -21,6 +21,7 @@ ORGAN_ROOTS = {
     "assets/agents/vascular-bundle_circulation",
     "assets/agents/reusable_methods",
     "assets/agents/functional_assurance",
+    "assets/agents/security_immune_system",
 }
 
 

@@ -22,6 +22,5 @@ Project leaf는 전역 reusable method의 이름·복사본·별칭이 아니다
 - 소스와 배포 위치는 해당 프로젝트가 소유한다. 초호기 설치기는 이를 자동 설치하지 않는다.
 - 프로젝트 leaf가 반복 검증을 통해 일반화 후보가 되어도, Learning과 Homeostasis의 승격
   근거 없이는 전역 reusable method나 정책으로 이동하지 않는다.
-- leaf가 scanner·gate를 주장하면 실제 실행 경로, 결과 산출물, positive·negative fixture,
-  실패 exit path를 프로젝트 CI에 연결한다.
-- 프로젝트는 scanner·gate를 실행할 때 `python3 tooling/run-security-gate.py --project <project> --plan <project-plan> --output <project-observation> --execute`처럼 명시적으로 실행하고, 생성된 observation을 release evidence로 보존한다.
+- scanner·gate는 leaf의 책임이 아니다. 보안 면역기관의 project adapter contract에 따라
+  프로젝트 구성·CI로 연결한다. leaf가 보안 관련 코드를 적응하더라도 gate의 소유권을 가져가지 않는다.

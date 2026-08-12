@@ -16,6 +16,8 @@ FORBIDDEN = {
     "leaves_capabilities": "global reusable methods must not masquerade as project leaves",
     "reusable-leaves": "manifest component must use reusable-methods, not project leaves",
     "leaf-methods.md": "reusable method catalog must not be named as a project leaf",
+    "trunk_orchestration/security-boundary.md": "security boundary must belong to security_immune_system",
+    "trunk_orchestration/evaluation/security-boundary-fixtures.json": "security fixtures must belong to security_immune_system",
     "amyloplast": "v1 organ name remains active",
     "`grill-me`를 사용": "retired grill-me remains an active route capability",
 }

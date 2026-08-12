@@ -272,7 +272,7 @@ def main() -> int:
     delivery_text = route_texts.get("delivery", "")
     if "verify-functional-assurance.py" not in delivery_text:
         errors.append("Delivery route does not require functional assurance for changed Chohogi assets.")
-    if "security-boundary.md" not in delivery_text or "pre-code-security-acceptance" not in delivery_text:
+    if "security_immune_system/boundary-policy.md" not in delivery_text or "pre-code-security-acceptance" not in delivery_text:
         errors.append("Delivery route does not require pre-code security acceptance for risk-bearing changes.")
 
     fixture_path = root / "assets/agents/trunk_orchestration/evaluation/route-fixtures.json"
