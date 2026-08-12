@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hallmark"
+  short_description: "Intentional frontend design and audit method."
+  default_prompt: "Use $hallmark to design, audit, redesign, or study this frontend surface."

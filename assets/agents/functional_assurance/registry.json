@@ -96,6 +96,17 @@
       "limits": "advisory guidance cannot prove that an interface feels human or that users are not fatigued"
     },
     {
+      "id": "hallmark-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/hallmark"],
+      "trigger": "a delivery needs a substantive frontend design, visual audit, bounded redesign, or non-copying study of a user-supplied screenshot or public URL",
+      "nonTrigger": "does not select route, overwrite project boundaries, run a visual gate, or certify design, legal, accessibility, performance, or user-research outcomes",
+      "output": "a design packet, ranked audit, bounded redesign rationale, or non-copying study diagnosis with specialist handoffs",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance does not execute Hallmark's upstream natural-language gates and cannot prove fatigue reduction, originality, or reference-use permission"
+    },
+    {
       "id": "agent-security-audit-method",
       "kind": "advisory",
       "sources": ["assets/agents/reusable_methods/agent-security-audit"],

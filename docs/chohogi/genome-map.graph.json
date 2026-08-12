@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "9ce591786359beb7968659c2aa3ef0ee91eddfcd90c9b5137613b1f326ab60f8",
+  "sourceDigest": "9a1dfa5ecd5acf12e4c0ffb158d81a5b9c9cbb1b72ead1800399a375204b0b37",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -141,6 +141,31 @@
       "id": "asset:assets/agents/reusable_methods/frontend-surface/agents/openai.yaml",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/frontend-surface/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/LICENSE",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/LICENSE"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/review-rubric.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/review-rubric.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/study-protocol.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/study-protocol.md"
     },
     {
       "id": "asset:assets/agents/reusable_methods/mcp-server-review/SKILL.md",
@@ -646,6 +671,12 @@
       "id": "skill:frontend-surface",
       "kind": "skill",
       "path": "assets/agents/reusable_methods/frontend-surface/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:hallmark",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/hallmark/SKILL.md",
       "state": "active"
     },
     {
@@ -1299,6 +1330,42 @@
     },
     {
       "source": "skill:frontend-surface",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/LICENSE",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/review-rubric.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/study-protocol.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:hallmark",
       "target": "verifier:provenance",
       "relation": "verifies",
       "evidence": "tooling/verify-provenance.py"

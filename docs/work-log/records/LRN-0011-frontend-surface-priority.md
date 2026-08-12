@@ -6,7 +6,7 @@
 
 User-facing interfaces can inherit an unexamined component-library default: equal-weight card grids, decorative pills, generic gradients, placeholder evidence, and motion without task value. The result can create visual fatigue and later rework even when individual components are technically valid.
 
-The external Hallmark candidate was reviewed as a source of ideas, but was not adopted: its package payload omitted required resources, its documentation graph was broken, and its natural-language gates had no executable verifier. See `INT-0001-hallmark-intake-audit.md`.
+The external Hallmark candidate initially failed intake: its package payload omitted required resources, its documentation graph was broken, and its natural-language gates had no executable verifier. A later explicit user decision authorized a bounded repair fork; see `INT-0001-hallmark-intake-audit.md` and `INT-0002-hallmark-repair-fork.md`.
 
 ## Bounded prevention
 

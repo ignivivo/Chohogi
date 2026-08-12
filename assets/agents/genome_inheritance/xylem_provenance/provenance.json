@@ -129,6 +129,20 @@
       "retirement_condition": "a verified replacement frontend surface method supersedes it"
     },
     {
+      "id": "hallmark",
+      "adoption": "mirror-baseline",
+      "origin": "https://github.com/nutlope/hallmark",
+      "license": "MIT",
+      "baseline_revision": "13ac0ec7e148655948100b6396439e481361d690",
+      "local_delta": "Chohogi-managed repair fork: retained design, audit, bounded redesign, and non-copying study methods; removed broken upstream payload references, project-memory and forced-file behavior, provider assumptions, conflicting chrome/italic guidance, and unexecutable 58-gate claims",
+      "required_resources": ["LICENSE", "references/review-rubric.md", "references/study-protocol.md"],
+      "trigger": "a delivery needs a substantive frontend design, visual audit, bounded redesign, or non-copying study of a user-supplied screenshot or public URL",
+      "non_trigger": "routine UI change without a design-method boundary, inaccessible/private URL analysis, or any task needing an automated visual gate",
+      "owner": "Chohogi maintainers",
+      "review_signal": ["upstream-revision-change", "broken-local-resource", "hallmark-project-boundary-conflict", "repeated-unhelpful-audit"],
+      "retirement_condition": "a verified replacement frontend design method supersedes it or the repaired local payload no longer provides distinct reusable value"
+    },
+    {
       "id": "core-web-vitals",
       "adoption": "absorb-core",
       "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/reusable_methods/core-web-vitals",
