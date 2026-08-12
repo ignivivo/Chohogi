@@ -15,6 +15,7 @@ from typing import Any
 LINK = re.compile(r"\[[^]]*\]\(([^)\s]+)(?:\s+[^)]*)?\)")
 URL = re.compile(r"https?://[^\s<>)\]]+")
 CODE_BLOCK = re.compile(r"```.*?```", re.DOTALL)
+EXECUTABLE_SUFFIXES = {".py", ".sh", ".js", ".mjs", ".cjs", ".ts", ".tsx"}
 
 
 def file_hash(path: Path) -> str:
@@ -54,6 +55,8 @@ def main() -> int:
     errors: list[str] = []
     symlinks: list[dict[str, str]] = []
     for path in sorted(root.rglob("*")):
+        if ".git" in path.relative_to(root).parts:
+            continue
         if path.is_symlink():
             relative_link = path.relative_to(root).as_posix()
             try:
@@ -88,6 +91,7 @@ def main() -> int:
         text = path.read_text(encoding="utf-8", errors="replace")
         external_references.update(URL.findall(text))
     reachable: set[Path] = set()
+    directory_references: set[tuple[str, str]] = set()
     pending = [entry] if under(entry, root) and entry.is_file() and entry.name == "SKILL.md" else []
     while pending:
         path = pending.pop()
@@ -105,9 +109,11 @@ def main() -> int:
             try:
                 candidate.relative_to(root)
             except ValueError:
-                errors.append(f"reference escapes intake root: {relative} -> {raw}")
+                errors.append(f"reference escapes intake root: {path.relative_to(root).as_posix()} -> {raw}")
                 continue
-            if not candidate.is_file():
+            if candidate.is_dir():
+                directory_references.add((path.relative_to(root).as_posix(), candidate.relative_to(root).as_posix()))
+            elif not candidate.is_file():
                 errors.append(f"missing local reference: {path.relative_to(root).as_posix()} -> {raw}")
             else:
                 pending.append(candidate)
@@ -118,12 +124,17 @@ def main() -> int:
         "entry": entry.relative_to(root).as_posix() if under(entry, root) else None,
         "files": inventory,
         "symlinks": symlinks,
+        "directoryReferences": [
+            {"source": source, "target": target}
+            for source, target in sorted(directory_references)
+        ],
         "externalReferences": sorted(external_references),
         "coverage": {
             "skillFilePresent": under(entry, root) and entry.is_file() and entry.name == "SKILL.md",
             "fileCount": len(inventory),
-            "containsScripts": any(item["path"].startswith("scripts/") for item in inventory),
-            "containsReferences": any(item["path"].startswith("references/") for item in inventory),
+            "containsScripts": any(Path(item["path"]).suffix.lower() in EXECUTABLE_SUFFIXES for item in inventory),
+            "executableFileCount": sum(Path(item["path"]).suffix.lower() in EXECUTABLE_SUFFIXES for item in inventory),
+            "containsReferences": any("references" in Path(item["path"]).parts for item in inventory),
             "reachableResourceCount": len(reachable),
             "internalSymlinkCount": len(symlinks),
         },

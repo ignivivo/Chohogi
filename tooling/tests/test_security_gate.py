@@ -112,7 +112,16 @@ class SecurityGateTests(unittest.TestCase):
             root = Path(temporary)
             entry = root / "nested/SKILL.md"
             entry.parent.mkdir()
-            entry.write_text("---\nname: nested\ndescription: nested\n---\n", encoding="utf-8")
+            (entry.parent / "references").mkdir()
+            (entry.parent / "scripts").mkdir()
+            entry.write_text(
+                "---\nname: nested\ndescription: nested\n---\n"
+                "[reference directory](references/)\n"
+                "[guide](references/guide.md)\n",
+                encoding="utf-8",
+            )
+            (entry.parent / "references/guide.md").write_text("guide\n", encoding="utf-8")
+            (entry.parent / "scripts/check.js").write_text("console.log('scan me');\n", encoding="utf-8")
             (root / "shared-play.md").write_text("shared resource\n", encoding="utf-8")
             output = root / "intake.json"
             result = subprocess.run([sys.executable, str(INTAKE), str(root), "--entry", "nested/SKILL.md", "--output", str(output)], text=True, capture_output=True, check=False)
@@ -120,6 +129,21 @@ class SecurityGateTests(unittest.TestCase):
             report = json.loads(output.read_text(encoding="utf-8"))
             self.assertEqual(report["entry"], "nested/SKILL.md")
             self.assertIn("shared-play.md", [item["path"] for item in report["files"]])
+            self.assertEqual(report["directoryReferences"], [{"source": "nested/SKILL.md", "target": "nested/references"}])
+            self.assertTrue(report["coverage"]["containsReferences"])
+            self.assertTrue(report["coverage"]["containsScripts"])
+            self.assertEqual(report["coverage"]["executableFileCount"], 1)
+
+    def test_intake_attributes_an_escaping_reference_to_its_actual_source(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            entry = root / "nested/SKILL.md"
+            entry.parent.mkdir()
+            entry.write_text("---\nname: nested\ndescription: nested\n---\n[escape](../../outside.md)\n", encoding="utf-8")
+            output = root / "intake.json"
+            result = subprocess.run([sys.executable, str(INTAKE), str(root), "--entry", "nested/SKILL.md", "--output", str(output)], text=True, capture_output=True, check=False)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("reference escapes intake root: nested/SKILL.md -> ../../outside.md", result.stderr)
 
     def test_intake_accepts_and_records_an_internal_symlinked_resource(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
