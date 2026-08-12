@@ -10,7 +10,7 @@ from pathlib import Path
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 ROOT = Path(__file__).resolve().parent.parent
 SKILL_ROOTS = (
-    ROOT / "assets" / "agents" / "leaves_capabilities",
+    ROOT / "assets" / "agents" / "reusable_methods",
     ROOT / "assets" / "agents" / "adaptive-regulation",
 )
 

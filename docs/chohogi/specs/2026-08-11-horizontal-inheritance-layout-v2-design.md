@@ -118,7 +118,7 @@ assets/
       index_registry.yaml
       records_promotions/
       assets_inherited/
-    leaves_capabilities/
+    reusable_methods/
       ... reusable technical skills
     adaptive-regulation/
       learning/
@@ -138,7 +138,7 @@ The installer maps these source paths to the existing Codex endpoints:
 
 ```text
 epidermis_entrypoint/AGENTS.md  -> ~/.codex/AGENTS.md
-leaves_capabilities/<skill>/    -> ~/.agents/skills/<skill>/
+reusable_methods/<skill>/       -> ~/.agents/skills/<skill>/
 agents/<organ>/                 -> ~/.agents/chohogi/<organ>/
 ```
 

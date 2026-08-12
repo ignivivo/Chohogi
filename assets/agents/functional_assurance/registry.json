@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Active Chohogi assets may claim only capabilities backed by the declared evidence path.",
+  "assurances": [
+    {
+      "id": "epidermis-guidance",
+      "kind": "policy-gate",
+      "sources": ["assets/epidermis_entrypoint/AGENTS.md"],
+      "trigger": "every Codex task",
+      "nonTrigger": "does not select a daily workflow itself",
+      "output": "direct handling, defer, or conductor handoff",
+      "execution": "assets/epidermis_entrypoint/AGENTS.md",
+      "verifiers": ["tooling/verify-routes.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json"],
+      "limits": "does not prove fresh-session model behavior"
+    },
+    {
+      "id": "trunk-orchestration",
+      "kind": "policy-gate",
+      "sources": ["assets/agents/trunk_orchestration"],
+      "trigger": "substantial work after conductor selection",
+      "nonTrigger": "does not replace project implementation or external provider authority",
+      "output": "one workflow, allocation, and evidence boundary",
+      "execution": "assets/agents/trunk_orchestration/conductor.md",
+      "verifiers": ["tooling/verify-routes.py", "tooling/verify-execution-allocation.py", "tooling/verify-capability-boundary.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json", "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json", "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json"],
+      "limits": "static contracts require bounded replay for durable behavior changes"
+    },
+    {
+      "id": "adaptive-regulation",
+      "kind": "policy-gate",
+      "sources": ["assets/agents/adaptive-regulation"],
+      "trigger": "confirmed prevention evidence or whole-harness change evidence",
+      "nonTrigger": "ordinary delivery and unconfirmed incidents",
+      "output": "bounded learning or Homeostasis disposition",
+      "execution": "assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "verifiers": ["tooling/verify-learning-contract.py", "tooling/verify-homeostasis-policy.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/learning-fixtures.json", "assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json"],
+      "limits": "does not automatically promote a project observation"
+    },
+    {
+      "id": "genome-inheritance",
+      "kind": "policy-gate",
+      "sources": ["assets/agents/genome_inheritance"],
+      "trigger": "verified reusable prevention or provenance review",
+      "nonTrigger": "unverified external metadata and one-off project observations",
+      "output": "bounded provenance or inheritance state",
+      "execution": "assets/agents/genome_inheritance/index_registry.yaml",
+      "verifiers": ["tooling/verify-provenance.py", "tooling/verify-learning-contract.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/learning-fixtures.json"],
+      "limits": "is not automatic active discovery"
+    },
+    {
+      "id": "vascular-circulation",
+      "kind": "advisory",
+      "sources": ["assets/agents/vascular-bundle_circulation"],
+      "trigger": "a terminal delivery or debugging result needs redacted handoff",
+      "nonTrigger": "does not choose route or persist raw evidence",
+      "output": "redacted context or feedback packet",
+      "verifiers": ["tooling/verify-learning-contract.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/learning-fixtures.json"],
+      "limits": "does not execute a scanner or release gate"
+    },
+    {
+      "id": "reusable-methods",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods"],
+      "trigger": "a matching concrete capability boundary",
+      "nonTrigger": "does not select route, authority, or completion",
+      "output": "scoped method, checklist, or review guidance",
+      "verifiers": ["tooling/verify-skills.py", "tooling/verify-functional-assurance.py"],
+      "fixtures": ["tooling/tests/test_functional_assurance.py"],
+      "limits": "advisory skills do not claim automatic detection, blocking, or scanner execution"
+    },
+    {
+      "id": "functional-assurance",
+      "kind": "policy-gate",
+      "sources": ["assets/agents/functional_assurance", "assets/agents/trunk_orchestration/project-leaves.md"],
+      "trigger": "an active Chohogi asset or tooling command claims, changes, or depends on a durable function",
+      "nonTrigger": "does not select a daily workflow, repair the asset, or prove unexecuted runtime behavior",
+      "output": "claim-to-evidence observation and conformance failure when coverage or minimum evidence is absent",
+      "execution": "python3 tooling/verify-functional-assurance.py",
+      "verifiers": ["tooling/tests/test_functional_assurance.py", "tooling/verify-homeostasis-policy.py"],
+      "fixtures": ["tooling/tests/test_functional_assurance.py"],
+      "limits": "declared evidence is not equivalent to semantic or fresh-session proof"
+    },
+    {
+      "id": "installation-and-diagnostics",
+      "kind": "deterministic-check",
+      "sources": ["tooling/install.sh", "tooling/doctor.sh", "tooling/doctor.py", "tooling/graft-compatibility_install-audit.sh", "tooling/verify-install.sh", "tooling/prune-backups.sh", "tooling/manifest_registry.py"],
+      "trigger": "installation, diagnosis, audit, or backup management",
+      "nonTrigger": "does not modify an unowned installation",
+      "output": "installed state report, audit result, or guarded migration action",
+      "execution": "shell command or Python resolver named by the requested operation",
+      "verifiers": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py"],
+      "fixtures": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py"],
+      "limits": "doctor reports state; graft audit establishes source/install parity"
+    },
+    {
+      "id": "verification-and-topology-tools",
+      "kind": "deterministic-check",
+      "sources": ["tooling/genome_map.py", "tooling/summarize-replays.py", "tooling/validate-replay-result.py", "tooling/verify-capability-boundary.py", "tooling/verify-execution-allocation.py", "tooling/verify-functional-assurance.py", "tooling/verify-homeostasis-policy.py", "tooling/verify-learning-contract.py", "tooling/verify-provenance.py", "tooling/verify-replay-evaluation.py", "tooling/verify-routes.py", "tooling/verify-skills.py", "tooling/verify-source-layout.py"],
+      "trigger": "a named static contract, topology, or replay record requires validation",
+      "nonTrigger": "does not prove unobserved runtime or model behavior",
+      "output": "machine-readable result or nonzero conformance failure",
+      "execution": "python3 tooling/<named-tool>.py",
+      "verifiers": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py"],
+      "fixtures": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py"],
+      "limits": "deterministic checks only establish their declared contract"
+    }
+  ]
+}

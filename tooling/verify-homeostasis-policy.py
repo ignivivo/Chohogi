@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -29,8 +30,10 @@ def main() -> int:
     transition = ROOT / "assets/agents/trunk_orchestration/state-transition.md"
     budget = ROOT / "assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md"
     manifest = ROOT / "manifest.json"
+    assurance = ROOT / "tooling/verify-functional-assurance.py"
 
-    require_terms(skill, ("Scope gate", "Evidence gate", "evaluation-budget-policy.md"), errors)
+    require_terms(skill, ("Scope gate", "Evidence gate", "evaluation-budget-policy.md", "semantic responsibility", "compatibility alias"), errors)
+    require_terms(skill, ("functional-assurance", "deterministic checks", "release gates"), errors)
     require_terms(admission, ("## Enter", "## Do not enter", "approved-global-change"), errors)
     require_terms(conductor, ("`learning`과 `homeostasis`는 일상 흐름과 경쟁하는 route가 아니다",), errors)
     require_terms(transition, ("scope gate", "evidence gate", "자동 시작되지는 않는다"), errors)
@@ -41,8 +44,12 @@ def main() -> int:
         errors.append(f"Invalid manifest registry: {exc}")
     else:
         component_ids = {item.get("id") for item in manifest_document.get("components", []) if isinstance(item, dict)}
-        if not {"chohogi-organs", "reusable-leaves"}.issubset(component_ids):
-            errors.append("Manifest registry does not declare the owned Chohogi organs and reusable leaves.")
+        if not {"chohogi-organs", "reusable-methods"}.issubset(component_ids):
+            errors.append("Manifest registry does not declare the owned Chohogi organs and reusable methods.")
+
+    assurance_result = subprocess.run([sys.executable, str(assurance)], cwd=ROOT, text=True, capture_output=True, check=False)
+    if assurance_result.returncode != 0:
+        errors.append("Functional assurance registry is invalid: " + assurance_result.stderr.strip())
 
     fixture_path = ROOT / "assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json"
     try:

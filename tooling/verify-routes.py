@@ -269,6 +269,10 @@ def main() -> int:
         route_texts[route] = route_path.read_text(encoding="utf-8")
         errors.extend(validate_route_text(route, route_texts[route]))
 
+    delivery_text = route_texts.get("delivery", "")
+    if "verify-functional-assurance.py" not in delivery_text:
+        errors.append("Delivery route does not require functional assurance for changed Chohogi assets.")
+
     fixture_path = root / "assets/agents/trunk_orchestration/evaluation/route-fixtures.json"
     data: dict[str, Any] | None = None
     if not fixture_path.is_file():

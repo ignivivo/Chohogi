@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 AUDIT = ROOT / "tooling" / "graft-compatibility_install-audit.sh"
-LEGACY = ROOT / "tooling" / "doctor.sh"
+DOCTOR = ROOT / "tooling" / "doctor.sh"
 GENOME_MAP = ROOT / "tooling" / "genome_map.py"
 
 
@@ -45,7 +45,10 @@ class GraftCompatibilityAuditTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("Graft compatibility installation audit: PASS", result.stdout)
 
-    def test_legacy_doctor_wrapper_warns_and_preserves_audit_result(self) -> None:
+    def test_doctor_reports_registry_state_without_running_audit(self) -> None:
+        doctor_source = DOCTOR.read_text(encoding="utf-8")
+        self.assertNotIn("Deprecated", doctor_source)
+        self.assertNotIn("graft-compatibility", doctor_source)
         self.build_genome_map()
         with tempfile.TemporaryDirectory() as temporary_directory:
             target_home = Path(temporary_directory)
@@ -57,15 +60,40 @@ class GraftCompatibilityAuditTests(unittest.TestCase):
                 check=True,
             )
             result = subprocess.run(
-                ["bash", str(LEGACY), "--home", str(target_home)],
+                ["bash", str(DOCTOR), "--home", str(target_home)],
                 cwd=ROOT,
                 text=True,
                 capture_output=True,
                 check=False,
             )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("deprecated", result.stderr.lower())
-        self.assertIn("Graft compatibility installation audit: PASS", result.stdout)
+        report = __import__("json").loads(result.stdout)
+        self.assertEqual(report["status"], "healthy")
+        self.assertEqual(report["installed"]["layoutVersion"], 2)
+        self.assertTrue(report["registry"]["digestMatches"])
+        self.assertEqual(report["components"]["missingActive"], [])
+        self.assertEqual(report["components"]["unexpectedRetired"], [])
+        self.assertNotIn("audit", result.stdout.lower())
+
+    def test_doctor_reports_missing_active_component(self) -> None:
+        self.build_genome_map()
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            target_home = Path(temporary_directory)
+            subprocess.run(
+                ["bash", "tooling/install.sh", "--home", str(target_home)],
+                cwd=ROOT, text=True, capture_output=True, check=True,
+            )
+            (target_home / ".agents" / "skills" / "performance").rename(
+                target_home / ".agents" / "skills" / "performance-missing"
+            )
+            result = subprocess.run(
+                ["bash", str(DOCTOR), "--home", str(target_home)],
+                cwd=ROOT, text=True, capture_output=True, check=False,
+            )
+        self.assertEqual(result.returncode, 1)
+        report = __import__("json").loads(result.stdout)
+        self.assertEqual(report["status"], "drift")
+        self.assertIn(".agents/skills/performance", report["components"]["missingActive"])
 
     def test_v1_migration_preserves_owned_tree_and_retires_grill_me(self) -> None:
         self.build_genome_map()

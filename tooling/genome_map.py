@@ -16,7 +16,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_JSON = ROOT / "docs/chohogi/genome-map.graph.json"
 OUTPUT_MARKDOWN = ROOT / "docs/chohogi/genome-map.md"
-SKILL_ROOT = ROOT / "assets/agents/leaves_capabilities"
+SKILL_ROOT = ROOT / "assets/agents/reusable_methods"
 GENERATED = {OUTPUT_JSON, OUTPUT_MARKDOWN}
 
 
@@ -31,7 +31,10 @@ def source_files() -> list[Path]:
         if root.is_file():
             paths.append(root)
         elif root.is_dir():
-            paths.extend(path for path in root.rglob("*") if path.is_file() and path not in GENERATED)
+            paths.extend(
+                path for path in root.rglob("*")
+                if path.is_file() and path not in GENERATED and "__pycache__" not in path.parts and path.suffix != ".pyc"
+            )
     return sorted(paths)
 
 
@@ -107,10 +110,10 @@ def build_graph() -> dict[str, Any]:
                 add_node(nodes, asset_id, "asset", candidate.rstrip(".,;:)"))
                 add_edge(edges, asset_id, document_id, "documents", relative(document))
 
-    # README is the public active-capability inventory, so every active leaf
+    # README is the public active-capability inventory, so every reusable method
     # affects it even when a concise Korean summary does not spell out its ID.
     for skill in skill_names:
-        add_edge(edges, f"skill:{skill}", "document:README.md", "documents", "manifest.json: reusable-leaves")
+        add_edge(edges, f"skill:{skill}", "document:README.md", "documents", "manifest.json: reusable-methods")
 
     for source in paths:
         if source.suffix not in {".md", ".py", ".sh", ".json"}:
@@ -152,13 +155,13 @@ def markdown(graph: dict[str, Any]) -> str:
         f"Source digest: `{graph['sourceDigest']}`", "",
         "```mermaid", "flowchart LR",
         "  E[epidermis entrypoint] --> C[conductor]",
-        "  C --> W[branches workflows]", "  W --> L[leaves capabilities]",
-        "  L --> V[verification]", "  V --> H[adaptive regulation / Homeostasis]",
+        "  C --> W[branches workflows]", "  W --> M[reusable methods]",
+        "  M --> F[functional assurance]", "  F --> H[adaptive regulation / Homeostasis]",
         "```", "",
         "## Current graph", "",
         "| Node kind | Count |", "| --- | ---: |",
         *[f"| {kind} | {count} |" for kind, count in sorted(counts.items())], "",
-        "## Active leaves", "",
+        "## Active reusable methods", "",
         ", ".join(f"`{skill}`" for skill in active_skills), "",
         "## Machine representation", "",
         "See `genome-map.graph.json` for nodes, edges, evidence paths, and the source digest.", "",

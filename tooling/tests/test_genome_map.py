@@ -30,7 +30,7 @@ class GenomeMapTests(unittest.TestCase):
         self.assertTrue(any(edge["relation"] == "documents" for edge in graph["edges"]))
 
     def test_impact_includes_documentation_and_verification_consumers(self) -> None:
-        result = self.run_map("impact", "assets/agents/leaves_capabilities/security-and-hardening/SKILL.md")
+        result = self.run_map("impact", "assets/agents/reusable_methods/security-and-hardening/SKILL.md")
         self.assertEqual(result.returncode, 0, result.stderr)
         packet = json.loads(result.stdout)
         self.assertIn("skill:security-and-hardening", packet["affected"])
@@ -39,7 +39,7 @@ class GenomeMapTests(unittest.TestCase):
         self.assertNotIn("skill:performance", packet["affected"])
 
     def test_repair_packet_is_inspection_only_and_names_reverification(self) -> None:
-        result = self.run_map("repair-packet", "assets/agents/leaves_capabilities/security-and-hardening/SKILL.md")
+        result = self.run_map("repair-packet", "assets/agents/reusable_methods/security-and-hardening/SKILL.md")
         self.assertEqual(result.returncode, 0, result.stderr)
         packet = json.loads(result.stdout)
         self.assertEqual(packet["disposition"], "inspect-before-repair")
@@ -56,6 +56,16 @@ class GenomeMapTests(unittest.TestCase):
     def test_check_rejects_stale_generated_views(self) -> None:
         build = self.run_map("build")
         self.assertEqual(build.returncode, 0, build.stderr)
+        result = self.run_map("check")
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_runtime_bytecode_does_not_stale_the_generated_views(self) -> None:
+        build = self.run_map("build")
+        self.assertEqual(build.returncode, 0, build.stderr)
+        doctor = subprocess.run(
+            ["bash", "tooling/doctor.sh", "--home", "/tmp"], cwd=ROOT, text=True, capture_output=True, check=False
+        )
+        self.assertNotEqual(doctor.returncode, 0)
         result = self.run_map("check")
         self.assertEqual(result.returncode, 0, result.stderr)
 

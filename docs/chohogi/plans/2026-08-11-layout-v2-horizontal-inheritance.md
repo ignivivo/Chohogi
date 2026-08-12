@@ -40,7 +40,7 @@ or unowned location.
 | `trunk/evals` | `trunk_orchestration/evaluation` | evaluation is functional, not an invented organ |
 | `assets/agents/chohogi/xylem` | `assets/agents/genome_inheritance` | verified inheritable assets are not amyloplasts |
 | `assets/agents/chohogi/amyloplast` | `assets/agents/genome_inheritance` | merge inherited assets, promotion records, and provenance under the truthful concept |
-| `assets/agents/skills` | `assets/agents/leaves_capabilities` | leaves are reusable capability surfaces |
+| `assets/agents/skills` | `assets/agents/reusable_methods` | reusable methods are global capability surfaces; project leaves remain empty until a project owns a real adaptation |
 | `learning` and `homeostasis` leaves | `assets/agents/adaptive-regulation/{learning,homeostasis}` | regulatory processes are not a single biological organ |
 | active `grill-me` | migration backup + retired provenance record | it has no verified active provenance or fitting trigger |
 

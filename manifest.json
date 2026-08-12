@@ -29,13 +29,13 @@
       "installMode": "tree"
     },
     {
-      "id": "reusable-leaves",
-      "organ": "leaves_capabilities",
+      "id": "reusable-methods",
+      "organ": "reusable_methods",
       "function": "reusable-skills",
-      "source": "assets/agents/leaves_capabilities",
+      "source": "assets/agents/reusable_methods",
       "destination": ".agents/skills",
       "ownership": "managed",
-      "activation": "matching concrete capability boundary",
+      "activation": "matching concrete capability boundary; never a project leaf",
       "state": "active",
       "installMode": "children",
       "exclude": []

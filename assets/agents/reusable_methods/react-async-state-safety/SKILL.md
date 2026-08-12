@@ -1,5 +1,7 @@
 ---
 name: react-async-state-safety
+metadata:
+  chohogi_assurance: advisory
 description: Use when React or TypeScript client code adds or changes async requests, stale-result handling, reset or close behavior, retries, cache invalidation, locale or identity changes, or multiple independently loading UI entities.
 ---
 

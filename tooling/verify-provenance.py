@@ -14,8 +14,8 @@ assets = data.get('assets') if isinstance(data, dict) else None
 if not isinstance(assets, list): errors.append('provenance assets must be a list')
 else:
     records = {item.get('id'): item for item in assets if isinstance(item, dict)}
-    skills = {p.parent.name for p in (root / 'assets/agents/leaves_capabilities').glob('*/SKILL.md')}
-    if set(records) != skills: errors.append('provenance IDs must exactly cover xylem skills')
+    skills = {p.parent.name for p in (root / 'assets/agents/reusable_methods').glob('*/SKILL.md')}
+    if set(records) != skills: errors.append('provenance IDs must exactly cover reusable methods')
     for name, item in records.items():
         for key in ('adoption','origin','license','baseline_revision','local_delta','required_resources','trigger','non_trigger','owner','review_signal','retirement_condition'):
             if key not in item: errors.append(f'{name}: missing {key}')
@@ -29,7 +29,7 @@ else:
         if not isinstance(item.get('required_resources'), list): errors.append(f'{name}: required_resources must be a list')
         if not isinstance(item.get('review_signal'), list): errors.append(f'{name}: review_signal must be a list')
         for resource in item.get('required_resources', []):
-            if not (root / 'assets/agents/leaves_capabilities' / name / resource).is_file(): errors.append(f'{name}: missing required resource {resource}')
+            if not (root / 'assets/agents/reusable_methods' / name / resource).is_file(): errors.append(f'{name}: missing required resource {resource}')
 if errors:
     print('Chohogi provenance verification: FAIL', file=sys.stderr); [print('- '+e, file=sys.stderr) for e in errors]; raise SystemExit(1)
 print('Chohogi provenance verification: PASS')

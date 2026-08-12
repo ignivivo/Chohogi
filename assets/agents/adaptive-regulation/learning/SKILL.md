@@ -1,5 +1,7 @@
 ---
 name: learning
+metadata:
+  chohogi_assurance: policy-gate
 description: "Use only after a confirmed reproducible defect or high-signal review finding has an evidenced root cause and a verified smallest prevention. Classify the prevention scope, return a redacted phloem record, and keep the asset local unless independent evidence justifies promotion. Do not use for suspicions, routine fixes, or automatic global skill creation."
 ---
 

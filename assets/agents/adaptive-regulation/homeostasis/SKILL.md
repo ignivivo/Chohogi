@@ -1,5 +1,7 @@
 ---
 name: homeostasis
+metadata:
+  chohogi_assurance: policy-gate
 description: "Use only to maintain Chohogi itself when a requested or evidenced whole-harness issue affects conductor routing, role/model policy, reusable-skill lifecycle, installation/discovery, evaluation policy, or a recurring cross-project orchestration imbalance. Do not use for ordinary product delivery, product decisions, or a single project bug."
 ---
 
@@ -27,7 +29,8 @@ an ambiguous case.
 
 Read the installed or source `constitution.md`,
 `trunk_orchestration/conductor.md`, `manifest.json`, the generated genome map,
-the affected asset, and concrete evidence of the imbalance.
+`functional_assurance/registry.json`, the affected asset,
+and concrete evidence of the imbalance.
 Classify each persistent change as requested, necessary, or optional.
 
 ## Trigger and negative scope
@@ -49,6 +52,19 @@ needs a regression test, or an optional tool exists.
 3. Check the affected set against its declared path, activation, ownership,
    installation, documentation, fixture, and replay contracts. This is
    conformance, not a judgment that the architecture is useful or optimal.
+   For a requested rename, replacement, or restored interface, verify the
+   requested semantic responsibility—not merely a matching filename, redirect,
+   deprecation message, or exit status. A compatibility alias is acceptable
+   only when the request explicitly permits it and its behavior is tested as
+   an alias rather than as the requested implementation.
+   Treat functional assurance as an observation system, not a Homeostasis subroutine:
+   it owns claim-to-evidence conformance and emits drift; Homeostasis consumes repeated
+   or system-level drift to choose repair, containment, or policy change. For every changed
+   active organ, skill, or tooling command, update its functional-assurance record and run
+   `python3 tooling/verify-functional-assurance.py`.
+   A registry entry must distinguish advisory guidance from deterministic checks,
+   providers, and release gates; do not claim a stronger function than its
+   execution path, resources, fixture, verifier, and output can establish.
 4. Identify the causal mismatch and emit a repair packet: observed state,
    affected component IDs, allowed smallest repair, required re-verification,
    and remaining risk. The audit itself never edits an asset.

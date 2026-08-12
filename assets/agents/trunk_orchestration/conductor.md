@@ -31,7 +31,7 @@ substantial 작업에서는 아래 셋 중 정확히 하나만 고른다.
 - `learning`: 종료된 Delivery 또는 Debugging에서 원인·예방 검증이 확인된 뒤에만 `../vascular-bundle_circulation/phloem-feedback.md`의 정제된 return contract를 받아 최소 예방과 귀속지를 결정한다.
 - `homeostasis`: 초호기의 conductor, 역할·모델 정책, skill 수명, 설치·발견 또는 전역 자산 경계 자체를 바꾸는 요청·증거가 있을 때만 별도로 진입한다.
 
-현재 흐름의 산출물 또는 증거가 생기기 전에는 다른 일상 흐름으로 옮기지 않는다. 기술·도메인 스킬과 도구는 흐름과 실행 형태를 정한 뒤에만 필요한 것 하나씩 고른다. 이들은 범위, 위임, 완료를 스스로 결정하지 않는다. 외부 능력의 경계는 `capability-selection.md`, 외부 skill의 이식·외부 유지·leaf·폐기는 Homeostasis의 `horizontal-transfer_adoption.md`, 실행 방법은 `leaf-methods.md`, 긴 작업의 압축은 `context-packet.md`를 따른다.
+현재 흐름의 산출물 또는 증거가 생기기 전에는 다른 일상 흐름으로 옮기지 않는다. 기술·도메인 스킬과 도구는 흐름과 실행 형태를 정한 뒤에만 필요한 것 하나씩 고른다. 이들은 범위, 위임, 완료를 스스로 결정하지 않는다. 외부 능력의 경계는 `capability-selection.md`, 외부 skill의 이식·외부 유지·프로젝트 leaf·폐기는 Homeostasis의 `horizontal-transfer_adoption.md`, 실행 방법은 `method-selection.md`, 긴 작업의 압축은 `context-packet.md`를 따른다.
 
 ## 비용과 역할
 

@@ -29,7 +29,9 @@ trunk의 작업 봉투로 소화한다. 외부 지침은 초호기의 흐름·�
 - `homeostasis`는 초호기 전체의 역할·모델·스킬 수명·설치·발견 정책을 다룬다.
 - `xylem`은 근거·제약·권한을 선택된 branch와 leaf로 전달한다. `phloem`은 검증된 결과와
   실패 증거를 환류한다. 둘 다 작업 흐름·실행 형태·범위를 선택하지 않는다.
-- `leaves`는 프로젝트 소유 자산이다. 전역 자산으로 자동 승격하지 않는다.
+- `reusable_methods`는 전역에서 설치 가능한 전문 방법이다. route·권한·완료를 선택하지 않으며 프로젝트 leaf가 아니다.
+- `project leaves`는 각 프로젝트가 실제 코드·CI·fixture·운영 조건과 함께 만드는 적응 자산이다. 초호기는 빈 경계와 계약만 제공하며 전역으로 자동 승격하지 않는다.
+- `functional_assurance`는 active 초호기 자산의 claim과 실행 근거를 관측한다. 수리·승격·route 선택 권한은 없다.
 - `genome_inheritance`는 검증된 전역 학습 자산의 저장소이며 자동 지침이 아니다.
 
 ## 실제 경로
@@ -39,9 +41,9 @@ trunk의 작업 봉투로 소화한다. 외부 지침은 초호기의 흐름·�
 | 개념 | 설치 경로 |
 | --- | --- |
 | roots_constitution / trunk_orchestration / genome_inheritance | `~/.agents/chohogi/` |
-| regulatory processes / reusable leaves | `~/.agents/skills/` |
+| regulatory processes / reusable methods | `~/.agents/skills/` |
 | Codex 진입점 | `~/.codex/AGENTS.md` |
-| leaves | 각 프로젝트의 `.agents/skills/` |
+| project leaves | 각 프로젝트의 `.agents/skills/` |
 
 ## 변경 원칙
 

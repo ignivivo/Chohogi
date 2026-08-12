@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "c25db93d2fd3740d9abc87723774e51a76924645703f5dc19238a802c04e7ce5",
+  "sourceDigest": "78b351917313c9854de9572ba8f4d19a6dcdf6d1a284afefc8f931e18500b4e3",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -48,6 +48,11 @@
       "path": "assets/agents/adaptive-regulation/learning/references/learning-record.md"
     },
     {
+      "id": "asset:assets/agents/functional_assurance/registry.json",
+      "kind": "asset",
+      "path": "assets/agents/functional_assurance/registry.json"
+    },
+    {
       "id": "asset:assets/agents/genome_inheritance/README.md",
       "kind": "asset",
       "path": "assets/agents/genome_inheritance/README.md"
@@ -73,59 +78,59 @@
       "path": "assets/agents/genome_inheritance/xylem_provenance/provenance.json"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities",
+      "id": "asset:assets/agents/reusable_methods",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities"
+      "path": "assets/agents/reusable_methods"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities/accessibility/SKILL.md",
+      "id": "asset:assets/agents/reusable_methods/accessibility/SKILL.md",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities/accessibility/SKILL.md"
+      "path": "assets/agents/reusable_methods/accessibility/SKILL.md"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities/accessibility/references/A11Y-PATTERNS.md",
+      "id": "asset:assets/agents/reusable_methods/accessibility/references/A11Y-PATTERNS.md",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities/accessibility/references/A11Y-PATTERNS.md"
+      "path": "assets/agents/reusable_methods/accessibility/references/A11Y-PATTERNS.md"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities/accessibility/references/WCAG.md",
+      "id": "asset:assets/agents/reusable_methods/accessibility/references/WCAG.md",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities/accessibility/references/WCAG.md"
+      "path": "assets/agents/reusable_methods/accessibility/references/WCAG.md"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities/core-web-vitals/SKILL.md",
+      "id": "asset:assets/agents/reusable_methods/core-web-vitals/SKILL.md",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities/core-web-vitals/SKILL.md"
+      "path": "assets/agents/reusable_methods/core-web-vitals/SKILL.md"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities/core-web-vitals/references/LCP.md",
+      "id": "asset:assets/agents/reusable_methods/core-web-vitals/references/LCP.md",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities/core-web-vitals/references/LCP.md"
+      "path": "assets/agents/reusable_methods/core-web-vitals/references/LCP.md"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities/performance/SKILL.md",
+      "id": "asset:assets/agents/reusable_methods/performance/SKILL.md",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities/performance/SKILL.md"
+      "path": "assets/agents/reusable_methods/performance/SKILL.md"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities/react-async-state-safety/SKILL.md",
+      "id": "asset:assets/agents/reusable_methods/react-async-state-safety/SKILL.md",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities/react-async-state-safety/SKILL.md"
+      "path": "assets/agents/reusable_methods/react-async-state-safety/SKILL.md"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities/react-async-state-safety/agents/openai.yaml",
+      "id": "asset:assets/agents/reusable_methods/react-async-state-safety/agents/openai.yaml",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities/react-async-state-safety/agents/openai.yaml"
+      "path": "assets/agents/reusable_methods/react-async-state-safety/agents/openai.yaml"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities/security-and-hardening/SKILL.md",
+      "id": "asset:assets/agents/reusable_methods/security-and-hardening/SKILL.md",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities/security-and-hardening/SKILL.md"
+      "path": "assets/agents/reusable_methods/security-and-hardening/SKILL.md"
     },
     {
-      "id": "asset:assets/agents/leaves_capabilities/security-and-hardening/references/security-checklist.md",
+      "id": "asset:assets/agents/reusable_methods/security-and-hardening/references/security-checklist.md",
       "kind": "asset",
-      "path": "assets/agents/leaves_capabilities/security-and-hardening/references/security-checklist.md"
+      "path": "assets/agents/reusable_methods/security-and-hardening/references/security-checklist.md"
     },
     {
       "id": "asset:assets/agents/roots_constitution/constitution.md",
@@ -223,14 +228,19 @@
       "path": "assets/agents/trunk_orchestration/horizontal-transfer_adoption.md"
     },
     {
-      "id": "asset:assets/agents/trunk_orchestration/leaf-methods.md",
-      "kind": "asset",
-      "path": "assets/agents/trunk_orchestration/leaf-methods.md"
-    },
-    {
       "id": "asset:assets/agents/trunk_orchestration/meristem_differentiation/capability-lifecycle.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/meristem_differentiation/capability-lifecycle.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/method-selection.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/method-selection.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/project-leaves.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/project-leaves.md"
     },
     {
       "id": "asset:assets/agents/trunk_orchestration/state-transition.md",
@@ -278,6 +288,11 @@
       "path": "manifest.json"
     },
     {
+      "id": "asset:tooling/doctor.py",
+      "kind": "asset",
+      "path": "tooling/doctor.py"
+    },
+    {
       "id": "asset:tooling/doctor.sh",
       "kind": "asset",
       "path": "tooling/doctor.sh"
@@ -306,6 +321,11 @@
       "id": "asset:tooling/summarize-replays.py",
       "kind": "asset",
       "path": "tooling/summarize-replays.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_functional_assurance.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_functional_assurance.py"
     },
     {
       "id": "asset:tooling/tests/test_genome_map.py",
@@ -418,9 +438,9 @@
       "state": "active"
     },
     {
-      "id": "component:reusable-leaves",
+      "id": "component:reusable-methods",
       "kind": "component",
-      "path": "assets/agents/leaves_capabilities",
+      "path": "assets/agents/reusable_methods",
       "state": "active"
     },
     {
@@ -466,31 +486,31 @@
     {
       "id": "skill:accessibility",
       "kind": "skill",
-      "path": "assets/agents/leaves_capabilities/accessibility/SKILL.md",
+      "path": "assets/agents/reusable_methods/accessibility/SKILL.md",
       "state": "active"
     },
     {
       "id": "skill:core-web-vitals",
       "kind": "skill",
-      "path": "assets/agents/leaves_capabilities/core-web-vitals/SKILL.md",
+      "path": "assets/agents/reusable_methods/core-web-vitals/SKILL.md",
       "state": "active"
     },
     {
       "id": "skill:performance",
       "kind": "skill",
-      "path": "assets/agents/leaves_capabilities/performance/SKILL.md",
+      "path": "assets/agents/reusable_methods/performance/SKILL.md",
       "state": "active"
     },
     {
       "id": "skill:react-async-state-safety",
       "kind": "skill",
-      "path": "assets/agents/leaves_capabilities/react-async-state-safety/SKILL.md",
+      "path": "assets/agents/reusable_methods/react-async-state-safety/SKILL.md",
       "state": "active"
     },
     {
       "id": "skill:security-and-hardening",
       "kind": "skill",
-      "path": "assets/agents/leaves_capabilities/security-and-hardening/SKILL.md",
+      "path": "assets/agents/reusable_methods/security-and-hardening/SKILL.md",
       "state": "active"
     },
     {
@@ -502,6 +522,11 @@
       "id": "verifier:execution-allocation",
       "kind": "verifier",
       "path": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "id": "verifier:functional-assurance",
+      "kind": "verifier",
+      "path": "tooling/verify-functional-assurance.py"
     },
     {
       "id": "verifier:graft-compatibility_install-audit",
@@ -547,7 +572,7 @@
   "edges": [
     {
       "source": "asset:README.md",
-      "target": "asset:assets/agents/leaves_capabilities/security-and-hardening/SKILL.md",
+      "target": "asset:assets/agents/reusable_methods/security-and-hardening/SKILL.md",
       "relation": "requires",
       "evidence": "README.md"
     },
@@ -576,19 +601,79 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/genome_inheritance/index_registry.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/capability-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/learning-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/route-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/project-leaves.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/epidermis_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
       "source": "asset:assets/agents/genome_inheritance/retired_assets/grill-me",
       "target": "component:grill-me",
       "relation": "activates",
       "evidence": "manifest.json"
     },
     {
-      "source": "asset:assets/agents/leaves_capabilities",
-      "target": "component:reusable-leaves",
+      "source": "asset:assets/agents/reusable_methods",
+      "target": "component:reusable-methods",
       "relation": "activates",
       "evidence": "manifest.json"
     },
     {
-      "source": "asset:assets/agents/leaves_capabilities/security-and-hardening/SKILL.md",
+      "source": "asset:assets/agents/reusable_methods/security-and-hardening/SKILL.md",
       "target": "document:README.md",
       "relation": "documents",
       "evidence": "README.md"
@@ -721,7 +806,7 @@
     },
     {
       "source": "asset:manifest.json",
-      "target": "component:reusable-leaves",
+      "target": "component:reusable-methods",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -780,8 +865,14 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
+      "source": "asset:tooling/tests/test_functional_assurance.py",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_functional_assurance.py"
+    },
+    {
       "source": "asset:tooling/tests/test_genome_map.py",
-      "target": "asset:assets/agents/leaves_capabilities/security-and-hardening/SKILL.md",
+      "target": "asset:assets/agents/reusable_methods/security-and-hardening/SKILL.md",
       "relation": "requires",
       "evidence": "tooling/tests/test_genome_map.py"
     },
@@ -894,28 +985,28 @@
       "evidence": "manifest.json"
     },
     {
-      "source": "component:reusable-leaves",
+      "source": "component:reusable-methods",
       "target": "endpoint:.agents/skills",
       "relation": "installs",
       "evidence": "manifest.json"
     },
     {
       "source": "skill:accessibility",
-      "target": "asset:assets/agents/leaves_capabilities/accessibility/references/A11Y-PATTERNS.md",
+      "target": "asset:assets/agents/reusable_methods/accessibility/references/A11Y-PATTERNS.md",
       "relation": "requires",
-      "evidence": "assets/agents/leaves_capabilities/accessibility/SKILL.md"
+      "evidence": "assets/agents/reusable_methods/accessibility/SKILL.md"
     },
     {
       "source": "skill:accessibility",
-      "target": "asset:assets/agents/leaves_capabilities/accessibility/references/WCAG.md",
+      "target": "asset:assets/agents/reusable_methods/accessibility/references/WCAG.md",
       "relation": "requires",
-      "evidence": "assets/agents/leaves_capabilities/accessibility/SKILL.md"
+      "evidence": "assets/agents/reusable_methods/accessibility/SKILL.md"
     },
     {
       "source": "skill:accessibility",
       "target": "document:README.md",
       "relation": "documents",
-      "evidence": "manifest.json: reusable-leaves"
+      "evidence": "manifest.json: reusable-methods"
     },
     {
       "source": "skill:accessibility",
@@ -925,15 +1016,15 @@
     },
     {
       "source": "skill:core-web-vitals",
-      "target": "asset:assets/agents/leaves_capabilities/core-web-vitals/references/LCP.md",
+      "target": "asset:assets/agents/reusable_methods/core-web-vitals/references/LCP.md",
       "relation": "requires",
-      "evidence": "assets/agents/leaves_capabilities/core-web-vitals/SKILL.md"
+      "evidence": "assets/agents/reusable_methods/core-web-vitals/SKILL.md"
     },
     {
       "source": "skill:core-web-vitals",
       "target": "document:README.md",
       "relation": "documents",
-      "evidence": "manifest.json: reusable-leaves"
+      "evidence": "manifest.json: reusable-methods"
     },
     {
       "source": "skill:core-web-vitals",
@@ -945,7 +1036,7 @@
       "source": "skill:performance",
       "target": "document:README.md",
       "relation": "documents",
-      "evidence": "manifest.json: reusable-leaves"
+      "evidence": "manifest.json: reusable-methods"
     },
     {
       "source": "skill:performance",
@@ -961,15 +1052,15 @@
     },
     {
       "source": "skill:react-async-state-safety",
-      "target": "asset:assets/agents/leaves_capabilities/react-async-state-safety/agents/openai.yaml",
+      "target": "asset:assets/agents/reusable_methods/react-async-state-safety/agents/openai.yaml",
       "relation": "requires",
-      "evidence": "assets/agents/leaves_capabilities/react-async-state-safety/SKILL.md"
+      "evidence": "assets/agents/reusable_methods/react-async-state-safety/SKILL.md"
     },
     {
       "source": "skill:react-async-state-safety",
       "target": "document:README.md",
       "relation": "documents",
-      "evidence": "manifest.json: reusable-leaves"
+      "evidence": "manifest.json: reusable-methods"
     },
     {
       "source": "skill:react-async-state-safety",
@@ -979,9 +1070,9 @@
     },
     {
       "source": "skill:security-and-hardening",
-      "target": "asset:assets/agents/leaves_capabilities/security-and-hardening/references/security-checklist.md",
+      "target": "asset:assets/agents/reusable_methods/security-and-hardening/references/security-checklist.md",
       "relation": "requires",
-      "evidence": "assets/agents/leaves_capabilities/security-and-hardening/SKILL.md"
+      "evidence": "assets/agents/reusable_methods/security-and-hardening/SKILL.md"
     },
     {
       "source": "skill:security-and-hardening",
@@ -993,7 +1084,7 @@
       "source": "skill:security-and-hardening",
       "target": "document:README.md",
       "relation": "documents",
-      "evidence": "manifest.json: reusable-leaves"
+      "evidence": "manifest.json: reusable-methods"
     },
     {
       "source": "skill:security-and-hardening",
@@ -1033,9 +1124,15 @@
     },
     {
       "source": "verifier:execution-allocation",
-      "target": "asset:assets/agents/trunk_orchestration/leaf-methods.md",
+      "target": "asset:assets/agents/trunk_orchestration/method-selection.md",
       "relation": "requires",
       "evidence": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "source": "verifier:functional-assurance",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-functional-assurance.py"
     },
     {
       "source": "verifier:homeostasis-policy",

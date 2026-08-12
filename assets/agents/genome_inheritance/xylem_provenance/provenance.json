@@ -4,7 +4,7 @@
     {
       "id": "security-and-hardening",
       "adoption": "absorb-core",
-      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/leaves_capabilities/security-and-hardening",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/reusable_methods/security-and-hardening",
       "license": "MIT",
       "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
       "local_delta": "owned-baseline",
@@ -18,7 +18,7 @@
     {
       "id": "accessibility",
       "adoption": "absorb-core",
-      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/leaves_capabilities/accessibility",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/reusable_methods/accessibility",
       "license": "MIT",
       "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
       "local_delta": "owned-baseline",
@@ -32,7 +32,7 @@
     {
       "id": "core-web-vitals",
       "adoption": "absorb-core",
-      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/leaves_capabilities/core-web-vitals",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/reusable_methods/core-web-vitals",
       "license": "MIT",
       "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
       "local_delta": "owned-baseline",
@@ -46,7 +46,7 @@
     {
       "id": "performance",
       "adoption": "absorb-core",
-      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/leaves_capabilities/performance",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/reusable_methods/performance",
       "license": "MIT",
       "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
       "local_delta": "owned-baseline",
@@ -60,7 +60,7 @@
     {
       "id": "react-async-state-safety",
       "adoption": "absorb-core",
-      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/leaves_capabilities/react-async-state-safety",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/900ba678366389a2ff400c3d75a025563dd1b5dd/assets/agents/reusable_methods/react-async-state-safety",
       "license": "repository",
       "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
       "local_delta": "owned-baseline",

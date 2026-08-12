@@ -3,6 +3,14 @@
 이 디렉터리는 초호기의 주장과 실제 성능을 구분해 검증한다. fixture는 모델을
 자동으로 채점하는 마법이 아니라, 무엇을 확인해야 하는지 고정하는 계약이다.
 
+## 기능 보증과의 경계
+
+기능보증은 `../functional_assurance/registry.json`과
+`python3 tooling/verify-functional-assurance.py`가 소유하는 횡단 관측 기관이다.
+이 디렉터리는 route·allocation·capability의 fixture와 replay 평가를 소유한다. 기능보증이
+발견한 claim–evidence 결손은 delivery에서 즉시 수용 조건으로 처리하고, 반복되거나
+전신 정책을 바꿀 결손만 Homeostasis가 수리 판단으로 승격한다.
+
 ## 지금 가능한 구조 검증
 
 `route-fixtures.json`의 각 요청에 대해 conductor가 고르는 결과를 다음 기준으로
