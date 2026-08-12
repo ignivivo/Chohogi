@@ -207,6 +207,18 @@
       "limits": "declared evidence is not equivalent to semantic or fresh-session proof"
     },
     {
+      "id": "semantic-interpretation-assurance",
+      "kind": "deterministic-check",
+      "sources": ["assets/agents/functional_assurance/semantic-contract-registry.json", "tooling/semantic_contracts.py", "tooling/verify-semantic-assurance.py"],
+      "trigger": "an active YAML, JSON, frontmatter, registry, manifest, fixture, or other declared contract is added, changed, installed, or audited",
+      "nonTrigger": "does not prove schema-specific behavior, runtime behavior, provider behavior, or fresh-session model adherence",
+      "output": "strictly parsed active declaration surface or a nonzero ambiguity failure",
+      "execution": "python3 tooling/verify-semantic-assurance.py",
+      "verifiers": ["tooling/verify-semantic-assurance.py", "tooling/tests/test_semantic_assurance.py"],
+      "fixtures": ["tooling/tests/test_semantic_assurance.py"],
+      "limits": "unambiguous syntax and required frontmatter fields are not equivalent to a complete domain schema or functional result"
+    },
+    {
       "id": "security-boundary",
       "kind": "policy-gate",
       "sources": ["assets/agents/security_immune_system"],

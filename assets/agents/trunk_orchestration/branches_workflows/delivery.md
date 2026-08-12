@@ -42,7 +42,8 @@
    `pre-code-security-acceptance`를 수용 조건으로 먼저 남기고 해당 reusable method를 적용한다.
    scanner·release gate를 주장하면 프로젝트가 `project-execution-gate-required`의 실제 command,
    결과, fixture, nonzero failure path를 제공할 때만 그렇게 주장한다.
-5. 초호기 기관·reusable method·tooling·설치/검증 adapter를 새로 만들거나 바꾸면,
+5. JSON·YAML·skill frontmatter·registry·fixture처럼 선언을 바꾸면 `python3 tooling/verify-semantic-assurance.py`로
+   실제 엄격 해석을 먼저 확인한다. 초호기 기관·reusable method·tooling·설치/검증 adapter를 새로 만들거나 바꾸면,
    `../functional_assurance/registry.json`에서 기능 claim·실행 경로·resource·verifier·fixture·산출물·한계를 갱신하고
    `python3 tooling/verify-functional-assurance.py`를 실행한다. 이 검증 없이 해당 자산이
    실제 기능을 제공하거나 release를 막는다고 주장하지 않는다.

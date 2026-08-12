@@ -9,6 +9,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from semantic_contracts import SemanticContractError, skill_assurance
+
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_REGISTRY = ROOT / "assets/agents/functional_assurance/registry.json"
@@ -31,13 +33,6 @@ def relative(path: Path) -> str:
 
 def source_exists(value: Any) -> bool:
     return isinstance(value, str) and (ROOT / value).exists()
-
-
-def assurance_marker(skill: Path) -> str | None:
-    for line in skill.read_text(encoding="utf-8").splitlines()[1:20]:
-        if line.strip().startswith("chohogi_assurance:"):
-            return line.split(":", 1)[1].strip()
-    return None
 
 
 def main() -> int:
@@ -109,7 +104,11 @@ def main() -> int:
             errors.append(f"{skill}: must map to exactly one assurance record")
             continue
         covered_skill_roots.add(skill)
-        marker = assurance_marker(ROOT / skill / "SKILL.md")
+        try:
+            marker = skill_assurance(ROOT / skill / "SKILL.md")
+        except SemanticContractError as exc:
+            errors.append(f"{skill}: invalid semantic frontmatter: {exc}")
+            continue
         if marker != matches[0].get("kind"):
             errors.append(f"{skill}: chohogi-assurance marker must match registry kind {matches[0].get('kind')!r}")
     missing_skills = expected_skills - covered_skill_roots

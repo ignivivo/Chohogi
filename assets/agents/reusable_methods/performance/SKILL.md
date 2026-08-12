@@ -2,11 +2,10 @@
 name: performance
 metadata:
   chohogi_assurance: advisory
-description: Optimize web performance for faster loading and better user experience. Use when asked to "speed up my site", "optimize performance", "reduce load time", "fix slow loading", "improve page speed", or "performance audit".
-license: MIT
-metadata:
   author: web-quality-skills
   version: "1.0"
+description: Optimize web performance for faster loading and better user experience. Use when asked to "speed up my site", "optimize performance", "reduce load time", "fix slow loading", "improve page speed", or "performance audit".
+license: MIT
 ---
 
 # Performance optimization

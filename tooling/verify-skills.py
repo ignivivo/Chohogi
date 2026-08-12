@@ -10,6 +10,8 @@ import tempfile
 from argparse import ArgumentParser
 from pathlib import Path
 
+from semantic_contracts import SemanticContractError, frontmatter
+
 
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 ROOT = Path(__file__).resolve().parent.parent
@@ -40,18 +42,18 @@ def check_skill(directory: Path, errors: list[str], review_signals: list[str]) -
     except ValueError:
         fail(f"Unclosed YAML frontmatter: {skill}", errors)
         return
-    frontmatter: dict[str, str] = {}
-    for line in lines[1:end]:
-        if ":" in line and not line.startswith((" ", "\t")):
-            key, value = line.split(":", 1)
-            frontmatter[key.strip()] = value.strip().strip('"').strip("'")
-    name = frontmatter.get("name", "")
-    description = frontmatter.get("description", "")
-    if not name:
+    try:
+        document = frontmatter(skill)
+    except SemanticContractError as exc:
+        fail(f"Invalid semantic frontmatter: {skill}: {exc}", errors)
+        return
+    name = document.get("name", "")
+    description = document.get("description", "")
+    if not isinstance(name, str) or not name:
         fail(f"Missing frontmatter name: {skill}", errors)
     elif name != directory.name or not NAME.fullmatch(name):
         fail(f"Skill name must match lowercase hyphenated directory: {skill}", errors)
-    if not description:
+    if not isinstance(description, str) or not description:
         fail(f"Missing frontmatter description: {skill}", errors)
     body = lines[end + 1 :]
     if not any(line.strip() for line in body):

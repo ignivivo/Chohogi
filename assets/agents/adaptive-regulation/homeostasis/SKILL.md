@@ -57,7 +57,9 @@ needs a regression test, or an optional tool exists.
    deprecation message, or exit status. A compatibility alias is acceptable
    only when the request explicitly permits it and its behavior is tested as
    an alias rather than as the requested implementation.
-   Treat functional assurance as an observation system, not a Homeostasis subroutine:
+   Run `python3 tooling/verify-semantic-assurance.py` whenever an active declaration changes;
+   the semantic verifier must use a strict parser rather than a substring or a weaker reimplementation
+   of the consumer's interpretation. Treat functional assurance as an observation system, not a Homeostasis subroutine:
    it owns claim-to-evidence conformance and emits drift; Homeostasis consumes repeated
    or system-level drift to choose repair, containment, or policy change. For every changed
    active organ, skill, or tooling command, update its functional-assurance record and run

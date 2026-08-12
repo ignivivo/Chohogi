@@ -20,6 +20,9 @@ fi
 if ! python3 "$root/tooling/verify-source-layout.py" >/dev/null; then
   echo 'Source layout is invalid.' >&2; exit 1
 fi
+if ! python3 "$root/tooling/verify-semantic-assurance.py" >/dev/null; then
+  echo 'Active declaration semantics are invalid.' >&2; exit 1
+fi
 if ! python3 "$root/tooling/verify-skills.py" >/dev/null; then
   echo 'Active skill resource graph is invalid.' >&2; exit 1
 fi

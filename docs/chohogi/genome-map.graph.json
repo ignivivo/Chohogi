@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "ca952df57968656c9da32a736c7b40b1d4a1f2cafe88db05806810d2eb8d04e0",
+  "sourceDigest": "ccb9bf8acc584e64fd1a08e48ab1cd0088016151b16bd0097073577faf3f594c",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -51,6 +51,11 @@
       "id": "asset:assets/agents/functional_assurance/registry.json",
       "kind": "asset",
       "path": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "id": "asset:assets/agents/functional_assurance/semantic-contract-registry.json",
+      "kind": "asset",
+      "path": "assets/agents/functional_assurance/semantic-contract-registry.json"
     },
     {
       "id": "asset:assets/agents/genome_inheritance/README.md",
@@ -413,6 +418,11 @@
       "path": "tooling/scan-skill-intake.py"
     },
     {
+      "id": "asset:tooling/semantic_contracts.py",
+      "kind": "asset",
+      "path": "tooling/semantic_contracts.py"
+    },
+    {
       "id": "asset:tooling/summarize-replays.py",
       "kind": "asset",
       "path": "tooling/summarize-replays.py"
@@ -446,6 +456,11 @@
       "id": "asset:tooling/tests/test_security_gate.py",
       "kind": "asset",
       "path": "tooling/tests/test_security_gate.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_semantic_assurance.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_semantic_assurance.py"
     },
     {
       "id": "asset:tooling/tests/test_skills.py",
@@ -710,6 +725,11 @@
       "path": "tooling/verify-security-boundary.py"
     },
     {
+      "id": "verifier:semantic-assurance",
+      "kind": "verifier",
+      "path": "tooling/verify-semantic-assurance.py"
+    },
+    {
       "id": "verifier:skills",
       "kind": "verifier",
       "path": "tooling/verify-skills.py"
@@ -760,6 +780,12 @@
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "asset:assets/agents/adaptive-regulation/learning/SKILL.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/functional_assurance/semantic-contract-registry.json",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
     },
@@ -1056,6 +1082,12 @@
       "target": "asset:assets/agents/security_immune_system/boundary-fixtures.json",
       "relation": "requires",
       "evidence": "tooling/tests/test_security_gate.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_semantic_assurance.py",
+      "target": "asset:assets/agents/functional_assurance/semantic-contract-registry.json",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_semantic_assurance.py"
     },
     {
       "source": "asset:tooling/verify-capability-boundary.py",
@@ -1524,6 +1556,12 @@
       "target": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
       "relation": "requires",
       "evidence": "tooling/verify-security-boundary.py"
+    },
+    {
+      "source": "verifier:semantic-assurance",
+      "target": "asset:assets/agents/functional_assurance/semantic-contract-registry.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-semantic-assurance.py"
     }
   ]
 }
