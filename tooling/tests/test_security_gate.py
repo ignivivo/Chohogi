@@ -121,7 +121,7 @@ class SecurityGateTests(unittest.TestCase):
             self.assertEqual(report["entry"], "nested/SKILL.md")
             self.assertIn("shared-play.md", [item["path"] for item in report["files"]])
 
-    def test_intake_rejects_symlinked_payload_resources(self) -> None:
+    def test_intake_accepts_and_records_an_internal_symlinked_resource(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             (root / "SKILL.md").write_text("---\nname: sample\ndescription: sample\n---\n", encoding="utf-8")
@@ -129,9 +129,24 @@ class SecurityGateTests(unittest.TestCase):
             os.symlink(root / "real.md", root / "references.md")
             output = root / "intake.json"
             result = subprocess.run([sys.executable, str(INTAKE), str(root), "--output", str(output)], text=True, capture_output=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            report = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(report["symlinks"][0]["path"], "references.md")
+            self.assertEqual(report["symlinks"][0]["target"], "real.md")
+            self.assertEqual(report["symlinks"][0]["kind"], "internal")
+            self.assertIn("targetSha256", report["symlinks"][0])
+
+    def test_intake_rejects_a_symlink_outside_the_payload_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary, tempfile.TemporaryDirectory() as outside:
+            root = Path(temporary)
+            (root / "SKILL.md").write_text("---\nname: sample\ndescription: sample\n---\n", encoding="utf-8")
+            target = Path(outside) / "outside.md"
+            target.write_text("outside\n", encoding="utf-8")
+            os.symlink(target, root / "escape.md")
+            output = root / "intake.json"
+            result = subprocess.run([sys.executable, str(INTAKE), str(root), "--output", str(output)], text=True, capture_output=True, check=False)
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("symlink is not allowed", result.stderr)
-            self.assertEqual(json.loads(output.read_text(encoding="utf-8"))["coverage"]["reachableResourceCount"], 1)
+            self.assertIn("symlink escapes intake root", result.stderr)
 
     def test_security_boundary_rejects_a_risk_fixture_without_pre_code_disposition(self) -> None:
         fixtures = ROOT / "assets/agents/security_immune_system/boundary-fixtures.json"

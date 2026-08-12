@@ -1,0 +1,4 @@
+interface:
+  display_name: "MCP Server Review"
+  short_description: "Review MCP server security boundaries"
+  default_prompt: "Use $mcp-server-review to review this MCP server."

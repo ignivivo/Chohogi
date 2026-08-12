@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "c056db176391c3c0e5104ce595079f41860ce6d9e62153628f435f970f0d3aec",
+  "sourceDigest": "a54c765886d3c57cabc92fccccf1a69f88839dc6ee263b2184658befe19b7a9b",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -98,6 +98,16 @@
       "path": "assets/agents/reusable_methods/accessibility/references/WCAG.md"
     },
     {
+      "id": "asset:assets/agents/reusable_methods/agent-security-audit/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/agent-security-audit/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/agent-security-audit/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/agent-security-audit/agents/openai.yaml"
+    },
+    {
       "id": "asset:assets/agents/reusable_methods/core-web-vitals/SKILL.md",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/core-web-vitals/SKILL.md"
@@ -116,6 +126,16 @@
       "id": "asset:assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/mcp-server-review/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/mcp-server-review/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/mcp-server-review/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/mcp-server-review/agents/openai.yaml"
     },
     {
       "id": "asset:assets/agents/reusable_methods/performance/SKILL.md",
@@ -575,6 +595,12 @@
       "state": "active"
     },
     {
+      "id": "skill:agent-security-audit",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/agent-security-audit/SKILL.md",
+      "state": "active"
+    },
+    {
       "id": "skill:core-web-vitals",
       "kind": "skill",
       "path": "assets/agents/reusable_methods/core-web-vitals/SKILL.md",
@@ -584,6 +610,12 @@
       "id": "skill:dependency-scanning",
       "kind": "skill",
       "path": "assets/agents/reusable_methods/dependency-scanning/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:mcp-server-review",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/mcp-server-review/SKILL.md",
       "state": "active"
     },
     {
@@ -1153,6 +1185,24 @@
       "evidence": "tooling/verify-provenance.py"
     },
     {
+      "source": "skill:agent-security-audit",
+      "target": "asset:assets/agents/reusable_methods/agent-security-audit/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/agent-security-audit/SKILL.md"
+    },
+    {
+      "source": "skill:agent-security-audit",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:agent-security-audit",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
       "source": "skill:core-web-vitals",
       "target": "asset:assets/agents/reusable_methods/core-web-vitals/references/LCP.md",
       "relation": "requires",
@@ -1184,6 +1234,24 @@
     },
     {
       "source": "skill:dependency-scanning",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:mcp-server-review",
+      "target": "asset:assets/agents/reusable_methods/mcp-server-review/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/mcp-server-review/SKILL.md"
+    },
+    {
+      "source": "skill:mcp-server-review",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:mcp-server-review",
       "target": "verifier:provenance",
       "relation": "verifies",
       "evidence": "tooling/verify-provenance.py"

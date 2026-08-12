@@ -23,7 +23,9 @@ controller가 아니며, 현재 작업에서 이미 호출 가능한 능력을 �
 필요 리소스, 충돌 가능성, 검증 방법을 기록한다. `security_immune_system/project-adapter-contract.md`와
 `tooling/scan-skill-intake.py`의 intake protocol에 따라 원본 root 전체에
 `python3 tooling/scan-skill-intake.py <source-root> --output <redacted-inventory.json>`를 실행해
-SKILL.md, script, reference, URL, 누락 resource, symlink를 함께 inventory한다. inventory는
+SKILL.md, script, reference, URL, 누락 resource, symlink를 함께 inventory한다. root 내부의
+regular file·directory symlink는 target 경로와 file hash를 기록한 뒤에만 허용하고, root 밖·깨진·순환
+symlink는 fail-closed한다. inventory는
 승인·안전성 증명이 아니며, 실행 전 review·provenance·sandbox 경계를 대체하지 않는다. 한 번의
 인상적인 응답이나 SKILL.md 한 파일만으로 전역 자산으로 승격하지 않는다. 외부 원본의
 controller·사용자 질문·역할 배정은 흡수하지 않는다.

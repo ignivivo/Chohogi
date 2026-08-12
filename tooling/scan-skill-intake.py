@@ -31,7 +31,7 @@ def local_target(raw: str) -> str | None:
 def under(path: Path, root: Path) -> bool:
     try:
         path.resolve().relative_to(root.resolve())
-    except ValueError:
+    except (OSError, RuntimeError, ValueError):
         return False
     return True
 
@@ -52,9 +52,27 @@ def main() -> int:
         return 2
     files: list[Path] = []
     errors: list[str] = []
+    symlinks: list[dict[str, str]] = []
     for path in sorted(root.rglob("*")):
         if path.is_symlink():
-            errors.append(f"symlink is not allowed in intake: {path.relative_to(root)}")
+            relative_link = path.relative_to(root).as_posix()
+            try:
+                target = path.resolve(strict=True)
+            except (OSError, RuntimeError) as exc:
+                errors.append(f"broken or cyclic symlink: {relative_link}: {exc}")
+                continue
+            if not under(target, root):
+                errors.append(f"symlink escapes intake root: {relative_link}")
+                continue
+            record = {"path": relative_link, "target": target.relative_to(root).as_posix(), "kind": "internal"}
+            if target.is_file():
+                record["targetSha256"] = file_hash(target)
+            elif target.is_dir():
+                record["kind"] = "internal-directory"
+            else:
+                errors.append(f"symlink target is not a regular file or directory: {relative_link}")
+                continue
+            symlinks.append(record)
         elif path.is_file() and path.resolve() != output:
             files.append(path)
     entry = (root / arguments.entry).resolve() if arguments.entry else root / "SKILL.md"
@@ -99,6 +117,7 @@ def main() -> int:
         "source": str(root),
         "entry": entry.relative_to(root).as_posix() if under(entry, root) else None,
         "files": inventory,
+        "symlinks": symlinks,
         "externalReferences": sorted(external_references),
         "coverage": {
             "skillFilePresent": under(entry, root) and entry.is_file() and entry.name == "SKILL.md",
@@ -106,6 +125,7 @@ def main() -> int:
             "containsScripts": any(item["path"].startswith("scripts/") for item in inventory),
             "containsReferences": any(item["path"].startswith("references/") for item in inventory),
             "reachableResourceCount": len(reachable),
+            "internalSymlinkCount": len(symlinks),
         },
         "errors": errors,
         "limits": "Inventory is not approval, provenance verification, sandboxing, or evidence that any script is safe to execute.",

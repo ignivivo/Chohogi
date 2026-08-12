@@ -9,7 +9,7 @@
     "secret": ["trust-boundaries", "secret-handling", "security-review-method"],
     "dependency-change": ["trust-boundaries", "dependency-review", "security-review-method", "project-security-plan", "scanner-command", "machine-readable-observation", "failure-exit-path"],
     "llm-output": ["trust-boundaries", "abuse-cases", "prompt-injection-tests", "tool-permission-tests", "security-review-method"],
-    "agent-tool": ["trust-boundaries", "abuse-cases", "prompt-injection-tests", "tool-permission-tests", "security-review-method"],
-    "mcp-provider": ["trust-boundaries", "abuse-cases", "prompt-injection-tests", "tool-permission-tests", "security-review-method"]
+    "agent-tool": ["trust-boundaries", "abuse-cases", "prompt-injection-tests", "tool-permission-tests", "agent-security-audit-method"],
+    "mcp-provider": ["trust-boundaries", "abuse-cases", "prompt-injection-tests", "tool-permission-tests", "agent-security-audit-method", "mcp-server-review-method"]
   }
 }
