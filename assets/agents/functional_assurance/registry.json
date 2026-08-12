@@ -77,12 +77,23 @@
       "id": "accessibility-method",
       "kind": "advisory",
       "sources": ["assets/agents/reusable_methods/accessibility"],
-      "trigger": "a delivery changes an interface or requests an accessibility review",
+      "trigger": "a user-facing semantic or interactive surface changes, or an accessibility review is requested",
       "nonTrigger": "does not select route, authority, or automatically certify WCAG conformance",
       "output": "scoped accessibility method and review guidance",
       "verifiers": ["tooling/verify-skills.py"],
       "fixtures": ["tooling/tests/test_skills.py"],
       "limits": "advisory guidance does not execute an accessibility scanner or establish legal compliance"
+    },
+    {
+      "id": "frontend-surface-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/frontend-surface"],
+      "trigger": "a delivery adds, redesigns, or materially changes a user-facing visual or interactive surface",
+      "nonTrigger": "does not select route or certify design, accessibility, performance, or user research outcomes",
+      "output": "a compact surface packet and specialist-review handoffs",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance cannot prove that an interface feels human or that users are not fatigued"
     },
     {
       "id": "agent-security-audit-method",

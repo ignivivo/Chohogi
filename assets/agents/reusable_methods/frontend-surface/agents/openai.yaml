@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Surface"
+  short_description: "Review user-facing interface intent before implementation."
+  default_prompt: "Review this frontend surface before implementation."

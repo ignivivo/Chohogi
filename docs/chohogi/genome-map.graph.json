@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "6fbfefe65117e44f86911d65ed5702e3fc337c24a62c308b3b89bd6e983a34d3",
+  "sourceDigest": "9ce591786359beb7968659c2aa3ef0ee91eddfcd90c9b5137613b1f326ab60f8",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -131,6 +131,16 @@
       "id": "asset:assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/frontend-surface/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/frontend-surface/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/frontend-surface/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/frontend-surface/agents/openai.yaml"
     },
     {
       "id": "asset:assets/agents/reusable_methods/mcp-server-review/SKILL.md",
@@ -630,6 +640,12 @@
       "id": "skill:dependency-scanning",
       "kind": "skill",
       "path": "assets/agents/reusable_methods/dependency-scanning/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:frontend-surface",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/frontend-surface/SKILL.md",
       "state": "active"
     },
     {
@@ -1265,6 +1281,24 @@
     },
     {
       "source": "skill:dependency-scanning",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:frontend-surface",
+      "target": "asset:assets/agents/reusable_methods/frontend-surface/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/frontend-surface/SKILL.md"
+    },
+    {
+      "source": "skill:frontend-surface",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:frontend-surface",
       "target": "verifier:provenance",
       "relation": "verifies",
       "evidence": "tooling/verify-provenance.py"

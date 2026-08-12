@@ -4,7 +4,7 @@ metadata:
   chohogi_assurance: advisory
   author: web-quality-skills
   version: "1.1"
-description: Audit and improve web accessibility following WCAG 2.2 guidelines. Use when asked to "improve accessibility", "a11y audit", "WCAG compliance", "screen reader support", "keyboard navigation", or "make accessible".
+description: Audit and improve web accessibility following WCAG 2.2 guidelines. Use for every changed user-facing semantic or interactive surface, or when asked to "improve accessibility", "a11y audit", "WCAG compliance", "screen reader support", "keyboard navigation", or "make accessible".
 license: MIT
 ---
 

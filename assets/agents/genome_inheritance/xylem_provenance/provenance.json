@@ -108,11 +108,25 @@
       "baseline_revision": "900ba678366389a2ff400c3d75a025563dd1b5dd",
       "local_delta": "owned-baseline",
       "required_resources": ["references/WCAG.md", "references/A11Y-PATTERNS.md"],
-      "trigger": "a requested WCAG, keyboard, screen-reader, or accessibility improvement",
-      "non_trigger": "a visual-only change with no accessibility claim",
+      "trigger": "a user-facing semantic or interactive surface changes, or a WCAG, keyboard, screen-reader, or accessibility improvement is requested",
+      "non_trigger": "a non-user-facing implementation change with no semantic or interactive UI effect",
       "owner": "Chohogi maintainers",
       "review_signal": ["wcag-update", "missing-reference", "confirmed-accessibility-failure"],
       "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
+    },
+    {
+      "id": "frontend-surface",
+      "adoption": "absorb-core",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/f7f49e278f6bd614a923a82b4b202ad8cb9400dd/assets/agents/reusable_methods",
+      "license": "MIT",
+      "baseline_revision": "f7f49e278f6bd614a923a82b4b202ad8cb9400dd",
+      "local_delta": "new Chohogi-owned frontend pre-implementation method; the externally audited Hallmark source was not copied, installed, or made a controller",
+      "required_resources": [],
+      "trigger": "a delivery adds, redesigns, or materially changes a user-facing visual or interactive surface",
+      "non_trigger": "a non-user-facing implementation change or a visual decision already bounded by a prior surface packet without material change",
+      "owner": "Chohogi maintainers",
+      "review_signal": ["repeated-generic-ui-rework", "design-system-change", "surface-packet-handoff-failure"],
+      "retirement_condition": "a verified replacement frontend surface method supersedes it"
     },
     {
       "id": "core-web-vitals",
