@@ -115,13 +115,13 @@ python3 tooling/verify-manifest-registry.py
    its route instruction, and any active doctor expectation. Preserve only a
    retired provenance entry and the migration behavior.
 6. Add a source-reference verifier that fails on active occurrences of v1
-   paths, `docs/superpowers/` outputs, or `amyloplast` outside declared
+   paths, foreign workflow outputs, or `amyloplast` outside declared
    historical migration evidence.
 
 **Verification**
 
 ```bash
-rg -n 'assets/(codex|agents/chohogi|agents/skills)|manifest\.yaml|amyloplast|grill-me|docs/superpowers' .
+rg -n 'assets/(codex|agents/chohogi|agents/skills)|manifest\.yaml|amyloplast|grill-me|foreign workflow output' .
 python3 tooling/verify-source-layout.py
 ```
 
@@ -154,7 +154,7 @@ historical record, which the verifier identifies individually.
    `defer`, and a link to the conductor. Move detailed policy to its one
    canonical owned contract; do not duplicate it in the entrypoint.
 5. Add fixtures for all five responses, including the observed
-   `docs/superpowers/specs/` and commit mandate. Verify that a higher-priority
+   foreign documentation path and commit mandate. Verify that a higher-priority
    instruction is obeyed but is not promoted into Chohogi policy.
 
 **Verification**

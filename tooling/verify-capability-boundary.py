@@ -30,7 +30,9 @@ REQUIRED_TERMS = (
     "`project-leaf`",
     "controller가 아니며",
     "캐시",
-    "Superpowers",
+    "attach-specialist",
+    "chohogi-external-capabilities.json",
+    "USER-REPORT",
 )
 
 

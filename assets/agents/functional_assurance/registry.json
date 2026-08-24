@@ -5,14 +5,14 @@
     {
       "id": "runtime-guidance",
       "kind": "policy-gate",
-      "sources": ["assets/runtime_entrypoint/AGENTS.md"],
-      "trigger": "every Codex task",
-      "nonTrigger": "does not select a daily workflow itself",
-      "output": "direct handling, defer, or conductor handoff",
-      "execution": "assets/runtime_entrypoint/AGENTS.md",
+      "sources": ["assets/runtime_entrypoint/AGENTS.md", "assets/runtime_entrypoint/agents"],
+      "trigger": "every Codex task, or explicit use of an installed Chohogi custom role",
+      "nonTrigger": "does not select a daily workflow itself or make a project-local role global",
+      "output": "direct handling, defer, or conductor handoff; installed bounded Codex role profiles",
+      "execution": "assets/runtime_entrypoint/AGENTS.md and tooling/install.sh",
       "verifiers": ["tooling/verify-routes.py"],
       "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json"],
-      "limits": "does not prove fresh-session model behavior"
+      "limits": "does not prove fresh-session model behavior or select a model and effort outside the active session policy"
     },
     {
       "id": "trunk-orchestration",
@@ -20,10 +20,10 @@
       "sources": ["assets/agents/trunk_orchestration"],
       "trigger": "substantial work after conductor selection",
       "nonTrigger": "does not replace project implementation or external provider authority",
-      "output": "one workflow, allocation, and evidence boundary",
+      "output": "one workflow, allocation, project-local policy discovery, an intent contract and pre-edit consumer-reference map when the change crosses an unfamiliar, dirty, shared, or multi-consumer boundary, isolated build-output discipline around active development servers, browser-verified visual acceptance when required, and mapped visual acceptance including standard breakpoint classification, cross-breakpoint layout consistency, container-width verification, maximum-width treatment for repeated visual assets, separate viewport-versus-container responsibilities, and boundary-adjacent responsive measurements with coordinate-system disclosure when the delivery requires it",
       "execution": "assets/agents/trunk_orchestration/conductor.md",
-      "verifiers": ["tooling/verify-routes.py", "tooling/verify-execution-allocation.py", "tooling/verify-capability-boundary.py", "tooling/verify-model-policy.py"],
-      "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json", "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json", "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json", "tooling/tests/test_model_policy.py"],
+      "verifiers": ["tooling/verify-routes.py", "tooling/verify-execution-allocation.py", "tooling/verify-capability-boundary.py", "tooling/verify-external-capability-contract.py", "tooling/verify-retired-capability.py", "tooling/verify-model-policy.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json", "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json", "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json", "tooling/tests/test_external_capability_contract.py", "tooling/tests/test_model_policy.py"],
       "limits": "static contracts require bounded replay for durable behavior changes"
     },
     {
@@ -269,7 +269,7 @@
     {
       "id": "verification-and-topology-tools",
       "kind": "deterministic-check",
-      "sources": ["tooling/genome_map.py", "tooling/summarize-replays.py", "tooling/validate-replay-result.py", "tooling/verify-capability-boundary.py", "tooling/verify-execution-allocation.py", "tooling/verify-functional-assurance.py", "tooling/verify-homeostasis-policy.py", "tooling/verify-learning-contract.py", "tooling/verify-provenance.py", "tooling/verify-replay-evaluation.py", "tooling/verify-routes.py", "tooling/verify-skills.py", "tooling/verify-source-layout.py"],
+      "sources": ["tooling/genome_map.py", "tooling/summarize-replays.py", "tooling/validate-replay-result.py", "tooling/verify-capability-boundary.py", "tooling/verify-execution-allocation.py", "tooling/verify-external-capability-contract.py", "tooling/verify-functional-assurance.py", "tooling/verify-homeostasis-policy.py", "tooling/verify-learning-contract.py", "tooling/verify-provenance.py", "tooling/verify-replay-evaluation.py", "tooling/verify-retired-capability.py", "tooling/verify-routes.py", "tooling/verify-skills.py", "tooling/verify-source-layout.py"],
       "trigger": "a named static contract, topology, or replay record requires validation",
       "nonTrigger": "does not prove unobserved runtime or model behavior",
       "output": "machine-readable result or nonzero conformance failure",

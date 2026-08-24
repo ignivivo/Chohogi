@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "package": {
     "id": "chohogi",
-    "layoutVersion": 2,
+    "layoutVersion": 3,
     "portability": "self-governing-method-assets"
   },
   "components": [
@@ -14,6 +14,39 @@
       "destination": ".codex/AGENTS.md",
       "ownership": "runtime-endpoint",
       "activation": "every Codex task",
+      "state": "active",
+      "installMode": "file"
+    },
+    {
+      "id": "critical-reviewer-role",
+      "organ": "runtime_entrypoint",
+      "function": "independent-high-risk-review",
+      "source": "assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "destination": ".codex/agents/critical-reviewer.toml",
+      "ownership": "managed",
+      "activation": "explicit bounded independent review after execution allocation",
+      "state": "active",
+      "installMode": "file"
+    },
+    {
+      "id": "evidence-scout-role",
+      "organ": "runtime_entrypoint",
+      "function": "bounded-read-only-evidence-collection",
+      "source": "assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "destination": ".codex/agents/evidence-scout.toml",
+      "ownership": "managed",
+      "activation": "explicit bounded read-only investigation after execution allocation",
+      "state": "active",
+      "installMode": "file"
+    },
+    {
+      "id": "implementation-worker-role",
+      "organ": "runtime_entrypoint",
+      "function": "bounded-implementation",
+      "source": "assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "destination": ".codex/agents/implementation-worker.toml",
+      "ownership": "managed",
+      "activation": "explicit bounded implementation after execution allocation",
       "state": "active",
       "installMode": "file"
     },

@@ -53,6 +53,14 @@
       "requiredArtifacts": ["affected-consumers", "change-summary", "verification-evidence"]
     },
     {
+      "id": "delivery-unfamiliar-shared-ui",
+      "request": "처음 보는 저장소에서 공통 사이드바 배너와 기사 상세의 숨김 섹션을 수정해줘. 기존 변경도 있다.",
+      "expected": { "kind": "daily-route", "flow": "delivery" },
+      "forbiddenFlows": ["product-decision", "debugging", "learning", "homeostasis"],
+      "mutationAuthority": "requested",
+      "requiredArtifacts": ["project-local-policy-discovery", "intent-contract", "pre-edit-recon", "consumer-reference-map", "scope-boundary", "acceptance-and-verification-plan", "runtime-output-isolation"]
+    },
+    {
       "id": "delivery-known-cause-fix",
       "request": "원인이 확정된 null 처리 누락을 이 파일에서 고치고 회귀 테스트를 추가해줘.",
       "expected": { "kind": "daily-route", "flow": "delivery" },

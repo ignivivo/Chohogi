@@ -15,7 +15,9 @@ bash tooling/verify-install.sh
 ```
 
 The installer obtains its inventory from `manifest.json`. A v1 owned install is staged,
-then preserved under `~/.agents/chohogi-backups/` before v2 is promoted. List backups
+then preserved under `~/.agents/chohogi-backups/` before a new layout is promoted. It installs
+the common Codex role adapters in `~/.codex/agents/`; project-only roles remain in each
+project's `.codex/agents/`. List backups
 with `bash tooling/prune-backups.sh`; removal requires the displayed absolute path and
 `--confirm`.
 

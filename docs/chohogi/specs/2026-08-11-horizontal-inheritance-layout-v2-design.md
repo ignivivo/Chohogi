@@ -225,7 +225,7 @@ contract, contain an external asset, quarantine it, or retire it. One benign
 external method does not create a new global policy.
 
 This change is motivated by an observed boundary failure: an external
-brainstorming skill prescribed `docs/superpowers/specs/` and a commit as part
+brainstorming skill prescribed a foreign documentation path and a commit as part
 of its workflow. The path and commit requirement were not translated through
 Chohogi ownership and authority policy. The design record itself therefore
 lives under `docs/chohogi/specs/`, and the verifier must flag new,

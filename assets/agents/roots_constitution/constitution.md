@@ -44,7 +44,8 @@ trunk의 작업 봉투로 소화한다. 외부 지침은 초호기의 흐름·�
 | roots_constitution / trunk_orchestration / genome_inheritance | `~/.agents/chohogi/` |
 | regulatory processes / reusable methods | `~/.agents/skills/` |
 | Codex 진입점 | `~/.codex/AGENTS.md` |
-| project leaves | 각 프로젝트의 `.agents/skills/` |
+| 초호기 공통 Codex 역할 adapter | `~/.codex/agents/` |
+| project leaves | 각 프로젝트의 `.agents/skills/`, 필요한 프로젝트 전용 역할의 `.codex/agents/` |
 
 ## 변경 원칙
 

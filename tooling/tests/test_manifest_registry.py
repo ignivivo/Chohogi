@@ -41,6 +41,9 @@ class ManifestRegistryTests(unittest.TestCase):
         plan = json.loads(result.stdout)["actions"]
         destinations = {item["destination"] for item in plan}
         self.assertIn(".agents/chohogi", destinations)
+        self.assertIn(".codex/agents/critical-reviewer.toml", destinations)
+        self.assertIn(".codex/agents/evidence-scout.toml", destinations)
+        self.assertIn(".codex/agents/implementation-worker.toml", destinations)
         self.assertIn(".agents/skills/accessibility", destinations)
         self.assertIn(".agents/skills/homeostasis", destinations)
         self.assertNotIn(".agents/skills/grill-me", destinations)

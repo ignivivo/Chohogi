@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "c2964c7b11f358afd030bd02c7236973c86f4cd6b92aa88c2c0c33cb5232dda8",
+  "sourceDigest": "9867ad1526e54386aa48ced1264daca95ba05b55e7c525ec4a52eaa22aff21a5",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -903,6 +903,21 @@
       "path": "assets/runtime_entrypoint/AGENTS.md"
     },
     {
+      "id": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/agents/critical-reviewer.toml"
+    },
+    {
+      "id": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/agents/evidence-scout.toml"
+    },
+    {
+      "id": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/agents/implementation-worker.toml"
+    },
+    {
       "id": "asset:docs/chohogi/genome-map.graph.json",
       "kind": "asset",
       "path": "docs/chohogi/genome-map.graph.json"
@@ -986,6 +1001,11 @@
       "id": "asset:tooling/summarize-replays.py",
       "kind": "asset",
       "path": "tooling/summarize-replays.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_external_capability_contract.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_external_capability_contract.py"
     },
     {
       "id": "asset:tooling/tests/test_functional_assurance.py",
@@ -1104,6 +1124,18 @@
       "state": "active"
     },
     {
+      "id": "component:critical-reviewer-role",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "state": "active"
+    },
+    {
+      "id": "component:evidence-scout-role",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "state": "active"
+    },
+    {
       "id": "component:frontend-surface",
       "kind": "component",
       "path": "assets/agents/reusable_methods/frontend-surface",
@@ -1125,6 +1157,12 @@
       "id": "component:homeostasis",
       "kind": "component",
       "path": "assets/agents/adaptive-regulation/homeostasis",
+      "state": "active"
+    },
+    {
+      "id": "component:implementation-worker-role",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/agents/implementation-worker.toml",
       "state": "active"
     },
     {
@@ -1184,6 +1222,21 @@
       "id": "endpoint:.codex/AGENTS.md",
       "kind": "endpoint",
       "path": ".codex/AGENTS.md"
+    },
+    {
+      "id": "endpoint:.codex/agents/critical-reviewer.toml",
+      "kind": "endpoint",
+      "path": ".codex/agents/critical-reviewer.toml"
+    },
+    {
+      "id": "endpoint:.codex/agents/evidence-scout.toml",
+      "kind": "endpoint",
+      "path": ".codex/agents/evidence-scout.toml"
+    },
+    {
+      "id": "endpoint:.codex/agents/implementation-worker.toml",
+      "kind": "endpoint",
+      "path": ".codex/agents/implementation-worker.toml"
     },
     {
       "id": "skill:accessibility",
@@ -1262,6 +1315,11 @@
       "path": "tooling/verify-execution-allocation.py"
     },
     {
+      "id": "verifier:external-capability-contract",
+      "kind": "verifier",
+      "path": "tooling/verify-external-capability-contract.py"
+    },
+    {
       "id": "verifier:functional-assurance",
       "kind": "verifier",
       "path": "tooling/verify-functional-assurance.py"
@@ -1295,6 +1353,11 @@
       "id": "verifier:replay-evaluation",
       "kind": "verifier",
       "path": "tooling/verify-replay-evaluation.py"
+    },
+    {
+      "id": "verifier:retired-capability",
+      "kind": "verifier",
+      "path": "tooling/verify-retired-capability.py"
     },
     {
       "id": "verifier:routes",
@@ -1492,6 +1555,24 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "target": "component:critical-reviewer-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "target": "component:evidence-scout-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "target": "component:implementation-worker-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "asset:docs/chohogi/genome-map.graph.json",
       "target": "document:README.md",
       "relation": "documents",
@@ -1553,7 +1634,37 @@
     },
     {
       "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
       "target": "component:chohogi-organs",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:critical-reviewer-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:evidence-scout-role",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -1578,6 +1689,12 @@
     {
       "source": "asset:manifest.json",
       "target": "component:homeostasis",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:implementation-worker-role",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -1780,6 +1897,18 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "component:critical-reviewer-role",
+      "target": "endpoint:.codex/agents/critical-reviewer.toml",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:evidence-scout-role",
+      "target": "endpoint:.codex/agents/evidence-scout.toml",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "component:global-guidance",
       "target": "endpoint:.codex/AGENTS.md",
       "relation": "installs",
@@ -1788,6 +1917,12 @@
     {
       "source": "component:homeostasis",
       "target": "endpoint:.agents/skills/homeostasis",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:implementation-worker-role",
+      "target": "endpoint:.codex/agents/implementation-worker.toml",
       "relation": "installs",
       "evidence": "manifest.json"
     },

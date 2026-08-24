@@ -35,6 +35,16 @@ factory.
    project leaf, provisional global candidate, genome_inheritance asset, or Homeostasis
    escalation.
 
+## Rework signal
+
+When a user correction or high-signal review establishes that required reconnaissance,
+consumer-reference discovery, scope containment, or completion verification was omitted,
+record it as a confirmed failure only after the smallest guard has been demonstrated.
+Repeated rework alone does not create a leaf or global rule. Keep project-specific layout
+numbers, framework quirks, and asset choices in the project record; escalate to
+Homeostasis only when the prevention changes Chohogi's route, lifecycle, installation,
+or evaluation boundary.
+
 ## Promotion and retirement
 
 Project evidence remains in that project's Git and work-log. A provisional

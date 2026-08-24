@@ -34,6 +34,7 @@ cleanup() {
 trap cleanup EXIT
 
 is_chohogi_owned() { [[ -f "$1/$marker_name" ]] && grep -E -q '"package"[[:space:]]*:[[:space:]]*"chohogi"' "$1/$marker_name"; }
+is_chohogi_managed_agent() { [[ -f "$1" ]] && grep -F -q '# chohogi:managed-codex-agent' "$1"; }
 marker_is_current() { grep -F -q "\"registryDigest\": \"$registry_digest\"" "$1/$marker_name"; }
 layout_version() {
   local value
@@ -75,11 +76,38 @@ install_global_guidance() {
     printf '\n\n' >> "$destination"; cat "$source" >> "$destination"; printf '\n' >> "$destination"
   fi
 }
+install_managed_codex_agent() {
+  local source="$1" destination="$2"
+  mkdir -p "$(dirname "$destination")"
+  if [[ -e "$destination" ]]; then
+    cmp -s "$source" "$destination" && return
+    is_chohogi_managed_agent "$destination" || {
+      echo "Installation collision: $destination is not marked as Chohogi-owned." >&2
+      exit 1
+    }
+    ensure_backup "$(layout_version "$live_root")"
+    mkdir -p "$backup/codex-agents"
+    cp "$destination" "$backup/codex-agents/$(basename "$destination")"
+  fi
+  cp "$source" "$destination"
+}
 
 [[ -f "$root/manifest.json" ]] || { echo 'Run from a complete Chohogi checkout.' >&2; exit 1; }
 plan="$(python3 "$root/tooling/manifest_registry.py" install-plan)"
 registry_digest="$(python3 -c 'import json,sys; print(json.load(sys.stdin)["registryDigest"])' <<<"$plan")"
 component_ids="$(python3 -c 'import json,sys; print(json.dumps(json.load(sys.stdin)["managedComponentIds"]))' <<<"$plan")"
+registry_layout_version="$(python3 -c 'import json,sys; print(json.load(sys.stdin)["layoutVersion"])' <<<"$plan")"
+
+while IFS=$'\t' read -r source destination mode; do
+  [[ "$destination" == .codex/agents/* ]] || continue
+  live="$target_home/$destination"
+  [[ ! -e "$live" ]] || cmp -s "$root/$source" "$live" || is_chohogi_managed_agent "$live" || {
+    echo "Installation collision: $live is not marked as Chohogi-owned." >&2
+    exit 1
+  }
+done < <(python3 -c 'import json,sys
+for action in json.load(sys.stdin)["actions"]:
+    print("\t".join((action["source"], action["destination"], action["mode"])))' <<<"$plan")
 
 while IFS=$'\t' read -r source destination mode; do
   [[ "$destination" == .codex/* ]] && continue
@@ -91,10 +119,10 @@ for action in json.load(sys.stdin)["actions"]:
 
 stage_root="$stage/chohogi"
 python3 -c 'import json,sys
-path, digest, ids = sys.argv[1:]
+path, digest, ids, layout_version = sys.argv[1:]
 with open(path, "w", encoding="utf-8") as handle:
-    json.dump({"package": "chohogi", "layoutVersion": 2, "managedComponentIds": json.loads(ids), "registryDigest": digest, "installedAt": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}, handle, indent=2)
-    handle.write("\n")' "$stage_root/$marker_name" "$registry_digest" "$component_ids"
+    json.dump({"package": "chohogi", "layoutVersion": int(layout_version), "managedComponentIds": json.loads(ids), "registryDigest": digest, "installedAt": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}, handle, indent=2)
+    handle.write("\n")' "$stage_root/$marker_name" "$registry_digest" "$component_ids" "$registry_layout_version"
 for staged_skill in "$stage/skills"/*; do
   [[ -d "$staged_skill" ]] && cp "$stage_root/$marker_name" "$staged_skill/$marker_name"
 done
@@ -156,8 +184,12 @@ done < <(python3 -c 'import json,sys
 for destination in json.load(sys.stdin)["retiredDestinations"]: print(destination)' <<<"$plan")
 
 while IFS=$'\t' read -r source destination mode; do
-  [[ "$destination" == .codex/* ]] || continue
-  install_global_guidance "$root/$source" "$target_home/$destination"
+  case "$destination" in
+    .codex/AGENTS.md) install_global_guidance "$root/$source" "$target_home/$destination" ;;
+    .codex/agents/*) install_managed_codex_agent "$root/$source" "$target_home/$destination" ;;
+    .codex/*) echo "Unsupported Codex installation destination: $destination" >&2; exit 1 ;;
+    *) continue ;;
+  esac
 done < <(python3 -c 'import json,sys
 for action in json.load(sys.stdin)["actions"]:
     print("\t".join((action["source"], action["destination"], action["mode"])))' <<<"$plan")

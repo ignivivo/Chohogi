@@ -14,7 +14,7 @@ Conductor가 flow를, `execution-allocation.md`가 실행 형태를 정한 뒤�
 | `chohogi-internal` | 초호기 Git 자산 | route, 실행 배정, xylem 방법, 작업 봉투가 필요할 때 | 외부 하네스 문서를 다시 읽어 절차를 결정하기 |
 | `native-system` | Codex | 현재 표면에 직접 노출된 기본 스킬·도구가 작업에 맞을 때 | 초호기의 controller로 취급하거나 복제본을 만드는 일 |
 | `capability-provider` | 플러그인·MCP·커넥터 | 현재 호출 가능하고, 외부 데이터·인증된 작업·브라우저·전용 도구가 실제로 필요할 때 | provider에게 흐름·위임·완료 권한을 주기 |
-| `absorbed-method-source` | 비교·역사 참고본 | 실행에는 사용하지 않음 | 활성 controller·방법 의존성으로 호출하기 |
+| `absorbed-method-source` | 초호기에 이식 완료된 원본 | 실행에는 사용하지 않음 | 이름·경로·원본 지침을 초호기 source나 산출물에 남기기 |
 | `project-leaf` | 프로젝트 Git | 선택된 흐름 뒤 도메인 사실·계약·검증이 필요할 때 | 전역 정책이나 controller로 승격하기 |
 
 ## 선택 절차
@@ -30,12 +30,19 @@ Conductor가 flow를, `execution-allocation.md`가 실행 형태를 정한 뒤�
    그래도 provider는 능력만 수행하며 controller가 되지 않는다.
 6. 순수 Markdown 전문 skill은 `horizontal-transfer_adoption.md`의 상태가 `attach-specialist`일 때만
    외부 원본으로 사용한다. `absorb-core`와 `mirror-baseline`은 초호기 정본만 사용한다.
+7. 프로젝트가 외부 전문 capability를 함께 쓰려면 project leaf의
+   `.agents/chohogi-external-capabilities.json`에 `attach-specialist` 계약을 선언하고
+   `python3 tooling/verify-external-capability-contract.py --project <project-root>`를 실행한다.
+   선언된 충돌은 사용 전에 사용자에게 `USER-REPORT`로 보고한다. 외부 provider의 방법은
+   허용된 좁은 동작만 수행하며 artifact path, commit, workflow, completion을 결정하지 않는다.
 
 ## 흡수 원칙
 
-Superpowers·구 Meta-harness·Caveman에서 채택한 절차는 초호기 내부 자산에 이미
-소화된 내용만 사용한다. 비활성화된 원본은 비교와 역사 확인을 위해 남아 있을 수 있지만,
-초호기는 그것을 읽거나 호출해 계획·디버깅·테스트·검토·역할 배정을 결정하지 않는다.
+흡수 완료된 외부 방법의 원본명·경로·원본 지침은 초호기 source와 프로젝트 산출물에서
+제거한다. Homeostasis의 은퇴·이식 작업은 `python3 tooling/verify-retired-capability.py --root
+<repository-root> --forbid <retired-marker>`로 숨김 파일과 문서를 포함한 전체 저장소를 검사한다.
+현재 외부에 남겨 함께 쓰는 specialist는 이 규칙의 대상이 아니며, project leaf 계약과 충돌
+보고를 통해서만 호출한다.
 
 ## 산출물
 

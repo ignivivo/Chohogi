@@ -69,7 +69,7 @@ class GraftCompatibilityAuditTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         report = __import__("json").loads(result.stdout)
         self.assertEqual(report["status"], "healthy")
-        self.assertEqual(report["installed"]["layoutVersion"], 2)
+        self.assertEqual(report["installed"]["layoutVersion"], 3)
         self.assertTrue(report["registry"]["digestMatches"])
         self.assertEqual(report["components"]["missingActive"], [])
         self.assertEqual(report["components"]["unexpectedRetired"], [])
@@ -167,6 +167,39 @@ class GraftCompatibilityAuditTests(unittest.TestCase):
                 check=False,
             )
             self.assertEqual(audit.returncode, 0, audit.stderr)
+
+    def test_installation_includes_global_codex_role_profiles(self) -> None:
+        self.build_genome_map()
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            target_home = Path(temporary_directory)
+            install = subprocess.run(
+                ["bash", "tooling/install.sh", "--home", str(target_home)],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(install.returncode, 0, install.stderr)
+            for role in ("critical-reviewer", "evidence-scout", "implementation-worker"):
+                self.assertTrue((target_home / ".codex" / "agents" / f"{role}.toml").is_file())
+
+    def test_installer_rejects_an_unowned_global_codex_role_collision(self) -> None:
+        self.build_genome_map()
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            target_home = Path(temporary_directory)
+            collision = target_home / ".codex" / "agents" / "critical-reviewer.toml"
+            collision.parent.mkdir(parents=True)
+            collision.write_text('name = "someone_else"\n', encoding="utf-8")
+            install = subprocess.run(
+                ["bash", "tooling/install.sh", "--home", str(target_home)],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertNotEqual(install.returncode, 0)
+            self.assertIn("Installation collision", install.stderr)
+            self.assertEqual(collision.read_text(encoding="utf-8"), 'name = "someone_else"\n')
 
 
 if __name__ == "__main__":

@@ -37,6 +37,13 @@
       "expectedResolution": "project-leaf",
       "requiredArtifacts": ["project-contract", "affected-boundary-verification"],
       "forbiddenOutcomes": ["external-controller", "promote-project-leaf-globally", "invoke-absorbed-method-source"]
+    },
+    {
+      "id": "attached-project-specialist",
+      "request": "프로젝트 leaf에 선언된 외부 전문 capability를 충돌 보고와 함께 사용해줘.",
+      "expectedResolution": "project-leaf",
+      "requiredArtifacts": ["external-capability-contract", "user-conflict-report", "bounded-provider-action"],
+      "forbiddenOutcomes": ["external-controller", "ask-user-execution-choice", "promote-project-leaf-globally"]
     }
   ]
 }
