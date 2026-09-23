@@ -20,6 +20,10 @@
 현재 수용 조건은 handoff에도 유지한다. 새 일상 route는 이전 route의 종료 근거와 새 route의
 진입 근거가 작업 봉투에 함께 있을 때만 시작한다.
 
+feedback·handoff·중단 재개·명시적 증명을 위해 execution record를 만든 작업은, 그 기록의
+사실·결정·결과를 terminal handoff에 포함한다. record contract가 evidence verification을
+선언한 경우에만 해당 contract의 successful `finalize`가 종료 근거에 추가된다.
+
 Homeostasis는 Homeostasis skill의 `references/admission-policy.md`에 있는 scope gate와
 evidence gate를 모두 통과한 경우에만 시작한다. 단일 프로젝트의 failure가 Learning을 통해
 candidate가 되었다는 사실만으로 Homeostasis가 자동 시작되지는 않는다.

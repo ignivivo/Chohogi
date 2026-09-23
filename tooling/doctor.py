@@ -50,8 +50,20 @@ def main() -> int:
     backups = sorted(str(path) for path in backup_root.iterdir()) if backup_root.is_dir() else []
     digest_matches = bool(root_marker and root_marker.get("registryDigest") == expected_digest)
     status = "healthy" if digest_matches and not missing_active and not unexpected_retired else "drift"
+    conformance = "healthy" if status == "healthy" else "failed"
     report = {
         "status": status,
+        "scope": "conformant-only",
+        "health": {
+            "conformant": conformance,
+            "operational": "unknown",
+            "responsive": "unknown",
+            "overall": "unknown",
+            "unverified": [
+                "project consumer behavior",
+                "feedback response evidence",
+            ],
+        },
         "installed": {
             "layoutVersion": root_marker.get("layoutVersion") if root_marker else None,
             "ownerMarker": str(home / ".agents" / "chohogi" / MARKER) if root_marker else None,

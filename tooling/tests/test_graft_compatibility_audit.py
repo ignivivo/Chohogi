@@ -69,6 +69,12 @@ class GraftCompatibilityAuditTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         report = __import__("json").loads(result.stdout)
         self.assertEqual(report["status"], "healthy")
+        self.assertEqual(report["scope"], "conformant-only")
+        self.assertEqual(report["health"]["conformant"], "healthy")
+        self.assertEqual(report["health"]["operational"], "unknown")
+        self.assertEqual(report["health"]["responsive"], "unknown")
+        self.assertEqual(report["health"]["overall"], "unknown")
+        self.assertIn("feedback response evidence", report["health"]["unverified"])
         self.assertEqual(report["installed"]["layoutVersion"], 3)
         self.assertTrue(report["registry"]["digestMatches"])
         self.assertEqual(report["components"]["missingActive"], [])
@@ -93,6 +99,7 @@ class GraftCompatibilityAuditTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         report = __import__("json").loads(result.stdout)
         self.assertEqual(report["status"], "drift")
+        self.assertEqual(report["health"]["conformant"], "failed")
         self.assertIn(".agents/skills/performance", report["components"]["missingActive"])
 
     def test_v1_migration_preserves_owned_tree_and_retires_grill_me(self) -> None:
@@ -182,6 +189,26 @@ class GraftCompatibilityAuditTests(unittest.TestCase):
             self.assertEqual(install.returncode, 0, install.stderr)
             for role in ("critical-reviewer", "evidence-scout", "implementation-worker"):
                 self.assertTrue((target_home / ".codex" / "agents" / f"{role}.toml").is_file())
+            self.assertTrue((target_home / ".claude" / "CLAUDE.md").is_file())
+            record_tool = target_home / ".agents" / "chohogi" / "tooling" / "execution-record.py"
+            self.assertTrue(record_tool.is_file())
+            catalog_tool = target_home / ".agents" / "chohogi" / "tooling" / "model-catalog.py"
+            self.assertTrue(catalog_tool.is_file())
+            self.assertTrue(catalog_tool.stat().st_mode & 0o111)
+            project = target_home / "sample-project"
+            project.mkdir()
+            contract = project / "contract.json"
+            contract.write_text('{"schemaVersion": 1, "acceptance": []}', encoding="utf-8")
+            begin = subprocess.run(
+                [sys.executable, str(record_tool), "--project", str(project), "begin", "--work-id", "installed", "--contract", str(contract)],
+                text=True, capture_output=True, check=False,
+            )
+            self.assertEqual(begin.returncode, 0, begin.stderr)
+            review = subprocess.run(
+                [sys.executable, str(record_tool), "--project", str(project), "review", "--work-id", "installed"],
+                text=True, capture_output=True, check=False,
+            )
+            self.assertEqual(review.returncode, 0, review.stderr)
 
     def test_installer_rejects_an_unowned_global_codex_role_collision(self) -> None:
         self.build_genome_map()

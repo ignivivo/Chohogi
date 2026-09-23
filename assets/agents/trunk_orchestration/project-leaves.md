@@ -22,7 +22,8 @@ Project leaf는 전역 reusable method 또는 초호기 공통 Codex 역할 adap
 - 소스와 배포 위치는 해당 프로젝트가 소유한다. 스킬 leaf는 `.agents/skills/`에 둔다. 프로젝트의
   도메인 규칙·도구·검증을 포함한 custom agent가 실제로 필요하면 `.codex/agents/`에 둔다. 초호기
   공통 `critical-reviewer`, `evidence-scout`, `implementation-worker`의 복사본은 project leaf가 아니며
-  초호기 설치기가 `~/.codex/agents/`에 설치한다.
+  초호기 설치기가 `~/.codex/agents/`에 설치한다. Claude Code는 동일한 전역 정책을
+  `~/.claude/CLAUDE.md`에서 받지만, 프로젝트 전용 Claude 지침은 프로젝트가 소유하며 전역 controller가 아니다.
 - 외부 specialist를 프로젝트에서 함께 쓸 때는 원본을 복사하거나 초호기 전역 자산으로 승격하지 않는다.
   `.agents/chohogi-external-capabilities.json`에 provider, trigger/non-trigger, 허용 동작, 금지된
   controller claim, 알려진 충돌과 사용자 보고 문구를 선언한다. 충돌이 없으면 빈 `conflicts`를 명시한다.

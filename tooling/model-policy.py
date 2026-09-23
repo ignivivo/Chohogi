@@ -9,16 +9,28 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
 
-
 EFFORT = ("low", "medium", "high", "ultra")
+NATIVE_EFFORT = re.compile(r"^[a-z][a-z0-9_-]{0,31}$")
 
 
 class ContractError(ValueError):
     pass
+
+
+def valid_effort(value: Any) -> bool:
+    return isinstance(value, str) and bool(NATIVE_EFFORT.fullmatch(value))
+
+
+def meets_minimum(actual: str, minimum: str) -> bool | None:
+    """Return unknown rather than inventing an ordering for provider-native efforts."""
+    if actual in EFFORT and minimum in EFFORT:
+        return EFFORT.index(actual) >= EFFORT.index(minimum)
+    return True if actual == minimum else None
 
 
 def read_json(path: Path) -> Any:
@@ -53,8 +65,8 @@ def validate_catalog(value: Any) -> dict[str, Any]:
         if not isinstance(item.get("available"), bool):
             raise ContractError(f"{prefix}.available must be boolean")
         levels = item.get("reasoningLevels")
-        if not isinstance(levels, list) or not levels or any(level not in EFFORT for level in levels) or len(set(levels)) != len(levels):
-            raise ContractError(f"{prefix}.reasoningLevels must be unique supported effort levels")
+        if not isinstance(levels, list) or not levels or any(not valid_effort(level) for level in levels) or len(set(levels)) != len(levels):
+            raise ContractError(f"{prefix}.reasoningLevels must be unique runtime effort identifiers")
         capabilities = item.get("capabilities")
         if not isinstance(capabilities, list) or not capabilities or any(not isinstance(capability, str) or not capability.strip() for capability in capabilities):
             raise ContractError(f"{prefix}.capabilities must be a non-empty string list")
@@ -77,29 +89,48 @@ def validate_task(value: Any) -> dict[str, Any]:
     if not isinstance(capabilities, list) or any(not isinstance(item, str) or not item.strip() for item in capabilities):
         raise ContractError("task.requiredCapabilities must be a string list")
     effort = value.get("minimumReasoning")
-    if effort not in EFFORT:
-        raise ContractError("task.minimumReasoning must be low, medium, high, or ultra")
+    if not valid_effort(effort):
+        raise ContractError("task.minimumReasoning must be a valid normalized tier or exact provider-native effort")
     return value
 
 
-def price_total(item: dict[str, Any]) -> float:
-    price = item.get("price")
-    if not isinstance(price, dict):
-        return float("inf")
-    return float(price["inputUsdPerMillion"]) + float(price["outputUsdPerMillion"])
-
-
 def candidates(catalog: dict[str, Any], task: dict[str, Any]) -> list[dict[str, Any]]:
-    minimum = EFFORT.index(task["minimumReasoning"])
+    minimum = task["minimumReasoning"]
     required = set(task["requiredCapabilities"])
     eligible = [
         item for item in catalog["observations"]
         if item["available"]
         and required.issubset(set(item["capabilities"]))
-        and max(EFFORT.index(level) for level in item["reasoningLevels"]) >= minimum
+        and any(meets_minimum(level, minimum) is True for level in item["reasoningLevels"])
     ]
-    eligible.sort(key=lambda item: (price_total(item), item["provider"], item["model"]))
-    return [{"provider": item["provider"], "model": item["model"], "reasoning": min((level for level in item["reasoningLevels"] if EFFORT.index(level) >= minimum), key=EFFORT.index), "priceKnown": isinstance(item.get("price"), dict)} for item in eligible]
+    result = [
+        {"provider": item["provider"], "model": item["model"], "reasoning": level, "priceKnown": isinstance(item.get("price"), dict), "price": item.get("price")}
+        for item in eligible
+        for level in item["reasoningLevels"]
+        if meets_minimum(level, minimum) is True
+    ]
+    result.sort(key=lambda item: (item["provider"], item["model"], EFFORT.index(item["reasoning"]) if item["reasoning"] in EFFORT else len(EFFORT), item["reasoning"]))
+    return result
+
+
+def explicit_selection(catalog: dict[str, Any], task: dict[str, Any], provider: str, model: str, reasoning: str) -> dict[str, Any]:
+    if not valid_effort(reasoning):
+        raise ContractError("requested reasoning must be a valid exact effort identifier")
+    floor_check = meets_minimum(reasoning, task["minimumReasoning"])
+    if floor_check is False:
+        raise ContractError("requested reasoning cannot satisfy task minimum reasoning")
+    item = next((candidate for candidate in catalog["observations"] if candidate["provider"] == provider and candidate["model"] == model), None)
+    if item is None or not item["available"] or reasoning not in item["reasoningLevels"]:
+        raise ContractError(f"requested model is not available with reasoning {provider}/{model}/{reasoning}")
+    if not set(task["requiredCapabilities"]).issubset(set(item["capabilities"])):
+        raise ContractError(f"requested model lacks required capabilities: {provider}/{model}")
+    return {
+        "provider": provider,
+        "model": model,
+        "reasoning": reasoning,
+        "priceKnown": isinstance(item.get("price"), dict),
+        "reasoningFloorCheck": "satisfied" if floor_check is True else "unknown-native-order",
+    }
 
 
 def compare(current: dict[str, Any], prior: dict[str, Any]) -> list[dict[str, str]]:
@@ -124,6 +155,13 @@ def main() -> int:
     recommend = subparsers.add_parser("recommend")
     recommend.add_argument("--catalog", type=Path, required=True)
     recommend.add_argument("--task", type=Path, required=True)
+    selection = subparsers.add_parser("select")
+    selection.add_argument("--catalog", type=Path, required=True)
+    selection.add_argument("--task", type=Path, required=True)
+    selection.add_argument("--provider", required=True)
+    selection.add_argument("--model", required=True)
+    selection.add_argument("--reasoning", required=True)
+    selection.add_argument("--reason", required=True)
     comparison = subparsers.add_parser("compare")
     comparison.add_argument("--catalog", type=Path, required=True)
     comparison.add_argument("--prior", type=Path, required=True)
@@ -133,9 +171,14 @@ def main() -> int:
     args = parser.parse_args()
     try:
         catalog = validate_catalog(read_json(args.catalog))
-        if args.command == "recommend":
+        if args.command == "select":
             task = validate_task(read_json(args.task))
-            result = {"schemaVersion": 1, "role": task["role"], "candidates": candidates(catalog, task), "requiresHumanConfirmation": True, "limits": "Candidates are ranked only by declared capability, selectable effort, and reported public price; they do not prove quality, account availability, or effective billed cost."}
+            reason = text(args.reason, "selection reason")
+            chosen = explicit_selection(catalog, task, args.provider, args.model, args.reasoning)
+            result = {"schemaVersion": 1, "role": task["role"], "selectionMode": "user-override", "selectionReason": reason, **chosen, "requiresHumanConfirmation": chosen["reasoningFloorCheck"] == "unknown-native-order", "limits": "The exact native provider/model/reasoning tuple is checked against the observed selectable list. For native effort names with no declared cross-tier mapping, the task floor remains unknown and must be confirmed by the user; no quality or billed-cost claim is made."}
+        elif args.command == "recommend":
+            task = validate_task(read_json(args.task))
+            result = {"schemaVersion": 1, "role": task["role"], "candidates": candidates(catalog, task), "requiresHumanConfirmation": True, "limits": "Candidates are filtered by observed availability, declared capability, and selectable effort, then listed alphabetically; separate input/output prices are reported when known, without inferring quality, quality-per-dollar, or actual task cost."}
         elif args.command == "compare":
             changes = compare(catalog, validate_catalog(read_json(args.prior)))
             result = {"schemaVersion": 1, "changes": changes, "requiresHumanReconfirmation": bool(changes), "limits": "Only supplied catalog facts are compared; no provider was queried by this tool."}

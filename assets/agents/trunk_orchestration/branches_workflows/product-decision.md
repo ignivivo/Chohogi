@@ -33,13 +33,21 @@
 <!-- chohogi:section=method -->
 ## 절차
 
+Material 계획·문서를 유지하는 프로젝트는 `.agents/chohogi-document-registry.json`을
+확인하고 `tooling/verify-project-document-registry.py --root <project>`를 먼저 실행한다.
+registry가 없으면 문서 권위와 활성 계획을 선언할 수 있을 때까지 `defer`하거나 registry를
+만드는 범위만 수행한다.
+여러 합의 항목이 한 결정에 묶이면 `requestedItems` scope lock으로 각 항목의 결과를
+기록하고, 빠진 항목이 없는지 확인한 뒤에만 다음 route로 넘긴다.
+
 1. 이미 확정된 사항과 실제로 열린 결정을 분리한다.
 2. 결정에 필요한 사실을 수집하고, 모르는 것은 모른다고 표시한다.
 3. 선택지별 이점·비용·위험·되돌릴 수 있는 정도를 같은 기준으로 비교한다.
 4. 사용자가 요청했거나 중요한 맥락이 부족할 때만 제한된 질문 또는 브레인스토밍을
    사용한다. 질문을 늘리는 것 자체를 목표로 삼지 않는다.
 5. 추천안과 추천 근거를 제시하되, 사용자의 결정이 필요한 지점은 명시한다.
-6. 결정되면 `delivery`가 사용할 수용 조건과 보류 사항을 남긴다.
+6. 기술 구현 선택도 delivery 시간/비용·운영 부담·구조/소유권·위험·되돌릴 수 있는 정도·사용자 결과를 실질적으로 바꾸면, capability map을 근거로 recommendation·trade-off·추정 범위/신뢰도·unknown을 `decision-report`로 정리한다. 사용자의 `decision-resolution`을 받은 뒤에만 선택을 확정한다.
+7. 결정되면 `delivery`가 사용할 수용 조건과 보류 사항을 남긴다.
 
 <!-- chohogi:section=optional-capabilities -->
 ## 선택적 능력

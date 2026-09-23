@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "9867ad1526e54386aa48ced1264daca95ba05b55e7c525ec4a52eaa22aff21a5",
+  "sourceDigest": "35e37491dd4d2ca31c194172f1fcf8510078037b17f8b287d7821b3b75630f36",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -808,6 +808,11 @@
       "path": "assets/agents/trunk_orchestration/context-packet.md"
     },
     {
+      "id": "asset:assets/agents/trunk_orchestration/document-lifecycle.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/document-lifecycle.md"
+    },
+    {
       "id": "asset:assets/agents/trunk_orchestration/evaluation/README.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/evaluation/README.md"
@@ -818,6 +823,11 @@
       "path": "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json"
     },
     {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json"
+    },
+    {
       "id": "asset:assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md"
@@ -826,6 +836,11 @@
       "id": "asset:assets/agents/trunk_orchestration/evaluation/execution-fixtures.json",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json"
     },
     {
       "id": "asset:assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json",
@@ -856,6 +871,11 @@
       "id": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/execution-allocation.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/execution-record-contract.md"
     },
     {
       "id": "asset:assets/agents/trunk_orchestration/horizontal-transfer_adoption.md",
@@ -918,6 +938,26 @@
       "path": "assets/runtime_entrypoint/agents/implementation-worker.toml"
     },
     {
+      "id": "asset:docs/chohogi/audits/2026-09-03-functional-reality-gap.md",
+      "kind": "asset",
+      "path": "docs/chohogi/audits/2026-09-03-functional-reality-gap.md"
+    },
+    {
+      "id": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "kind": "asset",
+      "path": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "id": "asset:docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md",
+      "kind": "asset",
+      "path": "docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md"
+    },
+    {
+      "id": "asset:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "kind": "asset",
+      "path": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md"
+    },
+    {
       "id": "asset:docs/chohogi/genome-map.graph.json",
       "kind": "asset",
       "path": "docs/chohogi/genome-map.graph.json"
@@ -933,9 +973,34 @@
       "path": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
+      "id": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
       "id": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
       "kind": "asset",
       "path": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
+    },
+    {
+      "id": "asset:docs/chohogi/specs/2026-09-03-execution-record.md",
+      "kind": "asset",
+      "path": "docs/chohogi/specs/2026-09-03-execution-record.md"
     },
     {
       "id": "asset:manifest.json",
@@ -958,6 +1023,11 @@
       "path": "tooling/doctor.sh"
     },
     {
+      "id": "asset:tooling/execution-record.py",
+      "kind": "asset",
+      "path": "tooling/execution-record.py"
+    },
+    {
       "id": "asset:tooling/genome_map.py",
       "kind": "asset",
       "path": "tooling/genome_map.py"
@@ -971,6 +1041,11 @@
       "id": "asset:tooling/manifest_registry.py",
       "kind": "asset",
       "path": "tooling/manifest_registry.py"
+    },
+    {
+      "id": "asset:tooling/model-catalog.py",
+      "kind": "asset",
+      "path": "tooling/model-catalog.py"
     },
     {
       "id": "asset:tooling/model-policy.py",
@@ -1003,6 +1078,11 @@
       "path": "tooling/summarize-replays.py"
     },
     {
+      "id": "asset:tooling/tests/test_execution_record.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_execution_record.py"
+    },
+    {
       "id": "asset:tooling/tests/test_external_capability_contract.py",
       "kind": "asset",
       "path": "tooling/tests/test_external_capability_contract.py"
@@ -1028,6 +1108,11 @@
       "path": "tooling/tests/test_manifest_registry.py"
     },
     {
+      "id": "asset:tooling/tests/test_model_catalog.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_model_catalog.py"
+    },
+    {
       "id": "asset:tooling/tests/test_model_policy.py",
       "kind": "asset",
       "path": "tooling/tests/test_model_policy.py"
@@ -1036,6 +1121,16 @@
       "id": "asset:tooling/tests/test_posix_only.py",
       "kind": "asset",
       "path": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_project_document_registry.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_project_document_registry.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_replay_scripts.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_replay_scripts.py"
     },
     {
       "id": "asset:tooling/tests/test_security_gate.py",
@@ -1058,6 +1153,11 @@
       "path": "tooling/tests/test_source_layout.py"
     },
     {
+      "id": "asset:tooling/tests/test_status_provenance.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_status_provenance.py"
+    },
+    {
       "id": "asset:tooling/validate-replay-result.py",
       "kind": "asset",
       "path": "tooling/validate-replay-result.py"
@@ -1073,6 +1173,11 @@
       "path": "tooling/verify-execution-allocation.py"
     },
     {
+      "id": "asset:tooling/verify-functional-assurance.py",
+      "kind": "asset",
+      "path": "tooling/verify-functional-assurance.py"
+    },
+    {
       "id": "asset:tooling/verify-homeostasis-policy.py",
       "kind": "asset",
       "path": "tooling/verify-homeostasis-policy.py"
@@ -1086,6 +1191,11 @@
       "id": "asset:tooling/verify-learning-contract.py",
       "kind": "asset",
       "path": "tooling/verify-learning-contract.py"
+    },
+    {
+      "id": "asset:tooling/verify-model-policy.py",
+      "kind": "asset",
+      "path": "tooling/verify-model-policy.py"
     },
     {
       "id": "asset:tooling/verify-provenance.py",
@@ -1136,6 +1246,12 @@
       "state": "active"
     },
     {
+      "id": "component:execution-record-tool",
+      "kind": "component",
+      "path": "tooling/execution-record.py",
+      "state": "active"
+    },
+    {
       "id": "component:frontend-surface",
       "kind": "component",
       "path": "assets/agents/reusable_methods/frontend-surface",
@@ -1143,6 +1259,12 @@
     },
     {
       "id": "component:global-guidance",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/AGENTS.md",
+      "state": "active"
+    },
+    {
+      "id": "component:global-guidance-claude",
       "kind": "component",
       "path": "assets/runtime_entrypoint/AGENTS.md",
       "state": "active"
@@ -1172,6 +1294,12 @@
       "state": "active"
     },
     {
+      "id": "component:model-catalog-tool",
+      "kind": "component",
+      "path": "tooling/model-catalog.py",
+      "state": "active"
+    },
+    {
       "id": "component:react-async-state-safety",
       "kind": "component",
       "path": "assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
@@ -1189,9 +1317,49 @@
       "path": "README.md"
     },
     {
+      "id": "document:docs/chohogi/audits/2026-09-03-functional-reality-gap.md",
+      "kind": "document",
+      "path": "docs/chohogi/audits/2026-09-03-functional-reality-gap.md"
+    },
+    {
+      "id": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "kind": "document",
+      "path": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "id": "document:docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md",
+      "kind": "document",
+      "path": "docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md"
+    },
+    {
+      "id": "document:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "kind": "document",
+      "path": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md"
+    },
+    {
       "id": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "kind": "document",
       "path": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-09-23-observability-closure.md"
     },
     {
       "id": "document:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
@@ -1199,9 +1367,24 @@
       "path": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
     },
     {
+      "id": "document:docs/chohogi/specs/2026-09-03-execution-record.md",
+      "kind": "document",
+      "path": "docs/chohogi/specs/2026-09-03-execution-record.md"
+    },
+    {
       "id": "endpoint:.agents/chohogi",
       "kind": "endpoint",
       "path": ".agents/chohogi"
+    },
+    {
+      "id": "endpoint:.agents/chohogi/tooling/execution-record.py",
+      "kind": "endpoint",
+      "path": ".agents/chohogi/tooling/execution-record.py"
+    },
+    {
+      "id": "endpoint:.agents/chohogi/tooling/model-catalog.py",
+      "kind": "endpoint",
+      "path": ".agents/chohogi/tooling/model-catalog.py"
     },
     {
       "id": "endpoint:.agents/skills",
@@ -1217,6 +1400,11 @@
       "id": "endpoint:.agents/skills/learning",
       "kind": "endpoint",
       "path": ".agents/skills/learning"
+    },
+    {
+      "id": "endpoint:.claude/CLAUDE.md",
+      "kind": "endpoint",
+      "path": ".claude/CLAUDE.md"
     },
     {
       "id": "endpoint:.codex/AGENTS.md",
@@ -1310,6 +1498,11 @@
       "path": "tooling/verify-capability-boundary.py"
     },
     {
+      "id": "verifier:document-lifecycle",
+      "kind": "verifier",
+      "path": "tooling/verify-document-lifecycle.py"
+    },
+    {
       "id": "verifier:execution-allocation",
       "kind": "verifier",
       "path": "tooling/verify-execution-allocation.py"
@@ -1343,6 +1536,11 @@
       "id": "verifier:model-policy",
       "kind": "verifier",
       "path": "tooling/verify-model-policy.py"
+    },
+    {
+      "id": "verifier:project-document-registry",
+      "kind": "verifier",
+      "path": "tooling/verify-project-document-registry.py"
     },
     {
       "id": "verifier:provenance",
@@ -1383,6 +1581,11 @@
       "id": "verifier:source-layout",
       "kind": "verifier",
       "path": "tooling/verify-source-layout.py"
+    },
+    {
+      "id": "verifier:status-provenance",
+      "kind": "verifier",
+      "path": "tooling/verify-status-provenance.py"
     }
   ],
   "edges": [
@@ -1454,13 +1657,31 @@
     },
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/document-lifecycle.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "asset:assets/agents/trunk_orchestration/evaluation/capability-fixtures.json",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
     },
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
     },
@@ -1484,6 +1705,12 @@
     },
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "asset:assets/agents/trunk_orchestration/project-leaves.md",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
@@ -1493,6 +1720,30 @@
       "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
       "source": "asset:assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
@@ -1525,10 +1776,40 @@
       "evidence": "README.md"
     },
     {
+      "source": "asset:assets/agents/roots_constitution/constitution.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/debugging.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/debugging.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
       "source": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
     },
     {
       "source": "asset:assets/agents/trunk_orchestration/branches_workflows/product-decision.md",
@@ -1544,9 +1825,99 @@
     },
     {
       "source": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "target": "document:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/context-packet.md",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/evaluation/README.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/evaluation/replay-result.schema.json",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/state-transition.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
     },
     {
       "source": "asset:assets/runtime_entrypoint/AGENTS.md",
@@ -1555,10 +1926,34 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "component:global-guidance-claude",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
       "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
       "target": "component:critical-reviewer-role",
       "relation": "activates",
       "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
     },
     {
       "source": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
@@ -1573,16 +1968,106 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "asset:docs/chohogi/audits/2026-09-03-functional-reality-gap.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/roots_constitution/constitution.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/README.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/replay-result.schema.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "document:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md",
+      "target": "document:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "target": "document:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
       "source": "asset:docs/chohogi/genome-map.graph.json",
       "target": "document:README.md",
       "relation": "documents",
       "evidence": "README.md"
     },
     {
+      "source": "asset:docs/chohogi/genome-map.graph.json",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
       "source": "asset:docs/chohogi/genome-map.md",
       "target": "document:README.md",
       "relation": "documents",
       "evidence": "README.md"
+    },
+    {
+      "source": "asset:docs/chohogi/genome-map.md",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
       "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
@@ -1615,10 +2100,130 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/debugging.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/debugging.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/trunk_orchestration/state-transition.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
       "source": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/specs/2026-09-03-execution-record.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
     },
     {
       "source": "asset:manifest.json",
@@ -1670,6 +2275,12 @@
     },
     {
       "source": "asset:manifest.json",
+      "target": "component:execution-record-tool",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
       "target": "component:frontend-surface",
       "relation": "activates",
       "evidence": "manifest.json"
@@ -1677,6 +2288,12 @@
     {
       "source": "asset:manifest.json",
       "target": "component:global-guidance",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:global-guidance-claude",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -1706,6 +2323,12 @@
     },
     {
       "source": "asset:manifest.json",
+      "target": "component:model-catalog-tool",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
       "target": "component:react-async-state-safety",
       "relation": "activates",
       "evidence": "manifest.json"
@@ -1729,10 +2352,58 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
+      "source": "asset:tooling/execution-record.py",
+      "target": "component:execution-record-tool",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "document:docs/chohogi/specs/2026-09-03-execution-record.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/specs/2026-09-03-execution-record.md"
+    },
+    {
+      "source": "asset:tooling/genome_map.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/genome_map.py"
+    },
+    {
       "source": "asset:tooling/genome_map.py",
       "target": "document:README.md",
       "relation": "documents",
       "evidence": "README.md"
+    },
+    {
+      "source": "asset:tooling/genome_map.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
       "source": "asset:tooling/install.sh",
@@ -1765,6 +2436,42 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
+      "source": "asset:tooling/model-catalog.py",
+      "target": "component:model-catalog-tool",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "governed-by",
+      "evidence": "tooling/genome_map.py: model-policy dependencies"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "asset:tooling/tests/test_model_policy.py",
+      "relation": "verified-by",
+      "evidence": "tooling/genome_map.py: model-policy dependencies"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "verifier:model-policy",
+      "relation": "verified-by",
+      "evidence": "tooling/genome_map.py: model-policy dependencies"
+    },
+    {
       "source": "asset:tooling/prune-backups.sh",
       "target": "document:README.md",
       "relation": "documents",
@@ -1777,16 +2484,88 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
+      "source": "asset:tooling/semantic_contracts.py",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_execution_record.py",
+      "target": "document:docs/chohogi/audits/2026-09-03-functional-reality-gap.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-03-functional-reality-gap.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_execution_record.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_execution_record.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_execution_record.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
       "source": "asset:tooling/tests/test_functional_assurance.py",
       "target": "asset:assets/agents/functional_assurance/registry.json",
       "relation": "requires",
       "evidence": "tooling/tests/test_functional_assurance.py"
     },
     {
+      "source": "asset:tooling/tests/test_functional_assurance.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_functional_assurance.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_functional_assurance.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
       "source": "asset:tooling/tests/test_genome_map.py",
       "target": "asset:assets/agents/reusable_methods/security-and-hardening/SKILL.md",
       "relation": "requires",
       "evidence": "tooling/tests/test_genome_map.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_genome_map.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_genome_map.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_genome_map.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_graft_compatibility_audit.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_model_policy.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
       "source": "asset:tooling/tests/test_posix_only.py",
@@ -1819,6 +2598,12 @@
       "evidence": "tooling/tests/test_semantic_assurance.py"
     },
     {
+      "source": "asset:tooling/tests/test_source_layout.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
       "source": "asset:tooling/verify-capability-boundary.py",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
@@ -1829,6 +2614,18 @@
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-functional-assurance.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:tooling/verify-functional-assurance.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
       "source": "asset:tooling/verify-homeostasis-policy.py",
@@ -1849,10 +2646,22 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
+      "source": "asset:tooling/verify-install.sh",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
       "source": "asset:tooling/verify-learning-contract.py",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-model-policy.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
       "source": "asset:tooling/verify-provenance.py",
@@ -1891,6 +2700,12 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
+      "source": "asset:tooling/verify-source-layout.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
       "source": "component:chohogi-organs",
       "target": "endpoint:.agents/chohogi",
       "relation": "installs",
@@ -1909,8 +2724,20 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "component:execution-record-tool",
+      "target": "endpoint:.agents/chohogi/tooling/execution-record.py",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "component:global-guidance",
       "target": "endpoint:.codex/AGENTS.md",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:global-guidance-claude",
+      "target": "endpoint:.claude/CLAUDE.md",
       "relation": "installs",
       "evidence": "manifest.json"
     },
@@ -1929,6 +2756,12 @@
     {
       "source": "component:learning",
       "target": "endpoint:.agents/skills/learning",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:model-catalog-tool",
+      "target": "endpoint:.agents/chohogi/tooling/model-catalog.py",
       "relation": "installs",
       "evidence": "manifest.json"
     },
@@ -2807,6 +3640,18 @@
       "target": "asset:assets/agents/trunk_orchestration/evaluation/capability-fixtures.json",
       "relation": "requires",
       "evidence": "tooling/verify-capability-boundary.py"
+    },
+    {
+      "source": "verifier:document-lifecycle",
+      "target": "asset:assets/agents/trunk_orchestration/document-lifecycle.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-document-lifecycle.py"
+    },
+    {
+      "source": "verifier:document-lifecycle",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-document-lifecycle.py"
     },
     {
       "source": "verifier:execution-allocation",

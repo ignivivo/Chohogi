@@ -37,6 +37,13 @@
       "expectedMode": "sequential",
       "requiredArtifacts": ["allocation", "progress-evidence"],
       "forbiddenOutcomes": ["ask-user-execution-choice", "external-controller", "mandatory-worktree"]
+    },
+    {
+      "id": "temporary-agent-reclaim",
+      "request": "독립 조사에 임시 에이전트를 배정하고 결과를 받은 뒤 역할을 회수해줘.",
+      "expectedMode": "scoped-delegation",
+      "requiredArtifacts": ["live-role-snapshot", "read-only-ownership", "reclaimed-role"],
+      "forbiddenOutcomes": ["persistent-change", "ask-user-execution-choice", "external-controller"]
     }
   ]
 }

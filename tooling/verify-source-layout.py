@@ -8,7 +8,14 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-ACTIVE_PATHS = (ROOT / "README.md", ROOT / "assets", ROOT / "tooling", ROOT / "manifest.json")
+ACTIVE_PATHS = (
+    ROOT / "README.md",
+    ROOT / "assets",
+    ROOT / "tooling",
+    ROOT / "manifest.json",
+)
+PLAN_PATH = ROOT / "docs" / "chohogi" / "plans"
+RETIRED_CONTROLLER_MARKER = "super" + "powers:"
 FORBIDDEN = {
     "manifest.yaml": "v1 manifest must not remain beside manifest.json",
     "assets/agents/chohogi": "v1 Chohogi source path remains active",
@@ -43,6 +50,13 @@ def main() -> int:
         for term, reason in FORBIDDEN.items():
             if term in text:
                 errors.append(f"{path.relative_to(ROOT)}: {reason}")
+    if PLAN_PATH.is_dir():
+        for path in PLAN_PATH.rglob("*"):
+            if not path.is_file():
+                continue
+            text = path.read_text(encoding="utf-8", errors="ignore")
+            if RETIRED_CONTROLLER_MARKER in text.casefold():
+                errors.append(f"{path.relative_to(ROOT)}: retired external controller directive remains in a Chohogi plan")
     if (ROOT / "manifest.yaml").exists():
         errors.append("manifest.yaml: v1 manifest must be removed")
     if errors:

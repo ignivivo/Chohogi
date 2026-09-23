@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "objective": "Evaluate newly published GPT-6 and cross-provider benchmark evidence, then update Chohogi model policy to reflect workload-specific evidence without making unsupported quality or runtime availability claims.",
+  "route": "homeostasis",
+  "execution": "direct-policy-change",
+  "requested": [
+    "compare current OpenAI model claims with independent and non-OpenAI evaluation evidence",
+    "update Chohogi global model selection policy and its executable profile declarations to reflect that evidence",
+    "preserve per-project Model Session Policy confirmation and user overrides"
+  ],
+  "excluded": [
+    "inspect credentials, private configuration, session data, or infer runtime catalog availability",
+    "automatically change provider/model choice for existing projects without a confirmed session profile",
+    "treat vendor benchmark claims as general proof of quality"
+  ],
+  "requestedItems": [
+    {
+      "id": "benchmark-review",
+      "description": "Summarize dated, task-specific model performance and cost evidence from OpenAI, other providers, and independent evaluations."
+    },
+    {
+      "id": "policy-refresh",
+      "description": "Update global Chohogi model policy/profile behavior to use evidence scoped by workload and preserve human project confirmation."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "evidence",
+      "description": "A durable benchmark evidence note records source, date, workload, effort/harness, cost basis, and limits."
+    },
+    {
+      "id": "policy",
+      "description": "The active policy reflects the new evidence and the project-specific confirmation/override contract."
+    },
+    {
+      "id": "independent-review",
+      "description": "Two independent read-only reviewers check source claims and policy/tool consistency; findings are resolved or recorded."
+    },
+    {
+      "id": "verification",
+      "description": "Relevant non-test policy and semantic checks pass, with limits reported."
+    }
+  ],
+  "reviewRequired": true,
+  "verification": [
+    "model-policy verifier without running its embedded unit tests",
+    "semantic-assurance verifier",
+    "functional-assurance verifier"
+  ]
+}

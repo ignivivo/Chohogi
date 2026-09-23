@@ -33,7 +33,15 @@
 <!-- chohogi:section=method -->
 ## 절차
 
-1. 코드 전에 프로젝트 진입점을 확인한다. 저장소 root와 가장 가까운 `.agents`, 호환 `.agent`,
+Material 계획·문서를 유지하는 프로젝트는 `.agents/chohogi-document-registry.json`을
+확인하고 `tooling/verify-project-document-registry.py --root <project>`를 먼저 실행한다.
+registry가 없으면 문서 권위와 활성 계획을 선언할 수 있을 때까지 `defer`하거나 registry를
+만드는 범위만 수행한다.
+사용자가 여러 합의 항목을 함께 적용하라고 요청한 material 작업은 execution contract에
+`requestedItems`를 만들고 각 항목을 `scope-item`으로 구현·보류·제외 처리하기 전에는
+finalize하지 않는다.
+
+1. 나중의 피드백·handoff·중단 재개·명시적 증명이 필요한 delivery는 먼저 execution record의 `begin`으로 기준본과 계약을 남긴다. 코드 전에 프로젝트 진입점을 확인하고, 경로·소비자·프레임워크·공통 컴포넌트/도메인 서비스·데이터/상태·기존 검증·관련 과거 피드백에서 재사용 가능한 능력을 찾아 capability map으로 기록한다. 프로젝트가 계획 문서를 유지하면 현재 큐와 완료 조건을 소유하는 활성 문서를 하나만 식별하고, 나머지 계획·감사·실행 기록은 역사 또는 증거로 분류한다. 소비자가 있는 수용 조건은 contract에 소비자별 `verified` artifact 또는 사유가 있는 `deferred` 상태를 선언한다. 다음 선택은 파일 확장자나 첫 구현 수단으로 축소하지 않고, 사용자 결과에서 프로젝트 구조·프레임워크/도메인 수단·컴포넌트/상태·국소 편집 순으로 내려오며 대안을 비교한다. credible 대안이 시간/비용·운영 부담·구조/소유권·위험·되돌릴 수 있는 정도·사용자 결과를 실질적으로 다르게 하면, agent는 recommendation과 trade-off·비용 범위/신뢰도·unknown을 `decision-report`로 보고하고 사용자 또는 권한 있는 결정권자의 `decision-resolution`을 기다린다. 이어 관측 사실·중요한 선택지·선택 이유·재검토 조건·결과를 기록한다. 되돌리기 어려운 판단, 공유·공개·보안 경계, 다투어진 근거, 반복 피드백 실패, 사용자가 요청한 독립 검토만 `reviewRequired`로 표시하고 map과 considered capabilities를 담은 packet에 대해 read-only reviewer의 response와 integrator의 수용·수정 결과를 남긴다. 단순 작업에 고정 node나 기록을 강제하지 않는다. 저장소 root와 가장 가까운 `.agents`, 호환 `.agent`,
    `AGENTS.md`, 로컬 skill, 기존 변경을 확인하고, 적용할 project leaf 또는 `없음`이라는
    결과를 작업 봉투에 남긴다. leaf가 없다는 사실만으로 자동 생성하지 않으며, 반복되는
    프로젝트 경계·소유자·실제 검증이 확인될 때만 Learning의 귀속 절차로 만든다.
@@ -106,7 +114,7 @@
    병행하지 않는다. 격리된 worktree·출력 경계가 없으면 사용자에게 서버 중지·재시작을
    맡기고, 활성 dev 서버의 정상성을 build 성공으로 대체하지 않는다. 범위 밖 설정을 임의로 바꾸지 않으며, 차단이
    해소되지 않으면 미검증 항목으로 종료한다.
-12. 실제 실행한 검증, 결과, 남은 위험을 사실대로 보고한다. 임시 테스트·스크린샷·서버·패치
+12. 실제 실행한 검증, 결과, 남은 위험을 사실대로 보고한다. execution record 계약이 proof를 선언했으면 그 contract에 대해서만 `finalize`로 누락 evidence를 확인한다. 임시 테스트·스크린샷·서버·패치
     산출물은 최종 변경에 남길지와 보관 이유를 확인하고, 전달용 patch는 최종 diff에서 다시 만들고
     깨끗한 기준에 적용 가능한지 검증한다.
 

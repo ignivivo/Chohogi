@@ -110,7 +110,7 @@ for action in json.load(sys.stdin)["actions"]:
     print("\t".join((action["source"], action["destination"], action["mode"])))' <<<"$plan")
 
 while IFS=$'\t' read -r source destination mode; do
-  [[ "$destination" == .codex/* ]] && continue
+  [[ "$destination" == .codex/* || "$destination" == .claude/* ]] && continue
   stage_destination="$stage/${destination#.agents/}"
   copy_to_stage "$root/$source" "$stage_destination" "$mode"
 done < <(python3 -c 'import json,sys
@@ -147,8 +147,11 @@ else
 fi
 
 while IFS=$'\t' read -r source destination mode; do
-  [[ "$destination" == .agents/chohogi ]] && continue
-  [[ "$destination" == .codex/* ]] && continue
+  # Components nested in the managed organ tree were already staged and moved
+  # atomically with that tree; do not treat their file destination as a second
+  # standalone managed directory.
+  [[ "$destination" == .agents/chohogi || "$destination" == .agents/chohogi/* ]] && continue
+  [[ "$destination" == .codex/* || "$destination" == .claude/* ]] && continue
   staged="$stage/${destination#.agents/}"
   live="$target_home/$destination"
   if [[ -e "$live" ]]; then
@@ -185,7 +188,7 @@ for destination in json.load(sys.stdin)["retiredDestinations"]: print(destinatio
 
 while IFS=$'\t' read -r source destination mode; do
   case "$destination" in
-    .codex/AGENTS.md) install_global_guidance "$root/$source" "$target_home/$destination" ;;
+    .codex/AGENTS.md|.claude/CLAUDE.md) install_global_guidance "$root/$source" "$target_home/$destination" ;;
     .codex/agents/*) install_managed_codex_agent "$root/$source" "$target_home/$destination" ;;
     .codex/*) echo "Unsupported Codex installation destination: $destination" >&2; exit 1 ;;
     *) continue ;;

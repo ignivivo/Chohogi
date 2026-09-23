@@ -18,6 +18,17 @@
       "installMode": "file"
     },
     {
+      "id": "global-guidance-claude",
+      "organ": "runtime_entrypoint",
+      "function": "global-guidance",
+      "source": "assets/runtime_entrypoint/AGENTS.md",
+      "destination": ".claude/CLAUDE.md",
+      "ownership": "runtime-endpoint",
+      "activation": "every Claude Code task",
+      "state": "active",
+      "installMode": "file"
+    },
+    {
       "id": "critical-reviewer-role",
       "organ": "runtime_entrypoint",
       "function": "independent-high-risk-review",
@@ -60,6 +71,28 @@
       "activation": "selected Chohogi contract",
       "state": "active",
       "installMode": "tree"
+    },
+    {
+      "id": "execution-record-tool",
+      "organ": "trunk_orchestration",
+      "function": "durable-execution-record",
+      "source": "tooling/execution-record.py",
+      "destination": ".agents/chohogi/tooling/execution-record.py",
+      "ownership": "managed",
+      "activation": "material work needing feedback evidence, handoff, interruption recovery, or contract-scoped proof",
+      "state": "active",
+      "installMode": "file"
+    },
+    {
+      "id": "model-catalog-tool",
+      "organ": "trunk_orchestration",
+      "function": "bounded-runtime-model-observation",
+      "source": "tooling/model-catalog.py",
+      "destination": ".agents/chohogi/tooling/model-catalog.py",
+      "ownership": "managed",
+      "activation": "a new project, a model-policy reconfirmation trigger, or an explicit request to verify runtime-visible model options",
+      "state": "active",
+      "installMode": "file"
     },
     {
       "id": "reusable-methods",

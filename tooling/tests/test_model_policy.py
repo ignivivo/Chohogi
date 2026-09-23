@@ -71,6 +71,57 @@ class ModelPolicyTests(unittest.TestCase):
         self.assertNotEqual(failed.returncode, 0)
         self.assertIn("preventionVerified", failed.stderr)
 
+    def test_explicit_user_selection_can_override_automatic_candidate_filter(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            catalog_value = self.catalog()
+            catalog_value["observations"].append({"provider": "openai", "model": "gpt-6-astra", "available": True, "reasoningLevels": ["low", "high"], "capabilities": ["coding", "review"], "source": "runtime-exposed"})
+            catalog = self.write_json(directory, "catalog.json", catalog_value)
+            task = self.write_json(directory, "task.json", {"schemaVersion": 1, "role": "implementation", "requiredCapabilities": ["coding"], "minimumReasoning": "low"})
+            result = self.run_tool("select", "--catalog", str(catalog), "--task", str(task), "--provider", "openai", "--model", "gpt-6-astra", "--reasoning", "high", "--reason", "user requested a comparative pass")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        selected = json.loads(result.stdout)
+        self.assertEqual(selected["selectionMode"], "user-override")
+        self.assertEqual(selected["model"], "gpt-6-astra")
+        self.assertEqual(selected["reasoning"], "high")
+        self.assertFalse(selected["requiresHumanConfirmation"])
+
+    def test_explicit_user_selection_rejects_unobserved_or_inadequate_model(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            catalog = self.write_json(directory, "catalog.json", self.catalog())
+            task = self.write_json(directory, "task.json", {"schemaVersion": 1, "role": "implementation", "requiredCapabilities": ["coding"], "minimumReasoning": "low"})
+            result = self.run_tool("select", "--catalog", str(catalog), "--task", str(task), "--provider", "openai", "--model", "gpt-6-astra", "--reasoning", "low", "--reason", "user requested a comparative pass")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("not available", result.stderr)
+
+    def test_native_effort_round_trips_exactly_without_cross_tier_inference(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            catalog_value = self.catalog()
+            catalog_value["observations"].append({"provider": "codex-vscode-runtime", "model": "gpt-6-luna", "available": True, "reasoningLevels": ["low", "high", "xhigh", "max"], "capabilities": ["coding"], "source": "runtime-exposed"})
+            catalog = self.write_json(directory, "catalog.json", catalog_value)
+            task = self.write_json(directory, "task.json", {"schemaVersion": 1, "role": "reviewer", "requiredCapabilities": ["coding"], "minimumReasoning": "xhigh"})
+            accepted = self.run_tool("select", "--catalog", str(catalog), "--task", str(task), "--provider", "codex-vscode-runtime", "--model", "gpt-6-luna", "--reasoning", "xhigh", "--reason", "user selected exact runtime option")
+            incomparable_task = self.write_json(directory, "incomparable-task.json", {"schemaVersion": 1, "role": "reviewer", "requiredCapabilities": ["coding"], "minimumReasoning": "high"})
+            incomparable = self.run_tool("select", "--catalog", str(catalog), "--task", str(incomparable_task), "--provider", "codex-vscode-runtime", "--model", "gpt-6-luna", "--reasoning", "xhigh", "--reason", "native order requires human confirmation")
+        self.assertEqual(accepted.returncode, 0, accepted.stderr)
+        self.assertEqual(json.loads(accepted.stdout)["reasoning"], "xhigh")
+        self.assertEqual(incomparable.returncode, 0, incomparable.stderr)
+        self.assertTrue(json.loads(incomparable.stdout)["requiresHumanConfirmation"])
+        self.assertEqual(json.loads(incomparable.stdout)["reasoningFloorCheck"], "unknown-native-order")
+
+    def test_unscoped_recommendation_includes_observed_astra_options(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            catalog_value = self.catalog()
+            catalog_value["observations"].append({"provider": "openai", "model": "gpt-6-astra", "available": True, "reasoningLevels": ["low"], "capabilities": ["coding", "review"], "source": "runtime-exposed"})
+            catalog = self.write_json(directory, "catalog.json", catalog_value)
+            task = self.write_json(directory, "task.json", {"schemaVersion": 1, "role": "implementation", "requiredCapabilities": ["coding"], "minimumReasoning": "low"})
+            result = self.run_tool("recommend", "--catalog", str(catalog), "--task", str(task))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("gpt-6-astra", [item["model"] for item in json.loads(result.stdout)["candidates"]])
+
 
 if __name__ == "__main__":
     unittest.main()

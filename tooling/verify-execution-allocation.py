@@ -27,6 +27,8 @@ REQUIRED_ALLOCATION_TERMS = (
     "`scoped-delegation`",
     "<!-- chohogi:execution-choice=internal -->",
     "외부 스킬의 handoff",
+    "유휴 역할",
+    "회수",
 )
 REQUIRED_METHOD_TERMS = (
     "<!-- chohogi:method-selection -->",

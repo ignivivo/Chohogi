@@ -49,6 +49,16 @@ class FunctionalAssuranceTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("uncovered tooling commands", result.stderr)
 
+    def test_execution_record_tool_requires_its_own_assurance_entry(self) -> None:
+        registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
+        registry["assurances"] = [item for item in registry["assurances"] if item["id"] != "execution-records"]
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            mutated = Path(temporary_directory) / "functional-assurance.json"
+            mutated.write_text(json.dumps(registry), encoding="utf-8")
+            result = self.run_verifier(mutated)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("tooling/execution-record.py", result.stderr)
+
     def test_skill_assurance_marker_must_match_its_registry_claim(self) -> None:
         registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
         methods = next(item for item in registry["assurances"] if item["id"] == "accessibility-method")

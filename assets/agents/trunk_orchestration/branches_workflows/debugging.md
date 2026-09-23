@@ -33,7 +33,14 @@
 <!-- chohogi:section=method -->
 ## 절차
 
-1. 증상, 기대값, 재현 조건, 영향 범위를 분리해 기록한다. 저장소 root와 가장 가까운
+Material 계획·문서를 유지하는 프로젝트는 `.agents/chohogi-document-registry.json`을
+확인하고 `tooling/verify-project-document-registry.py --root <project>`를 먼저 실행한다.
+registry가 없으면 문서 권위와 활성 계획을 선언할 수 있을 때까지 `defer`하거나 registry를
+만드는 범위만 수행한다.
+여러 원인·수정 항목을 함께 추적하면 `requestedItems` scope lock으로 각 항목의 재현·수정·
+보류 결과를 기록하고, 누락된 항목이 없을 때만 종료한다.
+
+1. 증상, 기대값, 재현 조건, 영향 범위를 분리해 기록한다. 나중의 피드백·handoff·중단 재개·명시적 증명이 필요한 조사라면 프로젝트의 경로·소비자·프레임워크·공통 서비스/상태·기존 검증·관련 과거 피드백을 capability map으로 남기고, 그 map을 바탕으로 가설과 수정 수단을 높은 추상도에서 국소 변경까지 비교한다. execution record에는 관측 사실, 검증/배제한 가설과 선택 이유, 결과·확정 원인·남은 한계를 남긴다. 고정 node나 모든 사고 과정을 기록하지 않는다. 저장소 root와 가장 가까운
    `.agents`, 호환 `.agent`, `AGENTS.md`, 로컬 skill과 기존 변경을 확인하고 적용한
    project leaf 또는 `없음`을 기록한다.
 2. 가능한 경우 가장 작은 재현 또는 관측을 만든다. 재현 불가라면 그 사실과 한계를

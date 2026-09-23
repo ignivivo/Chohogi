@@ -1,0 +1,42 @@
+{
+  "workId": "HOM-20260922-observability-integration-audit",
+  "baseline": "ad75e94ab302000fd3a35a6120142dc7b276ef99ca9a4124990c1d116f414ea9",
+  "contract": {
+    "schemaVersion": 1,
+    "objective": "Audit whether Chohogi can observe, reconcile, and correct cross-project planning, documentation, consumer-integration, and verification drift; determine the smallest safe disposition without changing active Chohogi assets during the audit.",
+    "route": "homeostasis",
+    "execution": "scoped-delegation-read-only",
+    "requested": [
+      "independent multi-perspective review of organism-wide observation and response gaps",
+      "cross-review of findings before an integrator recommendation",
+      "a bounded repair or no-change disposition with evidence and re-review conditions"
+    ],
+    "excluded": [
+      "changing Chohogi policy, runtime guidance, installer, or project code before causal findings are reviewed",
+      "treating a static verifier pass as proof of fresh-agent behavior",
+      "storing raw prompts, private reasoning, credentials, or user project data"
+    ],
+    "acceptance": [
+      {
+        "id": "independent-observation",
+        "description": "Three independent read-only reviews cover structural verification, runtime feedback circulation, and planning-to-consumer integration."
+      },
+      {
+        "id": "cross-challenge",
+        "description": "Each reviewer challenges the synthesized findings and distinguishes confirmed evidence from assumptions."
+      },
+      {
+        "id": "disposition",
+        "description": "The final packet identifies affected Chohogi boundaries, the smallest owning asset or a no-change/provisional outcome, verification limits, and re-review conditions."
+      }
+    ],
+    "reviewRequired": true,
+    "verification": [
+      "relevant static Chohogi verifiers",
+      "three independent read-only audit reports",
+      "cross-review responses"
+    ]
+  },
+  "artifacts": [],
+  "checkpoints": []
+}

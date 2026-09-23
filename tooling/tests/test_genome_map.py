@@ -53,6 +53,15 @@ class GenomeMapTests(unittest.TestCase):
         self.assertIn("verifier:graft-compatibility_install-audit", packet["verification"])
         self.assertIn("endpoint:.agents/chohogi", packet["affected"])
 
+    def test_model_policy_impact_includes_its_contract_and_verifier(self) -> None:
+        result = self.run_map("impact", "tooling/model-policy.py")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        packet = json.loads(result.stdout)
+        self.assertIn("asset:assets/agents/trunk_orchestration/model-policy.md", packet["affected"])
+        self.assertIn("asset:assets/agents/trunk_orchestration/model-policy.md", packet["affected"])
+        self.assertIn("verifier:model-policy", packet["verification"])
+        self.assertNotIn("asset:tooling/doctor.py", packet["affected"])
+
     def test_check_rejects_stale_generated_views(self) -> None:
         build = self.run_map("build")
         self.assertEqual(build.returncode, 0, build.stderr)

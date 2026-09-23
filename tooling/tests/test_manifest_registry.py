@@ -44,6 +44,7 @@ class ManifestRegistryTests(unittest.TestCase):
         self.assertIn(".codex/agents/critical-reviewer.toml", destinations)
         self.assertIn(".codex/agents/evidence-scout.toml", destinations)
         self.assertIn(".codex/agents/implementation-worker.toml", destinations)
+        self.assertIn(".claude/CLAUDE.md", destinations)
         self.assertIn(".agents/skills/accessibility", destinations)
         self.assertIn(".agents/skills/homeostasis", destinations)
         self.assertNotIn(".agents/skills/grill-me", destinations)

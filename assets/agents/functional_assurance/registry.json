@@ -17,14 +17,14 @@
     {
       "id": "trunk-orchestration",
       "kind": "policy-gate",
-      "sources": ["assets/agents/trunk_orchestration"],
+      "sources": ["assets/agents/trunk_orchestration", "assets/agents/trunk_orchestration/document-lifecycle.md", "assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json"],
       "trigger": "substantial work after conductor selection",
       "nonTrigger": "does not replace project implementation or external provider authority",
       "output": "one workflow, allocation, project-local policy discovery, an intent contract and pre-edit consumer-reference map when the change crosses an unfamiliar, dirty, shared, or multi-consumer boundary, isolated build-output discipline around active development servers, browser-verified visual acceptance when required, and mapped visual acceptance including standard breakpoint classification, cross-breakpoint layout consistency, container-width verification, maximum-width treatment for repeated visual assets, separate viewport-versus-container responsibilities, and boundary-adjacent responsive measurements with coordinate-system disclosure when the delivery requires it",
       "execution": "assets/agents/trunk_orchestration/conductor.md",
-      "verifiers": ["tooling/verify-routes.py", "tooling/verify-execution-allocation.py", "tooling/verify-capability-boundary.py", "tooling/verify-external-capability-contract.py", "tooling/verify-retired-capability.py", "tooling/verify-model-policy.py"],
-      "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json", "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json", "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json", "tooling/tests/test_external_capability_contract.py", "tooling/tests/test_model_policy.py"],
-      "limits": "static contracts require bounded replay for durable behavior changes"
+      "verifiers": ["tooling/verify-routes.py", "tooling/verify-execution-allocation.py", "tooling/verify-document-lifecycle.py", "tooling/verify-capability-boundary.py", "tooling/verify-external-capability-contract.py", "tooling/verify-retired-capability.py", "tooling/verify-model-policy.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json", "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json", "assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json", "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json", "tooling/tests/test_external_capability_contract.py", "tooling/tests/test_model_policy.py"],
+      "limits": "static contracts require bounded replay for durable behavior changes; context-packet document ownership, consolidation and splitting rules are advisory manual review guidance, not an automated semantic checker or a guarantee of future model adherence"
     },
     {
       "id": "learning-method",
@@ -207,6 +207,18 @@
       "limits": "declared evidence is not equivalent to semantic or fresh-session proof"
     },
     {
+      "id": "execution-records",
+      "kind": "deterministic-check",
+      "sources": ["assets/agents/trunk_orchestration/execution-record-contract.md", "assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json", "tooling/execution-record.py"],
+      "trigger": "a material task needs project-owned feedback evidence, a handoff, interruption recovery, or contract-scoped proof",
+      "nonTrigger": "a short direct answer or low-risk edit without a durable review need; does not record private reasoning or impose a fixed workflow graph",
+      "output": "append-only facts, capability maps, requested scope-item results, decisions, independent decision-review packets/responses/resolutions, decision-owner reports/resolutions, outcomes, feedback responses, optional checkpoints, a bounded handoff projection, and validation of contract-declared artifacts plus declared verified consumer evidence",
+      "execution": "python3 tooling/execution-record.py begin|fact|prior-feedback|feedback|feedback-scan|scope-item|capability-map|decision|review-request|review-response|review-resolution|decision-report|decision-resolution|outcome|checkpoint|resume|artifact|review|handoff|finalize ...",
+      "verifiers": ["tooling/tests/test_execution_record.py", "tooling/verify-functional-assurance.py"],
+      "fixtures": ["tooling/tests/test_execution_record.py", "assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json"],
+      "limits": "feedback-scan only finds Markdown under the supplied root and cannot infer impact or whether a plan update is semantically sufficient; re-checks registered artifact bytes at handoff and requires artifacts for declared verified consumers at finalize, but does not discover hidden consumers, make files immutable, or prove an artifact's semantic claim; it cannot prove reviewer independence, user identity or approval authority, unrecorded reasoning, universal model adherence, or tests that were not run"
+    },
+    {
       "id": "semantic-interpretation-assurance",
       "kind": "deterministic-check",
       "sources": ["assets/agents/functional_assurance/semantic-contract-registry.json", "tooling/semantic_contracts.py", "tooling/verify-semantic-assurance.py"],
@@ -252,30 +264,30 @@
       "execution": "shell command or Python resolver named by the requested operation",
       "verifiers": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py"],
       "fixtures": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py"],
-      "limits": "doctor reports state; graft audit establishes source/install parity"
+      "limits": "doctor reports conformant-only state; operational and responsive health remain unknown without project evidence; graft audit establishes source/install parity"
     },
     {
       "id": "model-policy-evaluator",
       "kind": "deterministic-check",
-      "sources": ["tooling/model-policy.py", "tooling/verify-model-policy.py"],
+      "sources": ["tooling/model-catalog.py", "tooling/tests/test_model_catalog.py", "tooling/model-policy.py", "tooling/verify-model-policy.py"],
       "trigger": "an officially exposed model catalog, task role, prior catalog, or verified learning escalation requires a session-policy recommendation or comparison",
       "nonTrigger": "does not discover providers, inspect credentials or private settings, change model selection, or send asynchronous notifications",
-      "output": "machine-readable candidates or catalog-change/learning reconfirmation requirement",
-      "execution": "python3 tooling/model-policy.py recommend|compare|learning-escalation",
-      "verifiers": ["tooling/verify-model-policy.py", "tooling/tests/test_model_policy.py"],
-      "fixtures": ["tooling/tests/test_model_policy.py"],
-      "limits": "only supplied official observations are compared; a ranking is not a quality benchmark, a provider probe, or a billing guarantee"
+      "output": "bounded Codex runtime list-visible model/effort observation with executable-source provenance, mandatory user confirmation and a separately provenance-marked user correction procedure, plus machine-readable candidates, catalog-change/learning reconfirmation requirement, or exact native-effort user selections that surface incomparable task floors for human confirmation",
+      "execution": "installed runtime: python3 ~/.agents/chohogi/tooling/model-catalog.py codex; Chohogi source checkout only: python3 tooling/model-policy.py recommend|compare|learning-escalation|select; recommendations use the observed catalog and task contract without global model profiles or allowlists",
+      "verifiers": ["tooling/verify-model-policy.py", "tooling/tests/test_model_catalog.py", "tooling/tests/test_model_policy.py"],
+      "fixtures": ["tooling/tests/test_model_catalog.py", "tooling/tests/test_model_policy.py"],
+      "limits": "the runtime adapter projects only model ID/name/list-visible effort fields and labels VS Code bundled, PATH, or explicit binary sources separately; list-visible does not prove API entitlement or current conversation selection; Claude UI catalogs remain unknown absent a supported source and UI corrections are an operational procedure, not automatic durable persistence; provider-native effort strings are preserved and incomparable task floors require human confirmation; model-policy.py is a source-checkout evaluator, not installed by the runtime manifest, so installed sessions must not claim that select/recommend executed; observations are not ranked by quality or blended price; no settings, credentials, or session files are scanned"
     },
     {
       "id": "verification-and-topology-tools",
       "kind": "deterministic-check",
-      "sources": ["tooling/genome_map.py", "tooling/summarize-replays.py", "tooling/validate-replay-result.py", "tooling/verify-capability-boundary.py", "tooling/verify-execution-allocation.py", "tooling/verify-external-capability-contract.py", "tooling/verify-functional-assurance.py", "tooling/verify-homeostasis-policy.py", "tooling/verify-learning-contract.py", "tooling/verify-provenance.py", "tooling/verify-replay-evaluation.py", "tooling/verify-retired-capability.py", "tooling/verify-routes.py", "tooling/verify-skills.py", "tooling/verify-source-layout.py"],
+      "sources": ["tooling/genome_map.py", "tooling/summarize-replays.py", "tooling/validate-replay-result.py", "tooling/verify-capability-boundary.py", "tooling/verify-document-lifecycle.py", "tooling/verify-project-document-registry.py", "tooling/verify-status-provenance.py", "tooling/verify-execution-allocation.py", "tooling/verify-external-capability-contract.py", "tooling/verify-functional-assurance.py", "tooling/verify-homeostasis-policy.py", "tooling/verify-learning-contract.py", "tooling/verify-model-policy.py", "tooling/verify-provenance.py", "tooling/verify-replay-evaluation.py", "tooling/verify-retired-capability.py", "tooling/verify-routes.py", "tooling/verify-skills.py", "tooling/verify-source-layout.py"],
       "trigger": "a named static contract, topology, or replay record requires validation",
       "nonTrigger": "does not prove unobserved runtime or model behavior",
       "output": "machine-readable result or nonzero conformance failure",
       "execution": "python3 tooling/<named-tool>.py",
-      "verifiers": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py"],
-      "fixtures": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py"],
+      "verifiers": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py", "tooling/tests/test_project_document_registry.py", "tooling/tests/test_status_provenance.py"],
+      "fixtures": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py", "tooling/tests/test_project_document_registry.py", "tooling/tests/test_status_provenance.py"],
       "limits": "deterministic checks only establish their declared contract"
     }
   ]

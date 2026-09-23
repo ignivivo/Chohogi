@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "roles": ["decision", "active-plan", "state-projection", "execution-record", "feedback-source", "review-synthesis", "history"],
+  "fixtures": [
+    {"id": "single-active-plan", "role": "active-plan", "executable": true, "expectedAuthority": "execution-queue"},
+    {"id": "state-is-projection", "role": "state-projection", "executable": false, "expectedAuthority": "none"},
+    {"id": "review-is-evidence", "role": "review-synthesis", "executable": false, "expectedAuthority": "review"},
+    {"id": "history-is-not-instruction", "role": "history", "executable": false, "expectedAuthority": "evidence"}
+  ]
+}

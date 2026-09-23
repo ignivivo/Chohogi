@@ -141,6 +141,18 @@ def build_graph() -> dict[str, Any]:
     add_edge(edges, installer_id, manifest_id, "requires", "tooling/install.sh")
     add_edge(edges, installer_id, "verifier:graft-compatibility_install-audit", "requires", "tooling/graft-compatibility_install-audit.sh")
 
+    # This evaluator has a strict, checked-in policy surface. Model-policy
+    # impact must name that surface and its behavioral verifier without
+    # treating every assurance-registry entry or planning document as a
+    # transitive implementation dependency.
+    model_policy_id = "asset:tooling/model-policy.py"
+    for target, relation in (
+        ("asset:assets/agents/trunk_orchestration/model-policy.md", "governed-by"),
+        ("asset:tooling/tests/test_model_policy.py", "verified-by"),
+        ("verifier:model-policy", "verified-by"),
+    ):
+        add_edge(edges, model_policy_id, target, relation, "tooling/genome_map.py: model-policy dependencies")
+
     return {"schemaVersion": 1, "sourceDigest": digest(paths), "nodes": sorted(nodes.values(), key=lambda node: node["id"]), "edges": sorted(edges, key=lambda edge: (edge["source"], edge["target"], edge["relation"]))}
 
 
@@ -189,13 +201,14 @@ def impact(graph: dict[str, Any], changed_path: str) -> dict[str, Any]:
             reverse_consumer.setdefault(edge["target"], set()).add(edge["source"])
     affected = set(initial)
     queue = deque(initial)
+    nodes = {node["id"]: node for node in graph["nodes"]}
     while queue:
         node = queue.popleft()
-        for neighbor in outgoing.get(node, set()) | reverse_consumer.get(node, set()):
+        forward = set() if nodes[node]["kind"] == "document" else outgoing.get(node, set())
+        for neighbor in forward | reverse_consumer.get(node, set()):
             if neighbor not in affected:
                 affected.add(neighbor)
                 queue.append(neighbor)
-    nodes = {node["id"]: node for node in graph["nodes"]}
     return {
         "changed": normalized,
         "affected": sorted(affected),
