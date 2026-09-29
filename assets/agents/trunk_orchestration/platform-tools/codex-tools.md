@@ -8,38 +8,28 @@
 관찰 보고**다 — 검증 상태를 항목마다 명시한다. Codex 세션은 여기 적힌 도구 이름을
 존재한다고 가정하지 않고, 먼저 현재 컨텍스트에 실제로 노출되어 있는지 확인한다.
 
-## 서브에이전트 위임 — 검증 상태: unverified
+## 서브에이전트 위임 — 검증 상태: source-reported (이 환경에서 실행 미확인)
 
-관찰된 도구 이름: `spawn_agent`, `wait_agent`, `close_agent`.
+아래는 Codex용 외부 방법론의 플랫폼 참조 문서(v6.4.2, 2026-09-29 읽음)가 보고한 내용이다.
+초호기가 live Codex 세션에서 직접 실행해 확인한 것은 아니므로, 세션은 먼저 현재 도구
+목록에 실제로 노출되어 있는지 확인하고 표와 다르면 실제 도구 목록을 따른다.
 
-**활성화 조건이 불명확하다.** 흡수 대상이었던 외부 방법론은 `~/.codex/config.toml`에
-`[features] multi_agent = true`를 추가하면 이 도구들이 열린다고 설명했다. 그런데
-Codex 자체 공식 참조(`codex-self-knowledge.md` 경로의 upgrade 문서)는 "multi_agent"를
-**OpenAI Responses API의 베타 기능**으로 설명한다 — `OpenAI-Beta: responses_multi_agent=v1`
-HTTP 헤더와 API 요청 바디의 `multi_agent: {enabled, max_concurrent_subagents}` 파라미터,
-그리고 `multi_agent_call`/`multi_agent_call_output`/`agent_message` 아이템 처리가
-필요한, **API를 직접 호출하는 통합 레벨의 기능**이다.
+| 개념 | 보고된 Codex 동작 |
+| --- | --- |
+| 활성화 | `~/.codex/config.toml`의 `[features] multi_agent = true`. 개인 설정이므로 초호기가 대신 바꾸지 않는다 — 노출되어 있지 않으면 사용자에게 알리고 순차 처리한다 |
+| 버전 | 모델 preset에 따라 multi-agent V1 또는 V2(현재 preset은 V2) |
+| 역할 생성 | `spawn_agent`. `fork_turns: "none"`이면 깨끗한 문맥, 기본값 `"all"`은 부모 transcript 전체를 복사한다 — 위임 설명 원칙상 `"none"`을 쓴다 |
+| 역할 파일 | Codex 0.145+에서 `~/.codex/agents/`의 역할 파일을 `agent_type`으로 격리 fork에 붙일 수 있다. 전체 이력 fork는 `agent_type`을 거부한다 |
+| 모델 | spawn마다 `model`과 `reasoning_effort`를 **둘 다** 명시한다. `model`만 주면 effort가 그 모델 기본값으로 조용히 바뀐다. 모델 이름은 현재 spawn 허용 목록과 대조한다 |
+| 이어서 지시(재개) | V2: `followup_task`로 같은 역할에 메시지를 보내고 한 턴을 시킨다. 축출된 역할도 투명하게 다시 로드된다. 즉 **재전송 가능** — fix 라운드 1–3은 같은 implementer에게 보낸다 |
+| 완료 대기 | `wait_agent`는 폴링이 아니라 이벤트 구독이다. 할 일이 남았으면 기다리지 않는다(완료 결과는 다음 턴에 도착). 정말 할 일이 없을 때만 `timeout_ms` 300000–600000 구간으로 기다리고, 구간마다 상태 한 줄과 `list_agents`로 보고 없이 끝난 역할을 확인한다. 5분 미만 짧은 대기를 반복하지 않는다 |
+| 회수 | V2에는 `close_agent`가 없고 끝난 역할은 필요할 때 자동 축출된다. V1에서만 `close_agent`로 결과가 돌아온 reviewer와 검토를 통과한 implementer를 닫는다 |
 
-이 둘이 같은 스위치를 가리키는지, Codex CLI가 내부적으로 이 API 기능을 이 config
-키로 노출하는지는 초호기가 확인하지 못했다. `config.toml`에 그 키를 써넣으라고
-지시하는 것과, 실제로 그 키가 이 Codex 버전에서 읽히는 것은 다른 주장이다. 이
-불일치가 과거 세션에서 서브에이전트 위임이 조용히 실패한 원인일 가능성이 있다.
-
-**따라서 Codex 세션은:**
-1. `spawn_agent`/`wait_agent`/`close_agent`가 현재 컨텍스트에 실제로 노출되어
-   있는지부터 확인한다. 노출되어 있지 않다고 `config.toml`을 추측으로 고치지 않는다
-   — 설정 파일 변경은 초호기의 관리 대상이 아니다(개인 설정).
-2. 노출되어 있지 않으면 병렬/서브에이전트 위임을 시도하지 않고, `execution-allocation.md`
-   의 "역할을 만들 수 없거나 현재 표면이 지원하지 않으면 주 에이전트가 같은 경계를
-   순차 처리한다"를 따른다. 없는 도구 호출을 지어내지 않는다.
-3. 노출되어 있으면, 완료 확인은 **명시적으로 `wait_agent`를 호출해야만** 이루어진다
-   고 가정한다 — Claude Code처럼 백그라운드 완료가 자동으로 알려오지 않는다. 작업이
-   끝난 역할은 `close_agent`로 즉시 닫아 유휴 상태로 남기지 않는다.
-4. "이미 완료된 서브에이전트에게 다시 메시지를 보낼 수 있는지"도 unverified다.
-   가능하다는 근거가 없으므로, fix 라운드마다 매번 brief 파일·report 파일 경로를
-   새 위임에 실어 보내는 방식(상태를 파일로 영속화)을 기본으로 삼는다. 이는 이미
-   초호기의 `execution-record.py`가 `docs/work-log/records/<work-id>/`에 append-only로
-   기록하는 것과 같은 방향이며, 별도 워크스페이스 폴더를 새로 만들지 않는다.
+**따라서 Codex 세션은:** 도구가 노출되어 있지 않으면 위임을 시도하지 않고
+`execution-allocation.md`대로 주 에이전트가 순차 처리한다(없는 도구 호출을 지어내지
+않는다). 노출되어 있으면 위 표를 따르되, 상태는 언제나 `docs/work-log/records/<work-id>/`의
+execution record와 작업 설명·보고 파일에 둔다 — 재개가 가능해도 기억이 아니라 파일이
+정본이다.
 
 ## 역할 정의(critical-reviewer/evidence-scout/implementation-worker) — 검증 상태: verified
 
@@ -50,10 +40,9 @@ Code처럼 `agents/*.md`를 플러그인이 선언한 서브에이전트 타입�
 기능이 Codex에는 없다 — `assets/runtime_entrypoint/agents/*.toml`이 플러그인에
 포함되어 파일로는 복사되지만, Codex가 이를 역할 정의로 인식하지 않는다.
 
-**이건 흡수 대상 외부 방법론도 겪은 동일한 제약이다.** 그 방법론은 Codex에서
-"agents/" 슬롯을 아예 쓰지 않고, 서브에이전트를 spawn하는 시점에 프롬프트
-템플릿(brief 파일)을 직접 채워 넣는 방식으로 우회했다. Codex 세션은 같은 방식을
-쓴다:
+플러그인 슬롯이 없으므로 Codex 세션은 spawn 시점에 역할 지시를 직접 조립한다
+(위 표의 `~/.codex/agents/` + `agent_type` 경로는 사용자 홈 설정이므로 초호기가 설치하지
+않는다):
 
 1. 서브에이전트를 spawn하기 전에, `assets/runtime_entrypoint/agents/<role>.toml`의
    `description`과 `developer_instructions`를 읽는다.
@@ -81,20 +70,27 @@ BRANCH=$(git branch --show-current)
   있으며, 이 경우 그 자리에서 commit까지만 하고 branch/push는 사용자의 App 네이티브
   컨트롤(예: "Create branch", "Hand off to local")로 넘긴다 — Codex가 대신 push를
   시도하지 않는다.
+- `GIT_DIR != GIT_COMMON`은 submodule 안에서도 참이다.
+  `git rev-parse --show-superproject-working-tree`가 경로를 내면 submodule이므로 일반
+  checkout으로 취급한다.
 - 둘 다 정상이면 일반 checkout이다. `git worktree add`는 네이티브 도구가 없을 때만
-  쓰고, `.worktrees/`가 `.gitignore`에 없으면 먼저 추가한다.
+  쓰고, 위치는 사용자 지침 → 기존 `.worktrees/`(또는 `worktrees/`) → `.worktrees/` 순이다.
+  만들기 전에 `git check-ignore`로 그 디렉토리가 무시되는지 확인하고, 아니면 먼저
+  `.gitignore`에 추가해 커밋한다 — 무시되지 않은 worktree는 트리 전체를 커밋하게 된다.
+  sandbox가 생성을 막으면 그 사실을 알리고 현재 디렉토리에서 진행한다.
+- 새로 만든 뒤 의존성을 준비하고 기준 테스트로 깨끗한 출발점을 확인한다.
 
 ## 역할 회수 규칙 적용
 
 `execution-allocation.md`의 "결과·handoff·중단 즉시 stop/interrupt 또는 동등한 회수를
-실행해 유휴 역할을 남기지 않는다"는 원칙은, 서브에이전트 도구가 실제로 열려 있을
-때만 `close_agent`로 구현한다. 열려 있지 않다면 애초에 임시 역할을 만들지 않았으므로
+실행해 유휴 역할을 남기지 않는다"는 원칙은 V1에서는 `close_agent`로, V2에서는 끝난
+역할에 새 작업을 보내지 않고 `list_agents`로 소유 경계를 확인하는 것으로 구현한다(V2는
+자동 축출). 서브에이전트 도구가 열려 있지 않다면 애초에 임시 역할을 만들지 않았으므로
 회수할 대상도 없다 — 이 경우 주 에이전트가 계속 직접 처리한다.
 
 ## 한계
 
-이 문서의 서브에이전트 절 대부분은 초호기가 이 환경에서 직접 실행해 확인한 것이
-아니라, 흡수 대상 외부 방법론의 관찰 보고와 Codex 자체 문서를 대조한 결과다.
-`spawn_agent`/`wait_agent`/`close_agent`의 실제 존재·활성화 조건·재전송 가능 여부는
-`unverified`로 남기며, 확인되기 전까지 이 문서의 예방적 지침(존재 여부 먼저 확인,
-없으면 순차 처리, 파일로 상태 영속화)을 기본값으로 삼는다.
+서브에이전트 절은 외부 방법론의 Codex 참조 문서가 보고한 내용이며, 초호기가 live Codex
+세션에서 `spawn_agent`/`followup_task`/`wait_agent`/`list_agents`/`close_agent`를 직접 실행해
+확인하지는 않았다. 확인되기 전까지는 "노출 여부 먼저 확인, 없으면 순차 처리, 상태는 파일에"를
+기본값으로 삼는다.

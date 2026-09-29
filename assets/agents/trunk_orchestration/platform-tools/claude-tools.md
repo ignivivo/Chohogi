@@ -20,9 +20,9 @@
 
 **"harness cannot send another message to a live subagent" 조건은 Claude Code에는
 해당하지 않는다.** `SendMessage`로 이름만 정확히 알면 완료된 에이전트도 다시 불러
-이어서 작업시킬 수 있다(이름이 같으면 최신 에이전트가 우선). 즉 흡수 대상 방법론의
-"fix loop 1-3라운드는 원래 구현자에게 재전송"이라는 **기본 흐름을 그대로 쓸 수 있다** —
-Codex처럼 "재전송 불가 시 fresh dispatch로 폴백"하는 예외 경로를 먼저 탈 필요가 없다.
+이어서 작업시킬 수 있다(이름이 같으면 최신 에이전트가 우선). 따라서 `task-loop.md`의
+"수정 1–3라운드는 같은 implementer에게 보낸다"를 `SendMessage`로 그대로 구현한다.
+위임할 때는 `model`을 명시한다 — 생략하면 세션 모델을 물려받는다.
 
 ## 격리 작업공간
 
@@ -30,6 +30,13 @@ Codex처럼 "재전송 불가 시 fresh dispatch로 폴백"하는 예외 경로�
 | --- | --- |
 | 격리된 workspace 생성/진입 | `EnterWorktree` (`name` 또는 기존 경로의 `path`) |
 | 격리 종료 | `ExitWorktree` (`action: keep`|`remove`) |
+
+만들기 전에 이미 격리되어 있는지 확인한다: `git rev-parse --git-dir`와 `--git-common-dir`가
+다르면(submodule이 아니라면 — `git rev-parse --show-superproject-working-tree`가 경로를
+내면 submodule) 이미 linked worktree이므로 새로 만들지 않는다. `git worktree add`로
+직접 만들지 않는다 — 하네스가 보지 못하는 상태가 생긴다. 새로 만든 뒤에는 프로젝트
+의존성을 준비하고 기준 테스트를 돌려 깨끗한 출발점인지 확인한다. 기준에서 이미 실패하면
+그 실패를 보고하며, 이후 실패와 섞이지 않게 기록한다.
 
 `EnterWorktree`는 git 저장소가 아니어도 VCS-agnostic hook으로 동작한다. 이미
 `EnterWorktree`로 만든 workspace가 아니면 `ExitWorktree`는 no-op이다 — 수동으로

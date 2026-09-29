@@ -23,8 +23,7 @@ codex plugin add chohogi@chohogi-marketplace
 매니페스트를 읽어 `skills/`, `hooks/hooks.json`, `assets/runtime_entrypoint/agents/*`를
 바로 노출한다. Codex는 마켓플레이스 root를 git 커밋 상태로 복사하고, Claude Code는
 심볼릭 링크를 세션 로드 시점에 따라간다 — **정본을 바꾼 뒤에는 반드시 커밋**해야
-Codex 쪽에도 반영된다. 흡수된 외부 provider 이름이 다시 스며들지 않았는지는
-`python3 tooling/verify-installed-capability-markers.py`로 확인한다.
+Codex 쪽에도 반영된다.
 
 ## 현재 구조
 

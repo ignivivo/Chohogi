@@ -65,7 +65,3 @@ description: "Diagnose why a past agent session (Codex/Claude) diverged from its
 하네스가 노출하는 counter가 없으면 계산하지 않는다. "가능성"과 "원인"을 구분하되, 하나의
 세션·하나의 프로젝트에서 나온 결론을 보편적 결함으로 일반화하지 않는다 — 같은 패턴이
 독립된 두 번째 세션/프로젝트에서 재현될 때만 confidence를 올린다.
-
-이 절차는 외부 provider(diagnosing-superpowers 계열 스킬)가 만들던 case file의 산출물
-구조(문제 정의·환경·세션 목록·타임라인·범주별 finding·커버리지 노트)를 관찰해 초호기
-내부 방법으로 재구성한 것이며, 그 provider의 이름·경로·원본 지침을 실행에 사용하지 않는다.

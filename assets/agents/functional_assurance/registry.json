@@ -17,14 +17,14 @@
     {
       "id": "trunk-orchestration",
       "kind": "policy-gate",
-      "sources": ["assets/agents/trunk_orchestration", "assets/agents/trunk_orchestration/document-lifecycle.md", "assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json"],
+      "sources": ["assets/agents/trunk_orchestration", "assets/agents/trunk_orchestration/document-lifecycle.md", "assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json", "assets/agents/trunk_orchestration/task-loop.md", "assets/agents/trunk_orchestration/plan-authoring.md"],
       "trigger": "substantial work after conductor selection",
       "nonTrigger": "does not replace project implementation or external provider authority",
-      "output": "one workflow, allocation, project-local policy discovery, an intent contract and pre-edit consumer-reference map when the change crosses an unfamiliar, dirty, shared, or multi-consumer boundary, isolated build-output discipline around active development servers, browser-verified visual acceptance when required, and mapped visual acceptance including standard breakpoint classification, cross-breakpoint layout consistency, container-width verification, maximum-width treatment for repeated visual assets, separate viewport-versus-container responsibilities, and boundary-adjacent responsive measurements with coordinate-system disclosure when the delivery requires it",
+      "output": "one workflow, allocation, project-local policy discovery, an intent contract and pre-edit consumer-reference map when the change crosses an unfamiliar, dirty, shared, or multi-consumer boundary, isolated build-output discipline around active development servers, browser-verified visual acceptance when required, and mapped visual acceptance including standard breakpoint classification, cross-breakpoint layout consistency, container-width verification, maximum-width treatment for repeated visual assets, separate viewport-versus-container responsibilities, and boundary-adjacent responsive measurements with coordinate-system disclosure when the delivery requires it; for multi-task implementation, a task-by-task loop with recorded rulings, a capped review/fix loop, and a final whole-change review; plan documents written for an unfamiliar executor; a fresh-evidence gate before completion claims; and an integration closure that leaves the integration choice to the user",
       "execution": "assets/agents/trunk_orchestration/conductor.md",
       "verifiers": ["tooling/verify-routes.py", "tooling/verify-execution-allocation.py", "tooling/verify-document-lifecycle.py", "tooling/verify-capability-boundary.py", "tooling/verify-external-capability-contract.py", "tooling/verify-retired-capability.py", "tooling/verify-model-policy.py"],
       "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json", "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json", "assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json", "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json", "tooling/tests/test_external_capability_contract.py", "tooling/tests/test_model_policy.py"],
-      "limits": "static contracts require bounded replay for durable behavior changes; context-packet document ownership, consolidation and splitting rules are advisory manual review guidance, not an automated semantic checker or a guarantee of future model adherence"
+      "limits": "static contracts require bounded replay for durable behavior changes; context-packet document ownership, consolidation and splitting rules are advisory manual review guidance, not an automated semantic checker or a guarantee of future model adherence; task-loop.md, plan-authoring.md, the delivery completion-claim/review-reception/integration-closure sections, the debugging three-failed-fixes stop, and the product-decision design-size classification are advisory method guidance with no deterministic checker and no bounded replay yet — they do not prove that a session follows them"
     },
     {
       "id": "learning-method",
@@ -268,14 +268,14 @@
     {
       "id": "installation-and-diagnostics",
       "kind": "deterministic-check",
-      "sources": [".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".codex-plugin/plugin.json", "hooks/hooks.json", "tooling/manifest_registry.py", "tooling/retired-capability-markers.json", "tooling/verify-installed-capability-markers.py"],
-      "trigger": "registering this repository as a Claude Code/Codex local plugin marketplace, diagnosing why a skill/hook/agent is not recognized by a host, or checking that no absorbed external provider is still referenced anywhere in this repository",
-      "nonTrigger": "does not modify a host's personal settings.json/config.toml beyond what its own `plugin marketplace add`/`plugin install` commands write; does not itself remove a found marker",
-      "output": "a registered local marketplace and installed plugin exposing skills/agents/hooks to that host, or a pass/fail absorbed-provider-marker scan",
-      "execution": "`claude plugin marketplace add <repo>` + `claude plugin install chohogi@chohogi-marketplace` for Claude Code; `codex plugin marketplace add <repo>` + `codex plugin add chohogi@chohogi-marketplace` for Codex; `python3 tooling/verify-installed-capability-markers.py --root <repo>` for the marker scan (self-contained)",
-      "verifiers": ["tooling/tests/test_manifest_registry.py", "tooling/tests/test_capability_marker_scan.py"],
-      "fixtures": ["tooling/tests/test_manifest_registry.py", "tooling/tests/test_capability_marker_scan.py"],
-      "limits": "there is no copy-install step and no doctor-style installed-state report; Codex copies the marketplace root by git commit (untracked/uncommitted files are invisible to it) while Claude Code follows symlinks live, so the two hosts can observe different content if changes are not committed; the marker scan only detects markers declared in retired-capability-markers.json and is not run automatically — a session must be told (by the runtime-entrypoint guidance) to invoke it, or a human/Homeostasis pass must run it"
+      "sources": [".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".codex-plugin/plugin.json", "hooks/hooks.json", "tooling/manifest_registry.py"],
+      "trigger": "registering this repository as a Claude Code/Codex local plugin marketplace, or diagnosing why a skill/hook/agent is not recognized by a host",
+      "nonTrigger": "does not modify a host's personal settings.json/config.toml beyond what its own `plugin marketplace add`/`plugin install` commands write",
+      "output": "a registered local marketplace and installed plugin exposing skills/agents/hooks to that host",
+      "execution": "`claude plugin marketplace add <repo>` + `claude plugin install chohogi@chohogi-marketplace` for Claude Code; `codex plugin marketplace add <repo>` + `codex plugin add chohogi@chohogi-marketplace` for Codex",
+      "verifiers": ["tooling/tests/test_manifest_registry.py"],
+      "fixtures": ["tooling/tests/test_manifest_registry.py"],
+      "limits": "there is no copy-install step and no doctor-style installed-state report; Codex copies the marketplace root by git commit (untracked/uncommitted files are invisible to it) while Claude Code follows symlinks live, so the two hosts can observe different content if changes are not committed"
     },
     {
       "id": "model-policy-evaluator",

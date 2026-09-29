@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "7adc9e3abb61795094dca4cd3e31f8978bb2628322c7a8739d36ab5ceb8fdcad",
+  "sourceDigest": "847f27009da4c41fe24828ea98458e7060b978b61838cb15520f978b3f82e123",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -693,11 +693,6 @@
       "path": "assets/agents/reusable_methods/security-and-hardening/references/security-checklist.md"
     },
     {
-      "id": "asset:assets/agents/reusable_methods/session-forensics/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/session-forensics/SKILL.md"
-    },
-    {
       "id": "asset:assets/agents/reusable_methods/session-forensics/agents/openai.yaml",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/session-forensics/agents/openai.yaml"
@@ -858,6 +853,11 @@
       "path": "assets/agents/trunk_orchestration/model-policy.md"
     },
     {
+      "id": "asset:assets/agents/trunk_orchestration/plan-authoring.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/plan-authoring.md"
+    },
+    {
       "id": "asset:assets/agents/trunk_orchestration/platform-tools/claude-tools.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/platform-tools/claude-tools.md"
@@ -876,6 +876,11 @@
       "id": "asset:assets/agents/trunk_orchestration/state-transition.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/state-transition.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/task-loop.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/task-loop.md"
     },
     {
       "id": "asset:assets/agents/vascular-bundle_circulation/phloem-feedback.md",
@@ -1033,11 +1038,6 @@
       "path": "tooling/model-policy.py"
     },
     {
-      "id": "asset:tooling/retired-capability-markers.json",
-      "kind": "asset",
-      "path": "tooling/retired-capability-markers.json"
-    },
-    {
       "id": "asset:tooling/run-security-gate.py",
       "kind": "asset",
       "path": "tooling/run-security-gate.py"
@@ -1056,11 +1056,6 @@
       "id": "asset:tooling/summarize-replays.py",
       "kind": "asset",
       "path": "tooling/summarize-replays.py"
-    },
-    {
-      "id": "asset:tooling/tests/test_capability_marker_scan.py",
-      "kind": "asset",
-      "path": "tooling/tests/test_capability_marker_scan.py"
     },
     {
       "id": "asset:tooling/tests/test_execution_record.py",
@@ -1163,11 +1158,6 @@
       "path": "tooling/verify-homeostasis-policy.py"
     },
     {
-      "id": "asset:tooling/verify-installed-capability-markers.py",
-      "kind": "asset",
-      "path": "tooling/verify-installed-capability-markers.py"
-    },
-    {
       "id": "asset:tooling/verify-learning-contract.py",
       "kind": "asset",
       "path": "tooling/verify-learning-contract.py"
@@ -1206,12 +1196,6 @@
       "id": "asset:tooling/verify-source-layout.py",
       "kind": "asset",
       "path": "tooling/verify-source-layout.py"
-    },
-    {
-      "id": "component:capability-marker-scan-tool",
-      "kind": "component",
-      "path": "tooling/verify-installed-capability-markers.py",
-      "state": "active"
     },
     {
       "id": "component:chohogi-organs",
@@ -1272,12 +1256,6 @@
       "kind": "component",
       "path": "assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
       "state": "retired"
-    },
-    {
-      "id": "component:retired-capability-markers",
-      "kind": "component",
-      "path": "tooling/retired-capability-markers.json",
-      "state": "active"
     },
     {
       "id": "component:reusable-methods",
@@ -1483,11 +1461,6 @@
       "path": "tooling/verify-homeostasis-policy.py"
     },
     {
-      "id": "verifier:installed-capability-markers",
-      "kind": "verifier",
-      "path": "tooling/verify-installed-capability-markers.py"
-    },
-    {
       "id": "verifier:learning-contract",
       "kind": "verifier",
       "path": "tooling/verify-learning-contract.py"
@@ -1677,7 +1650,19 @@
     },
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/plan-authoring.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "asset:assets/agents/trunk_orchestration/project-leaves.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/task-loop.md",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
     },
@@ -2307,12 +2292,6 @@
     },
     {
       "source": "asset:manifest.json",
-      "target": "component:capability-marker-scan-tool",
-      "relation": "activates",
-      "evidence": "manifest.json"
-    },
-    {
-      "source": "asset:manifest.json",
       "target": "component:chohogi-organs",
       "relation": "activates",
       "evidence": "manifest.json"
@@ -2368,12 +2347,6 @@
     {
       "source": "asset:manifest.json",
       "target": "component:react-async-state-safety",
-      "relation": "activates",
-      "evidence": "manifest.json"
-    },
-    {
-      "source": "asset:manifest.json",
-      "target": "component:retired-capability-markers",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -2492,52 +2465,10 @@
       "evidence": "tooling/genome_map.py: model-policy dependencies"
     },
     {
-      "source": "asset:tooling/retired-capability-markers.json",
-      "target": "asset:assets/agents/genome_inheritance/xylem_provenance/provenance.json",
-      "relation": "requires",
-      "evidence": "tooling/retired-capability-markers.json"
-    },
-    {
-      "source": "asset:tooling/retired-capability-markers.json",
-      "target": "asset:assets/agents/reusable_methods/session-forensics/SKILL.md",
-      "relation": "requires",
-      "evidence": "tooling/retired-capability-markers.json"
-    },
-    {
-      "source": "asset:tooling/retired-capability-markers.json",
-      "target": "asset:assets/agents/trunk_orchestration/capability-selection.md",
-      "relation": "requires",
-      "evidence": "tooling/retired-capability-markers.json"
-    },
-    {
-      "source": "asset:tooling/retired-capability-markers.json",
-      "target": "asset:assets/agents/trunk_orchestration/document-lifecycle.md",
-      "relation": "requires",
-      "evidence": "tooling/retired-capability-markers.json"
-    },
-    {
-      "source": "asset:tooling/retired-capability-markers.json",
-      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
-      "relation": "requires",
-      "evidence": "tooling/retired-capability-markers.json"
-    },
-    {
-      "source": "asset:tooling/retired-capability-markers.json",
-      "target": "component:retired-capability-markers",
-      "relation": "activates",
-      "evidence": "manifest.json"
-    },
-    {
       "source": "asset:tooling/semantic_contracts.py",
       "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
       "relation": "documents",
       "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
-    },
-    {
-      "source": "asset:tooling/tests/test_capability_marker_scan.py",
-      "target": "asset:assets/agents/trunk_orchestration/capability-selection.md",
-      "relation": "requires",
-      "evidence": "tooling/tests/test_capability_marker_scan.py"
     },
     {
       "source": "asset:tooling/tests/test_execution_record.py",
@@ -2678,18 +2609,6 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
-      "source": "asset:tooling/verify-installed-capability-markers.py",
-      "target": "component:capability-marker-scan-tool",
-      "relation": "activates",
-      "evidence": "manifest.json"
-    },
-    {
-      "source": "asset:tooling/verify-installed-capability-markers.py",
-      "target": "document:README.md",
-      "relation": "documents",
-      "evidence": "README.md"
-    },
-    {
       "source": "asset:tooling/verify-learning-contract.py",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
@@ -2744,12 +2663,6 @@
       "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
-      "source": "component:capability-marker-scan-tool",
-      "target": "slot:tooling",
-      "relation": "exposes",
-      "evidence": "manifest.json"
-    },
-    {
       "source": "component:chohogi-organs",
       "target": "slot:policy",
       "relation": "exposes",
@@ -2787,12 +2700,6 @@
     },
     {
       "source": "component:model-catalog-tool",
-      "target": "slot:tooling",
-      "relation": "exposes",
-      "evidence": "manifest.json"
-    },
-    {
-      "source": "component:retired-capability-markers",
       "target": "slot:tooling",
       "relation": "exposes",
       "evidence": "manifest.json"

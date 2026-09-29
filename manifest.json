@@ -77,26 +77,6 @@
       "state": "active"
     },
     {
-      "id": "retired-capability-markers",
-      "organ": "trunk_orchestration",
-      "function": "absorbed-provider-marker-declaration",
-      "source": "tooling/retired-capability-markers.json",
-      "pluginSlot": "tooling",
-      "ownership": "managed",
-      "activation": "read by capability-marker-scan-tool; declares absorbed external provider names that must not reappear as active references",
-      "state": "active"
-    },
-    {
-      "id": "capability-marker-scan-tool",
-      "organ": "trunk_orchestration",
-      "function": "absorbed-provider-marker-scan",
-      "source": "tooling/verify-installed-capability-markers.py",
-      "pluginSlot": "tooling",
-      "ownership": "managed",
-      "activation": "Homeostasis maintenance check or explicit request to confirm no absorbed external provider is still referenced in this repository",
-      "state": "active"
-    },
-    {
       "id": "reusable-methods",
       "organ": "reusable_methods",
       "function": "reusable-skills",

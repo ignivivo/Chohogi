@@ -73,7 +73,7 @@ class GenomeMapTests(unittest.TestCase):
         # Running an unrelated tool creates __pycache__ bytecode; the generated
         # genome map must not be considered stale by that side effect.
         unrelated = subprocess.run(
-            [sys.executable, "tooling/verify-installed-capability-markers.py", "--root", str(ROOT)],
+            [sys.executable, "tooling/verify-provenance.py"],
             cwd=ROOT,
             text=True,
             capture_output=True,

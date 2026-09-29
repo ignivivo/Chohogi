@@ -47,6 +47,9 @@ draft → active → executing → review → accepted | revised | deferred → 
 통합 판정이 필요한 경우 대표 synthesis 하나를 현재 feedback source로 삼고 나머지는
 그 근거로 연결한다.
 
+활성 계획의 작성 방법(독자, 작업 크기, 인터페이스, 단계, 전역 제약, 검토 초점, 자기 점검)은
+`plan-authoring.md`를, 그 계획의 실행은 `task-loop.md`를 따른다.
+
 ## 금지되는 승격
 
 - `state-projection`의 오래된 문구를 현재 active-plan보다 우선하지 않는다.
