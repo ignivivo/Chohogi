@@ -41,6 +41,29 @@ HTTP 헤더와 API 요청 바디의 `multi_agent: {enabled, max_concurrent_subag
    초호기의 `execution-record.py`가 `docs/work-log/records/<work-id>/`에 append-only로
    기록하는 것과 같은 방향이며, 별도 워크스페이스 폴더를 새로 만들지 않는다.
 
+## 역할 정의(critical-reviewer/evidence-scout/implementation-worker) — 검증 상태: verified
+
+**Codex의 `.codex-plugin/plugin.json` 스키마에는 커스텀 서브에이전트를 선언하는
+필드가 없다.** 인식되는 최상위 필드는 `name`/`version`/`interface.*`/`mcpServers`/
+`skills`뿐이다(Codex CLI 바이너리에 내장된 검증 에러 문자열로 직접 확인). Claude
+Code처럼 `agents/*.md`를 플러그인이 선언한 서브에이전트 타입으로 자동 로드하는
+기능이 Codex에는 없다 — `assets/runtime_entrypoint/agents/*.toml`이 플러그인에
+포함되어 파일로는 복사되지만, Codex가 이를 역할 정의로 인식하지 않는다.
+
+**이건 흡수 대상 외부 방법론도 겪은 동일한 제약이다.** 그 방법론은 Codex에서
+"agents/" 슬롯을 아예 쓰지 않고, 서브에이전트를 spawn하는 시점에 프롬프트
+템플릿(brief 파일)을 직접 채워 넣는 방식으로 우회했다. Codex 세션은 같은 방식을
+쓴다:
+
+1. 서브에이전트를 spawn하기 전에, `assets/runtime_entrypoint/agents/<role>.toml`의
+   `description`과 `developer_instructions`를 읽는다.
+2. 그 `developer_instructions` 전문을 spawn하는 프롬프트의 시스템 지시 부분에
+   그대로 포함시킨다 — TOML 파일 경로를 서브에이전트에게 "읽으라"고 넘기지 않는다
+   (서브에이전트가 격리된 컨텍스트를 가정하므로, 조립된 텍스트로 직접 전달해야
+   한다).
+3. `sandbox_mode`(`read-only`/`workspace-write`)를 spawn 시점의 실제 권한 설정과
+   맞춘다 — read-only 역할에 쓰기 권한을 주지 않는다.
+
 ## 격리 작업공간 — 검증 상태: partially verified (git 명령 자체는 표준)
 
 네이티브 worktree 도구(이름 예: `EnterWorktree`, `WorktreeCreate`, `/worktree` 명령,

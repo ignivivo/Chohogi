@@ -10,7 +10,7 @@
 
 | 개념 | Claude Code 도구 |
 | --- | --- |
-| 임시 역할 생성(scout/implementer/reviewer) | `Agent` (subagent_type 지정) |
+| 임시 역할 생성(scout/implementer/reviewer) | `Agent`에 `subagent_type: "critical-reviewer"` \| `"evidence-scout"` \| `"implementation-worker"` — chohogi 플러그인이 `agents/*.md`로 선언한 타입이며, `claude plugin details chohogi`로 노출을 직접 확인함(검증됨) |
 | 병렬 디스패치 | 한 응답 안에 `Agent` 호출을 여러 번 포함 |
 | 백그라운드 실행 + 완료 대기 | `Agent`에 `run_in_background: true` — 완료 시 **자동으로** task-notification이 도착한다. 폴링하지 않는다 |
 | 살아있는 역할 목록 확인 | `ListAgents` |

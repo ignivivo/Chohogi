@@ -23,7 +23,7 @@
       "source": "assets/runtime_entrypoint/agents/critical-reviewer.toml",
       "pluginSlot": "agents",
       "ownership": "managed",
-      "activation": "explicit bounded independent review after execution allocation",
+      "activation": "explicit bounded independent review after execution allocation; the TOML's developer_instructions is the source of truth, mirrored (not symlinked — incompatible formats) into agents/critical-reviewer.md for Claude Code, which recognizes a plugin agents/ slot that Codex's plugin.json schema does not have (verified against both CLI binaries)",
       "state": "active"
     },
     {
@@ -33,7 +33,7 @@
       "source": "assets/runtime_entrypoint/agents/evidence-scout.toml",
       "pluginSlot": "agents",
       "ownership": "managed",
-      "activation": "explicit bounded read-only investigation after execution allocation",
+      "activation": "explicit bounded read-only investigation after execution allocation; mirrored into agents/evidence-scout.md for Claude Code (see critical-reviewer-role for why this is a mirror, not a symlink)",
       "state": "active"
     },
     {
@@ -43,7 +43,7 @@
       "source": "assets/runtime_entrypoint/agents/implementation-worker.toml",
       "pluginSlot": "agents",
       "ownership": "managed",
-      "activation": "explicit bounded implementation after execution allocation",
+      "activation": "explicit bounded implementation after execution allocation; mirrored into agents/implementation-worker.md for Claude Code (see critical-reviewer-role for why this is a mirror, not a symlink)",
       "state": "active"
     },
     {
