@@ -1,0 +1,13 @@
+{
+  "status": "fail",
+  "missingArtifacts": [],
+  "missingConsumerEvidence": [],
+  "staleArtifacts": [],
+  "unresolvedDecisionReviews": [],
+  "unresolvedUserDecisions": [],
+  "pendingFeedback": [
+    "/home/ignivivo/github/Chohogi/docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+    "/home/ignivivo/github/Chohogi/docs/chohogi/feedback/sazu-project-plan-audit-20260922.md"
+  ],
+  "unresolvedScopeItems": []
+}
