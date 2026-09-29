@@ -74,7 +74,12 @@ class AdherenceReplayTests(unittest.TestCase):
         self.assertFalse(results["guidance"])
         self.assertFalse(results["reproduce-first"])
         self.assertFalse(results["fresh-verification"])
-        self.assertFalse(results["test-untouched"])
+        self.assertFalse(results["existing-tests-kept"])
+
+    def test_offline_claude_analysis_uses_the_session_cwd_for_relative_paths(self) -> None:
+        lines = [claude_line("system", subtype="init", cwd="/tmp/gone-project", model="m"),
+                 claude_tool("Edit", {"file_path": "/tmp/gone-project/textutil.py"})]
+        self.assertEqual(replay.normalize("claude", lines, None)["events"][0]["paths"], ["textutil.py"])
 
     def test_baseline_profile_expects_no_guidance(self) -> None:
         scenario = self.scenarios["readonly-explain-no-edit"]
@@ -109,6 +114,9 @@ class AdherenceReplayTests(unittest.TestCase):
         self.assertFalse(results["test-before-code-with-red-run"])
         self.assertEqual(replay.shell_writes("python3 -m unittest 2>/dev/null; sed -i 's/a/b/' calc.py; echo x | tee -a log.txt"),
                          ["calc.py", "log.txt"])
+        inline = "python3 - <<'EOF'\np='test_textutil.py'\ns=open(p).read()\nopen(p,'w').write(s+'x')\nEOF\npython3 -m unittest"
+        self.assertEqual(replay.shell_writes(inline), ["test_textutil.py"])
+        self.assertEqual(replay.shell_writes("python3 -c \"print(open('calc.py').read())\""), [])
 
     def test_unrequested_push_and_tool_named_plan_path_fail(self) -> None:
         finish = self.scenarios["finish-branch-user-decides"]

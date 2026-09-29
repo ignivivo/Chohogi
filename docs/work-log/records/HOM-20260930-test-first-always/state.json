@@ -1,0 +1,40 @@
+{
+  "workId": "HOM-20260930-test-first-always",
+  "baseline": "db7ab90d7b491ecda352bb9c93239ce3695bb2d9fa2991dcf5341c4924b6608b",
+  "contract": {
+    "schemaVersion": 1,
+    "objective": "Make test-first mandatory for every production-code behavior change, as the user decided, and confirm with live sessions that it is followed.",
+    "route": "homeostasis",
+    "execution": "direct",
+    "feedbackRegistry": ".agents/chohogi-document-registry.json",
+    "requested": [
+      "test-first always, like the external methodology, regardless of change size or handling mode"
+    ],
+    "excluded": [
+      "documentation-only or text-only changes, which are not production code",
+      "raw prompts or private reasoning in records"
+    ],
+    "requestedItems": [
+      {
+        "id": "policy",
+        "description": "Global guidance, conductor, delivery, and task-loop state test-first as mandatory for all production-code behavior changes, with user-decided exceptions only."
+      },
+      {
+        "id": "replay",
+        "description": "Live feature-test-first replay on Claude and Codex with Chohogi."
+      },
+      {
+        "id": "commit",
+        "description": "Commit verified changes."
+      }
+    ],
+    "acceptance": [
+      {
+        "id": "verified",
+        "description": "All Chohogi verifiers and the unittest suite pass."
+      }
+    ]
+  },
+  "artifacts": [],
+  "checkpoints": []
+}

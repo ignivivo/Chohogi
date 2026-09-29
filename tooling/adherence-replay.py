@@ -51,13 +51,22 @@ SHELL_WRITE = re.compile(
 )
 
 
+INLINE_WRITE = re.compile(r"\.write\(|write_text\(|\.writelines\(|fs\.writeFileSync\(")
+QUOTED_FILE = re.compile(r"['\"]([\w./-]+\.[A-Za-z0-9]{1,5})['\"]")
+
+
 def shell_writes(command: str) -> list[str]:
-    """Best-effort paths a shell command writes through redirection, tee, or sed -i."""
+    """Best-effort paths a shell command writes: redirection, tee, sed -i, or an inline
+    script that calls a write API (then every quoted file name in it is a candidate)."""
     paths = []
     for match in SHELL_WRITE.finditer(command):
         path = next(group for group in match.groups() if group)
         if path not in ("/dev/null", "/dev/stderr", "/dev/stdout") and path not in paths:
             paths.append(path)
+    if INLINE_WRITE.search(command):
+        for path in QUOTED_FILE.findall(command):
+            if path not in paths:
+                paths.append(path)
     return paths
 
 
@@ -85,6 +94,8 @@ def normalize_claude(lines: list[str], project: Path | None) -> dict[str, Any]:
                 guidance = True
         elif kind == "system" and entry.get("subtype") == "init":
             model = entry.get("model")
+            if project is None and entry.get("cwd"):
+                project = Path(entry["cwd"])  # offline analysis: the session's own working directory
         elif kind == "result":
             cost = entry.get("total_cost_usd")
         elif kind == "assistant":

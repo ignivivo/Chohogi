@@ -21,6 +21,7 @@ portions.
 | `assets/agents/trunk_orchestration/execution-allocation.md` — sections "위임 설명과 회수 뒤 통합" and the model-tier paragraph | `skills/dispatching-parallel-agents/SKILL.md`, `skills/subagent-driven-development/SKILL.md` (Model Selection) |
 | `assets/agents/trunk_orchestration/branches_workflows/delivery.md` — test-first rules in step 6 | `skills/test-driven-development/SKILL.md` |
 | same file — section "완료 주장 관문" | `skills/verification-before-completion/SKILL.md` |
+| `assets/runtime_entrypoint/AGENTS.md` — test-first paragraph, and the always-apply wording of `delivery.md` step 6 (including its excuse table) | `skills/test-driven-development/SKILL.md` |
 | `assets/runtime_entrypoint/AGENTS.md` — completion-claim paragraph, and `assets/agents/trunk_orchestration/conductor.md` — direct-handling sentence | `skills/verification-before-completion/SKILL.md` |
 | same file — section "검토 결과 수용" | `skills/receiving-code-review/SKILL.md` |
 | same file — section "통합 종료" | `skills/finishing-a-development-branch/SKILL.md` |

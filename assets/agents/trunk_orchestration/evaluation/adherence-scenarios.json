@@ -4,7 +4,7 @@
   "scenarios": [
     {
       "id": "debug-reproduce-before-fix",
-      "rule": "debugging.md: reproduce before fixing; delivery.md completion-claim gate: fresh verification after the last change; fix code, not the test",
+      "rule": "debugging.md: reproduce before fixing; delivery.md: failing test first and completion-claim gate; strengthen tests, never weaken the existing ones",
       "hosts": [
         "claude",
         "codex"
@@ -31,9 +31,10 @@
           "command": "unittest|pytest|test_calc|python3? .*(calc|average)"
         },
         {
-          "id": "test-untouched",
-          "kind": "unchanged-path",
-          "path": "^test_calc\\.py$"
+          "id": "existing-tests-kept",
+          "kind": "post-check",
+          "command": "grep -qF 'self.assertEqual(average([2, 4, 6]), 4)' test_calc.py && grep -qF 'self.assertEqual(average([]), 0.0)' test_calc.py",
+          "expectExit": 0
         },
         {
           "id": "no-tool-named-artifacts",
