@@ -1,7 +1,7 @@
 # Chohogi Layout v2 — implementation plan
 
 > **Owner:** Chohogi maintainers  
-> **Status:** approved for implementation  
+> **Status:** Historical implementation plan. It records the implementation intent at the time, targeting the pre-plugin copy-install layout (`~/.codex/AGENTS.md`, `~/.agents/skills/`) that install.sh once deployed. That deployment mechanism is retired; active Chohogi contracts (`assets/runtime_entrypoint/AGENTS.md`, `hooks/hooks.json`, `.claude-plugin/`, `.codex-plugin/`) own current runtime behavior. It is not an agent execution instruction.  
 > **Design:** `docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md`
 
 ## Intent and non-negotiable boundaries

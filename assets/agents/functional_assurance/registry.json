@@ -5,14 +5,14 @@
     {
       "id": "runtime-guidance",
       "kind": "policy-gate",
-      "sources": ["assets/runtime_entrypoint/AGENTS.md", "assets/runtime_entrypoint/agents"],
-      "trigger": "every Codex task, or explicit use of an installed Chohogi custom role",
+      "sources": ["assets/runtime_entrypoint/AGENTS.md", "assets/runtime_entrypoint/agents", "hooks/hooks.json", "agents", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json"],
+      "trigger": "every Codex or Claude Code session once the chohogi plugin is registered as a local marketplace and installed, or explicit use of a bounded Chohogi role",
       "nonTrigger": "does not select a daily workflow itself or make a project-local role global",
-      "output": "direct handling, defer, or conductor handoff; installed bounded Codex role profiles",
-      "execution": "assets/runtime_entrypoint/AGENTS.md and tooling/install.sh",
+      "output": "direct handling, defer, or conductor handoff; on Claude Code, three bounded role types exposed via the plugin's agents/ slot (subagent_type-selectable); on Codex, the same TOML role definitions assembled into a spawn prompt at dispatch time (no agents slot exists in Codex's plugin schema)",
+      "execution": "hooks/hooks.json's SessionStart command emits assets/runtime_entrypoint/AGENTS.md into the session; no copy-install step exists",
       "verifiers": ["tooling/verify-routes.py"],
       "fixtures": ["assets/agents/trunk_orchestration/evaluation/route-fixtures.json"],
-      "limits": "does not prove fresh-session model behavior or select a model and effort outside the active session policy"
+      "limits": "does not prove fresh-session model behavior or select a model and effort outside the active session policy; does not prove the SessionStart hook's stdout is actually surfaced as session context on every host version — only that the hook is declared and, on Claude Code, invoked without error"
     },
     {
       "id": "trunk-orchestration",

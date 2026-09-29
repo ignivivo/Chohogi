@@ -1,5 +1,7 @@
 # Chohogi Layout v2 — horizontal inheritance and differentiated organs
 
+> **Status:** Historical design. It describes the pre-plugin copy-install layout (`~/.codex/AGENTS.md`, `~/.agents/skills/`) that install.sh once deployed. That deployment mechanism is retired; Chohogi now distributes itself as a Claude Code / Codex plugin registered through a local marketplace (see `assets/runtime_entrypoint/AGENTS.md`, `hooks/hooks.json`, `.claude-plugin/`, `.codex-plugin/`). This document is not an agent execution instruction.
+
 ## Purpose
 
 This change incorporates the useful, bounded ideas found while comparing

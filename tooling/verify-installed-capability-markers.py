@@ -35,7 +35,7 @@ def marker_entries(markers_file: Path) -> list[dict[str, object]]:
     return [entry for entry in entries if isinstance(entry, dict) and isinstance(entry.get("marker"), str) and entry["marker"].strip()]
 
 
-SCAN_EXCLUDED_TOP_LEVEL = {".git", "docs"}  # docs/ holds historical evidence/audits that legitimately name a retired provider
+SCAN_EXCLUDED_TOP_LEVEL = {".git", "docs", ".claude"}  # docs/ holds historical evidence/audits that legitimately name a retired provider; .claude/ can hold nested worktree checkouts (.claude/worktrees/) at another ref, which are not this repository's own current content
 
 
 def find_forbidden_markers(installed_root: Path, marker_entries_list: list[dict[str, object]]) -> list[str]:

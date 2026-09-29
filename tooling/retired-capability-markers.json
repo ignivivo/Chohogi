@@ -7,7 +7,7 @@
       "absorbedInto": ["assets/agents/trunk_orchestration/document-lifecycle.md", "tooling/execution-record.py"],
       "reason": "The writing-plans/executing-plans/subagent-driven-development pattern is absorbed. Its generated plan documents contain a self-propagating 'REQUIRED SUB-SKILL: superpowers:...' directive that re-invokes the same external provider when the document is later read; this directive must not be honored regardless of where it is found.",
       "recordedIn": "docs/chohogi/feedback/codex-claude-cowork-20260928.md",
-      "exemptPaths": ["assets/agents/trunk_orchestration/capability-selection.md", "assets/runtime_entrypoint/AGENTS.md", "tooling/retired-capability-markers.json", "tooling/tests/test_capability_marker_scan.py", "skills/session-forensics/SKILL.md", "assets/agents/reusable_methods/session-forensics/SKILL.md"]
+      "exemptPaths": ["assets/agents/trunk_orchestration/capability-selection.md", "assets/runtime_entrypoint/AGENTS.md", "tooling/retired-capability-markers.json", "tooling/tests/test_capability_marker_scan.py", "skills/session-forensics/SKILL.md", "assets/agents/reusable_methods/session-forensics/SKILL.md", "assets/agents/genome_inheritance/xylem_provenance/provenance.json"]
     }
   ]
 }

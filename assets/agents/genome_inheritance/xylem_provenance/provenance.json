@@ -155,6 +155,21 @@
       "owner": "Chohogi maintainers",
       "review_signal": ["measurement-failure", "duplicate-guidance", "runtime-regression"],
       "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
+    },
+    {
+      "id": "session-forensics",
+      "adoption": "absorb-core",
+      "origin": "https://github.com/ignivivo/Chohogi/tree/acf40122df4138810c68c28f6feb693a02159081/assets/agents/reusable_methods/session-forensics",
+      "license": "MIT",
+      "baseline_revision": "acf40122df4138810c68c28f6feb693a02159081",
+      "local_delta": "owned-baseline, independently authored (no code or text copied). Replaces the Superpowers plugin's diagnosing-superpowers skill in this repository. That skill's own source was never available to inspect (it ships compiled into the Superpowers marketplace, not as readable source), so this method was built from its observed output shape only, not from its implementation.",
+      "secondary_origins_unverified": ["diagnosing-superpowers skill, Superpowers Claude Code plugin marketplace — exact upstream repository/commit/license not verified; named here only for honest attribution, not adopted as a baseline"],
+      "required_resources": [],
+      "trigger": "reconstructing what happened in a session or across sessions from logs, transcripts, or artifacts when the cause of an observed behavior is unclear",
+      "non_trigger": "a failure whose cause is already known or reproducible without session reconstruction",
+      "owner": "Chohogi maintainers",
+      "review_signal": ["missing-evidence-category", "confidence-miscalibration", "duplicate-guidance"],
+      "retirement_condition": "a replacement core capability is verified or the boundary is no longer reusable"
     }
   ],
   "retired": [

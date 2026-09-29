@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "e21350ee0711a5b84e9fc4ccd301f061cf6de7477705202ccfc6349351a43b2d",
+  "sourceDigest": "7adc9e3abb61795094dca4cd3e31f8978bb2628322c7a8739d36ab5ceb8fdcad",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -1905,6 +1905,12 @@
     },
     {
       "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
       "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
@@ -1914,6 +1920,12 @@
       "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
     },
     {
       "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
@@ -2108,6 +2120,12 @@
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
     },
     {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
       "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
       "target": "asset:assets/agents/functional_assurance/registry.json",
       "relation": "requires",
@@ -2226,6 +2244,12 @@
       "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
       "relation": "documents",
       "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
     },
     {
       "source": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
@@ -2466,6 +2490,12 @@
       "target": "verifier:model-policy",
       "relation": "verified-by",
       "evidence": "tooling/genome_map.py: model-policy dependencies"
+    },
+    {
+      "source": "asset:tooling/retired-capability-markers.json",
+      "target": "asset:assets/agents/genome_inheritance/xylem_provenance/provenance.json",
+      "relation": "requires",
+      "evidence": "tooling/retired-capability-markers.json"
     },
     {
       "source": "asset:tooling/retired-capability-markers.json",

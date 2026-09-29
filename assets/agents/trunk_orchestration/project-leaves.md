@@ -20,10 +20,15 @@ Project leaf는 전역 reusable method 또는 초호기 공통 Codex 역할 adap
 ## 경계
 
 - 소스와 배포 위치는 해당 프로젝트가 소유한다. 스킬 leaf는 `.agents/skills/`에 둔다. 프로젝트의
-  도메인 규칙·도구·검증을 포함한 custom agent가 실제로 필요하면 `.codex/agents/`에 둔다. 초호기
-  공통 `critical-reviewer`, `evidence-scout`, `implementation-worker`의 복사본은 project leaf가 아니며
-  초호기 설치기가 `~/.codex/agents/`에 설치한다. Claude Code는 동일한 전역 정책을
-  `~/.claude/CLAUDE.md`에서 받지만, 프로젝트 전용 Claude 지침은 프로젝트가 소유하며 전역 controller가 아니다.
+  도메인 규칙·도구·검증을 포함한 custom agent가 실제로 필요하면 `.codex/agents/`에 둔다(Codex) 또는
+  `.claude/agents/`에 둔다(Claude Code). 초호기 공통 `critical-reviewer`, `evidence-scout`,
+  `implementation-worker`는 project leaf가 아니다 — 정본은 chohogi 플러그인 저장소에 있으며,
+  copy-install 단계로 프로젝트나 홈 디렉토리에 설치되지 않는다. Claude Code는 플러그인의
+  `agents/` 슬롯으로 이 세 역할을 직접 노출한다(`subagent_type`으로 선택 가능). Codex는 플러그인
+  매니페스트에 커스텀 서브에이전트 슬롯이 없으므로(`platform-tools/codex-tools.md` 참조), 세션이
+  TOML의 `developer_instructions`를 읽어 spawn 프롬프트에 직접 조립한다. Claude Code의 전역 정책은
+  `~/.claude/CLAUDE.md`가 아니라 plugin의 `SessionStart` hook으로 세션마다 주입되며, 프로젝트 전용
+  Claude 지침은 프로젝트가 소유하며 전역 controller가 아니다.
 - 외부 specialist를 프로젝트에서 함께 쓸 때는 원본을 복사하거나 초호기 전역 자산으로 승격하지 않는다.
   `.agents/chohogi-external-capabilities.json`에 provider, trigger/non-trigger, 허용 동작, 금지된
   controller claim, 알려진 충돌과 사용자 보고 문구를 선언한다. 충돌이 없으면 빈 `conflicts`를 명시한다.
