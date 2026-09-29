@@ -1,0 +1,4 @@
+interface:
+  display_name: "Session Forensics"
+  short_description: "Diagnose why a past agent session diverged from intent"
+  default_prompt: "Use $session-forensics to diagnose why this past session diverged from the intended outcome."
