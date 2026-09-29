@@ -23,4 +23,22 @@
 실제 `SKILL.md`를 새로 만들거나 수정할 때는 호출 가능한 Codex `$skill-creator`를 우선 사용한다. 이 능력은 외부 하네스 의존성이 아니며, 해당 도구의 초기화·`quick_validate.py` 절차와 필요한 Python 의존성 준비를 따른다. 경로·route·conductor·매니페스트처럼 스킬이 아닌 자산에는 적용하지 않는다. `$skill-creator`가 실제로 없을 때만 Homeostasis의 보조 fallback을 쓰고, 공식 검증과 동등하다고 주장하지 않는다.
 Feedback 폐루프: 프로젝트가 feedback 문서 root를 갖고 있으면 material 작업에서 `feedback-scan`으로 미처리 Markdown을 찾고, relevant 문서를 `feedback` 이벤트로 영향과 반응까지 기록한다. `plan-updated`는 활성 계획 target을, `deferred`·`rejected`·`no-action`은 사유를 남긴다. 한 요청에 여러 합의 항목이 있으면 execution contract의 `requestedItems` scope lock으로 각 항목의 구현·보류·제외 결과를 남긴다. 문서의 역할·권위·수명·참조 방향은 `trunk_orchestration/document-lifecycle.md`를 따르며, 파생 상태·완료·건강·승인은 원본 evidence보다 강해질 수 없다.
 
+## route·유지과정 진입을 생략하지 않는다
+
+conductor·homeostasis·learning은 파일로 존재하는 것과 실제로 진입하는 것이 다르다.
+경로를 이미 알고 있다는 이유로 정식 진입(해당 skill을 호출하거나 그 Method를 실제로
+따르는 것)을 건너뛰고 텍스트만 참고한 채 바로 조사·수정으로 들어가지 않는다. 특히
+homeostasis·learning은 도구 목록에 이름으로 뜨지 않는 실행 표면(예: 별도 스킬
+탐색 경로를 쓰는 하네스)에서도 존재를 놓치지 않도록, 흐름이 바뀌는 시점마다
+`trunk_orchestration/conductor.md`로 되돌아가 재확인한다. 다음 생각이 들면 생략
+중이라는 신호다 — 계속 진행하기 전에 멈춘다.
+
+| 생각 | 실제 |
+|---|---|
+| "사용자가 이미 뭘 고칠지 정확히 말했으니 바로 조사·수정하면 된다" | 무엇을 할지 아는 것과 어떤 route로 할지 정하는 것은 다르다. 여전히 conductor를 거친다 |
+| "파일 몇 개 고치는 수준이니 execution-record까지는 필요 없다" | 나중 재검토·handoff가 필요해지는지는 지금 알 수 없다. material 여부는 변경 개수가 아니라 되돌리기 난이도·공유 범위로 판단한다 |
+| "이 skill 파일 경로를 이미 아니까 굳이 정식으로 부를 필요 없다" | 경로를 아는 것과 그 Method를 실제로 따르는 것은 다르다. 정식 진입 없이 참고만 하면 Method의 강제 단계(예: execution-record 연결)를 누락하기 쉽다 |
+| "대화가 이미 이 방향으로 몇 턴 진행됐으니 이제 와서 route를 다시 고르기 애매하다" | route는 작업의 성격이 바뀌는 시점마다 다시 고르는 것이지, 대화 길이와 무관하다 |
+| "이건 내가 지금 막 발견한 결함이니 바로 고치면 된다" | 발견과 수정 권한은 다르다. homeostasis 진입 조건(scope gate·evidence gate)을 먼저 확인한다 |
+
 <!-- chohogi:global-guidance:end -->
