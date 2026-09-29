@@ -300,6 +300,18 @@
       "verifiers": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py", "tooling/tests/test_project_document_registry.py", "tooling/tests/test_status_provenance.py"],
       "fixtures": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py", "tooling/tests/test_project_document_registry.py", "tooling/tests/test_status_provenance.py"],
       "limits": "deterministic checks only establish their declared contract"
+    },
+    {
+      "id": "session-adherence-replay",
+      "kind": "provider-backed",
+      "sources": ["tooling/adherence-replay.py", "assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json"],
+      "trigger": "a changed session-level rule (route, task loop, completion gate, integration closure, plan authoring) needs evidence that a real Claude Code or Codex session follows it, within evaluation-budget-policy.md",
+      "nonTrigger": "does not run for ordinary user work and is not a release gate; does not replace static route/allocation verifiers",
+      "output": "per-run JSON with per-assertion pass/fail about tool events, changed files, and a post-check, plus a pass/fail summary; raw transcripts stay in the chosen output directory outside the repository",
+      "execution": "python3 tooling/adherence-replay.py run --host claude|codex --profile chohogi|baseline --model <pinned> --out <dir outside repo>; offline: python3 tooling/adherence-replay.py analyze --host ... --scenario ... --transcript ...",
+      "verifiers": ["tooling/tests/test_adherence_replay.py"],
+      "fixtures": ["assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json", "tooling/tests/test_adherence_replay.py"],
+      "limits": "live runs depend on an installed, authenticated host CLI and cost model tokens; one run per scenario is an observation, not a rate; the Codex baseline profile is unsupported because Codex always loads ~/.codex/AGENTS.md and does not expose injected guidance in its event stream; assertions check observable tool order and files, so a session can pass them without understanding the rule, and final-message checks are pattern matches on prose"
     }
   ]
 }

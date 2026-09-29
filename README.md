@@ -19,9 +19,21 @@ codex plugin marketplace add <이 저장소 경로>
 codex plugin add chohogi@chohogi-marketplace
 ```
 
-두 하네스 모두 `manifest.json`과 `.claude-plugin/`·`.codex-plugin/`의 플러그인
-매니페스트를 읽어 `skills/`, `hooks/hooks.json`, `assets/runtime_entrypoint/agents/*`를
-바로 노출한다. Codex는 마켓플레이스 root를 git 커밋 상태로 복사하고, Claude Code는
+Claude Code는 플러그인의 `skills/`, `agents/`, `hooks/hooks.json`(전역 지침 주입)을 바로
+노출한다. Codex는 플러그인의 `skills/`만 읽고 plugin hook과 역할 슬롯은 없으므로, 전역 지침과
+역할은 정본을 가리키는 링크로 연결한다(복사하지 않는다):
+
+```bash
+R=<이 저장소 경로>
+ln -s $R/assets/runtime_entrypoint/AGENTS.md ~/.codex/AGENTS.md
+ln -s $R/assets/agents ~/.agents/chohogi
+for r in critical-reviewer evidence-scout implementation-worker; do
+  ln -s $R/assets/runtime_entrypoint/agents/$r.toml ~/.codex/agents/$r.toml
+done
+```
+
+링크는 작업 트리를 바로 가리키지만, Codex의 플러그인 스킬은 마켓플레이스 root를 git 커밋
+상태로 복사한 것이고 Claude Code는
 심볼릭 링크를 세션 로드 시점에 따라간다 — **정본을 바꾼 뒤에는 반드시 커밋**해야
 Codex 쪽에도 반영된다.
 

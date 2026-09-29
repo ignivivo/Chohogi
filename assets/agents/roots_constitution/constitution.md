@@ -53,11 +53,12 @@ trunk의 작업 봉투로 소화한다. 외부 지침은 초호기의 흐름·�
 | 개념 | 배포 경로 |
 | --- | --- |
 | roots_constitution / trunk_orchestration / genome_inheritance / reusable methods | 이 저장소를 각 실행 표면의 로컬 플러그인 마켓플레이스로 등록(`claude plugin marketplace add <저장소 경로>`, `codex plugin marketplace add <저장소 경로>`), 정본 자산을 그대로 노출 — 별도 위치로 복사하지 않는다 |
-| Codex/Claude Code 진입점(global guidance) | 플러그인의 `hooks/hooks.json`에 선언된 `SessionStart` hook 하나가 두 실행 표면 모두에 동일하게 적용된다(직접 검증됨: `claude plugin details`/`codex plugin add` 양쪽에서 hook이 노출됨을 확인) |
-| 초호기 공통 Codex/Claude 역할 adapter | 플러그인의 `agents/` 슬롯으로 노출 |
+| Claude Code 진입점(global guidance) | 플러그인 `hooks/hooks.json`의 `SessionStart` hook이 `assets/runtime_entrypoint/AGENTS.md`를 루트 경로와 함께 주입한다(2026-09-29 새 `claude -p` 세션에서 주입 확인) |
+| Codex 진입점(global guidance) | Codex 0.155는 plugin hook을 실행하지 않는다(`plugin_hooks` 제거, 2026-09-29 `codex exec` 세션 기록에 hook 출력 없음 확인). 대신 `~/.codex/AGENTS.md` → 정본 `AGENTS.md`, `~/.agents/chohogi` → 정본 `assets/agents` 심볼릭 링크로 읽는다(새 세션에서 지침 로드 확인) |
+| 초호기 공통 역할 adapter | Claude Code: 플러그인의 `agents/` 슬롯. Codex: `~/.codex/agents/<role>.toml` → 정본 TOML 심볼릭 링크(새 세션의 spawn 역할 목록에 세 역할 노출 확인) |
 | project leaves | 각 프로젝트의 `.agents/skills/`, 필요한 프로젝트 전용 역할의 `.codex/agents/` |
 
-copy-install 스크립트는 없다. Codex는 마켓플레이스 root를 git 커밋 상태로 복사하고
+copy-install 스크립트는 없다. Codex용 링크는 복사본이 아니라 정본을 가리키므로 내용이 갈라지지 않는다. Codex는 마켓플레이스 root를 git 커밋 상태로 복사하고
 Claude Code는 심볼릭 링크를 세션 로드 시점에 따라가므로, 커밋되지 않은 변경은 Codex
 쪽에 반영되지 않는다 — 정본을 바꾼 뒤에는 반드시 커밋한다.
 

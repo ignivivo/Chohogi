@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "objective": "Make Chohogi's session-level rules observable: remove stale install copies, connect Codex to canonical guidance and roles, and add a transcript-based adherence replay runner so a real Claude Code or Codex session can be checked against the naturalized rules instead of trusted.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "remove the stale ~/.claude/CLAUDE.md copy",
+    "connect Codex role files under ~/.codex/agents",
+    "build adherence checkers and replay tests modeled on the external methodology's test code",
+    "state clearly which Chohogi assets were built from that MIT-licensed source"
+  ],
+  "excluded": [
+    "editing ~/.codex/config.toml or ~/.claude/settings.json",
+    "deleting any home-directory file (stale copies are moved to a backup folder)",
+    "copying the external test scripts verbatim",
+    "running unbounded live replays; live runs stay within evaluation-budget-policy.md",
+    "raw prompts, private reasoning, credentials, or tool payload bodies in replay results"
+  ],
+  "requestedItems": [
+    {"id": "stale-copies", "description": "Move install.sh-era copies (CLAUDE.md, Codex AGENTS.md, ~/.agents/chohogi, Chohogi skills in ~/.claude/skills and ~/.agents/skills, ~/.codex/agents TOMLs) to a backup folder and confirm guidance still reaches both hosts."},
+    {"id": "codex-links", "description": "Connect Codex guidance and roles by symlink to canonical files and verify in a fresh Codex session."},
+    {"id": "adherence-replay", "description": "Transcript-based adherence runner, scenarios for the naturalized rules, offline analyzer tests, and at least one live run per host."},
+    {"id": "notice", "description": "Third-party notice naming the MIT source and each Chohogi asset derived from it."},
+    {"id": "commit", "description": "Commit verified changes."}
+  ],
+  "acceptance": [
+    {"id": "hosts-verified", "description": "A fresh Claude Code session and a fresh Codex session each show Chohogi guidance, and Codex lists the three Chohogi roles."},
+    {"id": "verified", "description": "All Chohogi verifiers and the unittest suite pass."}
+  ]
+}

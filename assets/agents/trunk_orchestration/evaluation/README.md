@@ -92,6 +92,33 @@ baseline과 Chohogi를 비교할 때는 같은 작업 설명, 모델, 추론 강
 `replay-result.example.json`은 결과 형식 검증용일 뿐 성능 증거가 아니며,
 `summarize-replays.py`는 검증된 결과 파일만 profile별 지표로 집계한다.
 
+## 세션 준수 replay
+
+위 replay는 사람이 새 세션을 돌리고 결과를 적는다. 세션이 규칙을 실제로 따랐는지는
+`tooling/adherence-replay.py`가 기계적으로 확인한다. `adherence-scenarios.json`의 각
+시나리오는 버릴 프로젝트를 만들고, 실제 호스트 세션(Claude Code `claude -p
+--output-format stream-json`, Codex `codex exec --json`)을 실행한 뒤, 모델이 한 말이 아니라
+**도구 이벤트 순서·바뀐 파일·사후 검사**로 단언을 판정한다(예: 수정 전에 테스트를 돌렸는가,
+마지막 변경 뒤에 검증을 다시 했는가, 테스트 파일을 약하게 고치지 않았는가, 도구 이름이 붙은
+경로를 만들지 않았는가, 요청하지 않은 push·merge를 하지 않았는가).
+
+```bash
+python3 tooling/adherence-replay.py run --host claude --profile chohogi --model <고정 모델> --out <저장소 밖 경로>
+python3 tooling/adherence-replay.py run --host claude --profile baseline --model <같은 모델> --out <저장소 밖 경로>
+python3 tooling/adherence-replay.py run --host codex --profile chohogi --out <저장소 밖 경로>
+python3 tooling/adherence-replay.py analyze --host claude --scenario <id> --transcript <file> [--project <dir>]
+```
+
+- `baseline`은 Claude Code에서 사용자 설정을 빼(`--setting-sources project,local`) 초호기 플러그인
+  없이 실행한다. 두 profile은 같은 모델을 고정한다. Codex는 `~/.codex/AGENTS.md`를 끄는 옵션이
+  없어 baseline을 지원하지 않는다.
+- 원문 transcript는 `--out`(저장소 밖)에만 남고, 결과 JSON에는 단언별 통과 여부와 짧은 사유,
+  이벤트 수, 비용만 들어간다.
+- 실행은 모델 비용을 쓰므로 `evaluation-budget-policy.md`의 paired replay 조건 안에서만 한다.
+  한 번의 실행은 관측이지 비율이 아니다.
+- 새 규칙을 넣을 때는 먼저 baseline에서 그 규칙이 깨지는 시나리오를 확인하고(빨강), 규칙을 넣은
+  뒤 chohogi profile에서 통과하는지(초록) 본다. 통과가 규칙 때문인지 가리려면 둘 다 필요하다.
+
 ## 실제 작업 성능 평가
 
 실제 작업이 충분히 쌓인 뒤에는 같은 유형의 작업군에서 다음을 비교한다.

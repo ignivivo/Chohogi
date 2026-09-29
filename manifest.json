@@ -13,7 +13,7 @@
       "source": "assets/runtime_entrypoint/AGENTS.md",
       "pluginSlot": "hooks",
       "ownership": "runtime-endpoint",
-      "activation": "every session, via the SessionStart hook in hooks/hooks.json, on both Claude Code and Codex once the chohogi plugin is installed",
+      "activation": "every session: on Claude Code via the SessionStart hook in hooks/hooks.json; on Codex, which does not run plugin hooks, via a ~/.codex/AGENTS.md symlink to this file",
       "state": "active"
     },
     {

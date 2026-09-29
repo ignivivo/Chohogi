@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "847f27009da4c41fe24828ea98458e7060b978b61838cb15520f978b3f82e123",
+  "sourceDigest": "32d69ca6283799d39dea2b3a7557b0e80a8f860c3118895804870e3107197b45",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -773,6 +773,11 @@
       "path": "assets/agents/trunk_orchestration/evaluation/README.md"
     },
     {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json"
+    },
+    {
       "id": "asset:assets/agents/trunk_orchestration/evaluation/capability-fixtures.json",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json"
@@ -1008,6 +1013,11 @@
       "path": "skills"
     },
     {
+      "id": "asset:tooling/adherence-replay.py",
+      "kind": "asset",
+      "path": "tooling/adherence-replay.py"
+    },
+    {
       "id": "asset:tooling/classify-security-boundary.py",
       "kind": "asset",
       "path": "tooling/classify-security-boundary.py"
@@ -1056,6 +1066,11 @@
       "id": "asset:tooling/summarize-replays.py",
       "kind": "asset",
       "path": "tooling/summarize-replays.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_adherence_replay.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_adherence_replay.py"
     },
     {
       "id": "asset:tooling/tests/test_execution_record.py",
@@ -1547,6 +1562,12 @@
       "evidence": "README.md"
     },
     {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
       "source": "asset:assets/agents",
       "target": "component:chohogi-organs",
       "relation": "activates",
@@ -1597,6 +1618,12 @@
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "asset:assets/agents/trunk_orchestration/document-lifecycle.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
     },
@@ -1725,6 +1752,12 @@
       "target": "document:README.md",
       "relation": "documents",
       "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/agents/roots_constitution/constitution.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "assets/agents/roots_constitution/constitution.md"
     },
     {
       "source": "asset:assets/agents/roots_constitution/constitution.md",
@@ -1871,6 +1904,12 @@
       "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
+      "source": "asset:assets/agents/trunk_orchestration/platform-tools/codex-tools.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "assets/agents/trunk_orchestration/platform-tools/codex-tools.md"
+    },
+    {
       "source": "asset:assets/agents/trunk_orchestration/state-transition.md",
       "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
       "relation": "documents",
@@ -1881,6 +1920,12 @@
       "target": "component:global-guidance",
       "relation": "activates",
       "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
     },
     {
       "source": "asset:assets/runtime_entrypoint/AGENTS.md",
@@ -2361,6 +2406,12 @@
       "target": "component:reusable-methods",
       "relation": "activates",
       "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:tooling/adherence-replay.py",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json",
+      "relation": "requires",
+      "evidence": "tooling/adherence-replay.py"
     },
     {
       "source": "asset:tooling/classify-security-boundary.py",
