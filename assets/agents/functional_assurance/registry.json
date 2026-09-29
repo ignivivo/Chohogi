@@ -268,14 +268,14 @@
     {
       "id": "installation-and-diagnostics",
       "kind": "deterministic-check",
-      "sources": ["tooling/install.sh", "tooling/doctor.sh", "tooling/doctor.py", "tooling/graft-compatibility_install-audit.sh", "tooling/verify-install.sh", "tooling/prune-backups.sh", "tooling/manifest_registry.py", "tooling/retired-capability-markers.json", "tooling/verify-installed-capability-markers.py"],
-      "trigger": "installation, diagnosis, audit, backup management, or a check that no absorbed external provider is still referenced in the installed tree",
-      "nonTrigger": "does not modify an unowned installation; does not itself remove a found marker",
-      "output": "installed state report, audit result, guarded migration action, or a pass/fail absorbed-provider-marker scan",
-      "execution": "shell command or Python resolver named by the requested operation; python3 tooling/verify-installed-capability-markers.py --home <home> for the installed-tree marker scan (self-contained, no manifest.json/source-checkout dependency)",
-      "verifiers": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py", "tooling/tests/test_capability_marker_scan.py"],
-      "fixtures": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py", "tooling/tests/test_capability_marker_scan.py"],
-      "limits": "doctor reports conformant-only state; operational and responsive health remain unknown without project evidence; graft audit establishes source/install parity; the marker scan only detects markers declared in retired-capability-markers.json and is not run automatically at session start — a session must be told (by the runtime-entrypoint guidance) to invoke it, or a human/Homeostasis pass must run it"
+      "sources": [".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".codex-plugin/plugin.json", "hooks/hooks.json", "tooling/manifest_registry.py", "tooling/retired-capability-markers.json", "tooling/verify-installed-capability-markers.py"],
+      "trigger": "registering this repository as a Claude Code/Codex local plugin marketplace, diagnosing why a skill/hook/agent is not recognized by a host, or checking that no absorbed external provider is still referenced anywhere in this repository",
+      "nonTrigger": "does not modify a host's personal settings.json/config.toml beyond what its own `plugin marketplace add`/`plugin install` commands write; does not itself remove a found marker",
+      "output": "a registered local marketplace and installed plugin exposing skills/agents/hooks to that host, or a pass/fail absorbed-provider-marker scan",
+      "execution": "`claude plugin marketplace add <repo>` + `claude plugin install chohogi@chohogi-marketplace` for Claude Code; `codex plugin marketplace add <repo>` + `codex plugin add chohogi@chohogi-marketplace` for Codex; `python3 tooling/verify-installed-capability-markers.py --root <repo>` for the marker scan (self-contained)",
+      "verifiers": ["tooling/tests/test_manifest_registry.py", "tooling/tests/test_capability_marker_scan.py"],
+      "fixtures": ["tooling/tests/test_manifest_registry.py", "tooling/tests/test_capability_marker_scan.py"],
+      "limits": "there is no copy-install step and no doctor-style installed-state report; Codex copies the marketplace root by git commit (untracked/uncommitted files are invisible to it) while Claude Code follows symlinks live, so the two hosts can observe different content if changes are not committed; the marker scan only detects markers declared in retired-capability-markers.json and is not run automatically — a session must be told (by the runtime-entrypoint guidance) to invoke it, or a human/Homeostasis pass must run it"
     },
     {
       "id": "model-policy-evaluator",
@@ -284,7 +284,7 @@
       "trigger": "an officially exposed model catalog, task role, prior catalog, or verified learning escalation requires a session-policy recommendation or comparison",
       "nonTrigger": "does not discover providers, inspect credentials or private settings, change model selection, or send asynchronous notifications",
       "output": "bounded Codex runtime list-visible model/effort observation with executable-source provenance, mandatory user confirmation and a separately provenance-marked user correction procedure, plus machine-readable candidates, catalog-change/learning reconfirmation requirement, or exact native-effort user selections that surface incomparable task floors for human confirmation",
-      "execution": "installed runtime: python3 ~/.agents/chohogi/tooling/model-catalog.py codex; Chohogi source checkout only: python3 tooling/model-policy.py recommend|compare|learning-escalation|select; recommendations use the observed catalog and task contract without global model profiles or allowlists",
+      "execution": "via the chohogi plugin: python3 ${CLAUDE_PLUGIN_ROOT:-$PLUGIN_ROOT}/tooling/model-catalog.py codex; Chohogi source checkout only: python3 tooling/model-policy.py recommend|compare|learning-escalation|select; recommendations use the observed catalog and task contract without global model profiles or allowlists",
       "verifiers": ["tooling/verify-model-policy.py", "tooling/tests/test_model_catalog.py", "tooling/tests/test_model_policy.py"],
       "fixtures": ["tooling/tests/test_model_catalog.py", "tooling/tests/test_model_policy.py"],
       "limits": "the runtime adapter projects only model ID/name/list-visible effort fields and labels VS Code bundled, PATH, or explicit binary sources separately; list-visible does not prove API entitlement or current conversation selection; Claude UI catalogs remain unknown absent a supported source and UI corrections are an operational procedure, not automatic durable persistence; provider-native effort strings are preserved and incomparable task floors require human confirmation; model-policy.py is a source-checkout evaluator, not installed by the runtime manifest, so installed sessions must not claim that select/recommend executed; observations are not ranked by quality or blended price; no settings, credentials, or session files are scanned"

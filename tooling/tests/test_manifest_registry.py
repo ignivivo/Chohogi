@@ -35,31 +35,25 @@ class ManifestRegistryTests(unittest.TestCase):
         self.assertIn("chohogi-organs", component_ids)
         self.assertNotIn("grill-me", component_ids)
 
-    def test_install_plan_expands_only_active_managed_assets(self) -> None:
-        result = self.run_resolver("install-plan")
+    def test_components_declare_a_real_plugin_slot_for_active_managed_assets(self) -> None:
+        result = self.run_resolver("components", "--ownership", "managed")
         self.assertEqual(result.returncode, 0, result.stderr)
-        plan = json.loads(result.stdout)["actions"]
-        destinations = {item["destination"] for item in plan}
-        self.assertIn(".agents/chohogi", destinations)
-        self.assertIn(".codex/agents/critical-reviewer.toml", destinations)
-        self.assertIn(".codex/agents/evidence-scout.toml", destinations)
-        self.assertIn(".codex/agents/implementation-worker.toml", destinations)
-        self.assertIn(".claude/CLAUDE.md", destinations)
-        self.assertIn(".agents/skills/accessibility", destinations)
-        self.assertIn(".agents/skills/homeostasis", destinations)
-        self.assertNotIn(".agents/skills/grill-me", destinations)
+        components = {item["id"]: item for item in json.loads(result.stdout)["components"]}
+        self.assertEqual(components["chohogi-organs"]["pluginSlot"], "policy")
+        self.assertEqual(components["critical-reviewer-role"]["pluginSlot"], "agents")
+        self.assertEqual(components["reusable-methods"]["pluginSlot"], "skills")
+        self.assertEqual(components["reusable-methods"]["source"], "skills")
 
-    def test_validate_rejects_duplicate_active_destination(self) -> None:
+    def test_validate_rejects_duplicate_component_id(self) -> None:
         document = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
         duplicate = dict(document["components"][0])
-        duplicate["id"] = "duplicate-global-guidance"
         document["components"].append(duplicate)
         with tempfile.TemporaryDirectory() as temporary_directory:
             manifest = Path(temporary_directory) / "manifest.json"
             manifest.write_text(json.dumps(document), encoding="utf-8")
             result = self.run_resolver("validate", manifest=manifest)
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("duplicate active destination", result.stderr)
+        self.assertIn("duplicate component id", result.stderr)
 
     def test_validate_rejects_source_outside_repository_root(self) -> None:
         document = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))

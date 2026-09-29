@@ -53,13 +53,13 @@ trunk의 작업 봉투로 소화한다. 외부 지침은 초호기의 흐름·�
 | 개념 | 배포 경로 |
 | --- | --- |
 | roots_constitution / trunk_orchestration / genome_inheritance / reusable methods | 이 저장소를 각 실행 표면의 로컬 플러그인 마켓플레이스로 등록(`claude plugin marketplace add <저장소 경로>`, `codex plugin marketplace add <저장소 경로>`), 정본 자산을 그대로 노출 — 별도 위치로 복사하지 않는다 |
-| Codex 진입점(global guidance) | Codex 플러그인의 hook 메커니즘으로 세션 시작 시 주입. 확인되지 않는 Codex 버전에서는 `~/.codex/AGENTS.md` 병행 설치로 대체한다 |
-| Claude Code 진입점(global guidance) | Claude Code 플러그인의 `SessionStart` hook(`additionalContext`)으로 주입. 확인되지 않는 Claude Code 버전에서는 `~/.claude/CLAUDE.md` 병행 설치로 대체한다 |
-| 초호기 공통 Codex 역할 adapter | 플러그인의 `agents/` 자산으로 노출, 미확인 시 `~/.codex/agents/` 병행 설치 |
+| Codex/Claude Code 진입점(global guidance) | 플러그인의 `hooks/hooks.json`에 선언된 `SessionStart` hook 하나가 두 실행 표면 모두에 동일하게 적용된다(직접 검증됨: `claude plugin details`/`codex plugin add` 양쪽에서 hook이 노출됨을 확인) |
+| 초호기 공통 Codex/Claude 역할 adapter | 플러그인의 `agents/` 슬롯으로 노출 |
 | project leaves | 각 프로젝트의 `.agents/skills/`, 필요한 프로젝트 전용 역할의 `.codex/agents/` |
 
-플러그인 배포로 대체된 각 항목의 "미확인 시 병행 설치" 조건은 실제 실행 표면에서
-검증되기 전까지 유효하다. 검증되지 않은 채 병행 설치를 제거하지 않는다.
+copy-install 스크립트는 없다. Codex는 마켓플레이스 root를 git 커밋 상태로 복사하고
+Claude Code는 심볼릭 링크를 세션 로드 시점에 따라가므로, 커밋되지 않은 변경은 Codex
+쪽에 반영되지 않는다 — 정본을 바꾼 뒤에는 반드시 커밋한다.
 
 ## 변경 원칙
 

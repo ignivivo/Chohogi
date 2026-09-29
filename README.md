@@ -1,25 +1,30 @@
 # 초호기 (初號機) / Chohogi
 
-초호기는 Codex 작업을 위한 이식 가능한 단일 하네스다. 초호기는 workflow,
+초호기는 Codex·Claude Code 작업을 위한 이식 가능한 단일 하네스다. 초호기는 workflow,
 authority, skill lifecycle, 설치·발견, 검증 정책을 소유한다. 플러그인·MCP·인증·개인
 설정은 필요할 때 호출하는 provider이지 초호기의 controller가 아니다.
 
-초호기는 Linux, WSL, Docker 같은 POSIX shell 환경을 지원한다. native Windows와
-PowerShell adapter는 지원하지 않는다.
+초호기는 자기 자신을 각 실행 표면의 공식 로컬 플러그인 마켓플레이스로 배포한다.
+copy-install 스크립트는 없다 — 정본 저장소가 곧 배포되는 자산이다.
 
 ## 빠른 시작
 
 ```bash
-bash tooling/install.sh
-bash tooling/verify-install.sh
+# Claude Code
+claude plugin marketplace add <이 저장소 경로>
+claude plugin install chohogi@chohogi-marketplace
+
+# Codex
+codex plugin marketplace add <이 저장소 경로>
+codex plugin add chohogi@chohogi-marketplace
 ```
 
-The installer obtains its inventory from `manifest.json`. A v1 owned install is staged,
-then preserved under `~/.agents/chohogi-backups/` before a new layout is promoted. It installs
-the common Codex role adapters in `~/.codex/agents/`; project-only roles remain in each
-project's `.codex/agents/`. List backups
-with `bash tooling/prune-backups.sh`; removal requires the displayed absolute path and
-`--confirm`.
+두 하네스 모두 `manifest.json`과 `.claude-plugin/`·`.codex-plugin/`의 플러그인
+매니페스트를 읽어 `skills/`, `hooks/hooks.json`, `assets/runtime_entrypoint/agents/*`를
+바로 노출한다. Codex는 마켓플레이스 root를 git 커밋 상태로 복사하고, Claude Code는
+심볼릭 링크를 세션 로드 시점에 따라간다 — **정본을 바꾼 뒤에는 반드시 커밋**해야
+Codex 쪽에도 반영된다. 흡수된 외부 provider 이름이 다시 스며들지 않았는지는
+`python3 tooling/verify-installed-capability-markers.py`로 확인한다.
 
 ## 현재 구조
 

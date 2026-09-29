@@ -14,9 +14,13 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MANIFEST = ROOT / "manifest.json"
 OWNERSHIP = {"managed", "runtime-endpoint", "project-local", "retired"}
-INSTALL_MODES = {"file", "tree", "children", "none"}
+# Chohogi has no copy-install step. pluginSlot names which part of the
+# .claude-plugin/.codex-plugin manifests exposes this component's source to a
+# host, or "policy" for an asset that is referenced/read but is not itself a
+# skill/agent/hook (e.g. constitution.md), or "none" for a retired component.
+PLUGIN_SLOTS = {"skills", "agents", "hooks", "tooling", "policy", "none"}
 REQUIRED_COMPONENT_FIELDS = {
-    "id", "organ", "function", "source", "destination", "ownership", "activation", "state", "installMode"
+    "id", "organ", "function", "source", "pluginSlot", "ownership", "activation", "state"
 }
 
 
@@ -61,7 +65,6 @@ def validate(document: dict[str, Any]) -> list[str]:
         return errors + ["components must be a non-empty list"]
 
     ids: set[str] = set()
-    destinations: set[str] = set()
     for component in components:
         if not isinstance(component, dict):
             errors.append("component must be an object")
@@ -78,10 +81,9 @@ def validate(document: dict[str, Any]) -> list[str]:
             errors.append(f"{component_id}: missing fields: {', '.join(sorted(missing))}")
             continue
         source = relative_path(component["source"], "source", component_id, errors)
-        destination = relative_path(component["destination"], "destination", component_id, errors)
         ownership = component.get("ownership")
         state = component.get("state")
-        install_mode = component.get("installMode")
+        plugin_slot = component.get("pluginSlot")
         if ownership not in OWNERSHIP:
             errors.append(f"{component_id}: invalid ownership: {ownership!r}")
         if ownership == "retired" and state != "retired":
@@ -90,18 +92,12 @@ def validate(document: dict[str, Any]) -> list[str]:
             errors.append(f"{component_id}: active ownership must have active state")
         if ownership == "retired" and component.get("activation") != "none":
             errors.append(f"{component_id}: retired component cannot be active")
-        if install_mode not in INSTALL_MODES:
-            errors.append(f"{component_id}: invalid installMode: {install_mode!r}")
-        elif ownership == "retired" and install_mode != "none":
-            errors.append(f"{component_id}: retired component must use installMode none")
-        elif ownership == "runtime-endpoint" and install_mode != "file":
-            errors.append(f"{component_id}: runtime endpoint must use installMode file")
-        elif ownership == "managed" and install_mode not in {"file", "tree", "children"}:
-            errors.append(f"{component_id}: managed component must have an install action")
-        if state == "active" and destination is not None:
-            if destination in destinations:
-                errors.append(f"duplicate active destination: {destination}")
-            destinations.add(destination)
+        if plugin_slot not in PLUGIN_SLOTS:
+            errors.append(f"{component_id}: invalid pluginSlot: {plugin_slot!r}")
+        elif ownership == "retired" and plugin_slot != "none":
+            errors.append(f"{component_id}: retired component must use pluginSlot none")
+        elif ownership != "retired" and plugin_slot == "none":
+            errors.append(f"{component_id}: active component must declare a real pluginSlot")
         if source is not None and ownership != "retired" and not (ROOT / source).exists():
             errors.append(f"{component_id}: source does not exist: {source}")
     return errors
@@ -119,48 +115,6 @@ def manifest_digest() -> str:
     return hashlib.sha256(DEFAULT_MANIFEST.read_bytes()).hexdigest()
 
 
-def install_plan(document: dict[str, Any]) -> dict[str, Any]:
-    actions: list[dict[str, str]] = []
-    component_ids: list[str] = []
-    for component in active_components(document, None):
-        if component["ownership"] not in {"managed", "runtime-endpoint"}:
-            continue
-        component_ids.append(component["id"])
-        source = ROOT / component["source"]
-        mode = component["installMode"]
-        if mode == "children":
-            for child in sorted(source.iterdir()):
-                if child.is_dir():
-                    actions.append({
-                        "component": component["id"],
-                        "source": relative_to_root(child),
-                        "destination": f"{component['destination'].rstrip('/')}/{child.name}",
-                        "mode": "tree",
-                    })
-        else:
-            actions.append({
-                "component": component["id"],
-                "source": component["source"],
-                "destination": component["destination"],
-                "mode": mode,
-            })
-    retired_destinations = [
-        component["destination"] for component in document["components"]
-        if component["state"] == "retired"
-    ]
-    return {
-        "layoutVersion": document["package"]["layoutVersion"],
-        "registryDigest": manifest_digest(),
-        "managedComponentIds": component_ids,
-        "actions": actions,
-        "retiredDestinations": retired_destinations,
-    }
-
-
-def relative_to_root(path: Path) -> str:
-    return path.relative_to(ROOT).as_posix()
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
@@ -168,7 +122,6 @@ def main() -> int:
     subparsers.add_parser("validate")
     components_parser = subparsers.add_parser("components")
     components_parser.add_argument("--ownership", choices=sorted(OWNERSHIP - {"retired"}))
-    subparsers.add_parser("install-plan")
     arguments = parser.parse_args()
     try:
         document = load_manifest(arguments.manifest)
@@ -182,10 +135,8 @@ def main() -> int:
         return 1
     if arguments.command == "validate":
         print(json.dumps({"status": "valid", "layoutVersion": document["package"]["layoutVersion"]}))
-    elif arguments.command == "components":
-        print(json.dumps({"components": active_components(document, arguments.ownership)}, indent=2))
     else:
-        print(json.dumps(install_plan(document), indent=2))
+        print(json.dumps({"components": active_components(document, arguments.ownership)}, indent=2))
     return 0
 
 

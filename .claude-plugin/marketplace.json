@@ -1,6 +1,7 @@
 {
   "name": "chohogi-marketplace",
   "owner": {"name": "ignivivo"},
+  "description": "Chohogi: single-harness orchestration (conductor routing, execution allocation, learning, homeostasis) for one user's Codex/Claude Code sessions.",
   "plugins": [
     {"name": "chohogi", "source": "./", "description": "Chohogi single-harness orchestration"}
   ]

@@ -11,189 +11,110 @@
       "organ": "runtime_entrypoint",
       "function": "global-guidance",
       "source": "assets/runtime_entrypoint/AGENTS.md",
-      "destination": ".codex/AGENTS.md",
+      "pluginSlot": "hooks",
       "ownership": "runtime-endpoint",
-      "activation": "every Codex task",
-      "state": "active",
-      "installMode": "file"
-    },
-    {
-      "id": "global-guidance-claude",
-      "organ": "runtime_entrypoint",
-      "function": "global-guidance",
-      "source": "assets/runtime_entrypoint/AGENTS.md",
-      "destination": ".claude/CLAUDE.md",
-      "ownership": "runtime-endpoint",
-      "activation": "every Claude Code task",
-      "state": "active",
-      "installMode": "file"
+      "activation": "every session, via the SessionStart hook in hooks/hooks.json, on both Claude Code and Codex once the chohogi plugin is installed",
+      "state": "active"
     },
     {
       "id": "critical-reviewer-role",
       "organ": "runtime_entrypoint",
       "function": "independent-high-risk-review",
       "source": "assets/runtime_entrypoint/agents/critical-reviewer.toml",
-      "destination": ".codex/agents/critical-reviewer.toml",
+      "pluginSlot": "agents",
       "ownership": "managed",
       "activation": "explicit bounded independent review after execution allocation",
-      "state": "active",
-      "installMode": "file"
+      "state": "active"
     },
     {
       "id": "evidence-scout-role",
       "organ": "runtime_entrypoint",
       "function": "bounded-read-only-evidence-collection",
       "source": "assets/runtime_entrypoint/agents/evidence-scout.toml",
-      "destination": ".codex/agents/evidence-scout.toml",
+      "pluginSlot": "agents",
       "ownership": "managed",
       "activation": "explicit bounded read-only investigation after execution allocation",
-      "state": "active",
-      "installMode": "file"
+      "state": "active"
     },
     {
       "id": "implementation-worker-role",
       "organ": "runtime_entrypoint",
       "function": "bounded-implementation",
       "source": "assets/runtime_entrypoint/agents/implementation-worker.toml",
-      "destination": ".codex/agents/implementation-worker.toml",
+      "pluginSlot": "agents",
       "ownership": "managed",
       "activation": "explicit bounded implementation after execution allocation",
-      "state": "active",
-      "installMode": "file"
+      "state": "active"
     },
     {
       "id": "chohogi-organs",
       "organ": "organ-library",
       "function": "internal-contracts",
       "source": "assets/agents",
-      "destination": ".agents/chohogi",
+      "pluginSlot": "policy",
       "ownership": "managed",
       "activation": "selected Chohogi contract",
-      "state": "active",
-      "installMode": "tree"
+      "state": "active"
     },
     {
       "id": "execution-record-tool",
       "organ": "trunk_orchestration",
       "function": "durable-execution-record",
       "source": "tooling/execution-record.py",
-      "destination": ".agents/chohogi/tooling/execution-record.py",
+      "pluginSlot": "tooling",
       "ownership": "managed",
       "activation": "material work needing feedback evidence, handoff, interruption recovery, or contract-scoped proof",
-      "state": "active",
-      "installMode": "file"
+      "state": "active"
     },
     {
       "id": "model-catalog-tool",
       "organ": "trunk_orchestration",
       "function": "bounded-runtime-model-observation",
       "source": "tooling/model-catalog.py",
-      "destination": ".agents/chohogi/tooling/model-catalog.py",
+      "pluginSlot": "tooling",
       "ownership": "managed",
       "activation": "a new project, a model-policy reconfirmation trigger, or an explicit request to verify runtime-visible model options",
-      "state": "active",
-      "installMode": "file"
+      "state": "active"
     },
     {
       "id": "retired-capability-markers",
       "organ": "trunk_orchestration",
       "function": "absorbed-provider-marker-declaration",
       "source": "tooling/retired-capability-markers.json",
-      "destination": ".agents/chohogi/tooling/retired-capability-markers.json",
+      "pluginSlot": "tooling",
       "ownership": "managed",
       "activation": "read by capability-marker-scan-tool; declares absorbed external provider names that must not reappear as active references",
-      "state": "active",
-      "installMode": "file"
+      "state": "active"
     },
     {
       "id": "capability-marker-scan-tool",
       "organ": "trunk_orchestration",
       "function": "absorbed-provider-marker-scan",
       "source": "tooling/verify-installed-capability-markers.py",
-      "destination": ".agents/chohogi/tooling/verify-installed-capability-markers.py",
+      "pluginSlot": "tooling",
       "ownership": "managed",
-      "activation": "Homeostasis maintenance check or explicit request to confirm no absorbed external provider is still referenced in the installed Chohogi tree",
-      "state": "active",
-      "installMode": "file"
+      "activation": "Homeostasis maintenance check or explicit request to confirm no absorbed external provider is still referenced in this repository",
+      "state": "active"
     },
     {
       "id": "reusable-methods",
       "organ": "reusable_methods",
       "function": "reusable-skills",
-      "source": "assets/agents/reusable_methods",
-      "destination": ".agents/skills",
+      "source": "skills",
+      "pluginSlot": "skills",
       "ownership": "managed",
       "activation": "matching concrete capability boundary; never a project leaf",
-      "state": "active",
-      "installMode": "children",
-      "exclude": []
-    },
-    {
-      "id": "reusable-methods-claude",
-      "organ": "reusable_methods",
-      "function": "reusable-skills",
-      "source": "assets/agents/reusable_methods",
-      "destination": ".claude/skills",
-      "ownership": "managed",
-      "activation": "same as reusable-methods; mirrored because Claude Code's own skill-discovery path (.claude/skills/) is not the Codex/Gemini/Copilot-shared .agents/skills/, so a Claude Code session cannot otherwise see these skills exist",
-      "state": "active",
-      "installMode": "children",
-      "exclude": []
-    },
-    {
-      "id": "learning",
-      "organ": "adaptive-regulation",
-      "function": "confirmed-failure-prevention",
-      "source": "assets/agents/adaptive-regulation/learning",
-      "destination": ".agents/skills/learning",
-      "ownership": "managed",
-      "activation": "confirmed root cause and prevention evidence",
-      "state": "active",
-      "installMode": "tree"
-    },
-    {
-      "id": "learning-claude",
-      "organ": "adaptive-regulation",
-      "function": "confirmed-failure-prevention",
-      "source": "assets/agents/adaptive-regulation/learning",
-      "destination": ".claude/skills/learning",
-      "ownership": "managed",
-      "activation": "same as learning; mirrored so a Claude Code session's own skill discovery (.claude/skills/) can see this maintenance skill exists, not only Codex/Gemini/Copilot via .agents/skills/",
-      "state": "active",
-      "installMode": "tree"
-    },
-    {
-      "id": "homeostasis",
-      "organ": "adaptive-regulation",
-      "function": "whole-harness-maintenance",
-      "source": "assets/agents/adaptive-regulation/homeostasis",
-      "destination": ".agents/skills/homeostasis",
-      "ownership": "managed",
-      "activation": "whole-harness policy, lifecycle, or installation boundary",
-      "state": "active",
-      "installMode": "tree"
-    },
-    {
-      "id": "homeostasis-claude",
-      "organ": "adaptive-regulation",
-      "function": "whole-harness-maintenance",
-      "source": "assets/agents/adaptive-regulation/homeostasis",
-      "destination": ".claude/skills/homeostasis",
-      "ownership": "managed",
-      "activation": "same as homeostasis; mirrored so a Claude Code session's own skill discovery (.claude/skills/) can see this maintenance skill exists, not only Codex/Gemini/Copilot via .agents/skills/",
-      "state": "active",
-      "installMode": "tree"
+      "state": "active"
     },
     {
       "id": "grill-me",
       "organ": "horizontal-transfer",
       "function": "design-interview",
       "source": "assets/agents/genome_inheritance/retired_assets/grill-me",
-      "destination": ".agents/skills/grill-me",
+      "pluginSlot": "none",
       "ownership": "retired",
       "activation": "none",
       "state": "retired",
-      "installMode": "none",
       "retirementReason": "unverified active provenance and conflicting interaction contract"
     },
     {
@@ -201,11 +122,10 @@
       "organ": "epidermal-tissue-system",
       "function": "frontend-preflight",
       "source": "assets/agents/reusable_methods/frontend-surface",
-      "destination": ".agents/skills/frontend-surface",
+      "pluginSlot": "none",
       "ownership": "retired",
       "activation": "none",
       "state": "retired",
-      "installMode": "none",
       "retirementReason": "superseded by the complete Hallmark frontend expression method"
     },
     {
@@ -213,11 +133,10 @@
       "organ": "genome-inheritance",
       "function": "unpromoted-learning-candidate",
       "source": "assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
-      "destination": ".agents/skills/react-async-state-safety",
+      "pluginSlot": "none",
       "ownership": "retired",
       "activation": "none",
       "state": "retired",
-      "installMode": "none",
       "retirementReason": "single-project learned prevention lacks the independent multi-project evidence required for active global discovery"
     }
   ]

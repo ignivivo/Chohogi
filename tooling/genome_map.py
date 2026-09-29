@@ -72,8 +72,9 @@ def build_graph() -> dict[str, Any]:
         add_edge(edges, source_id, component_id, "activates", "manifest.json")
         add_edge(edges, "asset:manifest.json", component_id, "activates", "manifest.json")
         if component["state"] == "active":
-            add_edge(edges, component_id, f"endpoint:{component['destination']}", "installs", "manifest.json")
-            add_node(nodes, f"endpoint:{component['destination']}", "endpoint", component["destination"])
+            slot = component["pluginSlot"]
+            add_edge(edges, component_id, f"slot:{slot}", "exposes", "manifest.json")
+            add_node(nodes, f"slot:{slot}", "slot", slot)
 
     for skill_file in sorted(SKILL_ROOT.glob("*/SKILL.md")):
         skill = skill_file.parent.name
@@ -90,7 +91,6 @@ def build_graph() -> dict[str, Any]:
         identifier = verifier.stem.removeprefix("verify-")
         add_node(nodes, f"verifier:{identifier}", "verifier", relative(verifier))
     add_node(nodes, "verifier:provenance", "verifier", "tooling/verify-provenance.py")
-    add_node(nodes, "verifier:graft-compatibility_install-audit", "verifier", "tooling/graft-compatibility_install-audit.sh")
 
     documents = [ROOT / "README.md"] + sorted(
         path for path in (ROOT / "docs/chohogi").rglob("*.md") if path not in GENERATED
@@ -122,9 +122,6 @@ def build_graph() -> dict[str, Any]:
         if source.name.startswith("verify-") and source.suffix == ".py":
             source_id = f"verifier:{source.stem.removeprefix('verify-')}"
             add_node(nodes, source_id, "verifier", source_path)
-        elif source.name == "graft-compatibility_install-audit.sh":
-            source_id = "verifier:graft-compatibility_install-audit"
-            add_node(nodes, source_id, "verifier", source_path)
         else:
             source_id = f"asset:{source_path}"
             add_node(nodes, source_id, "asset", source_path)
@@ -136,10 +133,20 @@ def build_graph() -> dict[str, Any]:
                 add_node(nodes, target_id, "asset", candidate.rstrip("'\"),.;:"))
                 add_edge(edges, source_id, target_id, "requires", relative(source))
 
-    installer_id = "asset:tooling/install.sh"
+    # Chohogi distributes itself via each host's own local plugin marketplace
+    # (no copy-install script); these manifests are what Claude Code and Codex
+    # actually read to discover skills/agents/hooks in this repository.
     manifest_id = "asset:manifest.json"
-    add_edge(edges, installer_id, manifest_id, "requires", "tooling/install.sh")
-    add_edge(edges, installer_id, "verifier:graft-compatibility_install-audit", "requires", "tooling/graft-compatibility_install-audit.sh")
+    for plugin_manifest in (
+        "assets:.claude-plugin/marketplace.json",
+        "assets:.claude-plugin/plugin.json",
+        "assets:.codex-plugin/plugin.json",
+    ):
+        _, plugin_path = plugin_manifest.split(":", 1)
+        if (ROOT / plugin_path).is_file():
+            plugin_id = f"asset:{plugin_path}"
+            add_node(nodes, plugin_id, "asset", plugin_path)
+            add_edge(edges, plugin_id, manifest_id, "requires", plugin_path)
 
     # This evaluator has a strict, checked-in policy surface. Model-policy
     # impact must name that surface and its behavioral verifier without

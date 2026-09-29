@@ -46,21 +46,20 @@ class GenomeMapTests(unittest.TestCase):
         self.assertIn("verifier:provenance", packet["requiredReverification"])
         self.assertNotIn("apply", packet)
 
-    def test_installer_impact_includes_its_verifier_and_endpoint(self) -> None:
-        result = self.run_map("impact", "tooling/install.sh")
+    def test_plugin_manifest_impact_includes_its_component_and_slots(self) -> None:
+        result = self.run_map("impact", ".claude-plugin/plugin.json")
         self.assertEqual(result.returncode, 0, result.stderr)
         packet = json.loads(result.stdout)
-        self.assertIn("verifier:graft-compatibility_install-audit", packet["verification"])
-        self.assertIn("endpoint:.agents/chohogi", packet["affected"])
+        self.assertIn("asset:manifest.json", packet["affected"])
+        self.assertIn("slot:skills", packet["affected"])
+        self.assertIn("slot:hooks", packet["affected"])
 
     def test_model_policy_impact_includes_its_contract_and_verifier(self) -> None:
         result = self.run_map("impact", "tooling/model-policy.py")
         self.assertEqual(result.returncode, 0, result.stderr)
         packet = json.loads(result.stdout)
         self.assertIn("asset:assets/agents/trunk_orchestration/model-policy.md", packet["affected"])
-        self.assertIn("asset:assets/agents/trunk_orchestration/model-policy.md", packet["affected"])
         self.assertIn("verifier:model-policy", packet["verification"])
-        self.assertNotIn("asset:tooling/doctor.py", packet["affected"])
 
     def test_check_rejects_stale_generated_views(self) -> None:
         build = self.run_map("build")
@@ -71,10 +70,16 @@ class GenomeMapTests(unittest.TestCase):
     def test_runtime_bytecode_does_not_stale_the_generated_views(self) -> None:
         build = self.run_map("build")
         self.assertEqual(build.returncode, 0, build.stderr)
-        doctor = subprocess.run(
-            ["bash", "tooling/doctor.sh", "--home", "/tmp"], cwd=ROOT, text=True, capture_output=True, check=False
+        # Running an unrelated tool creates __pycache__ bytecode; the generated
+        # genome map must not be considered stale by that side effect.
+        unrelated = subprocess.run(
+            [sys.executable, "tooling/verify-installed-capability-markers.py", "--root", str(ROOT)],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
         )
-        self.assertNotEqual(doctor.returncode, 0)
+        self.assertEqual(unrelated.returncode, 0, unrelated.stderr)
         result = self.run_map("check")
         self.assertEqual(result.returncode, 0, result.stderr)
 

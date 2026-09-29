@@ -17,8 +17,8 @@ MARKERS_FILE = ROOT / "tooling" / "retired-capability-markers.json"
 
 
 class CapabilityMarkerScanTests(unittest.TestCase):
-    def run_scanner(self, home: Path, markers_file: Path | None = None) -> subprocess.CompletedProcess[str]:
-        command = [sys.executable, str(SCANNER), "--home", str(home)]
+    def run_scanner(self, root: Path, markers_file: Path | None = None) -> subprocess.CompletedProcess[str]:
+        command = [sys.executable, str(SCANNER), "--root", str(root)]
         if markers_file is not None:
             command.extend(("--markers-file", str(markers_file)))
         return subprocess.run(command, text=True, capture_output=True, check=False)
@@ -31,60 +31,68 @@ class CapabilityMarkerScanTests(unittest.TestCase):
             self.assertIsInstance(entry["marker"], str)
             self.assertTrue(entry["marker"].strip())
 
-    def test_pass_when_installed_tree_has_no_marker(self) -> None:
-        with tempfile.TemporaryDirectory() as home:
-            home_path = Path(home)
-            installed = home_path / ".agents" / "chohogi" / "trunk_orchestration"
-            installed.mkdir(parents=True)
-            (installed / "conductor.md").write_text("no forbidden names here\n", encoding="utf-8")
-            result = self.run_scanner(home_path)
+    def test_current_repository_passes(self) -> None:
+        result = self.run_scanner(ROOT)
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+        self.assertEqual(json.loads(result.stdout)["status"], "pass")
+
+    def test_pass_when_repo_has_no_marker(self) -> None:
+        with tempfile.TemporaryDirectory() as repo:
+            repo_path = Path(repo)
+            asset_dir = repo_path / "assets" / "agents" / "trunk_orchestration"
+            asset_dir.mkdir(parents=True)
+            (asset_dir / "conductor.md").write_text("no forbidden names here\n", encoding="utf-8")
+            result = self.run_scanner(repo_path)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(json.loads(result.stdout)["status"], "pass")
 
-    def test_fail_when_installed_tree_contains_a_declared_marker(self) -> None:
-        with tempfile.TemporaryDirectory() as home:
-            home_path = Path(home)
-            installed = home_path / ".agents" / "chohogi" / "trunk_orchestration"
-            installed.mkdir(parents=True)
-            (installed / "document-lifecycle.md").write_text(
+    def test_fail_when_repo_contains_a_declared_marker(self) -> None:
+        with tempfile.TemporaryDirectory() as repo:
+            repo_path = Path(repo)
+            asset_dir = repo_path / "assets" / "agents" / "trunk_orchestration"
+            asset_dir.mkdir(parents=True)
+            (asset_dir / "document-lifecycle.md").write_text(
                 "this plan absorbed patterns from Superpowers directly\n", encoding="utf-8"
             )
-            result = self.run_scanner(home_path)
+            result = self.run_scanner(repo_path)
             self.assertEqual(result.returncode, 1)
             payload = json.loads(result.stdout)
             self.assertEqual(payload["status"], "fail")
             self.assertTrue(any("superpowers" in finding for finding in payload["findings"]))
 
+    def test_docs_directory_is_excluded_from_scanning(self) -> None:
+        with tempfile.TemporaryDirectory() as repo:
+            repo_path = Path(repo)
+            docs_dir = repo_path / "docs" / "chohogi" / "audits"
+            docs_dir.mkdir(parents=True)
+            (docs_dir / "history.md").write_text("this audit discusses Superpowers as evidence\n", encoding="utf-8")
+            result = self.run_scanner(repo_path)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(json.loads(result.stdout)["status"], "pass")
+
     def test_exempt_path_is_not_flagged(self) -> None:
-        with tempfile.TemporaryDirectory() as markers_dir, tempfile.TemporaryDirectory() as home:
+        with tempfile.TemporaryDirectory() as markers_dir, tempfile.TemporaryDirectory() as repo:
             markers_path = Path(markers_dir) / "retired-capability-markers.json"
             markers_path.write_text(
                 json.dumps(
                     {
                         "schemaVersion": 1,
                         "markers": [
-                            {"marker": "superpowers", "exemptPaths": ["trunk_orchestration/capability-selection.md"]}
+                            {"marker": "superpowers", "exemptPaths": ["assets/agents/trunk_orchestration/capability-selection.md"]}
                         ],
                     }
                 ),
                 encoding="utf-8",
             )
-            home_path = Path(home)
-            installed = home_path / ".agents" / "chohogi" / "trunk_orchestration"
-            installed.mkdir(parents=True)
-            (installed / "capability-selection.md").write_text(
+            repo_path = Path(repo)
+            asset_dir = repo_path / "assets" / "agents" / "trunk_orchestration"
+            asset_dir.mkdir(parents=True)
+            (asset_dir / "capability-selection.md").write_text(
                 "superpowers is named here only to deny it\n", encoding="utf-8"
             )
-            result = self.run_scanner(home_path, markers_file=markers_path)
+            result = self.run_scanner(repo_path, markers_file=markers_path)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(json.loads(result.stdout)["status"], "pass")
-
-    def test_current_installed_runtime_passes_if_present(self) -> None:
-        runtime_home = Path.home()
-        if not (runtime_home / ".agents" / "chohogi").is_dir():
-            self.skipTest("no installed Chohogi runtime under the current HOME")
-        result = self.run_scanner(runtime_home)
-        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
 
 
 if __name__ == "__main__":
