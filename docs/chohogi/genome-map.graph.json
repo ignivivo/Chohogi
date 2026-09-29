@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "c524d387727dc5fd51332d6f481afbd599fed50492bc6e568f4059553c2c91d7",
+  "sourceDigest": "6137e47e05ffe3e4364d71f5cab1b75f6c60065bb6779f2a575ba5d2ca6a24b0",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -93,11 +93,6 @@
       "path": "assets/agents/reusable_methods"
     },
     {
-      "id": "asset:assets/agents/reusable_methods/accessibility/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/accessibility/SKILL.md"
-    },
-    {
       "id": "asset:assets/agents/reusable_methods/accessibility/references/A11Y-PATTERNS.md",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/accessibility/references/A11Y-PATTERNS.md"
@@ -108,29 +103,14 @@
       "path": "assets/agents/reusable_methods/accessibility/references/WCAG.md"
     },
     {
-      "id": "asset:assets/agents/reusable_methods/agent-security-audit/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/agent-security-audit/SKILL.md"
-    },
-    {
       "id": "asset:assets/agents/reusable_methods/agent-security-audit/agents/openai.yaml",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/agent-security-audit/agents/openai.yaml"
     },
     {
-      "id": "asset:assets/agents/reusable_methods/core-web-vitals/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/core-web-vitals/SKILL.md"
-    },
-    {
       "id": "asset:assets/agents/reusable_methods/core-web-vitals/references/LCP.md",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/core-web-vitals/references/LCP.md"
-    },
-    {
-      "id": "asset:assets/agents/reusable_methods/dependency-scanning/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/dependency-scanning/SKILL.md"
     },
     {
       "id": "asset:assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml",
@@ -146,11 +126,6 @@
       "id": "asset:assets/agents/reusable_methods/hallmark/LICENSE",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/hallmark/LICENSE"
-    },
-    {
-      "id": "asset:assets/agents/reusable_methods/hallmark/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/hallmark/SKILL.md"
     },
     {
       "id": "asset:assets/agents/reusable_methods/hallmark/agents/openai.yaml",
@@ -693,34 +668,14 @@
       "path": "assets/agents/reusable_methods/hallmark/references/verbs/redesign.md"
     },
     {
-      "id": "asset:assets/agents/reusable_methods/mcp-server-review/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/mcp-server-review/SKILL.md"
-    },
-    {
       "id": "asset:assets/agents/reusable_methods/mcp-server-review/agents/openai.yaml",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/mcp-server-review/agents/openai.yaml"
     },
     {
-      "id": "asset:assets/agents/reusable_methods/performance/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/performance/SKILL.md"
-    },
-    {
-      "id": "asset:assets/agents/reusable_methods/prompt-injection/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/prompt-injection/SKILL.md"
-    },
-    {
       "id": "asset:assets/agents/reusable_methods/prompt-injection/agents/openai.yaml",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/prompt-injection/agents/openai.yaml"
-    },
-    {
-      "id": "asset:assets/agents/reusable_methods/secure-code-review/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/secure-code-review/SKILL.md"
     },
     {
       "id": "asset:assets/agents/reusable_methods/secure-code-review/agents/openai.yaml",
@@ -738,19 +693,9 @@
       "path": "assets/agents/reusable_methods/security-and-hardening/references/security-checklist.md"
     },
     {
-      "id": "asset:assets/agents/reusable_methods/session-forensics/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/session-forensics/SKILL.md"
-    },
-    {
       "id": "asset:assets/agents/reusable_methods/session-forensics/agents/openai.yaml",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/session-forensics/agents/openai.yaml"
-    },
-    {
-      "id": "asset:assets/agents/reusable_methods/threat-modeling/SKILL.md",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/threat-modeling/SKILL.md"
     },
     {
       "id": "asset:assets/agents/reusable_methods/threat-modeling/agents/openai.yaml",

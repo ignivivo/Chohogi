@@ -15,10 +15,11 @@ from semantic_contracts import SemanticContractError, frontmatter
 
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_SKILL_ROOTS = (
-    ROOT / "assets" / "agents" / "reusable_methods",
-    ROOT / "assets" / "agents" / "adaptive-regulation",
-)
+# Chohogi's actual skill source lives here; assets/agents/reusable_methods/<name>
+# and assets/agents/adaptive-regulation/{learning,homeostasis} are reverse
+# symlinks into this directory (Codex's local-plugin install does not follow
+# symlinks, so the plugin's skills/ must hold the real files).
+DEFAULT_SKILL_ROOT = ROOT / "skills"
 INTAKE = ROOT / "tooling" / "scan-skill-intake.py"
 
 
@@ -83,19 +84,17 @@ def check_resource_graph(directory: Path, skill_root: Path, errors: list[str]) -
 
 def main() -> int:
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument("--reusable-root", type=Path, default=DEFAULT_SKILL_ROOTS[0])
-    parser.add_argument("--adaptive-root", type=Path, default=DEFAULT_SKILL_ROOTS[1])
+    parser.add_argument("--skill-root", type=Path, default=DEFAULT_SKILL_ROOT)
     arguments = parser.parse_args()
-    skill_roots = (arguments.reusable_root.resolve(), arguments.adaptive_root.resolve())
+    skill_root = arguments.skill_root.resolve()
     errors: list[str] = []
     review_signals: list[str] = []
-    if not all(path.is_dir() for path in skill_roots):
-        print("Missing Chohogi skill roots: " + ", ".join(str(path) for path in skill_roots))
+    if not skill_root.is_dir():
+        print(f"Missing Chohogi skill root: {skill_root}")
         return 1
-    for skill_root in skill_roots:
-        for directory in sorted(path for path in skill_root.iterdir() if path.is_dir()):
-            check_skill(directory, errors, review_signals)
-            check_resource_graph(directory, skill_root, errors)
+    for directory in sorted(path for path in skill_root.iterdir() if path.is_dir()):
+        check_skill(directory, errors, review_signals)
+        check_resource_graph(directory, skill_root, errors)
     if errors:
         print("Chohogi supplemental skill verification: FAIL")
         print("\n".join(f"- {error}" for error in errors))

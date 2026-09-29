@@ -53,7 +53,7 @@ copy_to_stage() {
   mkdir -p "$(dirname "$destination")"
   case "$mode" in
     file) cp "$source" "$destination" ;;
-    tree) cp -R "$source" "$destination" ;;
+    tree) cp -RL "$source" "$destination" ;;
     *) echo "Unsupported registry install mode: $mode" >&2; exit 1 ;;
   esac
 }
