@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "35e37491dd4d2ca31c194172f1fcf8510078037b17f8b287d7821b3b75630f36",
+  "sourceDigest": "c524d387727dc5fd51332d6f481afbd599fed50492bc6e568f4059553c2c91d7",
   "nodes": [
     {
       "id": "asset:README.md",
@@ -738,6 +738,16 @@
       "path": "assets/agents/reusable_methods/security-and-hardening/references/security-checklist.md"
     },
     {
+      "id": "asset:assets/agents/reusable_methods/session-forensics/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/session-forensics/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/session-forensics/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/session-forensics/agents/openai.yaml"
+    },
+    {
       "id": "asset:assets/agents/reusable_methods/threat-modeling/SKILL.md",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/threat-modeling/SKILL.md"
@@ -898,6 +908,16 @@
       "path": "assets/agents/trunk_orchestration/model-policy.md"
     },
     {
+      "id": "asset:assets/agents/trunk_orchestration/platform-tools/claude-tools.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/platform-tools/claude-tools.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/platform-tools/codex-tools.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/platform-tools/codex-tools.md"
+    },
+    {
       "id": "asset:assets/agents/trunk_orchestration/project-leaves.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/project-leaves.md"
@@ -943,9 +963,19 @@
       "path": "docs/chohogi/audits/2026-09-03-functional-reality-gap.md"
     },
     {
+      "id": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "kind": "asset",
+      "path": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
       "id": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
       "kind": "asset",
       "path": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "id": "asset:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "kind": "asset",
+      "path": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
     },
     {
       "id": "asset:docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md",
@@ -1003,6 +1033,16 @@
       "path": "docs/chohogi/specs/2026-09-03-execution-record.md"
     },
     {
+      "id": "asset:docs/work-log/README.md",
+      "kind": "asset",
+      "path": "docs/work-log/README.md"
+    },
+    {
+      "id": "asset:docs/work-log/records/HOM-20260923-observability-closure/final-verification-report.md",
+      "kind": "asset",
+      "path": "docs/work-log/records/HOM-20260923-observability-closure/final-verification-report.md"
+    },
+    {
       "id": "asset:manifest.json",
       "kind": "asset",
       "path": "manifest.json"
@@ -1058,6 +1098,11 @@
       "path": "tooling/prune-backups.sh"
     },
     {
+      "id": "asset:tooling/retired-capability-markers.json",
+      "kind": "asset",
+      "path": "tooling/retired-capability-markers.json"
+    },
+    {
       "id": "asset:tooling/run-security-gate.py",
       "kind": "asset",
       "path": "tooling/run-security-gate.py"
@@ -1076,6 +1121,11 @@
       "id": "asset:tooling/summarize-replays.py",
       "kind": "asset",
       "path": "tooling/summarize-replays.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_capability_marker_scan.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_capability_marker_scan.py"
     },
     {
       "id": "asset:tooling/tests/test_execution_record.py",
@@ -1188,6 +1238,11 @@
       "path": "tooling/verify-install.sh"
     },
     {
+      "id": "asset:tooling/verify-installed-capability-markers.py",
+      "kind": "asset",
+      "path": "tooling/verify-installed-capability-markers.py"
+    },
+    {
       "id": "asset:tooling/verify-learning-contract.py",
       "kind": "asset",
       "path": "tooling/verify-learning-contract.py"
@@ -1226,6 +1281,12 @@
       "id": "asset:tooling/verify-source-layout.py",
       "kind": "asset",
       "path": "tooling/verify-source-layout.py"
+    },
+    {
+      "id": "component:capability-marker-scan-tool",
+      "kind": "component",
+      "path": "tooling/verify-installed-capability-markers.py",
+      "state": "active"
     },
     {
       "id": "component:chohogi-organs",
@@ -1282,6 +1343,12 @@
       "state": "active"
     },
     {
+      "id": "component:homeostasis-claude",
+      "kind": "component",
+      "path": "assets/agents/adaptive-regulation/homeostasis",
+      "state": "active"
+    },
+    {
       "id": "component:implementation-worker-role",
       "kind": "component",
       "path": "assets/runtime_entrypoint/agents/implementation-worker.toml",
@@ -1289,6 +1356,12 @@
     },
     {
       "id": "component:learning",
+      "kind": "component",
+      "path": "assets/agents/adaptive-regulation/learning",
+      "state": "active"
+    },
+    {
+      "id": "component:learning-claude",
       "kind": "component",
       "path": "assets/agents/adaptive-regulation/learning",
       "state": "active"
@@ -1306,7 +1379,19 @@
       "state": "retired"
     },
     {
+      "id": "component:retired-capability-markers",
+      "kind": "component",
+      "path": "tooling/retired-capability-markers.json",
+      "state": "active"
+    },
+    {
       "id": "component:reusable-methods",
+      "kind": "component",
+      "path": "assets/agents/reusable_methods",
+      "state": "active"
+    },
+    {
+      "id": "component:reusable-methods-claude",
       "kind": "component",
       "path": "assets/agents/reusable_methods",
       "state": "active"
@@ -1322,9 +1407,19 @@
       "path": "docs/chohogi/audits/2026-09-03-functional-reality-gap.md"
     },
     {
+      "id": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "kind": "document",
+      "path": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
       "id": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
       "kind": "document",
       "path": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "id": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "kind": "document",
+      "path": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
     },
     {
       "id": "document:docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md",
@@ -1387,6 +1482,16 @@
       "path": ".agents/chohogi/tooling/model-catalog.py"
     },
     {
+      "id": "endpoint:.agents/chohogi/tooling/retired-capability-markers.json",
+      "kind": "endpoint",
+      "path": ".agents/chohogi/tooling/retired-capability-markers.json"
+    },
+    {
+      "id": "endpoint:.agents/chohogi/tooling/verify-installed-capability-markers.py",
+      "kind": "endpoint",
+      "path": ".agents/chohogi/tooling/verify-installed-capability-markers.py"
+    },
+    {
       "id": "endpoint:.agents/skills",
       "kind": "endpoint",
       "path": ".agents/skills"
@@ -1405,6 +1510,21 @@
       "id": "endpoint:.claude/CLAUDE.md",
       "kind": "endpoint",
       "path": ".claude/CLAUDE.md"
+    },
+    {
+      "id": "endpoint:.claude/skills",
+      "kind": "endpoint",
+      "path": ".claude/skills"
+    },
+    {
+      "id": "endpoint:.claude/skills/homeostasis",
+      "kind": "endpoint",
+      "path": ".claude/skills/homeostasis"
+    },
+    {
+      "id": "endpoint:.claude/skills/learning",
+      "kind": "endpoint",
+      "path": ".claude/skills/learning"
     },
     {
       "id": "endpoint:.codex/AGENTS.md",
@@ -1487,6 +1607,12 @@
       "state": "active"
     },
     {
+      "id": "skill:session-forensics",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/session-forensics/SKILL.md",
+      "state": "active"
+    },
+    {
       "id": "skill:threat-modeling",
       "kind": "skill",
       "path": "assets/agents/reusable_methods/threat-modeling/SKILL.md",
@@ -1526,6 +1652,11 @@
       "id": "verifier:homeostasis-policy",
       "kind": "verifier",
       "path": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "id": "verifier:installed-capability-markers",
+      "kind": "verifier",
+      "path": "tooling/verify-installed-capability-markers.py"
     },
     {
       "id": "verifier:learning-contract",
@@ -1608,6 +1739,12 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "asset:assets/agents/adaptive-regulation/homeostasis",
+      "target": "component:homeostasis-claude",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
@@ -1616,6 +1753,12 @@
     {
       "source": "asset:assets/agents/adaptive-regulation/learning",
       "target": "component:learning",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/adaptive-regulation/learning",
+      "target": "component:learning-claude",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -1723,6 +1866,12 @@
     },
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
       "relation": "documents",
       "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
@@ -1760,6 +1909,12 @@
     {
       "source": "asset:assets/agents/reusable_methods",
       "target": "component:reusable-methods",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/reusable_methods",
+      "target": "component:reusable-methods-claude",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -1816,6 +1971,12 @@
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "target": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
     },
     {
       "source": "asset:assets/agents/trunk_orchestration/conductor.md",
@@ -1933,6 +2094,12 @@
     },
     {
       "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
       "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
@@ -1972,6 +2139,36 @@
       "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
       "relation": "documents",
       "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "target": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "target": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
     },
     {
       "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
@@ -2038,6 +2235,12 @@
       "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
       "relation": "requires",
       "evidence": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "target": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
     },
     {
       "source": "asset:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
@@ -2214,6 +2417,12 @@
       "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
+      "source": "asset:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
       "source": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
@@ -2224,6 +2433,18 @@
       "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/work-log/README.md",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:docs/work-log/records/HOM-20260923-observability-closure/final-verification-report.md",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
     },
     {
       "source": "asset:manifest.json",
@@ -2253,6 +2474,12 @@
       "source": "asset:manifest.json",
       "target": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
       "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:capability-marker-scan-tool",
+      "relation": "activates",
       "evidence": "manifest.json"
     },
     {
@@ -2311,6 +2538,12 @@
     },
     {
       "source": "asset:manifest.json",
+      "target": "component:homeostasis-claude",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
       "target": "component:implementation-worker-role",
       "relation": "activates",
       "evidence": "manifest.json"
@@ -2318,6 +2551,12 @@
     {
       "source": "asset:manifest.json",
       "target": "component:learning",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:learning-claude",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -2335,7 +2574,19 @@
     },
     {
       "source": "asset:manifest.json",
+      "target": "component:retired-capability-markers",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
       "target": "component:reusable-methods",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:reusable-methods-claude",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -2482,6 +2733,12 @@
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/retired-capability-markers.json",
+      "target": "component:retired-capability-markers",
+      "relation": "activates",
+      "evidence": "manifest.json"
     },
     {
       "source": "asset:tooling/semantic_contracts.py",
@@ -2652,6 +2909,12 @@
       "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
+      "source": "asset:tooling/verify-installed-capability-markers.py",
+      "target": "component:capability-marker-scan-tool",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "asset:tooling/verify-learning-contract.py",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
@@ -2706,6 +2969,12 @@
       "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
+      "source": "component:capability-marker-scan-tool",
+      "target": "endpoint:.agents/chohogi/tooling/verify-installed-capability-markers.py",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "component:chohogi-organs",
       "target": "endpoint:.agents/chohogi",
       "relation": "installs",
@@ -2748,6 +3017,12 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "component:homeostasis-claude",
+      "target": "endpoint:.claude/skills/homeostasis",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "component:implementation-worker-role",
       "target": "endpoint:.codex/agents/implementation-worker.toml",
       "relation": "installs",
@@ -2760,14 +3035,32 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "component:learning-claude",
+      "target": "endpoint:.claude/skills/learning",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "component:model-catalog-tool",
       "target": "endpoint:.agents/chohogi/tooling/model-catalog.py",
       "relation": "installs",
       "evidence": "manifest.json"
     },
     {
+      "source": "component:retired-capability-markers",
+      "target": "endpoint:.agents/chohogi/tooling/retired-capability-markers.json",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "component:reusable-methods",
       "target": "endpoint:.agents/skills",
+      "relation": "installs",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:reusable-methods-claude",
+      "target": "endpoint:.claude/skills",
       "relation": "installs",
       "evidence": "manifest.json"
     },
@@ -3607,6 +3900,24 @@
     },
     {
       "source": "skill:security-and-hardening",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:session-forensics",
+      "target": "asset:assets/agents/reusable_methods/session-forensics/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/session-forensics/SKILL.md"
+    },
+    {
+      "source": "skill:session-forensics",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:session-forensics",
       "target": "verifier:provenance",
       "relation": "verifies",
       "evidence": "tooling/verify-provenance.py"

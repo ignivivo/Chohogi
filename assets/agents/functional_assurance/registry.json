@@ -85,6 +85,17 @@
       "limits": "advisory guidance does not execute an accessibility scanner or establish legal compliance"
     },
     {
+      "id": "session-forensics-method",
+      "kind": "advisory",
+      "sources": ["assets/agents/reusable_methods/session-forensics"],
+      "trigger": "the debugging route needs to diagnose why a past agent session (not a code bug) diverged from its intended outcome, using the actual session rollout/transcript as evidence",
+      "nonTrigger": "does not select route, authority, or completion; does not diagnose a reproducible code defect (use the plain debugging route); does not compute cost/token totals the harness does not itself expose",
+      "output": "an evidence-backed case file with triage verdict, environment, sessions examined, timeline, categorized findings with file:line evidence and confidence, and coverage notes",
+      "verifiers": ["tooling/verify-skills.py"],
+      "fixtures": ["tooling/tests/test_skills.py"],
+      "limits": "advisory guidance; requires the session log to actually exist and be readable; cannot prove causation beyond what cited evidence supports, and does not generalize a single session's finding into a universal defect without independent repetition"
+    },
+    {
       "id": "hallmark-method",
       "kind": "advisory",
       "sources": ["assets/agents/reusable_methods/hallmark"],
@@ -257,14 +268,14 @@
     {
       "id": "installation-and-diagnostics",
       "kind": "deterministic-check",
-      "sources": ["tooling/install.sh", "tooling/doctor.sh", "tooling/doctor.py", "tooling/graft-compatibility_install-audit.sh", "tooling/verify-install.sh", "tooling/prune-backups.sh", "tooling/manifest_registry.py"],
-      "trigger": "installation, diagnosis, audit, or backup management",
-      "nonTrigger": "does not modify an unowned installation",
-      "output": "installed state report, audit result, or guarded migration action",
-      "execution": "shell command or Python resolver named by the requested operation",
-      "verifiers": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py"],
-      "fixtures": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py"],
-      "limits": "doctor reports conformant-only state; operational and responsive health remain unknown without project evidence; graft audit establishes source/install parity"
+      "sources": ["tooling/install.sh", "tooling/doctor.sh", "tooling/doctor.py", "tooling/graft-compatibility_install-audit.sh", "tooling/verify-install.sh", "tooling/prune-backups.sh", "tooling/manifest_registry.py", "tooling/retired-capability-markers.json", "tooling/verify-installed-capability-markers.py"],
+      "trigger": "installation, diagnosis, audit, backup management, or a check that no absorbed external provider is still referenced in the installed tree",
+      "nonTrigger": "does not modify an unowned installation; does not itself remove a found marker",
+      "output": "installed state report, audit result, guarded migration action, or a pass/fail absorbed-provider-marker scan",
+      "execution": "shell command or Python resolver named by the requested operation; python3 tooling/verify-installed-capability-markers.py --home <home> for the installed-tree marker scan (self-contained, no manifest.json/source-checkout dependency)",
+      "verifiers": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py", "tooling/tests/test_capability_marker_scan.py"],
+      "fixtures": ["tooling/tests/test_graft_compatibility_audit.py", "tooling/tests/test_manifest_registry.py", "tooling/tests/test_capability_marker_scan.py"],
+      "limits": "doctor reports conformant-only state; operational and responsive health remain unknown without project evidence; graft audit establishes source/install parity; the marker scan only detects markers declared in retired-capability-markers.json and is not run automatically at session start — a session must be told (by the runtime-entrypoint guidance) to invoke it, or a human/Homeostasis pass must run it"
     },
     {
       "id": "model-policy-evaluator",

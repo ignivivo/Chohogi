@@ -18,6 +18,7 @@
     {"path": "docs/chohogi/feedback/chohogi-harness-comparison.md", "role": "feedback-source", "authority": "observation", "state": "active"},
     {"path": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md", "role": "feedback-source", "authority": "observation", "state": "active"},
     {"path": "docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md", "role": "feedback-source", "authority": "observation", "state": "active"},
+    {"path": "docs/chohogi/feedback/codex-claude-cowork-20260928.md", "role": "feedback-source", "authority": "observation", "state": "active"},
     {"path": "docs/chohogi/audits/2026-09-03-functional-reality-gap.md", "role": "review-synthesis", "authority": "review", "state": "historical"},
     {"path": "docs/chohogi/specs/2026-09-03-execution-record.md", "role": "decision", "authority": "information-architecture", "state": "active"},
     {"path": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md", "role": "decision", "authority": "information-architecture", "state": "active"},

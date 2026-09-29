@@ -1,0 +1,7 @@
+{
+  "name": "chohogi-marketplace",
+  "owner": {"name": "ignivivo"},
+  "plugins": [
+    {"name": "chohogi", "source": "./", "description": "Chohogi single-harness orchestration"}
+  ]
+}

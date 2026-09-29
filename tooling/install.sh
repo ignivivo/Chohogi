@@ -186,10 +186,50 @@ while IFS= read -r retired_destination; do
 done < <(python3 -c 'import json,sys
 for destination in json.load(sys.stdin)["retiredDestinations"]: print(destination)' <<<"$plan")
 
+# Claude Code's own skill-discovery path (.claude/skills/) is not the
+# Codex/Gemini/Copilot-shared .agents/skills/, so a session running under
+# Claude Code cannot see a skill installed only there. Mirror .claude/skills/*
+# actions independently: they are outside the .agents/ staging pipeline above,
+# so they get their own staging, ownership marker, and collision discipline.
+claude_skills_stage="$stage/claude-skills"
+mkdir -p "$claude_skills_stage"
+while IFS=$'\t' read -r source destination mode; do
+  [[ "$destination" == .claude/skills/* ]] || continue
+  relative="${destination#.claude/skills/}"
+  staged="$claude_skills_stage/$relative"
+  copy_to_stage "$root/$source" "$staged" "$mode"
+  [[ -d "$staged" ]] && cp "$live_root/$marker_name" "$staged/$marker_name"
+done < <(python3 -c 'import json,sys
+for action in json.load(sys.stdin)["actions"]:
+    print("\t".join((action["source"], action["destination"], action["mode"])))' <<<"$plan")
+
+for staged in "$claude_skills_stage"/*; do
+  [[ -e "$staged" ]] || continue
+  name="$(basename "$staged")"
+  live="$target_home/.claude/skills/$name"
+  if [[ -e "$live" ]]; then
+    [[ -d "$live" ]] || { echo "Installation collision: $live is not a directory." >&2; exit 1; }
+    if ! is_chohogi_owned "$live" && [[ "$adopt_existing" != true ]]; then
+      echo "Installation collision: $live is not marked as Chohogi-owned." >&2; exit 1
+    fi
+    if tree_matches "$staged" "$live"; then
+      marker_is_current "$live" || cp "$staged/$marker_name" "$live/$marker_name"
+      continue
+    fi
+    ensure_backup "$(layout_version "$live")"
+    mkdir -p "$backup/claude-skills"
+    mv "$live" "$backup/claude-skills/$name"
+  else
+    mkdir -p "$(dirname "$live")"
+  fi
+  mv "$staged" "$live"
+done
+
 while IFS=$'\t' read -r source destination mode; do
   case "$destination" in
     .codex/AGENTS.md|.claude/CLAUDE.md) install_global_guidance "$root/$source" "$target_home/$destination" ;;
     .codex/agents/*) install_managed_codex_agent "$root/$source" "$target_home/$destination" ;;
+    .claude/skills/*) continue ;;  # handled above, independently of the .agents/ pipeline
     .codex/*) echo "Unsupported Codex installation destination: $destination" >&2; exit 1 ;;
     *) continue ;;
   esac

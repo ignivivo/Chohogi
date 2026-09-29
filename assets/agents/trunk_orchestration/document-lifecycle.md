@@ -2,10 +2,11 @@
 
 # 문서 lifecycle 및 참조 계약
 
-이 계약은 Superpowers에서 흡수한 계획→실행→검증→피드백의 유효한 패턴을 초호기
-문서 topology에 적용한다. 외부 하네스나 별도 controller를 만들지 않으며, 기존
-`conductor → branch → allocation → execution record → verification → feedback`
-흐름을 보강할 뿐이다.
+이 계약은 외부 방법론에서 흡수해 초호기 내부 자산으로 소화한 계획→실행→검증→피드백
+패턴을 초호기 문서 topology에 적용한다. 외부 하네스나 별도 controller를 만들지
+않으며, 기존 `conductor → branch → allocation → execution record → verification →
+feedback` 흐름을 보강할 뿐이다. 흡수 원(source)의 이름·경로·원본 지침은 참조하지
+않는다(`roots_constitution/constitution.md`의 흡수 원칙).
 
 ## 역할과 권위
 

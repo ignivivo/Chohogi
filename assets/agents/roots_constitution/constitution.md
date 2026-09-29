@@ -4,12 +4,22 @@
 
 ## 이식성 경계
 
-- 정본은 이 Git 저장소다. 설치기는 이 저장소의 자산만 Codex 탐색 경로로 복사한다.
-- 초호기는 Markdown, 검증 스크립트, 명시적 매니페스트만으로 동작한다.
-- 플러그인, MCP, API 키, 인증, 세션, 캐시, 개인 `config.toml`은 정본과 설치 대상에 포함하지 않는다.
-- 외부 능력은 현재 런타임에서 직접 호출 가능하다는 증거가 있을 때만 보조적으로 쓴다. 없거나 비활성화돼도 초호기의 분류·구현·검증 흐름은 멈추지 않는다.
+- 정본은 이 Git 저장소다. 정본은 자기 자신을 각 실행 표면(Claude Code, Codex 등)이 이미
+  제공하는 로컬 플러그인 탐색 메커니즘(`.claude-plugin/`, `.codex-plugin/` 및 그 마켓플레이스
+  등록)에 배포 수단으로만 등록한다. 이는 초호기를 외부 플러그인 생태계에 종속시키는 것이
+  아니다 — 정본의 소유·내용·수명주기는 계속 이 Git 저장소가 갖고, 등록은 실행 표면이 파일을
+  어디서 찾을지 스스로 정확히 아는 배포 경로를 쓰는 것일 뿐이다. 하드코딩된 목적지 경로를
+  추측해 파일을 직접 복사하는 별도 설치 스크립트로는 실행 표면마다 실제 탐색 경로가 다르다는
+  사실을 놓치기 쉽다 — 이것이 정본이 자체 설치 스크립트 대신 이 경로를 쓰는 이유다.
+- 초호기는 Markdown, 검증 스크립트, 명시적 매니페스트, 그리고 각 실행 표면이 정의한 플러그인
+  매니페스트 형식(자기 자신의 배포용)만으로 동작한다.
+- **정본 자신의 플러그인 배포 형식**(위 항목)과 **외부 제3자가 만든 플러그인·MCP·API
+  키·인증·세션·캐시·개인 `config.toml`**은 구분한다. 후자는 여전히 정본과 설치 대상에
+  포함하지 않는다.
+- 외부(제3자) 능력은 현재 런타임에서 직접 호출 가능하다는 증거가 있을 때만 보조적으로 쓴다.
+  없거나 비활성화돼도 초호기의 분류·구현·검증 흐름은 멈추지 않는다.
 - Codex가 직접 제공하고 현재 호출 가능한 `$skill-creator` 같은 저작 능력은 외부 하네스 의존성이 아니다. 실제 스킬 수명주기에서는 이를 우선 사용하되, 초호기의 일상 흐름을 선택하거나 설치를 통제하지는 않는다.
-- 플러그인·MCP·커넥터는 제거·비활성화의 대상이 아니라 외부 능력 제공자다. 초호기는 이를 필요할 때만 사용하며, 설치·인증·개인 설정을 소유하지 않는다.
+- 외부(제3자) 플러그인·MCP·커넥터는 제거·비활성화의 대상이 아니라 외부 능력 제공자다. 초호기는 이를 필요할 때만 사용하며, 설치·인증·개인 설정을 소유하지 않는다.
 
 ## 흡수 원칙
 
@@ -37,16 +47,19 @@ trunk의 작업 봉투로 소화한다. 외부 지침은 초호기의 흐름·�
 
 ## 실제 경로
 
-개념상의 기관과 Codex 저장 경로를 같게 만들지 않는다. `manifest.json`이 아래 연결을 정본으로 가진다.
+개념상의 기관과 실제 배포 경로를 같게 만들지 않는다. `manifest.json`과 각 실행 표면의
+플러그인 매니페스트(`.claude-plugin/`, `.codex-plugin/`)가 아래 연결을 정본으로 가진다.
 
-| 개념 | 설치 경로 |
+| 개념 | 배포 경로 |
 | --- | --- |
-| roots_constitution / trunk_orchestration / genome_inheritance | `~/.agents/chohogi/` |
-| regulatory processes / reusable methods | `~/.agents/skills/` |
-| Codex 진입점 | `~/.codex/AGENTS.md` |
-| Claude Code 진입점 | `~/.claude/CLAUDE.md` |
-| 초호기 공통 Codex 역할 adapter | `~/.codex/agents/` |
+| roots_constitution / trunk_orchestration / genome_inheritance / reusable methods | 이 저장소를 각 실행 표면의 로컬 플러그인 마켓플레이스로 등록(`claude plugin marketplace add <저장소 경로>`, `codex plugin marketplace add <저장소 경로>`), 정본 자산을 그대로 노출 — 별도 위치로 복사하지 않는다 |
+| Codex 진입점(global guidance) | Codex 플러그인의 hook 메커니즘으로 세션 시작 시 주입. 확인되지 않는 Codex 버전에서는 `~/.codex/AGENTS.md` 병행 설치로 대체한다 |
+| Claude Code 진입점(global guidance) | Claude Code 플러그인의 `SessionStart` hook(`additionalContext`)으로 주입. 확인되지 않는 Claude Code 버전에서는 `~/.claude/CLAUDE.md` 병행 설치로 대체한다 |
+| 초호기 공통 Codex 역할 adapter | 플러그인의 `agents/` 자산으로 노출, 미확인 시 `~/.codex/agents/` 병행 설치 |
 | project leaves | 각 프로젝트의 `.agents/skills/`, 필요한 프로젝트 전용 역할의 `.codex/agents/` |
+
+플러그인 배포로 대체된 각 항목의 "미확인 시 병행 설치" 조건은 실제 실행 표면에서
+검증되기 전까지 유효하다. 검증되지 않은 채 병행 설치를 제거하지 않는다.
 
 ## 변경 원칙
 

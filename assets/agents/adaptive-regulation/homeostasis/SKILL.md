@@ -45,7 +45,11 @@ needs a regression test, or an optional tool exists.
 ## Method
 
 1. State the admission evidence, current boundary, and observable failure or
-   unnecessary cost.
+   unnecessary cost. Once admission passes, this is material work: open
+   `python3 tooling/execution-record.py --project <project> begin --work-id HOM-<date>-<slug>
+   --contract <contract.json>` before making any persistent change. A repair packet
+   this skill later produces without an open execution record has no durable trail —
+   the next session cannot tell why the change was made or reopen it.
 2. Run `python3 tooling/genome_map.py impact <changed-path>` and use its full
    affected set: consumers, prerequisites, verifiers, installed endpoint, and
    active documentation. An unmapped path is itself a conformance failure.
@@ -69,7 +73,10 @@ needs a regression test, or an optional tool exists.
    execution path, resources, fixture, verifier, and output can establish.
 4. Identify the causal mismatch and emit a repair packet: observed state,
    affected component IDs, allowed smallest repair, required re-verification,
-   and remaining risk. The audit itself never edits an asset.
+   and remaining risk. The audit itself never edits an asset. Record the packet
+   as an execution-record `fact` (observed state) and `decision` (the smallest
+   repair and why) in the work-id opened at step 1 — the packet is not durable
+   until it is in the record.
 5. Identify the smallest owning asset: conductor, route contract, vascular
    contract, capability lifecycle, genome inheritance, installer/adapter, or project leaf.
 6. Give each changed asset a trigger, negative scope, owner, input, output,
@@ -103,3 +110,7 @@ Produce either a bounded change with the required verification evidence, or a
 decision not to change Chohogi. When a confirmed failure is being made durable,
 let `$learning` decide the smallest prevention first; use Homeostasis only if
 that decision changes Chohogi's own policy or lifecycle.
+
+Close the work-id opened at step 1 with an `outcome` (result, remaining risk)
+and `finalize`. A Homeostasis change without a closed execution record is not
+distinguishable, to a later session, from a change nobody decided to make.

@@ -95,6 +95,28 @@
       "installMode": "file"
     },
     {
+      "id": "retired-capability-markers",
+      "organ": "trunk_orchestration",
+      "function": "absorbed-provider-marker-declaration",
+      "source": "tooling/retired-capability-markers.json",
+      "destination": ".agents/chohogi/tooling/retired-capability-markers.json",
+      "ownership": "managed",
+      "activation": "read by capability-marker-scan-tool; declares absorbed external provider names that must not reappear as active references",
+      "state": "active",
+      "installMode": "file"
+    },
+    {
+      "id": "capability-marker-scan-tool",
+      "organ": "trunk_orchestration",
+      "function": "absorbed-provider-marker-scan",
+      "source": "tooling/verify-installed-capability-markers.py",
+      "destination": ".agents/chohogi/tooling/verify-installed-capability-markers.py",
+      "ownership": "managed",
+      "activation": "Homeostasis maintenance check or explicit request to confirm no absorbed external provider is still referenced in the installed Chohogi tree",
+      "state": "active",
+      "installMode": "file"
+    },
+    {
       "id": "reusable-methods",
       "organ": "reusable_methods",
       "function": "reusable-skills",
@@ -102,6 +124,18 @@
       "destination": ".agents/skills",
       "ownership": "managed",
       "activation": "matching concrete capability boundary; never a project leaf",
+      "state": "active",
+      "installMode": "children",
+      "exclude": []
+    },
+    {
+      "id": "reusable-methods-claude",
+      "organ": "reusable_methods",
+      "function": "reusable-skills",
+      "source": "assets/agents/reusable_methods",
+      "destination": ".claude/skills",
+      "ownership": "managed",
+      "activation": "same as reusable-methods; mirrored because Claude Code's own skill-discovery path (.claude/skills/) is not the Codex/Gemini/Copilot-shared .agents/skills/, so a Claude Code session cannot otherwise see these skills exist",
       "state": "active",
       "installMode": "children",
       "exclude": []
@@ -118,6 +152,17 @@
       "installMode": "tree"
     },
     {
+      "id": "learning-claude",
+      "organ": "adaptive-regulation",
+      "function": "confirmed-failure-prevention",
+      "source": "assets/agents/adaptive-regulation/learning",
+      "destination": ".claude/skills/learning",
+      "ownership": "managed",
+      "activation": "same as learning; mirrored so a Claude Code session's own skill discovery (.claude/skills/) can see this maintenance skill exists, not only Codex/Gemini/Copilot via .agents/skills/",
+      "state": "active",
+      "installMode": "tree"
+    },
+    {
       "id": "homeostasis",
       "organ": "adaptive-regulation",
       "function": "whole-harness-maintenance",
@@ -125,6 +170,17 @@
       "destination": ".agents/skills/homeostasis",
       "ownership": "managed",
       "activation": "whole-harness policy, lifecycle, or installation boundary",
+      "state": "active",
+      "installMode": "tree"
+    },
+    {
+      "id": "homeostasis-claude",
+      "organ": "adaptive-regulation",
+      "function": "whole-harness-maintenance",
+      "source": "assets/agents/adaptive-regulation/homeostasis",
+      "destination": ".claude/skills/homeostasis",
+      "ownership": "managed",
+      "activation": "same as homeostasis; mirrored so a Claude Code session's own skill discovery (.claude/skills/) can see this maintenance skill exists, not only Codex/Gemini/Copilot via .agents/skills/",
       "state": "active",
       "installMode": "tree"
     },
