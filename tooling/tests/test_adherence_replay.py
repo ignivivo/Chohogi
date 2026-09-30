@@ -94,6 +94,13 @@ class AdherenceReplayTests(unittest.TestCase):
         self.assertEqual(replay.codex_rollout_delegates(rollout),
                          [{"kind": "delegate", "role": "critical_reviewer", "model": "gpt-6-sol", "effort": "low"}])
 
+    def test_codex_rollout_ignores_internal_and_empty_agent_types(self) -> None:
+        def spawn(agent_type: str) -> str:
+            return json.dumps({"type": "response_item", "payload": {"type": "function_call", "name": "spawn_agent",
+                               "arguments": json.dumps({"agent_type": agent_type, "message": "m"})}})
+        rollout = [spawn("/session"), spawn(""), spawn("debugger")]
+        self.assertEqual([event["role"] for event in replay.codex_rollout_delegates(rollout)], ["debugger"])
+
     def test_delegated_assertion_checks_role_and_host_specific_model(self) -> None:
         scenario = {"id": "t", "rule": "r", "assertions": [
             {"id": "inherits", "kind": "delegated", "role": "critical[-_]reviewer", "model": {"claude": "^$", "codex": "^$"}},

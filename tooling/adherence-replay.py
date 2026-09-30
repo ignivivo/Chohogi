@@ -161,7 +161,10 @@ def codex_rollout_delegates(lines: list[str]) -> list[dict[str, Any]]:
             arguments = json.loads(payload.get("arguments") or "{}")
         except json.JSONDecodeError:
             arguments = {}
-        delegates.append({"kind": "delegate", "role": arguments.get("agent_type", "") or "",
+        role = arguments.get("agent_type", "") or ""
+        if not role or role.startswith("/"):
+            continue
+        delegates.append({"kind": "delegate", "role": role,
                           "model": arguments.get("model", "") or "", "effort": arguments.get("reasoning_effort", "") or ""})
     return delegates
 

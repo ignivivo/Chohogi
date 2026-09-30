@@ -52,6 +52,12 @@ class RoleDefinitionTests(unittest.TestCase):
         for role, agent in role_agent.items():
             self.assertTrue((CLAUDE_DIR / f"{agent}.md").is_file(), role)
 
+    def test_role_that_is_told_to_run_git_has_a_shell_tool(self) -> None:
+        for path in sorted(CLAUDE_DIR.glob("*.md")):
+            fields, body = claude_role(path)
+            if re.search(r"`git (show|diff|log)", body):
+                self.assertIn("Bash", [tool.strip() for tool in fields["tools"].split(",")], path.stem)
+
     def test_claude_role_frontmatter_is_deliverable(self) -> None:
         aliases = json.loads(RECOMMENDATIONS.read_text(encoding="utf-8"))["hosts"]["claude"]["deliveryAlias"]
         for path in sorted(CLAUDE_DIR.glob("*.md")):

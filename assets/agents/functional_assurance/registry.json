@@ -268,14 +268,14 @@
     {
       "id": "installation-and-diagnostics",
       "kind": "deterministic-check",
-      "sources": [".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".codex-plugin/plugin.json", "hooks/hooks.json", "tooling/manifest_registry.py"],
+      "sources": [".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".codex-plugin/plugin.json", "hooks/hooks.json", "tooling/manifest_registry.py", "tooling/codex-role-setup.py"],
       "trigger": "registering this repository as a Claude Code/Codex local plugin marketplace, or diagnosing why a skill/hook/agent is not recognized by a host",
-      "nonTrigger": "does not modify a host's personal settings.json/config.toml beyond what its own `plugin marketplace add`/`plugin install` commands write",
-      "output": "a registered local marketplace and installed plugin exposing skills/agents/hooks to that host",
-      "execution": "`claude plugin marketplace add <repo>` + `claude plugin install chohogi@chohogi-marketplace` for Claude Code; `codex plugin marketplace add <repo>` + `codex plugin add chohogi@chohogi-marketplace` for Codex",
-      "verifiers": ["tooling/tests/test_manifest_registry.py"],
-      "fixtures": ["tooling/tests/test_manifest_registry.py"],
-      "limits": "there is no copy-install step and no doctor-style installed-state report; Codex copies the marketplace root by git commit (untracked/uncommitted files are invisible to it) while Claude Code follows symlinks live, so the two hosts can observe different content if changes are not committed"
+      "nonTrigger": "does not modify a host's personal settings.json/config.toml beyond what its own `plugin marketplace add`/`plugin install` commands write, except the explicit `codex-role-setup.py --apply`, which only appends missing Chohogi role registrations after a backup (a user-authorized exception pending a standing decision)",
+      "output": "a registered local marketplace and installed plugin exposing skills/agents/hooks to that host; on Codex, a MISSING/WRONG_PATH/OK report for the canonical role registrations and, with --apply, the appended missing ones",
+      "execution": "`claude plugin marketplace add <repo>` + `claude plugin install chohogi@chohogi-marketplace` for Claude Code; `codex plugin marketplace add <repo>` + `codex plugin add chohogi@chohogi-marketplace` + `python3 tooling/codex-role-setup.py [--apply]` for Codex",
+      "verifiers": ["tooling/tests/test_manifest_registry.py", "tooling/tests/test_codex_role_setup.py"],
+      "fixtures": ["tooling/tests/test_manifest_registry.py", "tooling/tests/test_codex_role_setup.py"],
+      "limits": "there is no copy-install step; the only installed-state report is codex-role-setup.py for Codex role registrations (text match on [agents.<role>] config_file, not a TOML parse or a spawn test); Codex copies the marketplace root by git commit (untracked/uncommitted files are invisible to it) while Claude Code follows symlinks live, so the two hosts can observe different content if changes are not committed"
     },
     {
       "id": "model-policy-evaluator",
@@ -292,14 +292,14 @@
     {
       "id": "verification-and-topology-tools",
       "kind": "deterministic-check",
-      "sources": ["tooling/genome_map.py", "tooling/summarize-replays.py", "tooling/validate-replay-result.py", "tooling/verify-capability-boundary.py", "tooling/verify-document-lifecycle.py", "tooling/verify-project-document-registry.py", "tooling/verify-status-provenance.py", "tooling/verify-execution-allocation.py", "tooling/verify-external-capability-contract.py", "tooling/verify-functional-assurance.py", "tooling/verify-homeostasis-policy.py", "tooling/verify-learning-contract.py", "tooling/verify-model-policy.py", "tooling/verify-provenance.py", "tooling/verify-replay-evaluation.py", "tooling/verify-retired-capability.py", "tooling/verify-routes.py", "tooling/verify-skills.py", "tooling/verify-source-layout.py"],
+      "sources": ["tooling/genome_map.py", "tooling/summarize-replays.py", "tooling/validate-replay-result.py", "tooling/verify-capability-boundary.py", "tooling/verify-document-lifecycle.py", "tooling/verify-project-document-registry.py", "tooling/verify-status-provenance.py", "tooling/verify-execution-allocation.py", "tooling/verify-external-capability-contract.py", "tooling/verify-functional-assurance.py", "tooling/verify-homeostasis-policy.py", "tooling/verify-learning-contract.py", "tooling/verify-model-policy.py", "tooling/verify-provenance.py", "tooling/verify-replay-evaluation.py", "tooling/verify-retired-capability.py", "tooling/verify-routes.py", "tooling/verify-skills.py", "tooling/verify-source-layout.py", "tooling/verify-runtime-entrypoint.py"],
       "trigger": "a named static contract, topology, or replay record requires validation",
       "nonTrigger": "does not prove unobserved runtime or model behavior",
       "output": "machine-readable result or nonzero conformance failure",
       "execution": "python3 tooling/<named-tool>.py",
-      "verifiers": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py", "tooling/tests/test_project_document_registry.py", "tooling/tests/test_status_provenance.py"],
-      "fixtures": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py", "tooling/tests/test_project_document_registry.py", "tooling/tests/test_status_provenance.py"],
-      "limits": "deterministic checks only establish their declared contract"
+      "verifiers": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py", "tooling/tests/test_project_document_registry.py", "tooling/tests/test_status_provenance.py", "tooling/tests/test_runtime_entrypoint.py"],
+      "fixtures": ["tooling/tests/test_genome_map.py", "tooling/tests/test_functional_assurance.py", "tooling/tests/test_project_document_registry.py", "tooling/tests/test_status_provenance.py", "tooling/tests/test_runtime_entrypoint.py"],
+      "limits": "deterministic checks only establish their declared contract; verify-runtime-entrypoint checks hook paths and one anchor phrase per core rule, which proves presence, not session adherence"
     },
     {
       "id": "session-adherence-replay",

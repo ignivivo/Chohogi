@@ -32,6 +32,13 @@ ln -s $R/assets/agents ~/.agents/chohogi
 역할은 링크가 아니라 `~/.codex/config.toml`에 정본 경로로 등록한다. `~/.codex/agents/`에 링크를
 두면 역할 목록에는 보이지만 스폰이 거부된다.
 
+아래 수동 블록 대신 설치 뒤 정본에서 한 번 실행하면 누락된 역할만 등록하고, 이미 등록된
+역할은 바꾸지 않는다.
+
+```bash
+python3 tooling/codex-role-setup.py --apply
+```
+
 ```toml
 [agents.critical_reviewer]
 config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/critical-reviewer.toml"

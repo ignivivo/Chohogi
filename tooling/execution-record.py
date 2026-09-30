@@ -23,6 +23,14 @@ def load(path: Path): return json.loads(path.read_text(encoding='utf-8'))
 def event(folder: Path, data: dict):
     data['at'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     with (folder/'events.jsonl').open('a', encoding='utf-8') as f: f.write(json.dumps(data, ensure_ascii=False)+'\n')
+    # A later event can contradict what finalize checked, so a passed record stays unverified until finalized again.
+    verification = folder/'verification.json'
+    if data.get('event') != 'finalize' and verification.is_file():
+        report = json.loads(verification.read_text(encoding='utf-8'))
+        if report.get('status') == 'pass':
+            report.update(status='reopened', reopenedBy=data.get('event'), reopenedAt=data['at'])
+            verification.write_text(json.dumps(report, indent=2), encoding='utf-8')
+            print(f"record {folder.name} reopened by a {data.get('event')} event after finalize; run finalize again", file=sys.stderr)
 
 def parse_json(value: str, label: str):
     try:

@@ -69,11 +69,11 @@ def main() -> int:
         seen.add(path)
         entries_by_path[path] = item
         if role not in ROLES:
-            errors.append(f"{path}: unknown role {role}")
+            errors.append(f"{path}: unknown role {role}; valid: {sorted(ROLES)}")
         if authority not in AUTHORITIES:
-            errors.append(f"{path}: unknown authority {authority}")
+            errors.append(f"{path}: unknown authority {authority}; valid: {sorted(AUTHORITIES)}")
         if state not in STATES:
-            errors.append(f"{path}: unknown state {state}")
+            errors.append(f"{path}: unknown state {state}; valid: {sorted(STATES)}")
         target = root / path
         try:
             target.resolve().relative_to(root)
@@ -102,7 +102,11 @@ def main() -> int:
             errors.append("activeExecutionPlan must be a plan path or null")
         elif active_plans != [declared]:
             errors.append(f"activeExecutionPlan must be the only active plan; found {active_plans}")
+    keeps_records = (root / "docs/work-log/records").is_dir()
     for path, item in entries_by_path.items():
+        # Without a named record the finalize cross-check cannot run, so a finished plan could stay active.
+        if keeps_records and item.get("role") == "active-plan" and item.get("state") == "active" and "executionRecord" not in item:
+            errors.append(f"{path}: an active plan in a project with execution records must name its executionRecord")
         if item.get("role") == "active-plan" and item.get("state") == "active" and "executionRecord" in item:
             record = item["executionRecord"]
             record_entry = entries_by_path.get(record) if isinstance(record, str) else None

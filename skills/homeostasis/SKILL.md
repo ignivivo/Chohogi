@@ -85,16 +85,17 @@ needs a regression test, or an optional tool exists.
    credential, session, or private configuration a required controller.
 8. Prefer adapting one existing asset. Create a role or skill only for a
    repeatable boundary with independent evidence and a named verification.
-9. When creating or updating an actual `SKILL.md`, prefer Codex's callable
-   `$skill-creator`. Follow its lifecycle: concrete examples, resource plan,
-   `init_skill.py` for a new skill, edit, then `quick_validate.py`. This is a
-   Codex-native authoring capability, not a required external harness,
-   plugin, or controller. Do not invoke it for route, conductor, manifest, or
+9. When creating or updating an actual `SKILL.md`, prefer the host's callable
+   skill-creator (Codex `$skill-creator`, Claude Code `anthropic-skills:skill-creator`;
+   host mapping in `references/skill-lifecycle.md`). Follow its lifecycle: concrete
+   examples, resource plan, `init_skill.py` for a new skill where the host has it,
+   edit, then `quick_validate.py`. It is a host authoring capability, not a
+   required external harness, plugin, or controller. Do not invoke it for route, conductor, manifest, or
    other non-skill assets.
 10. If the official validator needs Python dependencies, prepare a task-scoped
    isolated environment and rerun that validator. Do not silently substitute
-   a different check and call it equivalent. If `$skill-creator` is genuinely
-   unavailable, use the supplemental fallback in
+   a different check and call it equivalent. If no skill-creator is genuinely
+   available, use the supplemental fallback in
    `references/skill-lifecycle.md` and record that limitation with the result.
 11. Read `trunk_orchestration/evaluation/evaluation-budget-policy.md` before approving an explicit
    paired replay; run the relevant static policy check. For

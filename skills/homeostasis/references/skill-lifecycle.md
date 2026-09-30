@@ -7,8 +7,12 @@ skill.
 
 ## Preferred authoring and validation
 
-When the current Codex surface exposes `$skill-creator`, use it for any new or
-changed `SKILL.md`.
+When the current surface exposes a skill-creator, use it for any new or changed
+`SKILL.md`: Codex `$skill-creator`, or Claude Code `anthropic-skills:skill-creator`.
+Both ship `scripts/quick_validate.py`, and on 2026-09-30 they gave the same verdict
+on all 14 Chohogi skills (`DBG-20260930-diagnosis-phase2`). Only the Codex one
+ships `init_skill.py`; on Claude Code, scaffold a new skill by copying an existing
+Chohogi skill's folder shape, then run the Claude `quick_validate.py`.
 
 1. Establish concrete trigger and non-trigger examples, ownership, and the
    smallest useful resources.
@@ -56,7 +60,7 @@ Chohogi checkout still contains its own operating assets.
 
 ## Supplemental fallback
 
-If `$skill-creator` cannot be called in the active Codex surface, use
+If no skill-creator can be called on the active surface, use
 `tooling/verify-skills.py` as a baseline check.
 They check Chohogi's own packaging conventions but are not a replacement for
 the official validator's YAML parsing. State the fallback in the verification

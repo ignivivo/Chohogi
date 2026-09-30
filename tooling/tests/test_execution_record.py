@@ -37,6 +37,20 @@ class ExecutionRecordTests(unittest.TestCase):
             result = self.invoke(project, "finalize", "--work-id", "sample")
             self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_event_after_finalize_reopens_the_record_until_finalized_again(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            self.begin(project, {"schemaVersion": 1})
+            self.assertEqual(self.invoke(project, "finalize", "--work-id", "sample").returncode, 0)
+            verification = project / "docs/work-log/records/sample/verification.json"
+            self.assertEqual(json.loads(verification.read_text())["status"], "pass")
+            added = self.invoke(project, "fact", "--work-id", "sample", "--kind", "observation", "--summary", "later check failed")
+            self.assertEqual(added.returncode, 0, added.stderr)
+            self.assertIn("reopened", added.stderr)
+            self.assertEqual(json.loads(verification.read_text())["status"], "reopened")
+            self.assertEqual(self.invoke(project, "finalize", "--work-id", "sample").returncode, 0)
+            self.assertEqual(json.loads(verification.read_text())["status"], "pass")
+
     def test_finalize_rejects_registered_artifact_when_bytes_change(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             project = Path(temporary)

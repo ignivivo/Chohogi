@@ -34,7 +34,7 @@
     "profileRoleToFile": {"scout": "evidence-scout", "implementer": "implementation-worker", "task-reviewer": "critical-reviewer", "final-reviewer": "final-reviewer", "debugger": "debugger"},
     "claude": "agents/*.md frontmatter의 model(정확한 id)과 effort(low|medium|high|xhigh|max)가 역할별로 실제 적용된다. 플러그인 전역 값이다. Agent 도구의 model 인자(별칭만)는 모델만 덮어쓰고 강도는 못 바꾼다. Haiku는 effort를 받지 않는다.",
     "claudeCurrentPlacement": {"evidence-scout": "claude-haiku-4-5 / (없음)", "implementation-worker": "claude-sonnet-5-5 / medium", "critical-reviewer": "claude-sonnet-5-5 / high", "final-reviewer": "claude-opus-5-5 / high", "debugger": "claude-opus-5-5 / high"},
-    "codex": "~/.codex/config.toml의 [agents.<이름>] config_file로 정본 TOML을 가리켜야 스폰된다(README). 5개 역할 모두 사용자 승인 대기로 미등록. 강도는 spawn_agent의 reasoning_effort로 호출마다 준다.",
+    "codex": "~/.codex/config.toml의 [agents.<이름>] config_file로 정본 TOML을 가리켜야 스폰된다(README). 2026-09-30 이 호스트에 5개 등록·live spawn 확인(3.17). `python3 tooling/codex-role-setup.py`가 MISSING/WRONG_PATH/OK를 보고하고 `--apply`는 백업 후 누락분만 추가한다. 강도는 spawn_agent의 reasoning_effort로 호출마다 준다.",
     "codexCurrentPlacement": {"scout": "gpt-5.6-luna / low", "implementer": "gpt-5.6-luna / medium", "task-reviewer": "gpt-5.6-luna / medium", "final-reviewer": "gpt-6-sol / medium", "debugger": "gpt-6-sol / medium"},
     "codexPlacementRationale": "사용자 결정: GPT-6를 쓴다. Luna만 5.6으로 내린 이유는 Luna의 장점이 속도인데 GPT-6 Luna가 느리게 관측됐기 때문이다(2026-09-30). Sol 역할은 GPT-6 유지."
   },
@@ -49,7 +49,8 @@
   },
   "documents": {
     "activeExecutionPlan": null,
-    "rule": "활성 계획은 최대 하나. 소유 기록이 finalize되면 계획을 historical로 바꾸고 null로 둔다. verify-project-document-registry.py가 finalize된 기록을 active로 선언하면 실패시킨다."
+    "rule": "활성 계획은 최대 하나. 소유 기록이 finalize되면 계획을 historical로 바꾸고 null로 둔다. verify-project-document-registry.py가 finalize된 기록을 active로 선언하면 실패시킨다. 프로젝트가 docs/work-log/records를 쓰면 활성 계획은 executionRecord를 반드시 적는다.",
+    "records": "finalize 뒤에 이벤트를 추가하면 verification.json이 reopened가 되고, 다시 finalize해야 pass다(F26). pass는 마지막 이벤트까지 검사됐다는 뜻이다."
   },
   "alwaysInjectedRules": [
     "route 선택: conductor가 direct / defer / product-decision / delivery / debugging 중 하나를 고른다",
@@ -82,6 +83,7 @@
 | 12 | `sonnet` 별칭은 Sonnet 5와 5.5 사이에서 모호하다 | 별칭은 항상 그 계열의 **최신**이다. 이전 세대는 별칭으로 고를 수 없다 | CLI `--model` 도움말 | 같은 기록 |
 | 13 | Claude는 역할별 추론 강도를 지정할 수 없다(`not-selectable`) | 역할 파일 frontmatter `effort`가 역할별로 적용된다. 인자에 없다는 것만 보고 능력이 없다고 판단한 오류 | 바이너리 검증 코드 → `claude -p` 탐침 transcript | `HOM-20260930-claude-role-effort` |
 | 14 | 역할 본문의 `${CLAUDE_EFFORT}`로 강도를 관측할 수 있다 | 역할 본문에서는 치환되지 않는다. 첫 탐침의 `EFFORT=60`은 무의미한 값이었다 | 두 번째 탐침에서 문자 그대로 반환 | 같은 기록 |
+| 15 | 기록의 `verification.json`이 pass면 그 작업은 끝났다 | finalize 뒤에 붙은 사실이 실패를 말해도 pass가 남았다(Codex 기록, Claude 기록 2개). 이제 reopened로 바뀐다 | Claude의 Codex 작업 검토 | `HOM-20260930-review-fixes` |
 
 교훈: 이름이 목록에 보이는 것, 설치 명령이 성공한 것, 문서에 적힌 것은 동작 증거가 아니다. 또한
 **전달 수단(도구 인자)의 제약을 능력 자체의 제약으로 읽지 않는다**(#11, #13). 새 세션을 실제로 돌려
@@ -222,13 +224,72 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 - **핵심 결과:** 8.2·8.3. 가장 무거운 것은 F21(세션이 주입 지침 밖을 읽지 않음)과 F22(검증기가 핵심 규칙 파손 대부분을 못 잡음).
 - **자기 회귀:** F18·F20은 3.13의 역할 분리가 만든 회귀다. 정적 테스트·검증기는 모두 통과했지만 replay가 드러냈다.
 
+### 3.17 Codex 설치·역할 재검토 ([`HOM-20260930-codex-role-install-live`](../../work-log/records/HOM-20260930-codex-role-install-live/events.jsonl))
+
+- **발견/재현:** `codex plugin add chohogi@chohogi-marketplace`는 성공했으나 `~/.codex/config.toml`에
+  `[agents.*]`가 0개여서 역할 5종을 스폰할 수 없었다. 이전 replay의 `--codex-role-config`는 그 실행에만
+  역할을 주입했으므로 영구 설치 상태를 증명하지 못했다.
+- **원인:** Codex plugin manifest에는 agents 슬롯·install lifecycle이 없다. `2372be0`은 이 제약을
+  README 수동 설정으로 넘기고 F4를 user-action으로 분류했다. 따라서 설치 성공이 역할 기능 성공처럼
+  보이는 발견 경계의 결함이 되었다.
+- **영향:** Codex에서 critical_reviewer·evidence_scout·implementation_worker·final_reviewer·debugger를
+  실제 `agent_type`으로 호출할 수 없었다. 정책 replay도 역할 등록 여부를 잘못 양성으로 볼 수 있었다.
+- **수정:** 사용자 승인으로 이 호스트의 config.toml에 5개 정본 TOML을 등록했다. 재발 방지로
+  `tooling/codex-role-setup.py --apply`를 추가해 누락 항목만 idempotent하게 등록하고 README에 설치 단계로
+  넣었다.
+- **검증:** 새 유료 `gpt-5.6-luna` Codex 세션에서 5개 agent_type을 각각 spawn해 모두 `ROLE_OK`를 받았다.
+  setup 도구의 신규 실패 테스트를 먼저 실행한 뒤 구현했고, setup·adherence replay 단위 테스트 16개가 통과했다.
+  raw replay 결과의 SHA-256은 work log artifact에 있다.
+- **별도 결함:** 7개 Codex replay 중 일반 5개는 통과했지만 review 2개는 부모가 spawn하지 않았다.
+  원인은 역할 등록이 아니라 시나리오가 `scoped-delegation` 계약을 만들지 않고 “독립 검토”만 요청한 데 있다.
+  이를 역할 자동 위임 성공으로 판정하던 평가는 잘못된 테스트 계약이며 F18/F19로 유지한다.
+
+### 3.18 남은 결함 전수 대조 (3.19에서 마무리; [work log](../../work-log/records/HOM-20260930-codex-role-install-live/events.jsonl#L20))
+
+- **재현 명령:** `verify-project-document-registry.py`, `verify-functional-assurance.py`,
+  `verify-model-policy.py`, `verify-semantic-assurance.py`, `verify-homeostasis-policy.py`,
+  `verify-source-layout.py`를 현 작업 트리에서 실행했다.
+- **결과:** registry/model-policy/semantic/source-layout은 PASS. functional-assurance는 새
+  `tooling/codex-role-setup.py`가 registry에 없는 상태라 FAIL이고, 이를 소비하는 homeostasis-policy도 FAIL.
+  이는 setup 도구 구현 자체가 아니라 활성 tooling command의 assurance 등록 누락이다.
+- **수정 계획:** setup 도구의 source·trigger·execution·verifier·limit를 functional assurance registry에
+  등록하고 full verifier를 재실행한다. 이 수정 전에는 setup 도구를 완결된 설치 수리라고 주장하지 않는다.
+- **기존 열린 항목:** F11, F16, F17, F20, F21, F22는 현재 source와 기존 mutation/replay evidence로
+  재확인됐다. F2, F3, F10, F12, F14, F23–F25는 아직 새 Codex/Claude 관측 또는 결정이 없어 open으로 유지한다.
+- **증거 연결:** 실제 5개 역할 spawn, 유료 replay 결과, parser 수리, 전수 verifier 출력은 위 work log의
+  `live-role-spawn`, `live-adherence-replay`, `replay-parser-repair`, `full-audit` 이벤트와 artifact에 연결한다.
+
+### 3.19 Claude 검토와 수리 ([`HOM-20260930-review-fixes`](../../work-log/records/HOM-20260930-review-fixes/events.jsonl))
+
+3.17·3.18의 Codex 작업을 Claude가 검토하고, 2차 진단의 확정 결함과 함께 고쳤다. 각 행의 근거는 기록의 같은
+이름 `fact` 이벤트에 있다. 모든 코드 수정은 테스트를 먼저 쓰고 실패를 본 뒤 구현했다.
+
+| 항목 | 문제 | 추정 원인(확인됨) | 수정 방법 | 결과·근거 |
+|---|---|---|---|---|
+| assurance-setup | 작업 트리에서 검증기 2개·테스트 1개 FAIL | Codex가 추가한 `codex-role-setup.py`가 functional-assurance에 없음 | `installation-and-diagnostics` 항목에 도구·테스트·한계 등록. 개인 설정 예외를 nonTrigger에 명시 | 두 검증기 PASS |
+| parser-test | replay 파서 수정에 테스트 없음(테스트 우선 위반) | 3.17 작업 중 생략 | 빈 값·`/session` agent_type 무시 테스트 추가 | HEAD 파서에서 실패, 수정본에서 통과 |
+| setup-hardening | 역할 목록 하드코딩, 섹션 존재만 확인, 백업 없음 | F8과 같은 패턴 | 정본 TOML 디렉토리에서 역할 도출, 다른 경로를 가리키면 `WRONG_PATH`(apply가 덮어쓰지 않음), 쓰기 전 백업 | 테스트 4개. 실제 설정은 강화된 검사에서도 `OK` |
+| record-reopen (F26) | finalize 뒤 이벤트가 붙어도 pass 유지 | `execution-record.py`가 추가 이벤트에서 verification을 갱신하지 않음 | finalize 이후 이벤트는 상태를 `reopened`로 바꾸고 경고. 기존 기록 3개(Codex 1, Claude 2)에 소급 적용(파생 파일만) | 테스트 red→green |
+| F17 | fixed | — | 기록을 쓰는 프로젝트의 활성 계획은 `executionRecord` 필수 | 같은 기록, mutation M14 | — |
+| F22 | fixed | — | `verify-runtime-entrypoint.py`, mutation 17/17 | 같은 기록 | 문구 존재만 증명(준수는 C2) |
+| F20 | fixed | — | 세션 모델 상속 서술 3곳을 호스트별 사실로 교체 | 같은 기록 | — |
+| F11 | fixed | — | critical-reviewer에 Bash | 같은 기록 | — |
+| F3 | fixed | — | skill-creator 호스트 매핑 | `HOM-20260930-review-fixes` | — |
+| F23 | partial | medium | 오류에 허용값, 주입 지침에 검증 실행 한 줄 | 같은 기록 | replay 재측정 필요 |
+| scenario (F18) | Codex가 두 review 시나리오 모두에 역할을 명시함 | 3.17의 가설(문구 모호) 검증용이었으나 Codex 스스로 반증 | 자율 위임 시나리오는 원래 문구로 복원, profile 시나리오는 명시 문구 유지 | 각 시나리오가 자기 주장만 시험 |
+
+- **검증:** unittest 140개 OK, 검증기 17개 PASS(신규 1), genome map OK.
+- **Codex 작업에 남긴 질문(F27):** 3.17 기록의 두 사실이 충돌한다. "명시 문구로도 spawn_agent 호출 없음"과
+  "원본 기록에 spawn_agent 호출이 있었지만 필드가 비어 있음"이 같은 실행을 말하는지 Codex가 rollout 경로로 정리해야 한다.
+- **AGENTS.md 크기:** 16,199 → 16,541 bytes(+342). F24와 함께 판단할 증가분이다.
+
 ## 4. 두 호스트 차이 (실측 기준)
 
 | 항목 | Claude Code (2.1.284) | Codex (codex-cli 0.155.0-alpha.16.3) |
 |---|---|---|
 | 전역 지침 | 플러그인 SessionStart hook | `~/.codex/AGENTS.md` 링크. 플러그인 hook은 `"hooks": {}`로 끔 |
 | 스킬 | 플러그인 `skills/`(`chohogi:*`) | 플러그인 캐시(커밋 상태 복사)의 `skills/`. 링크는 따라가지 않음 |
-| 역할 | 플러그인 `agents/` → `chohogi:<role>` 5종 | `config.toml`의 `config_file`(미등록). `~/.codex/agents` 링크는 스폰 거부 |
+| 역할 | 플러그인 `agents/` → `chohogi:<role>` 5종 | `config.toml`의 `config_file`(2026-09-30 live 등록·5종 spawn 확인). `~/.codex/agents` 링크는 스폰 거부 |
 | 위임 도구 | `Agent`(`subagent_type`, `model` 별칭만), `SendMessage`, `TaskStop` | `spawn_agent`(`agent_type`, `model`, `reasoning_effort`, `fork_turns`) 등 |
 | 역할별 모델 | 역할 파일 frontmatter `model`(정확한 id, 검증됨). 인자는 별칭=계열 최신 | `model` 인자 |
 | 역할별 강도 | 역할 파일 frontmatter `effort`(검증됨). 플러그인 전역, 호출마다 변경 불가 | `reasoning_effort`. `model`만 주면 강도가 그 모델 기본값으로 바뀜 |
@@ -282,6 +343,8 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 | `2a93ae4`, `cd126dc` | 09-30 | 모델 별칭 거부, 모델 id 오판 정정 |
 | `934d20a` | 09-30 | 위임 없는 작업에서 모델 카드 제외(Codex 세션) |
 | `e95323b` | 09-30 | 3.12–3.15: `DBG-20260930-integrity-audit`, `HOM-20260930-integrity-repair`, `HOM-20260930-claude-role-effort`, `HOM-20260930-model-choice-no-speedbump`, `HOM-20260930-profile-gaps` |
+| `ecc1e78` | 09-30 | 3.16: 2차 진단 `DBG-20260930-diagnosis-phase2` |
+| (이 행 다음 커밋, `git log --grep HOM-20260930-review-fixes`) | 09-30 | 3.17(Codex 작업, 함께 커밋)·3.19: `HOM-20260930-codex-role-install-live`, `HOM-20260930-review-fixes` |
 
 ## 8. 초호기 검토안 (2026-09-30 시작, 2차 진단 완료)
 
@@ -326,7 +389,7 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 | F1 | fixed | — | 검증기가 "활성 계획 정확히 1개"를 강제해 finalize된 계획이 active로 남음 | `HOM-20260930-integrity-repair` | F17로 보완 필요 |
 | F2 | candidate(Codex) | low | homeostasis skill의 루트 없는 상대 경로. Claude는 hook 루트로 해결됨(live, $0.12) | phase2 fact | Codex에서 1회 확인 |
 | F3 | open | medium | skill-creator를 Codex에만 허용. Claude `anthropic-skills:skill-creator`의 `quick_validate.py`가 14개 skill 모두 Codex판과 같은 판정 | `skill-lifecycle.md:10,59`, phase2 fact | 호스트별 매핑 추가(`init_skill.py`는 Claude에 없음) |
-| F4 | user-action | high | Codex 역할 5종 미등록 → Codex에서 역할 위임 불가 | README | 사용자가 `config.toml`에 등록 |
+| F4 | fixed (this host) | high | Codex 역할 5종이 설치 뒤 미등록이었던 설치·발견 결함. `codex-role-setup.py --apply`로 정본 TOML을 등록하고, 새 `gpt-5.6-luna` 세션에서 5종 모두 실제 spawn | `HOM-20260930-codex-role-install-live`, `/tmp/chohogi-live-codex-pe6ZIa` | native plugin add에는 역할 lifecycle이 없으므로 setup/doctor adapter를 설치 절차에 포함 |
 | F5–F9 | fixed | — | 3.12–3.14 참조 | 각 기록 | — |
 | F10 | open | low | manifest 폐기 항목 보존 규칙 비일관, 검증기도 확인 안 함 | `manifest.json` | 규칙 하나로 정리 |
 | F11 | open | medium | critical-reviewer가 `git show/diff` 사용을 지시받지만 도구에 Bash 없음 | `agents/critical-reviewer.md:4` | Bash 추가 또는 diff를 packet으로 전달하도록 본문 변경 |
@@ -336,23 +399,26 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 | F15 | fixed | — | 부분 저장 profile | `HOM-20260930-profile-gaps` | — |
 | F16 | open | high | learning이 2026-08-12 이후 미사용. 확정 실패 수리 11건이 모두 homeostasis로 직행. learning-우선 규칙은 `skills/homeostasis/SKILL.md:111`에만 있음 | phase2 fact | 규칙을 conductor·주입 지침으로 올리거나, 실효가 없으면 규칙을 줄임(사용자 판단) |
 | F17 | open | high | F1 수리가 부분적: `executionRecord`가 선택 필드라 finalize된 계획을 다시 active로 선언해도 PASS | mutation M14 | 활성 계획에 `executionRecord` 필수화 또는 records 디렉토리 역참조 |
-| F18 | open | medium | 역할 분리(3.13) 뒤 `review-uses-saved-profile` 시나리오가 모호: 세션이 final-reviewer를 골랐는데 단언은 critical-reviewer만 허용 | C2 transcript | 시나리오 프롬프트를 "작업 단위 검토"로 명시하거나 단언 확장. **이번 세션 변경이 만든 회귀** |
-| F19 | open | medium | profile 없는 위임에서 카드 미실행, "세션 모델을 물려받았다"고 틀리게 보고 | C2 transcript | F20 수정 후 재측정. 원인 후보: F20, `claude-tools.md`의 "기다릴 이유가 없다" 문장, `934d20a` |
+| F18 | fixed | — | 시나리오 분리(자율 위임은 원래 문구, profile은 명시 문구) | 같은 기록 | replay 재측정 필요 |
+| F19 | open | medium | profile 없는 위임에서 카드 미실행, "세션 모델을 물려받았다"고 틀리게 보고 | C2 transcript | F20 수정됨. 같은 시나리오 재측정으로 남은 원인 확인 |
 | F20 | open | high | "역할은 세션 모델을 물려받는다"가 `AGENTS.md:11`, `model-policy.md:13`, `claude-tools.md:25`에 남아 역할 파일 frontmatter 사실과 모순. `claude-tools.md:25`는 같은 문서의 '역할 파일과 같으면 model 생략'과도 모순 | grep, C2 transcript | 세 문장을 호스트별 사실로 교체. **3.13에서 놓친 갱신** |
 | F21 | open | high | replay 7/7 세션이 초호기 route 문서를 한 번도 읽지 않음. skill 호출 0. 행동은 주입 지침만으로 결정 | C2 transcript 분석 | 규칙 배치 재설계: 행동을 바꿔야 하는 규칙은 주입 지침에, 나머지는 필요 시 명령(검증기·card)으로 묶기. C3과 함께 판단 |
 | F22 | open | high | 핵심 규칙 17곳 파손 중 12곳 미검출. hook의 지침 경로가 깨져도 PASS | mutation 결과 | 주입 지침 핵심 문장·hook 경로의 존재 검사 추가. 검증기의 한계를 functional-assurance에 명시 |
 | F23 | open | medium | 계획 작성 세션이 registry에 허용되지 않는 상태 `completed`를 쓰고 검증기를 돌리지 않음. 프로젝트 밖 `/tmp/placeholder`에 잘못 쓰고 삭제 | C2 transcript, 재현 | 상태 어휘를 주입 지침 또는 검증 명령 안내로. F21과 같은 뿌리 |
 | F24 | open | medium | 비용: 세션당 +11.2k 토큰, 작은 작업 약 2배. 주입 지침 3.5배 성장, 추가:삭제 19:1 | C3·C6 | 규칙 정리 기준(C3 근거 대조) 수립. F21과 함께 |
+| F26 | fixed | — | finalize 뒤 이벤트가 상태를 reopened로 바꿈. 기존 기록 3개 소급 | 같은 기록 | — |
+| F27 | open(Codex) | medium | 3.17 기록의 spawn_agent 관측 두 사실이 서로 충돌 | `HOM-20260930-codex-role-install-live` events | Codex가 rollout 경로로 정리 |
+| F28 | decision | medium | `codex-role-setup.py --apply`가 "개인 config.toml은 관리 대상이 아니다" 원칙의 예외가 됨 | AGENTS.md, assurance nonTrigger | 사용자가 예외를 상시로 둘지 결정(8.6) |
 | F25 | open | low | `~/.claude/plugins/cache/chohogi-marketplace/chohogi/1.0.0`에 09-29 사본(agents/ 없음)이 남아 있으나 로드되지 않음 | C8 fact | 혼동 방지를 위해 기록만. 삭제는 사용자 판단 |
 
-### 8.4 권고 순서와 이유
+### 8.4 권고 순서와 이유 (2026-09-30 23시 이후 갱신)
 
-1. **Codex 검토(8.5)** — 발견은 한 호스트·1회 관측에 기반한다. 다른 호스트가 반박하거나 재현해야 수정 범위를 확정할 수 있다.
-2. **F20** — 가장 작고 확실한 수정. F19의 원인 후보 하나를 제거해 재측정을 가능하게 한다.
-3. **F17·F22** — 검증기를 믿을 수 있어야 이후 수정의 PASS가 의미를 가진다.
-4. **F21·F24·F16(설계 판단)** — 규칙을 어디에 두어야 실제로 작동하는가의 문제. 사용자 결정 사항이며 `decision-report`로 올린다.
-5. **F18·F23·F11·F3** — 국소 수정.
-6. **F4(사용자)**, 이후 Codex replay로 C8 완료.
+1. **재측정(Claude·Codex 각 1회):** `review-delegates-on-session-model`, `review-uses-saved-profile`,
+   `plan-location-no-tool-directives`. F19·F23·F18 수정의 효과를 확인한다. 정적 검사만으로는 준수를 증명하지 못한다(F21).
+2. **F27(Codex)** — Codex 위임 실패 결론을 확정해야 Codex 쪽 F19를 다룰 수 있다.
+3. **8.6 사용자 결정** — F21·F24·F16은 규칙 배치 설계이고, F28은 원칙 예외다.
+4. **F2(Codex 1회), F14(대화형 관측)** — 관측만 남았다.
+5. **F10·F12·F25** — 낮은 우선순위 정리. 근거: 행동에 영향이 관측되지 않았다.
 
 ### 8.5 Codex 검토 체크리스트
 
@@ -368,3 +434,11 @@ Codex 검토자는 아래를 독립적으로 확인하고, 결과를 이 문서 
 5. F19·F20: Codex에서 profile 없는 위임 시나리오(`review-delegates-on-session-model`)를 1회 돌려 카드 실행 여부를 본다.
 6. F16: Codex 쪽 판단 — learning-우선 규칙이 실효가 있어야 하는지, 줄여야 하는지 의견을 남긴다(수정은 하지 않는다).
 7. 비용은 `evaluation-budget-policy.md` 안에서 쓰고, 실행 횟수와 비용을 이 문서에 적는다.
+
+### 8.6 사용자 결정 항목
+
+| id | 질문 | 선택지와 trade-off | 추천 |
+|---|---|---|---|
+| D1 (F21·F24) | 규칙을 어디에 둘 것인가 | (a) 행동을 바꿔야 하는 규칙만 주입 지침에 두고 나머지는 명령·검증기로 묶는다: 비용↓, 문서 재구성 필요. (b) 현 구조 유지하고 route 문서 읽기를 강제한다: 비용↑, 강제 수단 불확실. (c) 주입 지침을 계속 늘린다: 준수↑(관측상), 비용·크기↑ | (a). 근거: 준수된 규칙은 모두 주입 지침에 있었고(F21), 비용은 세션당 +11k 토큰(F24) |
+| D2 (F16) | learning을 살릴 것인가 | (a) learning-우선을 conductor·주입 지침에 올린다. (b) 실효가 없으니 homeostasis가 예방 범위를 직접 판정하도록 규칙을 줄인다 | 판단 보류. 6주간 미사용이 "불필요"인지 "진입 경로 부재"인지 증거가 없다 |
+| D3 (F28) | `codex-role-setup.py --apply`를 원칙 예외로 둘 것인가 | (a) 상시 예외(명시 실행·백업·추가만). (b) 점검만 허용하고 등록은 README 수동 절차 | (a). Codex는 플러그인에 역할 슬롯이 없어 설치만으로 역할이 동작하지 않는다(3.17) |

@@ -1,7 +1,7 @@
 ---
 name: critical-reviewer
 description: Read-only independent reviewer for delegated task reviews, high-risk changes, and contract-marked decision checkpoints. Use when the task loop requires a task review, when execution allocation marks a decision reviewRequired, or for an independent challenge to a decision packet before it is finalized.
-tools: Read, Grep, Glob, WebFetch
+tools: Read, Grep, Glob, Bash, WebFetch
 model: claude-sonnet-5-5
 effort: high
 ---

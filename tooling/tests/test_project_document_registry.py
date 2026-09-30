@@ -101,6 +101,26 @@ class ProjectDocumentRegistryTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("finalized", result.stdout)
 
+    def test_active_plan_must_name_its_record_when_the_project_keeps_records(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            (project / "plan.md").write_text("active\n", encoding="utf-8")
+            (project / "docs/work-log/records").mkdir(parents=True)
+            registry = project / "registry.json"
+            registry.write_text(json.dumps({"schemaVersion": 1, "activeExecutionPlan": "plan.md", "documents": [
+                {"path": "plan.md", "role": "active-plan", "authority": "execution-queue", "state": "active"},
+            ]}), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(TOOL), "--root", str(project), "--registry", str(registry)], text=True, capture_output=True, check=False)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("executionRecord", result.stdout)
+
+    def test_unknown_state_error_lists_the_valid_states(self) -> None:
+        result = self.run_registry({"schemaVersion": 1, "activeExecutionPlan": None, "documents": [
+            {"path": "plan.md", "role": "history", "authority": "evidence", "state": "completed"},
+        ]})
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("historical", result.stdout)
+
     def test_nested_project_plan_directories_are_scanned(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             project = Path(temporary)

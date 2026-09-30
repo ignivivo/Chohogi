@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "6377bbeb0b6d4936197490229a00686702f79545d9024c2cacdf149a6c9098d5",
+  "sourceDigest": "139b6e5fd01b4e0995ed5f677fee394131054edc83d3d16dff429cf2f73e20f8",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -1033,6 +1033,11 @@
       "path": "tooling/classify-security-boundary.py"
     },
     {
+      "id": "asset:tooling/codex-role-setup.py",
+      "kind": "asset",
+      "path": "tooling/codex-role-setup.py"
+    },
+    {
       "id": "asset:tooling/execution-record.py",
       "kind": "asset",
       "path": "tooling/execution-record.py"
@@ -1081,6 +1086,11 @@
       "id": "asset:tooling/tests/test_adherence_replay.py",
       "kind": "asset",
       "path": "tooling/tests/test_adherence_replay.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_codex_role_setup.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_codex_role_setup.py"
     },
     {
       "id": "asset:tooling/tests/test_execution_record.py",
@@ -1136,6 +1146,11 @@
       "id": "asset:tooling/tests/test_role_definitions.py",
       "kind": "asset",
       "path": "tooling/tests/test_role_definitions.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_runtime_entrypoint.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_runtime_entrypoint.py"
     },
     {
       "id": "asset:tooling/tests/test_security_gate.py",
@@ -1536,6 +1551,11 @@
       "id": "verifier:routes",
       "kind": "verifier",
       "path": "tooling/verify-routes.py"
+    },
+    {
+      "id": "verifier:runtime-entrypoint",
+      "kind": "verifier",
+      "path": "tooling/verify-runtime-entrypoint.py"
     },
     {
       "id": "verifier:security-boundary",
@@ -2567,6 +2587,18 @@
       "evidence": "tooling/classify-security-boundary.py"
     },
     {
+      "source": "asset:tooling/codex-role-setup.py",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:tooling/codex-role-setup.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
       "source": "asset:tooling/execution-record.py",
       "target": "component:execution-record-tool",
       "relation": "activates",
@@ -2787,6 +2819,12 @@
       "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
       "relation": "documents",
       "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_runtime_entrypoint.py",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_runtime_entrypoint.py"
     },
     {
       "source": "asset:tooling/tests/test_security_gate.py",
@@ -3987,6 +4025,12 @@
       "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "tooling/verify-routes.py"
+    },
+    {
+      "source": "verifier:runtime-entrypoint",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-runtime-entrypoint.py"
     },
     {
       "source": "verifier:security-boundary",

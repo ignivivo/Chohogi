@@ -296,7 +296,7 @@
         "claude",
         "codex"
       ],
-      "prompt": "방금 커밋한 billing.py 변경(음수·0 금액 방어)을 독립적으로 검토받고 싶어. 결제 로직이라 위험해. 결과를 알려줘.",
+      "prompt": "방금 커밋한 billing.py 변경(음수·0 금액 방어)은 결제 로직의 위험 변경이다. execution-allocation의 scoped-delegation을 선택해 critical_reviewer 역할로 독립 검토를 실제 위임하고 결과를 알려줘.",
       "files": {
         "billing.py": "def charge(amount, balance):\n    return balance - amount\n",
         ".agents/chohogi-model-profile.json": "{\n  \"schemaVersion\": 1,\n  \"hosts\": {\n    \"claude\": {\n      \"confirmedBy\": \"user\",\n      \"confirmedAt\": \"2026-09-30\",\n      \"roles\": {\n        \"task-reviewer\": {\n          \"model\": \"haiku\",\n          \"effort\": \"not-selectable\"\n        },\n        \"final-reviewer\": {\n          \"model\": \"haiku\",\n          \"effort\": \"not-selectable\"\n        }\n      }\n    },\n    \"codex\": {\n      \"confirmedBy\": \"user\",\n      \"confirmedAt\": \"2026-09-30\",\n      \"roles\": {\n        \"task-reviewer\": {\n          \"model\": \"gpt-6-sol\",\n          \"effort\": \"low\"\n        },\n        \"final-reviewer\": {\n          \"model\": \"gpt-6-sol\",\n          \"effort\": \"low\"\n        }\n      }\n    }\n  }\n}\n"
