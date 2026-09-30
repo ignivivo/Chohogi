@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "objective": "Complete the remaining Chohogi diagnosis (C1 remainder, C2-C8) read-only, with evidence per finding, and hand the results to a Codex review through the cowork log.",
+  "route": "debugging",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "continue the whole Chohogi diagnosis and update the cowork document for a Codex review"
+  ],
+  "excluded": [
+    "fixes to Chohogi assets (findings only; fixes after review)",
+    "editing private ~/.codex/config.toml",
+    "Codex-host replays (left to the Codex reviewer)",
+    "raw prompts or private reasoning in records"
+  ],
+  "requestedItems": [
+    {
+      "id": "c1",
+      "description": "C1 remainder: F2 cross-project path resolution, F3 Claude skill-creator, F10, F11, feedback-loop chain."
+    },
+    {
+      "id": "c2",
+      "description": "C2 adherence on Claude with pinned model, budget-capped."
+    },
+    {
+      "id": "c3",
+      "description": "C3 cost: guidance injection size and overhead against a baseline."
+    },
+    {
+      "id": "c4",
+      "description": "C4 verifier mutation test in a scratch copy."
+    },
+    {
+      "id": "c5",
+      "description": "C5 consistency table for core rules."
+    },
+    {
+      "id": "c6",
+      "description": "C6 self-growth metrics from git history."
+    },
+    {
+      "id": "c7",
+      "description": "C7 understandability measures."
+    },
+    {
+      "id": "c8",
+      "description": "C8 host portability summary and Codex review handoff."
+    },
+    {
+      "id": "doc",
+      "description": "Cowork log section 8 updated with results and a Codex review checklist."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "evidence",
+      "description": "Every finding cites a file:line, command output, or record observed in this session."
+    }
+  ]
+}

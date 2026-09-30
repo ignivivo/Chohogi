@@ -14,8 +14,8 @@
   상태를 바꾸고 근거 기록을 붙인다.
 - 문서 역할: `feedback-source`(`.agents/chohogi-document-registry.json`). 활성 실행 계획이 아니며
   실행 지시도 아니다. 8장의 "예정"은 권고 순서이고, 각 항목은 착수할 때 conductor로 route를 다시 고른다.
-- 범위: 2026-09-28 ~ 2026-09-30. 커밋 `acf4012` ~ `934d20a`(브랜치 `agent/chohogi-v2-integrity`)와
-  2026-09-30 Claude Code 세션(Opus 5.5)의 **미커밋** 작업 트리 변경 4건(7장).
+- 범위: 2026-09-28 ~ 2026-09-30. 커밋 `acf4012` ~ `e95323b`(브랜치 `agent/chohogi-v2-integrity`)와
+  2026-09-30 Claude Code 세션(Opus 5.5)의 커밋 `e95323b`와 2차 진단 기록(3.16).
 
 ## 1. 지금 믿어도 되는 사실 (2026-09-30 기준)
 
@@ -169,7 +169,7 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
   원래 작업 재개, 완료된 작업은 다시 열지 않음.
 - **검증:** 정적 검증기만(`HOM-20260930-model-card-nonblocking`). live replay 없음.
 
-### 3.12 정합성 전수 점검과 결함 2건 수리 (미커밋, Claude 세션)
+### 3.12 정합성 전수 점검과 결함 2건 수리 (`e95323b`, Claude 세션)
 
 - **기록:** `DBG-20260930-integrity-audit`(조사), `HOM-20260930-integrity-repair`(수리).
 - **방법:** 8장 C1의 A층(정의↔존재) 전수 교차참조를 스크립트로 돌리고 문서 권위(active/historical)로
@@ -182,7 +182,7 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
   id로, 카탈로그 `unknown`, 전달용 `deliveryAlias` 매핑, override 표시를 추가했다.
 - **사용자 결정:** Claude 역할 배치 "비용 절감안"(scout Haiku 4.5, 나머지 Sonnet 5.5/Opus 5.5).
 
-### 3.13 Claude 역할별 모델·추론 강도 (미커밋)
+### 3.13 Claude 역할별 모델·추론 강도 (`e95323b`)
 
 - **기록:** `HOM-20260930-claude-role-effort`.
 - **문제:** 카드가 Claude 역할 강도를 `not-selectable`로 표시했다(2장 #13). 사용자가 "다른 하네스는 된다"고 지적.
@@ -195,7 +195,7 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
   frontmatter에 model/effort. 역할 본문의 "모델·강도를 정하지 않는다" 문장을 호스트별 설명으로 교체.
   미러 일치 테스트 신설, replay의 Codex 역할 등록을 하드코딩에서 디렉토리 기반으로 변경.
 
-### 3.14 모델 선택 방지턱 제거 — Claude 쪽 (미커밋)
+### 3.14 모델 선택 방지턱 제거 — Claude 쪽 (`e95323b`)
 
 - **기록:** `HOM-20260930-model-choice-no-speedbump`.
 - **문제:** 3.11은 공통 문장만 바꿨다. Claude에서 남은 차단 경로는 턴을 멈추는 질문 도구(`AskUserQuestion`)다.
@@ -205,7 +205,7 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
   replay에 `forbidden-tool` 단언 종류와 `no-blocking-model-question` 단언 추가.
 - **한계:** headless replay는 대화형 대기를 재현하지 못한다. 실제 대화 관측이 남아 있다(F14).
 
-### 3.15 부분 저장 profile (미커밋)
+### 3.15 부분 저장 profile (`e95323b`)
 
 - **기록:** `HOM-20260930-profile-gaps`.
 - **문제:** 15:41 Codex 세션이 사용자 요청("GPT-6가 느리니 6 luna 대신 5.6 luna")을 GPT-6 Luna가 추천된 역할에만
@@ -213,6 +213,14 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 - **사용자 결정:** GPT-6를 쓴다. Luna만 속도 때문에 5.6. final-reviewer·debugger는 `gpt-6-sol / medium`.
 - **해결:** card가 빠진 역할을 "미저장 → 추천"으로 보여 사용자가 고르게 함(비차단, 답 전 대체값 명시).
   AGENTS.md·`model-policy.md`에 "배치에 빠진 역할이 있으면 card 실행" 추가. 테스트 먼저.
+
+### 3.16 2차 진단 C1–C8 (`DBG-20260930-diagnosis-phase2`, 수정 없음)
+
+- **방법:** C1 잔여(F2 live, F3 파일·검증기 비교, 환류 체인 사용 흔적), C2 Claude replay 7개, C3 baseline 비교 2개,
+  C4 복제본 mutation 17건, C5 규칙 10개 교차 grep, C6 git 이력 수치, C7 replay transcript의 문서 읽기 계수, C8 설치 경로 확인.
+- **비용:** live 세션 합계 약 1.40 USD(F2 0.12, C2 약 1.06, C3 baseline 약 0.12, 별도 탐침 제외).
+- **핵심 결과:** 8.2·8.3. 가장 무거운 것은 F21(세션이 주입 지침 밖을 읽지 않음)과 F22(검증기가 핵심 규칙 파손 대부분을 못 잡음).
+- **자기 회귀:** F18·F20은 3.13의 역할 분리가 만든 회귀다. 정적 테스트·검증기는 모두 통과했지만 replay가 드러냈다.
 
 ## 4. 두 호스트 차이 (실측 기준)
 
@@ -273,83 +281,90 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 | `2372be0`, `36f4b5a` | 09-30 | 세션 모델 출발, 추천 카드, profile 저장, Codex hook·역할 정정 |
 | `2a93ae4`, `cd126dc` | 09-30 | 모델 별칭 거부, 모델 id 오판 정정 |
 | `934d20a` | 09-30 | 위임 없는 작업에서 모델 카드 제외(Codex 세션) |
-| (미커밋) | 09-30 | 3.12–3.15: `DBG-20260930-integrity-audit`, `HOM-20260930-integrity-repair`, `HOM-20260930-claude-role-effort`, `HOM-20260930-model-choice-no-speedbump`, `HOM-20260930-profile-gaps` |
+| `e95323b` | 09-30 | 3.12–3.15: `DBG-20260930-integrity-audit`, `HOM-20260930-integrity-repair`, `HOM-20260930-claude-role-effort`, `HOM-20260930-model-choice-no-speedbump`, `HOM-20260930-profile-gaps` |
 
-## 8. 초호기 검토안 (2026-09-30 시작)
+## 8. 초호기 검토안 (2026-09-30 시작, 2차 진단 완료)
 
 ### 8.1 목적과 전제
 
 초호기의 문제를 기준별로 증거와 함께 찾고, 확정된 것만 고친다. 사용자 합의 사항:
 - 문서에 정의된 것, 실제로 존재하는 것, 올바르게 호출되어 기능하는 것은 다른 문제다. 스킬·역할·도구가
   연쇄적으로 작동할 때의 정합성까지 본다(C1).
-- 정합성을 먼저 본다. 체인이 끊겨 있으면 "규칙을 안 따른다"(C2)가 실제로는 "따를 수 없는 구조"일 수 있어
-  원인을 잘못 짚기 때문이다.
-- 점검은 읽기 전용 debugging route로 하고, 수정은 항목별로 homeostasis 진입 조건(scope·evidence gate)을
-  확인한 뒤 따로 한다.
+- 정합성을 먼저 본다. 체인이 끊겨 있으면 "규칙을 안 따른다"(C2)가 실제로는 "따를 수 없는 구조"일 수 있다.
+- 진단은 읽기 전용 debugging route. 수정은 항목별로 homeostasis 진입 조건을 확인한 뒤 따로 한다.
+- 2차 진단(`DBG-20260930-diagnosis-phase2`)은 **수정 없이** 발견만 남겼다. Codex 검토(8.5)를 거친 뒤 수정한다.
 
-### 8.2 기준과 진행 상태
+### 8.2 기준과 결과
 
 ```json
 [
-  {"id": "C1", "name": "정합성", "status": "partial",
-   "layers": {
-     "A 정의↔존재": "done — 활성 자산에 끊긴 참조 없음(권위 분류 후). 근거: DBG-20260930-integrity-audit",
-     "B 존재↔발견": "partial — Claude 관측됨(hook, chohogi:* skill, 역할). Codex는 skills 캐시=HEAD 확인, 역할 미등록(F4)",
-     "C 발견↔호출": "partial — F2, F3 후보",
-     "D 호출↔기능": "partial — F1 수리. 도구 테스트·검증기 통과",
-     "E 연쇄": "partial — Claude 위임 체인 live 확인(3.13). 진입·기록 체인은 이 세션에서 실행됨. 환류(learning→homeostasis)와 다른 프로젝트에서의 호출은 미실행"},
-   "why": "정의가 있어도 발견·호출·연쇄가 끊기면 규칙 준수를 측정할 수 없다"},
-  {"id": "C2", "name": "실제 준수", "status": "not-started",
-   "method": "규칙별 replay(정확한 모델 id 고정) + 실제 세션 transcript. 칸마다 관측 수를 적고 비율 주장은 evaluation-budget-policy.md 안에서만",
-   "why": "매 세션 주입되는 red-flag 표 자체가 생략이 반복됐다는 신호다"},
-  {"id": "C3", "name": "비용", "status": "not-started",
-   "method": "전역 지침 주입량(AGENTS.md 16,064 bytes) 측정, 단순 작업에 붙는 절차(route·기록·카드) 수, 규칙별 '없으면 어떤 사고가 났나' 근거 대조",
-   "why": "근거 없이 비용만 드는 규칙은 정리 후보다. 모델 선택 방지턱(F9)이 이 기준의 첫 사례였다"},
-  {"id": "C4", "name": "검증의 실효성", "status": "partial",
-   "found": ["F1: 검증기가 멈춘 활성 계획을 PASS", "F7: TOML↔md 미러를 아무 검사도 강제하지 않음", "F12: genome impact가 너무 넓어 선별력 없음"],
-   "method": "규칙 문서를 일부러 망가뜨려 검증기가 잡는지 역시험(mutation)",
-   "why": "검사 통과가 목표가 되면(Goodhart) 결함이 PASS 뒤에 숨는다. F1이 실제 사례"},
-  {"id": "C5", "name": "일관성", "status": "not-started",
-   "method": "핵심 규칙 10개를 골라 규칙별로 적힌 문서 위치를 표로 대조(정본 하나인가)",
-   "why": "같은 규칙이 여러 문서에 다르게 있으면 세션마다 다른 쪽을 따른다(예: '활성 계획 정확히 하나'가 3곳에 있었다)"},
-  {"id": "C6", "name": "자기증식", "status": "not-started",
-   "method": "HOM·LRN 기록 대 프로젝트 작업 비율, 규칙 추가 대 삭제 수",
-   "why": "하네스가 자기 관리에만 커지면 제품 작업 비용이 오른다"},
-  {"id": "C7", "name": "이해 가능성", "status": "not-started",
-   "method": "처음 온 세션이 '지금 무엇을 해야 하나'에 답을 얻기까지의 읽기 단계 수, 은유 이름(xylem·phloem 등)의 탐색 비용",
-   "why": "AI 독자도 경로 추측 비용을 치른다"},
+  {"id": "C1", "name": "정합성", "status": "done",
+   "result": "A층 깨끗. B: Claude는 저장소를 live 로드(확인), Codex 역할 미등록(F4). C: F3 확정, F2는 Claude에서 비결함. D: F1 수리했으나 부분적(F17). E: 위임 체인 Claude live 확인, 환류 체인은 learning이 6주간 미사용(F16)."},
+  {"id": "C2", "name": "실제 준수", "status": "done",
+   "result": "Claude replay 7개 1회씩(claude-sonnet-5-5, 합계 약 1.06 USD): 4 통과, 3 실패(F18 시나리오 모호, F19 카드 생략+틀린 보고, F23 registry 상태값 오류+프로젝트 밖 쓰기). 7개 세션 모두 초호기 route 문서를 읽지 않음(F21)."},
+  {"id": "C3", "name": "비용", "status": "done",
+   "result": "첫 턴 컨텍스트 +11.2k 토큰(38.4k 대 27.2k), 작은 작업 비용 약 2배. 대신 테스트 우선은 초호기에서만 지켜짐(baseline 위반). F24."},
+  {"id": "C4", "name": "검증의 실효성", "status": "done",
+   "result": "핵심 규칙 17곳 단일 파손 중 5곳만 검출(F22). 테스트 우선·완료 관문·red-flag·conductor 경로·hook 경로 파손을 아무 검증기도 못 잡음. F1 상태 재현도 통과(F17)."},
+  {"id": "C5", "name": "일관성", "status": "done",
+   "result": "10개 규칙 표본 중 '역할은 세션 모델을 물려받는다'가 3곳에서 새 사실과 모순(F20). learning-우선·세 번 실패 중단 규칙은 각 1곳에만 있고 주입 지침에 없음."},
+  {"id": "C6", "name": "자기증식", "status": "done",
+   "result": "주입 지침 AGENTS.md 4.6KB(08-12) → 16.2KB(09-30), 최근 1주에 +6.2KB. 규칙 문서 추가:삭제 약 19:1. 09-22 이후 기록 전부 자기 유지(HOM/DBG). F24."},
+  {"id": "C7", "name": "이해 가능성", "status": "done",
+   "result": "실측: 세션은 주입 지침 밖의 문서를 따라가지 않는다(F21). 따라서 규칙의 실효 위치는 AGENTS.md 한 파일이고, 나머지 약 15k줄은 이번 표본에서 행동에 기여하지 않았다."},
   {"id": "C8", "name": "호스트 이식성", "status": "partial",
-   "found": ["F3", "F4", "F14"],
-   "why": "같은 규칙이 한 호스트에서만 깨지는 경우가 반복됐다(2장 #4–#7, #13)"}
+   "result": "Claude 쪽은 측정 완료. Codex 쪽 replay·F2·F4 검증은 Codex 검토자에게 넘김(8.5)."}
 ]
 ```
 
 ### 8.3 발견 항목
 
-| id | 상태 | 요약 | 근거 | 다음 조치와 이유 |
-|---|---|---|---|---|
-| F1 | fixed | 검증기가 "활성 계획 정확히 1개"를 강제해, finalize된 계획이 active로 남은 채 PASS | `tooling/verify-project-document-registry.py`, `HOM-20260930-integrity-repair` | — |
-| F2 | candidate | `skills/homeostasis/SKILL.md:31,49`가 `tooling/…`, `trunk_orchestration/…`을 기준 루트 없이 부름. 초호기 저장소 밖에서 호출되면 경로가 skill 본문만으로 안 풀림 | 파일 확인, 미실행 | 다른 프로젝트에서 homeostasis를 부르는 replay 1회로 확정. 확정되면 경로를 플러그인 루트 기준으로 고정 |
-| F3 | candidate | `skills/homeostasis/references/skill-lifecycle.md:10,59`가 skill-creator를 "Codex 표면"에만 허용. Claude에는 `anthropic-skills:skill-creator`가 있는데 fallback으로 빠짐 | 파일 확인. Claude skill-creator의 `quick_validate.py` 제공 여부 미확인 | Claude skill-creator 능력 확인 후 호스트별 매핑 추가 |
-| F4 | user-action | Codex 역할 5종이 `config.toml`에 미등록. Codex에서 `scoped-delegation`이 역할을 띄우지 못함 | README 등록 예시, 3.9 | 사용자 승인 후 등록 → 새 세션에서 스폰 확인 |
-| F5 | fixed | Claude 카드가 도구 인자 별칭을 모델 목록으로 사용 | `HOM-20260930-integrity-repair` | — |
-| F6 | fixed | Claude 역할별 강도를 불가능으로 판단 | `HOM-20260930-claude-role-effort` | — |
-| F7 | fixed | TOML↔md 미러 일치를 강제하는 검사 없음 | `tooling/tests/test_role_definitions.py` | — |
-| F8 | fixed | replay의 Codex 역할 등록 목록 하드코딩 | `tooling/adherence-replay.py` | — |
-| F9 | fixed | Claude에서 모델 선택이 질문 도구로 작업을 멈출 수 있음 | `HOM-20260930-model-choice-no-speedbump` | 실제 대화 관측은 F14 |
-| F10 | open | manifest 폐기 항목이 비일관: `grill-me`는 원본 보존, `frontend-surface`는 원본 삭제 | `manifest.json` | 폐기 자산 보존 규칙을 하나로 정함(낮은 우선순위) |
-| F11 | open | `critical-reviewer` 본문은 `git show/diff/log` 사용을 지시하지만 Claude 도구 목록에 Bash가 없음(`Read, Grep, Glob, WebFetch`) | `agents/critical-reviewer.md:4` | Bash 추가 또는 본문을 도구 목록에 맞춤. 읽기 전용 경계와 함께 판단 |
-| F12 | open | `genome_map.py impact tooling/model-policy.py`가 영향 114개를 반환해 선별력이 없음 | 명령 출력 | impact 계산을 실제 소비 관계로 좁힘. C4에서 다룸 |
-| F13 | user-action | `.agents/chohogi-model-profile.json`이 git 미추적 | `git status` | 커밋 여부를 사용자가 정함 |
-| F15 | fixed | 부분 저장 profile: Codex profile에 final-reviewer·debugger가 없어 조용히 세션 모델로 돌았고, card는 저장된 역할만 보였으며, 규칙상 저장된 배치가 있으면 card를 실행하지도 않았다 | `HOM-20260930-profile-gaps` | — |
-| F14 | open | 모델 선택 비차단을 실제 대화에서 관측하지 않음. headless는 대기를 재현 못함 | 3.14 | 다음 대화형 세션에서 첫 지시 + 위임 상황을 관측해 기록 |
+심각도: `high`(규칙이 실제로 작동하지 않거나 거짓 PASS), `medium`(특정 경로에서 틀린 행동), `low`(정리).
+
+| id | 상태 | 심각도 | 요약 | 근거 | 제안 |
+|---|---|---|---|---|---|
+| F1 | fixed | — | 검증기가 "활성 계획 정확히 1개"를 강제해 finalize된 계획이 active로 남음 | `HOM-20260930-integrity-repair` | F17로 보완 필요 |
+| F2 | candidate(Codex) | low | homeostasis skill의 루트 없는 상대 경로. Claude는 hook 루트로 해결됨(live, $0.12) | phase2 fact | Codex에서 1회 확인 |
+| F3 | open | medium | skill-creator를 Codex에만 허용. Claude `anthropic-skills:skill-creator`의 `quick_validate.py`가 14개 skill 모두 Codex판과 같은 판정 | `skill-lifecycle.md:10,59`, phase2 fact | 호스트별 매핑 추가(`init_skill.py`는 Claude에 없음) |
+| F4 | user-action | high | Codex 역할 5종 미등록 → Codex에서 역할 위임 불가 | README | 사용자가 `config.toml`에 등록 |
+| F5–F9 | fixed | — | 3.12–3.14 참조 | 각 기록 | — |
+| F10 | open | low | manifest 폐기 항목 보존 규칙 비일관, 검증기도 확인 안 함 | `manifest.json` | 규칙 하나로 정리 |
+| F11 | open | medium | critical-reviewer가 `git show/diff` 사용을 지시받지만 도구에 Bash 없음 | `agents/critical-reviewer.md:4` | Bash 추가 또는 diff를 packet으로 전달하도록 본문 변경 |
+| F12 | open | low | genome impact가 114개를 반환해 선별력 없음 | 명령 출력 | 소비 관계 기준으로 축소 |
+| F13 | fixed | — | profile 파일 커밋 | `e95323b` | — |
+| F14 | open | medium | 모델 선택 비차단을 실제 대화에서 미관측 | 3.14 | 대화형 세션 관측 |
+| F15 | fixed | — | 부분 저장 profile | `HOM-20260930-profile-gaps` | — |
+| F16 | open | high | learning이 2026-08-12 이후 미사용. 확정 실패 수리 11건이 모두 homeostasis로 직행. learning-우선 규칙은 `skills/homeostasis/SKILL.md:111`에만 있음 | phase2 fact | 규칙을 conductor·주입 지침으로 올리거나, 실효가 없으면 규칙을 줄임(사용자 판단) |
+| F17 | open | high | F1 수리가 부분적: `executionRecord`가 선택 필드라 finalize된 계획을 다시 active로 선언해도 PASS | mutation M14 | 활성 계획에 `executionRecord` 필수화 또는 records 디렉토리 역참조 |
+| F18 | open | medium | 역할 분리(3.13) 뒤 `review-uses-saved-profile` 시나리오가 모호: 세션이 final-reviewer를 골랐는데 단언은 critical-reviewer만 허용 | C2 transcript | 시나리오 프롬프트를 "작업 단위 검토"로 명시하거나 단언 확장. **이번 세션 변경이 만든 회귀** |
+| F19 | open | medium | profile 없는 위임에서 카드 미실행, "세션 모델을 물려받았다"고 틀리게 보고 | C2 transcript | F20 수정 후 재측정. 원인 후보: F20, `claude-tools.md`의 "기다릴 이유가 없다" 문장, `934d20a` |
+| F20 | open | high | "역할은 세션 모델을 물려받는다"가 `AGENTS.md:11`, `model-policy.md:13`, `claude-tools.md:25`에 남아 역할 파일 frontmatter 사실과 모순. `claude-tools.md:25`는 같은 문서의 '역할 파일과 같으면 model 생략'과도 모순 | grep, C2 transcript | 세 문장을 호스트별 사실로 교체. **3.13에서 놓친 갱신** |
+| F21 | open | high | replay 7/7 세션이 초호기 route 문서를 한 번도 읽지 않음. skill 호출 0. 행동은 주입 지침만으로 결정 | C2 transcript 분석 | 규칙 배치 재설계: 행동을 바꿔야 하는 규칙은 주입 지침에, 나머지는 필요 시 명령(검증기·card)으로 묶기. C3과 함께 판단 |
+| F22 | open | high | 핵심 규칙 17곳 파손 중 12곳 미검출. hook의 지침 경로가 깨져도 PASS | mutation 결과 | 주입 지침 핵심 문장·hook 경로의 존재 검사 추가. 검증기의 한계를 functional-assurance에 명시 |
+| F23 | open | medium | 계획 작성 세션이 registry에 허용되지 않는 상태 `completed`를 쓰고 검증기를 돌리지 않음. 프로젝트 밖 `/tmp/placeholder`에 잘못 쓰고 삭제 | C2 transcript, 재현 | 상태 어휘를 주입 지침 또는 검증 명령 안내로. F21과 같은 뿌리 |
+| F24 | open | medium | 비용: 세션당 +11.2k 토큰, 작은 작업 약 2배. 주입 지침 3.5배 성장, 추가:삭제 19:1 | C3·C6 | 규칙 정리 기준(C3 근거 대조) 수립. F21과 함께 |
+| F25 | open | low | `~/.claude/plugins/cache/chohogi-marketplace/chohogi/1.0.0`에 09-29 사본(agents/ 없음)이 남아 있으나 로드되지 않음 | C8 fact | 혼동 방지를 위해 기록만. 삭제는 사용자 판단 |
 
 ### 8.4 권고 순서와 이유
 
-1. **미커밋 변경 커밋(F13 포함 결정)** — Codex는 커밋된 내용만 읽는다. 커밋 전에는 두 호스트가 다른 초호기를 본다.
-2. **F4 Codex 역할 등록** — 5개 역할 체계가 Codex에서 끊겨 있다. 사용자 승인 필요.
-3. **F11** — 작은 수정으로 reviewer 역할의 지시와 능력을 맞춘다.
-4. **F2·F3 replay 확정** — C1 C층을 닫는다. 비용은 replay 각 1회.
-5. **C2 실제 준수** — C1이 닫힌 뒤에 해야 원인을 구조와 준수로 분리할 수 있다.
-6. **C4 mutation 역시험 → C3 비용 → C5 일관성** — 검증기를 믿을 수 있어야 비용·일관성 측정도 믿을 수 있다.
-7. **C6·C7·C8** — 앞 단계의 수치를 입력으로 쓴다.
+1. **Codex 검토(8.5)** — 발견은 한 호스트·1회 관측에 기반한다. 다른 호스트가 반박하거나 재현해야 수정 범위를 확정할 수 있다.
+2. **F20** — 가장 작고 확실한 수정. F19의 원인 후보 하나를 제거해 재측정을 가능하게 한다.
+3. **F17·F22** — 검증기를 믿을 수 있어야 이후 수정의 PASS가 의미를 가진다.
+4. **F21·F24·F16(설계 판단)** — 규칙을 어디에 두어야 실제로 작동하는가의 문제. 사용자 결정 사항이며 `decision-report`로 올린다.
+5. **F18·F23·F11·F3** — 국소 수정.
+6. **F4(사용자)**, 이후 Codex replay로 C8 완료.
+
+### 8.5 Codex 검토 체크리스트
+
+Codex 검토자는 아래를 독립적으로 확인하고, 결과를 이 문서 8.3의 상태 열과 새 행(반박·재현)으로 남긴다.
+각 항목은 "재현됨 / 반박됨 / 확인 불가(이유)"로 판정한다. 판정 근거는 명령 출력이나 rollout 경로로 남긴다.
+
+1. 커밋 `e95323b`의 diff를 읽고, 3.12–3.15의 설명과 실제 변경이 일치하는지 확인한다.
+2. F17·F22: `git clone --local . <저장소 밖 경로>` 후 `python3 docs/work-log/records/DBG-20260930-diagnosis-phase2/mutate.py <복제본>`을
+   실행해 `mutate-result.jsonl`(같은 디렉토리)과 비교한다. 스크립트는 규칙 17곳을 하나씩 깨고 검증기 16개와 unittest를 돌린다.
+3. F21: `python3 tooling/adherence-replay.py run --host codex --profile chohogi --scenario all --runs 1 --model <정확한 id> --out <저장소 밖>`
+   후 rollout에서 초호기 route 문서 읽기 여부를 센다. Codex는 AGENTS.md가 링크라 경로 문서를 읽을 수 있는지가 쟁점이다.
+4. F2: 초호기 저장소 밖 프로젝트에서 homeostasis skill의 execution-record 명령이 경로를 찾는지 Codex에서 1회 확인한다.
+5. F19·F20: Codex에서 profile 없는 위임 시나리오(`review-delegates-on-session-model`)를 1회 돌려 카드 실행 여부를 본다.
+6. F16: Codex 쪽 판단 — learning-우선 규칙이 실효가 있어야 하는지, 줄여야 하는지 의견을 남긴다(수정은 하지 않는다).
+7. 비용은 `evaluation-budget-policy.md` 안에서 쓰고, 실행 횟수와 비용을 이 문서에 적는다.
