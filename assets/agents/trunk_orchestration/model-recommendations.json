@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-09-30",
+  "purpose": "Starting recommendations shown on the Model Session Policy card before the user has saved a profile. They are not applied automatically: until the user answers, every role inherits the session model.",
+  "basis": "execution-allocation.md tier rule (mechanical work lowest fitting tier, prose implementers and reviewers at least mid tier, design judgment and final whole-change review highest tier) and model-policy.md evidence notes (Codex: GPT-6 Luna/medium as the cost-first start, Sol for complex judgment, Astra only by user choice).",
+  "hosts": {
+    "claude": {
+      "optionsSource": "Agent tool model argument: sonnet, opus, haiku, fable; per-role effort is not selectable",
+      "roles": {
+        "scout": {"model": "sonnet", "effort": "not-selectable", "why": "reads and reports from prose instructions; mid tier floor"},
+        "implementer": {"model": "sonnet", "effort": "not-selectable", "why": "plan-driven implementation; mid tier floor"},
+        "task-reviewer": {"model": "sonnet", "effort": "not-selectable", "why": "task-scoped review; mid tier floor, raise for security or payment scope"},
+        "final-reviewer": {"model": "opus", "effort": "not-selectable", "why": "whole-change judgment; highest tier"},
+        "debugger": {"model": "opus", "effort": "not-selectable", "why": "unknown-cause investigation; judgment heavy"}
+      }
+    },
+    "codex": {
+      "optionsSource": "tooling/model-catalog.py codex",
+      "roles": {
+        "scout": {"model": "gpt-6-luna", "effort": "low", "why": "bounded read-only evidence collection"},
+        "implementer": {"model": "gpt-6-luna", "effort": "medium", "why": "cost-first start for ordinary implementation"},
+        "task-reviewer": {"model": "gpt-6-luna", "effort": "medium", "why": "task-scoped review; raise effort for security or payment scope"},
+        "final-reviewer": {"model": "gpt-6-sol", "effort": "medium", "why": "whole-change judgment; Sol is the step up from Luna"},
+        "debugger": {"model": "gpt-6-sol", "effort": "medium", "why": "unknown-cause investigation; judgment heavy"}
+      }
+    }
+  }
+}

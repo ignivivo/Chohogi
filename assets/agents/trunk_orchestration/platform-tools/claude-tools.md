@@ -24,6 +24,18 @@
 "수정 1–3라운드는 같은 implementer에게 보낸다"를 `SendMessage`로 그대로 구현한다.
 위임할 때는 `model`을 명시한다 — 생략하면 세션 모델을 물려받는다.
 
+## 역할 모델 — 검증 상태: verified (도구 스키마)
+
+`Agent` 도구의 `model` 인자는 `sonnet`·`opus`·`haiku`·`fable` 별칭을 받는다. 생략하면 역할 정의의
+모델, 그것도 없으면 부모 세션 모델을 물려받는다(사용자가 기본 서브에이전트 모델을 따로 설정한
+경우 제외). 초호기 역할 정의(`agents/*.md`)에는 모델이 없으므로 생략하면 세션 모델이다. 역할별
+추론 강도는 이 도구로 지정할 수 없어 `not-selectable`로 기록하고 세션 강도를 따른다.
+
+`model-policy.md`의 "출발·추천·저장"에 따라, 저장된 profile이 없으면 `model`을 생략한다.
+`.agents/chohogi-model-profile.json`의 `hosts.claude`에 역할 값이 있으면 그 별칭을 `model`로 준다
+(`session`이면 생략). 추천 card의 선택지는 이 네 별칭 안에서만 만들고, 호출 가능한 전체 목록과
+가격은 공식 조회 수단이 없으면 `unknown`으로 둔다.
+
 ## 격리 작업공간
 
 | 개념 | Claude Code 도구 |

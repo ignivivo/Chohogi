@@ -149,6 +149,95 @@ def compare(current: dict[str, Any], prior: dict[str, Any]) -> list[dict[str, st
     return changes
 
 
+PROFILE_HOSTS = {"claude", "codex"}
+SECRET_KEY = re.compile(r"(api[_-]?key|token|secret|password|account|credential|billing)", re.I)
+
+
+def validate_profile(value: Any) -> dict[str, Any]:
+    """A saved project profile holds only user-confirmed role placements per host."""
+    if not isinstance(value, dict) or value.get("schemaVersion") != 1:
+        raise ContractError("profile must be an object with schemaVersion 1")
+    hosts = value.get("hosts")
+    if not isinstance(hosts, dict) or not hosts:
+        raise ContractError("profile.hosts must be a non-empty object")
+    def walk(node: Any, where: str) -> None:
+        if isinstance(node, dict):
+            for key, child in node.items():
+                if SECRET_KEY.search(str(key)):
+                    raise ContractError(f"{where}.{key}: profile must not hold credentials or account data")
+                walk(child, f"{where}.{key}")
+        elif isinstance(node, list):
+            for index, child in enumerate(node):
+                walk(child, f"{where}[{index}]")
+    walk(value, "profile")
+    def placement(item: Any, where: str) -> dict[str, str]:
+        if not isinstance(item, dict):
+            raise ContractError(f"{where} must be an object")
+        return {"model": text(item.get("model"), f"{where}.model"), "effort": text(item.get("effort"), f"{where}.effort")}
+    summary: dict[str, Any] = {}
+    for host, entry in hosts.items():
+        if host not in PROFILE_HOSTS:
+            raise ContractError(f"profile.hosts.{host}: host must be one of {sorted(PROFILE_HOSTS)}")
+        if not isinstance(entry, dict) or entry.get("confirmedBy") != "user":
+            raise ContractError(f"profile.hosts.{host}.confirmedBy must be 'user'; unconfirmed recommendations are not saved")
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(entry.get("confirmedAt", ""))):
+            raise ContractError(f"profile.hosts.{host}.confirmedAt must be YYYY-MM-DD")
+        roles = entry.get("roles")
+        if not isinstance(roles, dict) or not roles:
+            raise ContractError(f"profile.hosts.{host}.roles must be a non-empty object")
+        summary[host] = {text(role, "role name"): placement(item, f"profile.hosts.{host}.roles.{role}") for role, item in roles.items()}
+        overrides = entry.get("overrides", [])
+        if not isinstance(overrides, list):
+            raise ContractError(f"profile.hosts.{host}.overrides must be a list")
+        for index, item in enumerate(overrides):
+            where = f"profile.hosts.{host}.overrides[{index}]"
+            if not isinstance(item, dict):
+                raise ContractError(f"{where} must be an object")
+            text(item.get("scope"), f"{where}.scope")
+            text(item.get("role"), f"{where}.role")
+            placement(item, where)
+    return summary
+
+
+RECOMMENDATIONS = Path(__file__).resolve().parents[1] / "assets/agents/trunk_orchestration/model-recommendations.json"
+CARD_ROLES = ("scout", "implementer", "task-reviewer", "final-reviewer", "debugger")
+
+
+def observed_models(path: Path | None) -> dict[str, list[str]] | None:
+    if path is None:
+        return None
+    data = read_json(path)
+    models = data.get("models") if isinstance(data, dict) else None
+    if not isinstance(models, list):
+        raise ContractError("observed catalog must contain a models list (tooling/model-catalog.py output)")
+    return {str(item.get("id") or item.get("model")): [str(effort) for effort in (item.get("supportedReasoningEfforts") or [])]
+            for item in models if isinstance(item, dict)}
+
+
+def render_card(host: str, session_model: str, session_effort: str, profile_path: Path, catalog: dict[str, list[str]] | None) -> str:
+    if profile_path.is_file():
+        saved = validate_profile(read_json(profile_path)).get(host)
+        if saved:
+            lines = [f"초호기 모델 배치: {profile_path}의 저장된 배치를 사용합니다 ({host}).", *(f"- {role}: {item['model']} / {item['effort']}" for role, item in saved.items())]
+            return "\n".join(lines)
+    data = read_json(RECOMMENDATIONS)
+    roles = data["hosts"][host]["roles"]
+    lines = [f"초호기 모델 배치 제안 ({host}) — 지금은 모든 역할이 세션 모델 {session_model} / {session_effort}로 돌고 있습니다.",
+             f"추천 (근거: {data['basis'].split(' (')[0]}; 검토일 {data['reviewedAt']}):"]
+    for role in CARD_ROLES:
+        item = roles[role]
+        note = ""
+        if catalog is not None:
+            if item["model"] not in catalog:
+                note = " — 관측된 런타임 목록에 없음"
+            elif item["effort"] not in ("not-selectable", "session") and item["effort"] not in catalog[item["model"]]:
+                note = " — 이 강도는 관측된 목록에 없음"
+        lines.append(f"- {role}: {item['model']} / {item['effort']} — {item['why']}{note}")
+    lines.append("그대로 둘지, 바꿀지, 더 세세하게 정할지(예: 결제·보안 검토는 최상위) 알려주면 "
+                 ".agents/chohogi-model-profile.json에 저장하고 이후 세션은 다시 묻지 않습니다. 답을 주기 전까지는 세션 모델로 계속합니다.")
+    return "\n".join(lines)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -168,7 +257,32 @@ def main() -> int:
     escalation = subparsers.add_parser("learning-escalation")
     escalation.add_argument("--catalog", type=Path, required=True)
     escalation.add_argument("--learning", type=Path, required=True)
+    saved = subparsers.add_parser("profile", help="validate a saved project profile (.agents/chohogi-model-profile.json)")
+    saved.add_argument("--file", type=Path, required=True)
+    card = subparsers.add_parser("card", help="render the Model Session Policy card for this host")
+    card.add_argument("--host", choices=sorted(PROFILE_HOSTS), required=True)
+    card.add_argument("--session-model", required=True)
+    card.add_argument("--session-effort", required=True)
+    card.add_argument("--profile", type=Path, default=Path(".agents/chohogi-model-profile.json"))
+    card.add_argument("--observed-catalog", type=Path)
     args = parser.parse_args()
+    if args.command == "card":
+        try:
+            print(render_card(args.host, args.session_model, args.session_effort, args.profile, observed_models(args.observed_catalog)))
+        except ContractError as exc:
+            print(f"Model policy: FAIL\n- {exc}", file=sys.stderr)
+            return 1
+        return 0
+    if args.command == "profile":
+        try:
+            summary = validate_profile(read_json(args.file))
+        except ContractError as exc:
+            print(f"Model policy: FAIL\n- {exc}", file=sys.stderr)
+            return 1
+        print(json.dumps({"schemaVersion": 1, "hosts": summary, "requiresHumanConfirmation": False,
+                          "limits": "Validates shape and user confirmation only; whether each model/effort is still selectable is checked against a fresh runtime catalog, not by this command."},
+                         ensure_ascii=False, indent=2, sort_keys=True))
+        return 0
     try:
         catalog = validate_catalog(read_json(args.catalog))
         if args.command == "select":

@@ -2,13 +2,18 @@
   "name": "chohogi",
   "version": "1.0.0",
   "description": "Chohogi single-harness orchestration: conductor routing, execution allocation, learning, and homeostasis.",
-  "author": {"name": "ignivivo"},
+  "author": {
+    "name": "ignivivo"
+  },
   "license": "UNLICENSED",
   "skills": "./skills/",
   "interface": {
     "displayName": "Chohogi",
     "shortDescription": "Single-harness orchestration for Codex/Claude Code",
     "longDescription": "Conductor-based routing, execution allocation, learning, and homeostasis for one project's Codex or Claude Code sessions.",
-    "defaultPrompt": ["Continue this project's work under Chohogi routing."]
-  }
+    "defaultPrompt": [
+      "Continue this project's work under Chohogi routing."
+    ]
+  },
+  "hooks": {}
 }

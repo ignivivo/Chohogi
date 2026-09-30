@@ -31,6 +31,7 @@ portions.
 | `agents/implementation-worker.md`, `assets/runtime_entrypoint/agents/implementation-worker.toml` — report contract added 2026-09-29 | `skills/subagent-driven-development/SKILL.md` |
 | `assets/agents/trunk_orchestration/platform-tools/claude-tools.md`, `codex-tools.md` — workspace isolation rules | `skills/using-git-worktrees/SKILL.md` |
 | `skills/homeostasis/references/skill-lifecycle.md` — section "Observe the failure before writing the skill" | `skills/writing-skills/SKILL.md` |
+| `.codex-plugin/plugin.json` — `"hooks": {}` to stop Codex auto-registering `hooks/hooks.json` | `tests/codex/test-marketplace-manifest.sh`, `RELEASE-NOTES.md` (v6.1.x Codex hook note) |
 | `tooling/adherence-replay.py`, `assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json`, `tooling/tests/test_adherence_replay.py` | `tests/claude-code/test-helpers.sh`, `tests/explicit-skill-requests/run-test.sh`, `tests/claude-code/test-worktree-native-preference.sh`, `tests/claude-code/test-subagent-driven-development-integration.sh` |
 
 `assets/agents/genome_inheritance/xylem_provenance/provenance.json` records the same

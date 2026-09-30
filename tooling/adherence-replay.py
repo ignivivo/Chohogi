@@ -113,12 +113,12 @@ def normalize_claude(lines: list[str], project: Path | None) -> dict[str, Any]:
                 elif name in CLAUDE_READ_TOOLS:
                     events.append({"kind": "read", "tool": name})
                 elif name in CLAUDE_DELEGATE_TOOLS:
-                    events.append({"kind": "delegate", "role": data.get("subagent_type", "")})
+                    events.append({"kind": "delegate", "role": data.get("subagent_type", ""), "model": data.get("model", "") or ""})
                 elif name == "Skill":
                     events.append({"kind": "skill", "skill": data.get("skill", "")})
                 else:
                     events.append({"kind": "tool", "tool": name})
-    return {"events": events, "guidanceObserved": guidance, "model": model, "costUsd": cost}
+    return {"events": events, "guidanceObserved": guidance, "model": model, "costUsd": cost, "host": "claude"}
 
 
 def normalize_codex(lines: list[str], project: Path | None) -> dict[str, Any]:
@@ -139,12 +139,43 @@ def normalize_codex(lines: list[str], project: Path | None) -> dict[str, Any]:
         elif kind == "agent_message":
             events.append({"kind": "message", "text": item.get("text", "")})
         elif "agent" in kind or "collab" in kind:
-            events.append({"kind": "delegate", "role": item.get("agent_type", "")})
+            events.append({"kind": "delegate", "role": item.get("agent_type", ""), "model": item.get("model", "") or ""})
         elif kind:
             events.append({"kind": "tool", "tool": kind})
     # Codex does not run plugin hooks; global guidance arrives via ~/.codex/AGENTS.md and
     # is not visible in the exec event stream.
-    return {"events": events, "guidanceObserved": None, "model": None, "costUsd": None}
+    return {"events": events, "guidanceObserved": None, "model": None, "costUsd": None, "host": "codex"}
+
+
+def codex_rollout_delegates(lines: list[str]) -> list[dict[str, Any]]:
+    """`codex exec --json` does not emit spawns; the session rollout records them as spawn_agent calls."""
+    delegates = []
+    for line in lines:
+        try:
+            payload = json.loads(line).get("payload", {})
+        except (json.JSONDecodeError, AttributeError):
+            continue
+        if payload.get("type") != "function_call" or payload.get("name") != "spawn_agent":
+            continue
+        try:
+            arguments = json.loads(payload.get("arguments") or "{}")
+        except json.JSONDecodeError:
+            arguments = {}
+        delegates.append({"kind": "delegate", "role": arguments.get("agent_type", "") or "",
+                          "model": arguments.get("model", "") or "", "effort": arguments.get("reasoning_effort", "") or ""})
+    return delegates
+
+
+def codex_rollout_for(raw: str) -> list[str]:
+    for line in raw.splitlines():
+        try:
+            entry = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if entry.get("type") == "thread.started" and entry.get("thread_id"):
+            found = sorted(Path.home().glob(f".codex/sessions/*/*/*/rollout-*{entry['thread_id']}.jsonl"))
+            return found[-1].read_text(encoding="utf-8").splitlines() if found else []
+    return []
 
 
 def normalize(host: str, lines: list[str], project: Path | None) -> dict[str, Any]:
@@ -233,6 +264,17 @@ def evaluate(scenario: dict[str, Any], normalized: dict[str, Any], project: Path
                 record(aid, command is not None and command > edit,
                        "fresh matching command after the last edit" if command is not None and command > edit
                        else "no matching command after the last edit")
+        elif kind == "delegated":
+            role = re.compile(assertion["role"])
+            model_spec = assertion.get("model", {}).get(normalized.get("host", ""))
+            model = re.compile(model_spec) if model_spec is not None else None
+            effort_spec = assertion.get("effort", {}).get(normalized.get("host", ""))
+            effort = re.compile(effort_spec) if effort_spec is not None else None
+            matches = [event for event in events if event["kind"] == "delegate" and role.search(event.get("role", ""))
+                       and (model is None or model.search(event.get("model", "")))
+                       and (effort is None or effort.search(event.get("effort", "")))]
+            seen = [f"{event.get('role')}/{event.get('model') or 'session'}" for event in events if event["kind"] == "delegate"]
+            record(aid, bool(matches), ("matching delegation: " if matches else "no matching delegation; saw: ") + (", ".join(seen) or "none"))
         elif kind == "command-ran":
             ran = first_index(events, is_command(assertion["command"])) is not None
             record(aid, ran, "matching command ran" if ran else "matching command never ran")
@@ -315,7 +357,8 @@ def find_binary(host: str, explicit: str | None) -> str:
     return located
 
 
-def host_command(host: str, profile: str, binary: str, prompt: str, model: str | None, max_turns: int, project: Path) -> list[str]:
+def host_command(host: str, profile: str, binary: str, prompt: str, model: str | None, max_turns: int, project: Path,
+                 codex_role_config: bool = False) -> list[str]:
     if host == "claude":
         command = [binary, "-p", prompt, "--output-format", "stream-json", "--verbose",
                    "--dangerously-skip-permissions", "--max-turns", str(max_turns)]
@@ -327,6 +370,11 @@ def host_command(host: str, profile: str, binary: str, prompt: str, model: str |
     if profile == "baseline":
         raise SystemExit("codex baseline is not supported: Codex loads ~/.codex/AGENTS.md with no flag to exclude it")
     command = [binary, "exec", "--json", "--skip-git-repo-check", "--dangerously-bypass-approvals-and-sandbox", "-C", str(project)]
+    if codex_role_config:
+        # Registers Chohogi roles for this run only, pointing at the canonical TOMLs (no personal config edit).
+        for name, stem in (("critical_reviewer", "critical-reviewer"), ("evidence_scout", "evidence-scout"),
+                           ("implementation_worker", "implementation-worker")):
+            command += ["-c", f'agents.{name}.config_file="{ROOT / "assets/runtime_entrypoint/agents" / (stem + ".toml")}"']
     if model:
         command += ["-m", model]
     return command + [prompt]
@@ -348,7 +396,8 @@ def run(args: argparse.Namespace) -> int:
         for run_index in range(1, args.runs + 1):
             project = build_project(scenario, out)
             before = snapshot(project)
-            command = host_command(args.host, args.profile, binary, scenario["prompt"], args.model, args.max_turns, project)
+            command = host_command(args.host, args.profile, binary, scenario["prompt"], args.model, args.max_turns, project,
+                                   args.codex_role_config)
             started = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
             try:
                 completed = subprocess.run(command, cwd=project, stdin=subprocess.DEVNULL, capture_output=True,
@@ -359,6 +408,8 @@ def run(args: argparse.Namespace) -> int:
             stem = f"{scenario_id}.{args.host}.{args.profile}.{run_index}"
             (out / f"{stem}.transcript.jsonl").write_text(raw, encoding="utf-8")
             normalized = normalize(args.host, raw.splitlines(), project)
+            if args.host == "codex":
+                normalized["events"].extend(codex_rollout_delegates(codex_rollout_for(raw)))
             assertions = evaluate(scenario, normalized, project, before, args.profile)
             decided = [item for item in assertions if item["passed"] is not None]
             result = {
@@ -407,6 +458,8 @@ def main() -> int:
     runner.add_argument("--timeout", type=int, default=900)
     runner.add_argument("--out", required=True, help="directory outside the repository for transcripts and results")
     runner.add_argument("--keep-projects", action="store_true")
+    runner.add_argument("--codex-role-config", action="store_true",
+                        help="register Chohogi roles for this run via -c agents.<name>.config_file (canonical TOMLs)")
     offline = commands.add_parser("analyze", help="check an existing transcript against a scenario without running a model")
     offline.add_argument("--host", choices=["claude", "codex"], required=True)
     offline.add_argument("--profile", choices=["chohogi", "baseline"], default="chohogi")

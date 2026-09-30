@@ -6,13 +6,46 @@
 `provider + model + reasoning effort + role + 비용 근거`를 사람의 세션 정책으로
 확정하고, 그 정책 안에서 작업·임시 역할에 배정하는 일이다.
 
+## 출발·추천·저장
+
+1. **출발은 세션 모델로 한다.** 사용자가 이 세션에서 고른 모델과 추론 강도(예: Claude Code
+   화면의 `Opus 5.5 Medium`, Codex에서 고른 모델)가 모든 역할의 출발 기본값이다. 세션 모델을
+   고른 것이 이미 사람의 선택이므로, 임시 역할은 모델을 따로 지정하지 않고 세션 모델을 물려받아
+   즉시 배정할 수 있다. 모델 확인을 기다리느라 작업이나 위임을 멈추지 않는다.
+2. **시동을 건 뒤 추천한다.** 프로젝트에 현재 호스트의 저장된 배치가 없으면, 이 프로젝트에서
+   처음으로 역할을 위임하기 직전(위임이 없으면 첫 substantial 작업의 최종 보고 직전)에
+   `python3 tooling/model-policy.py card --host <claude|codex> --session-model <모델> --session-effort <강도>`를
+   실행하고 그 출력을 최종 보고 끝에 붙인다. 추천값은 `model-recommendations.json`(검토일·근거 포함)에
+   있으며, Codex는 `--observed-catalog`에 `model-catalog.py codex` 출력을 주면 관측 목록에 없는 추천을
+   표시한다. 문장 규칙만으로는 두 호스트 모두 card를 건너뛰었기 때문에(2026-09-30 replay) 명령으로
+   묶었다. 사용자는
+   그대로 수용하거나, 바꾸거나, 더 세세하게(예: "결제·보안 검토는 최상위") 정할 수 있다. 답을
+   기다리는 동안에도 작업은 세션 모델로 계속한다. 답할 사람이 없는 실행(headless 등)은 세션
+   모델로 끝까지 가고, card를 최종 보고에 남긴다.
+3. **답은 프로젝트에 저장한다.** 사용자가 답하면 그 호스트의 배치를
+   `.agents/chohogi-model-profile.json`에 기록하고
+   `python3 tooling/model-policy.py profile --file .agents/chohogi-model-profile.json`으로 검증한다.
+   같은 프로젝트의 이후 세션은 이 파일을 읽어 그대로 쓰고 다시 묻지 않는다. Claude와 Codex는
+   선택 가능한 모델이 다르므로 `hosts.claude`와 `hosts.codex`를 따로 둔다. 사용자가 답하지
+   않았으면 파일을 만들지 않는다 — 추천은 확정이 아니다.
+4. **올리는 것만 확인받는다.** 저장된 배치(없으면 세션 모델)보다 비싼 모델이나 높은 추론
+   강도로 올리는 배정은 사용자 확인 전에 적용하지 않는다. 저장된 배치 안에서 역할에 배정하는
+   것은 묻지 않는다.
+
+역할 단위는 `scout`, `implementer`, `task-reviewer`, `final-reviewer`, `debugger`에서 시작한다.
+`scout`는 evidence-scout, `implementer`는 implementation-worker, `task-reviewer`와 `final-reviewer`는
+critical-reviewer 역할에 대응하고, `debugger`는 디버깅 조사를 맡긴 역할에 대응한다. 사용자가 원하면
+`overrides`에 범위(scope)별 예외를 둔다. 모델 값 `session`은 "세션 모델을
+그대로 쓴다"는 뜻이고, 추론 강도 `session`은 세션 강도를, `not-selectable`은 그 호스트가 역할별
+강도를 지정할 수 없음을 뜻한다.
+
 ## 권고와 사용자 선택
 
 전역 기본 모델 profile이나 허용 모델 목록은 두지 않는다. Codex와 Claude는 서로 다른
 실행 표면이므로 각각 자기 runtime에서 관측된 모델만 별도 후보로 제시한다. 권고는 강제
 설정이나 allowlist가 아니라 비용·역할별 시작점이며, 사용자는 관측된 다른 모델과 effort를
 자유롭게 선택할 수 있다. 새 프로젝트마다 첫 substantial 배정 전에 해당 runtime의 목록과
-역할별 후보를 보여주고 확인받는다.
+역할별 후보를 비차단 card로 보여준다(위 "출발·추천·저장").
 
 - 현재 공식 런타임 카탈로그에서 provider·model·effort 조합이 실제 선택 가능한지 확인한다.
   공개 모델 문서만으로 이 환경의 가용성을 보증하지 않는다.
@@ -67,8 +100,8 @@ Claude 모델을 한 실행 배치의 대체 역할로 섞지 않는다. 실제 
 cache, 재시도, 도구 호출, harness에 따라 달라지므로 비교 가능한 평가 근거가 있을 때만
 별도로 보고한다.
 
-소유자는 trunk의 모델 배정 정책이다. 새 프로젝트마다 첫 substantial 모델 배정 전에
-역할별 권고 배치를 제시하고 확인을 받는다. 같은 프로젝트의 새 대화/session만으로는
+소유자는 trunk의 모델 배정 정책이다. 새 프로젝트에서는 세션 모델로 출발한 뒤 역할별 권고
+배치를 비차단 card로 제시한다. 같은 프로젝트의 새 대화/session은 저장된 배치를 읽고
 재확인하지 않는다. 다만 새 모델·모델 버전, 가격, 가용성, effort/capability 또는 관련
 benchmark 업데이트가 감지되면 프로젝트가 이미 존재하고 profile이 확정되어 있어도
 Model Session Policy card를 다시 제시하고, 기존 배치를 유지할지 특정 역할을 바꾸거나
@@ -95,8 +128,9 @@ reasoning effort, 선언된 capability, 관측 시각, 가격 근거를 포함�
 ## 세션 시작과 사람 확정
 
 새 프로젝트에 처음 들어가거나, 기존 프로젝트에서 역할·비용·추론 요구가 달라지는 첫
-작업의 실행 배정 전에 역할별 권고 모델과 관측 가능한 대안을 Model Session Policy card로
-제시하고, 사용자가 그대로 둘지 수정할지 묻는다. 권고 profile은 편의를 위한 출발점이지
+작업에서 역할별 권고 모델과 관측 가능한 대안을 Model Session Policy card로 제시하고, 사용자가
+그대로 둘지 수정할지 묻는다. 이 질문은 작업을 멈추는 관문이 아니다 — 답이 오기 전까지는
+세션 모델로 진행한다. 권고 profile은 편의를 위한 출발점이지
 사용자의 취향이나 비용 판단을 대신하지 않는다. 사용자는 각 작업·역할별로 관측된 조합을
 선택하거나 이후에도 변경할 수 있다.
 프로젝트마다 기본 배치를 다시 보여주되, 같은 프로젝트의 동일한 profile 안에서 반복되는
@@ -107,9 +141,9 @@ reasoning effort, 선언된 capability, 관측 시각, 가격 근거를 포함�
 3. 세션 기본 profile: 역할별 provider/model/effort, 비용 상한, fallback
 4. 재검토 trigger와 이 정책이 보장하지 않는 범위
 
-사람이 확정하기 전에는 후보를 추천할 수 있지만, 새 모델·추론도 상향 또는 승인되지 않은
-비용 상향을 적용하지 않는다. 확정 뒤에는 같은 세션에서 매 역할마다 다시 묻지 않고,
-사용자가 확정한 role별 profile을 쓴다. 후보가 과업 관련 결과에서 대체로 비슷하고 가격
+사람이 확정하기 전에는 세션 모델을 그대로 쓰고 후보를 추천만 한다. 세션 모델과 다른 모델,
+더 높은 추론 강도, 승인되지 않은 비용 상향은 적용하지 않는다. 확정 뒤에는 매 역할마다 다시
+묻지 않고, 저장된 role별 profile을 쓴다. 후보가 과업 관련 결과에서 대체로 비슷하고 가격
 근거도 같은 조건이면 더 낮은 비용을 우선할 수 있다. 다만 사용자가 명시적으로
 다른 관측 모델이나 reasoning effort를 요청하면 그것을 사용자 선택으로 받아들인다.
 저장된 전역 모델 allowlist는 없다. 이때 정확한 provider/model/effort가 현재 catalog에 있고 task capability·최소 reasoning을
@@ -180,7 +214,29 @@ learning evidence가 있을 때만 재확정을 출력한다. `select --catalog 
 --task <task.json> --provider <provider> --model <model> --reasoning <effort> --reason <text>`는
 사용자가 명시한 override를 현재 관측과 task 계약에 대조한다.
 
-세션 정책 record는 비밀 없는 관측과 사람의 확정만 담는다. 원본 대화, API key, account ID,
-개인 청구 정보는 넣지 않는다. record를 어디에 보존할지는 런타임/사용자의 권한 있는
-adapter가 정한다. 초호기 source와 installer는 provider 설정이나 개인 세션 저장소를
-관리하지 않는다.
+세션 정책 record는 비밀 없는 관측과 사람의 확정만 담으며, 프로젝트의
+`.agents/chohogi-model-profile.json`에 둔다. 원본 대화, API key, account ID, 개인 청구 정보는
+넣지 않는다(`model-policy.py profile`이 이런 키를 거부한다). 초호기 source와 installer는
+provider 설정이나 개인 세션 저장소를 관리하지 않는다.
+
+```json
+{
+  "schemaVersion": 1,
+  "hosts": {
+    "claude": {
+      "confirmedBy": "user",
+      "confirmedAt": "2026-09-30",
+      "sessionModelAtConfirmation": {"model": "claude-opus-5-5", "effort": "medium"},
+      "catalogSource": "user-reported-from-runtime-ui",
+      "roles": {
+        "scout": {"model": "sonnet", "effort": "not-selectable"},
+        "implementer": {"model": "session", "effort": "not-selectable"},
+        "task-reviewer": {"model": "session", "effort": "not-selectable"},
+        "final-reviewer": {"model": "opus", "effort": "not-selectable"},
+        "debugger": {"model": "session", "effort": "not-selectable"}
+      },
+      "overrides": [{"scope": "payment or security review", "role": "task-reviewer", "model": "opus", "effort": "not-selectable"}]
+    }
+  }
+}
+```

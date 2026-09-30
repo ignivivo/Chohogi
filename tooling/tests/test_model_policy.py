@@ -123,5 +123,79 @@ class ModelPolicyTests(unittest.TestCase):
         self.assertIn("gpt-6-astra", [item["model"] for item in json.loads(result.stdout)["candidates"]])
 
 
+    def profile(self) -> dict[str, object]:
+        return {
+            "schemaVersion": 1,
+            "hosts": {
+                "claude": {
+                    "confirmedBy": "user", "confirmedAt": "2026-09-30",
+                    "sessionModelAtConfirmation": {"model": "claude-opus-5-5", "effort": "medium"},
+                    "catalogSource": "user-reported-from-runtime-ui",
+                    "roles": {"implementer": {"model": "session", "effort": "not-selectable"},
+                              "task-reviewer": {"model": "haiku", "effort": "not-selectable"}},
+                    "overrides": [{"scope": "payment review", "role": "task-reviewer", "model": "opus", "effort": "not-selectable"}],
+                },
+                "codex": {
+                    "confirmedBy": "user", "confirmedAt": "2026-09-30",
+                    "roles": {"task-reviewer": {"model": "gpt-6-sol", "effort": "medium"}},
+                },
+            },
+        }
+
+    def test_profile_accepts_a_user_confirmed_per_host_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = self.write_json(Path(directory), "profile.json", self.profile())
+            result = self.run_tool("profile", "--file", str(path))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        payload = json.loads(result.stdout)
+        self.assertEqual(payload["hosts"]["claude"]["task-reviewer"], {"model": "haiku", "effort": "not-selectable"})
+        self.assertEqual(payload["hosts"]["codex"]["task-reviewer"], {"model": "gpt-6-sol", "effort": "medium"})
+        self.assertFalse(payload["requiresHumanConfirmation"])
+
+    def test_profile_rejects_unconfirmed_unknown_host_secret_and_incomplete_roles(self) -> None:
+        cases = []
+        unconfirmed = self.profile(); unconfirmed["hosts"]["claude"]["confirmedBy"] = "agent"; cases.append(unconfirmed)
+        unknown_host = self.profile(); unknown_host["hosts"]["gemini"] = unknown_host["hosts"]["codex"]; cases.append(unknown_host)
+        secret = self.profile(); secret["hosts"]["codex"]["apiKey"] = "x"; cases.append(secret)
+        no_effort = self.profile(); del no_effort["hosts"]["codex"]["roles"]["task-reviewer"]["effort"]; cases.append(no_effort)
+        empty_roles = self.profile(); empty_roles["hosts"]["codex"]["roles"] = {}; cases.append(empty_roles)
+        bad_date = self.profile(); bad_date["hosts"]["claude"]["confirmedAt"] = "yesterday"; cases.append(bad_date)
+        with tempfile.TemporaryDirectory() as directory:
+            for index, case in enumerate(cases):
+                path = self.write_json(Path(directory), f"p{index}.json", case)
+                result = self.run_tool("profile", "--file", str(path))
+                self.assertNotEqual(result.returncode, 0, f"case {index} should fail")
+
+
+    def test_card_recommends_per_role_from_session_model_when_no_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            result = self.run_tool("card", "--host", "codex", "--session-model", "gpt-6-luna", "--session-effort", "medium",
+                                   "--profile", str(Path(directory) / "missing.json"))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("gpt-6-luna / medium", result.stdout)
+        for role in ("scout", "implementer", "task-reviewer", "final-reviewer", "debugger"):
+            self.assertIn(role, result.stdout)
+        self.assertIn(".agents/chohogi-model-profile.json", result.stdout)
+
+    def test_card_reports_saved_profile_instead_of_asking_again(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = self.write_json(Path(directory), "profile.json", self.profile())
+            result = self.run_tool("card", "--host", "claude", "--session-model", "claude-opus-5-5", "--session-effort", "medium", "--profile", str(path))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("저장된 배치", result.stdout)
+        self.assertIn("task-reviewer: haiku", result.stdout)
+        self.assertNotIn("알려주면", result.stdout)
+
+    def test_card_marks_recommendations_missing_from_an_observed_catalog(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            catalog = self.write_json(Path(directory), "catalog.json", {"schemaVersion": 1, "provider": "codex-vscode-runtime", "models": [
+                {"id": "gpt-6-luna", "supportedReasoningEfforts": ["low", "medium", "high"]}]})
+            result = self.run_tool("card", "--host", "codex", "--session-model", "gpt-6-luna", "--session-effort", "medium",
+                                   "--profile", str(Path(directory) / "missing.json"), "--observed-catalog", str(catalog))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("gpt-6-sol", result.stdout)
+        self.assertIn("목록에 없음", result.stdout)
+
+
 if __name__ == "__main__":
     unittest.main()

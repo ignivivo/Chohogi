@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "6a6af1abae9aa2e010571ea57538a813d616256673b58767d16c15d2d8c61937",
+  "sourceDigest": "0e508465e7bde272f97ac391d56ff0b0329e4c6d613510bca1f3d66b2909e4e7",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -858,6 +858,11 @@
       "path": "assets/agents/trunk_orchestration/model-policy.md"
     },
     {
+      "id": "asset:assets/agents/trunk_orchestration/model-recommendations.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/model-recommendations.json"
+    },
+    {
       "id": "asset:assets/agents/trunk_orchestration/plan-authoring.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/plan-authoring.md"
@@ -1568,6 +1573,24 @@
       "evidence": "README.md"
     },
     {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
       "source": "asset:assets/agents",
       "target": "component:chohogi-organs",
       "relation": "activates",
@@ -1672,6 +1695,12 @@
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/model-recommendations.json",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
     },
@@ -1965,6 +1994,12 @@
     },
     {
       "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
       "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
@@ -1976,10 +2011,22 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
       "source": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
       "target": "component:implementation-worker-role",
       "relation": "activates",
       "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
     },
     {
       "source": "asset:docs/chohogi/audits/2026-09-03-functional-reality-gap.md",
@@ -2490,6 +2537,12 @@
       "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
       "relation": "governed-by",
       "evidence": "tooling/genome_map.py: model-policy dependencies"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-recommendations.json",
+      "relation": "requires",
+      "evidence": "tooling/model-policy.py"
     },
     {
       "source": "asset:tooling/model-policy.py",

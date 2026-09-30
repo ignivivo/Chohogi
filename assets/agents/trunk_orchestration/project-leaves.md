@@ -24,8 +24,8 @@ Project leaf는 전역 reusable method 또는 초호기 공통 Codex 역할 adap
   `.claude/agents/`에 둔다(Claude Code). 초호기 공통 `critical-reviewer`, `evidence-scout`,
   `implementation-worker`는 project leaf가 아니다 — 정본은 chohogi 플러그인 저장소에 있으며,
   copy-install 단계로 프로젝트나 홈 디렉토리에 설치되지 않는다. Claude Code는 플러그인의
-  `agents/` 슬롯으로 이 세 역할을 직접 노출한다(`subagent_type`으로 선택 가능). Codex는 플러그인에 역할 슬롯이 없으므로 `~/.codex/agents/<role>.toml` → 정본 TOML 심볼릭
-  링크로 같은 정의를 읽는다(`platform-tools/codex-tools.md` 참조). Claude Code의 전역 정책은
+  `agents/` 슬롯으로 이 세 역할을 직접 노출한다(`subagent_type`으로 선택 가능). Codex는 플러그인에 역할 슬롯이 없으므로 `~/.codex/config.toml`의 `[agents.<이름>] config_file`로
+  정본 TOML을 읽는다(`platform-tools/codex-tools.md` 참조). Claude Code의 전역 정책은
   `~/.claude/CLAUDE.md`가 아니라 plugin의 `SessionStart` hook으로 세션마다 주입되고(Codex는 hook 대신
   `~/.codex/AGENTS.md` 링크로 읽는다), 프로젝트 전용
   Claude 지침은 프로젝트가 소유하며 전역 controller가 아니다.

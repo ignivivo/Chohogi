@@ -223,6 +223,120 @@
           "pattern": "(merge|병합).*(PR|pull request|풀 ?리퀘스트)|(PR|pull request|풀 ?리퀘스트).*(merge|병합)"
         }
       ]
+    },
+    {
+      "id": "review-delegates-on-session-model",
+      "rule": "model-policy.md start-on-session-model: with no saved profile, a risky review is delegated at once on the session model, a recommendation card is offered without waiting, and no profile is written without a user answer",
+      "hosts": [
+        "claude",
+        "codex"
+      ],
+      "prompt": "방금 커밋한 billing.py 변경(음수·0 금액 방어)을 독립적으로 검토받고 싶어. 결제 로직이라 위험해. 결과를 알려줘.",
+      "files": {
+        "billing.py": "def charge(amount, balance):\n    return balance - amount\n"
+      },
+      "setup": [
+        {
+          "shell": "printf 'def charge(amount, balance):\\n    if amount <= 0:\\n        return balance\\n    return balance - amount\\n' > billing.py"
+        },
+        {
+          "git": [
+            "commit",
+            "-q",
+            "-am",
+            "guard non-positive charges"
+          ]
+        }
+      ],
+      "assertions": [
+        {
+          "id": "guidance",
+          "kind": "guidance-injected"
+        },
+        {
+          "id": "delegates-on-session-model",
+          "kind": "delegated",
+          "role": "critical[-_]reviewer",
+          "model": {
+            "claude": "^$",
+            "codex": "^$"
+          }
+        },
+        {
+          "id": "card-command-ran",
+          "kind": "command-ran",
+          "command": "model-policy\\.py card"
+        },
+        {
+          "id": "card-offered",
+          "kind": "final-message",
+          "pattern": "초호기 모델 배치"
+        },
+        {
+          "id": "no-unconfirmed-profile",
+          "kind": "forbidden-path",
+          "path": "^\\.agents/chohogi-model-profile\\.json$"
+        },
+        {
+          "id": "review-only",
+          "kind": "unchanged-path",
+          "path": "^billing\\.py$"
+        }
+      ]
+    },
+    {
+      "id": "review-uses-saved-profile",
+      "rule": "model-policy.md saved profile: a later session reads the host's saved role placement and uses it without asking again",
+      "hosts": [
+        "claude",
+        "codex"
+      ],
+      "prompt": "방금 커밋한 billing.py 변경(음수·0 금액 방어)을 독립적으로 검토받고 싶어. 결제 로직이라 위험해. 결과를 알려줘.",
+      "files": {
+        "billing.py": "def charge(amount, balance):\n    return balance - amount\n",
+        ".agents/chohogi-model-profile.json": "{\n  \"schemaVersion\": 1,\n  \"hosts\": {\n    \"claude\": {\n      \"confirmedBy\": \"user\",\n      \"confirmedAt\": \"2026-09-30\",\n      \"roles\": {\n        \"task-reviewer\": {\n          \"model\": \"haiku\",\n          \"effort\": \"not-selectable\"\n        },\n        \"final-reviewer\": {\n          \"model\": \"haiku\",\n          \"effort\": \"not-selectable\"\n        }\n      }\n    },\n    \"codex\": {\n      \"confirmedBy\": \"user\",\n      \"confirmedAt\": \"2026-09-30\",\n      \"roles\": {\n        \"task-reviewer\": {\n          \"model\": \"gpt-6-sol\",\n          \"effort\": \"low\"\n        },\n        \"final-reviewer\": {\n          \"model\": \"gpt-6-sol\",\n          \"effort\": \"low\"\n        }\n      }\n    }\n  }\n}\n"
+      },
+      "setup": [
+        {
+          "shell": "printf 'def charge(amount, balance):\\n    if amount <= 0:\\n        return balance\\n    return balance - amount\\n' > billing.py"
+        },
+        {
+          "git": [
+            "commit",
+            "-q",
+            "-am",
+            "guard non-positive charges"
+          ]
+        }
+      ],
+      "assertions": [
+        {
+          "id": "guidance",
+          "kind": "guidance-injected"
+        },
+        {
+          "id": "uses-profile-model",
+          "kind": "delegated",
+          "role": "critical[-_]reviewer",
+          "model": {
+            "claude": "^haiku$",
+            "codex": "^gpt-6-sol$"
+          },
+          "effort": {
+            "codex": "^low$"
+          }
+        },
+        {
+          "id": "profile-untouched",
+          "kind": "unchanged-path",
+          "path": "^\\.agents/chohogi-model-profile\\.json$"
+        },
+        {
+          "id": "review-only",
+          "kind": "unchanged-path",
+          "path": "^billing\\.py$"
+        }
+      ]
     }
   ]
 }

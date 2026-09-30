@@ -13,7 +13,7 @@
       "source": "assets/runtime_entrypoint/AGENTS.md",
       "pluginSlot": "hooks",
       "ownership": "runtime-endpoint",
-      "activation": "every session: on Claude Code via the SessionStart hook in hooks/hooks.json; on Codex, which does not run plugin hooks, via a ~/.codex/AGENTS.md symlink to this file",
+      "activation": "every session: on Claude Code via the SessionStart hook in hooks/hooks.json; on Codex via a ~/.codex/AGENTS.md symlink to this file (the Codex manifest declares hooks {} so the hook is not also registered there)",
       "state": "active"
     },
     {

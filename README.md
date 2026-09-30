@@ -20,17 +20,31 @@ codex plugin add chohogi@chohogi-marketplace
 ```
 
 Claude Code는 플러그인의 `skills/`, `agents/`, `hooks/hooks.json`(전역 지침 주입)을 바로
-노출한다. Codex는 플러그인의 `skills/`만 읽고 plugin hook과 역할 슬롯은 없으므로, 전역 지침과
-역할은 정본을 가리키는 링크로 연결한다(복사하지 않는다):
+노출한다. Codex는 플러그인의 `skills/`만 쓴다(hook은 아래처럼 끄고, 역할 슬롯은 없다). 전역
+지침은 정본을 가리키는 링크로, 역할은 `config.toml`의 정본 경로 등록으로 연결한다(복사하지 않는다):
 
 ```bash
 R=<이 저장소 경로>
 ln -s $R/assets/runtime_entrypoint/AGENTS.md ~/.codex/AGENTS.md
 ln -s $R/assets/agents ~/.agents/chohogi
-for r in critical-reviewer evidence-scout implementation-worker; do
-  ln -s $R/assets/runtime_entrypoint/agents/$r.toml ~/.codex/agents/$r.toml
-done
 ```
+
+역할은 링크가 아니라 `~/.codex/config.toml`에 정본 경로로 등록한다. `~/.codex/agents/`에 링크를
+두면 역할 목록에는 보이지만 스폰이 거부된다.
+
+```toml
+[agents.critical_reviewer]
+config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/critical-reviewer.toml"
+
+[agents.evidence_scout]
+config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/evidence-scout.toml"
+
+[agents.implementation_worker]
+config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/implementation-worker.toml"
+```
+
+Codex 플러그인 매니페스트는 `"hooks": {}`로 `hooks/hooks.json` 자동 등록을 끈다. Codex의 전역
+지침은 위 AGENTS.md 링크 하나로만 들어간다.
 
 링크는 작업 트리를 바로 가리키지만, Codex의 플러그인 스킬은 마켓플레이스 root를 git 커밋
 상태로 복사한 것이고 Claude Code는

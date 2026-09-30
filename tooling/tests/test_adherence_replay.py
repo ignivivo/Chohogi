@@ -81,6 +81,38 @@ class AdherenceReplayTests(unittest.TestCase):
                  claude_tool("Edit", {"file_path": "/tmp/gone-project/textutil.py"})]
         self.assertEqual(replay.normalize("claude", lines, None)["events"][0]["paths"], ["textutil.py"])
 
+    def test_delegation_records_role_and_model_on_both_hosts(self) -> None:
+        claude = replay.normalize("claude", [
+            claude_tool("Agent", {"subagent_type": "chohogi:critical-reviewer", "prompt": "x"}),
+            claude_tool("Agent", {"subagent_type": "chohogi:critical-reviewer", "model": "haiku", "prompt": "x"}),
+        ], None)
+        self.assertEqual([(e["role"], e["model"]) for e in claude["events"]],
+                         [("chohogi:critical-reviewer", ""), ("chohogi:critical-reviewer", "haiku")])
+        rollout = [json.dumps({"type": "response_item", "payload": {"type": "function_call", "name": "spawn_agent",
+                   "arguments": json.dumps({"agent_type": "critical_reviewer", "model": "gpt-6-sol", "reasoning_effort": "low", "message": "m"})}}),
+                   json.dumps({"type": "response_item", "payload": {"type": "function_call", "name": "wait_agent", "arguments": "{}"}})]
+        self.assertEqual(replay.codex_rollout_delegates(rollout),
+                         [{"kind": "delegate", "role": "critical_reviewer", "model": "gpt-6-sol", "effort": "low"}])
+
+    def test_delegated_assertion_checks_role_and_host_specific_model(self) -> None:
+        scenario = {"id": "t", "rule": "r", "assertions": [
+            {"id": "inherits", "kind": "delegated", "role": "critical[-_]reviewer", "model": {"claude": "^$", "codex": "^$"}},
+            {"id": "profile-model", "kind": "delegated", "role": "critical[-_]reviewer", "model": {"claude": "^haiku$", "codex": "^gpt-6-sol$"}}]}
+        inherit = {"events": [{"kind": "delegate", "role": "chohogi:critical-reviewer", "model": ""}], "guidanceObserved": True, "model": None, "costUsd": None, "host": "claude"}
+        results = {r["id"]: r["passed"] for r in replay.evaluate(scenario, inherit, None, None, "chohogi")}
+        self.assertEqual(results, {"inherits": True, "profile-model": False})
+        chosen = {"events": [{"kind": "delegate", "role": "critical_reviewer", "model": "gpt-6-sol"}], "guidanceObserved": None, "model": None, "costUsd": None, "host": "codex"}
+        results = {r["id"]: r["passed"] for r in replay.evaluate(scenario, chosen, None, None, "chohogi")}
+        self.assertEqual(results, {"inherits": False, "profile-model": True})
+        effort_scenario = {"id": "t", "rule": "r", "assertions": [
+            {"id": "effort", "kind": "delegated", "role": "critical[-_]reviewer", "model": {"codex": "^gpt-6-sol$"}, "effort": {"codex": "^low$"}}]}
+        wrong_effort = dict(chosen, events=[{"kind": "delegate", "role": "critical_reviewer", "model": "gpt-6-sol", "effort": ""}])
+        self.assertFalse(replay.evaluate(effort_scenario, wrong_effort, None, None, "chohogi")[0]["passed"])
+        right_effort = dict(chosen, events=[{"kind": "delegate", "role": "critical_reviewer", "model": "gpt-6-sol", "effort": "low"}])
+        self.assertTrue(replay.evaluate(effort_scenario, right_effort, None, None, "chohogi")[0]["passed"])
+        none = {"events": [], "guidanceObserved": True, "model": None, "costUsd": None, "host": "claude"}
+        self.assertFalse(replay.evaluate(scenario, none, None, None, "chohogi")[0]["passed"])
+
     def test_baseline_profile_expects_no_guidance(self) -> None:
         scenario = self.scenarios["readonly-explain-no-edit"]
         lines = [claude_tool("Read", {"file_path": "calc.py"}), claude_text("It averages.")]
