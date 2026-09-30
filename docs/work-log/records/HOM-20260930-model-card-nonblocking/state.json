@@ -1,0 +1,53 @@
+{
+  "workId": "HOM-20260930-model-card-nonblocking",
+  "baseline": "cbb741b8d021e5fd84e41d41303662fef051dee74d0c1e8a1a5bec76a9b8e19a",
+  "contract": {
+    "schemaVersion": 1,
+    "objective": "Prevent optional model-profile prompts from distracting or interrupting the user's requested work while preserving explicit per-project model selection when delegation needs it.",
+    "route": "homeostasis",
+    "execution": "direct",
+    "feedbackRegistry": ".agents/chohogi-document-registry.json",
+    "requested": [
+      "avoid a model-selection speed bump that delays or displaces the user's original instruction"
+    ],
+    "excluded": [
+      "change the current session's model",
+      "silently change model choices beyond the user's stated preference",
+      "remove profile selection when an actual role assignment needs a model"
+    ],
+    "requestedItems": [
+      {
+        "id": "card-trigger",
+        "description": "Do not present a model-profile card solely because a substantial task has no delegation; present it when an actual delegation/model assignment is imminent or when user requests model advice."
+      },
+      {
+        "id": "resume-work",
+        "description": "A user's model/profile answer must not replace, restart, or pause unfinished work; save the scoped choice and continue the existing task."
+      },
+      {
+        "id": "completed-work",
+        "description": "If the original task is already complete when the user answers, acknowledge completion and apply only the requested profile change without inventing follow-up work."
+      }
+    ],
+    "acceptance": [
+      {
+        "id": "policy-consistency",
+        "description": "Global entrypoint, model policy and execution allocation agree on a non-blocking, work-first trigger for model cards."
+      },
+      {
+        "id": "verified",
+        "description": "Affected model-policy and functional-assurance verifiers pass; replay contract documents the observable boundaries and remaining runtime limits."
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "acceptanceId": "verified",
+      "kind": "verifier-output",
+      "path": "/home/ignivivo/github/Chohogi/docs/work-log/records/HOM-20260930-model-card-nonblocking/verification.txt",
+      "sha256": "e2c9274c354c49ac42fec41fb32c163b28e1dd228c85e60bce7da37e8dcfeab3",
+      "status": "pass"
+    }
+  ],
+  "checkpoints": []
+}

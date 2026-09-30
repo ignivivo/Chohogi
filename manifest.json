@@ -73,7 +73,7 @@
       "source": "tooling/model-catalog.py",
       "pluginSlot": "tooling",
       "ownership": "managed",
-      "activation": "a new project, a model-policy reconfirmation trigger, or an explicit request to verify runtime-visible model options",
+      "activation": "the first actual role/model assignment in a new project, a model-policy reconfirmation trigger, or an explicit request to verify runtime-visible model options",
       "state": "active"
     },
     {
