@@ -113,6 +113,20 @@ class AdherenceReplayTests(unittest.TestCase):
         none = {"events": [], "guidanceObserved": True, "model": None, "costUsd": None, "host": "claude"}
         self.assertFalse(replay.evaluate(scenario, none, None, None, "chohogi")[0]["passed"])
 
+    def test_codex_rollout_reports_the_model_the_session_actually_ran(self) -> None:
+        rollout = [json.dumps({"type": "session_meta", "payload": {}}),
+                   json.dumps({"type": "turn_context", "payload": {"model": "gpt-6-luna", "effort": "medium"}})]
+        self.assertEqual(replay.codex_rollout_model(rollout), "gpt-6-luna")
+        self.assertIsNone(replay.codex_rollout_model([]))
+
+    def test_model_aliases_are_rejected_so_runs_stay_comparable(self) -> None:
+        for alias in ("sonnet", "opus", "haiku", "fable"):
+            with self.assertRaises(SystemExit):
+                replay.require_exact_model("claude", alias)
+        replay.require_exact_model("claude", "claude-sonnet-5")
+        replay.require_exact_model("codex", "gpt-6-luna")
+        replay.require_exact_model("claude", None)
+
     def test_baseline_profile_expects_no_guidance(self) -> None:
         scenario = self.scenarios["readonly-explain-no-edit"]
         lines = [claude_tool("Read", {"file_path": "calc.py"}), claude_text("It averages.")]

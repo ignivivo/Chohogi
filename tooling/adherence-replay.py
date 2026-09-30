@@ -166,6 +166,27 @@ def codex_rollout_delegates(lines: list[str]) -> list[dict[str, Any]]:
     return delegates
 
 
+def codex_rollout_model(lines: list[str]) -> str | None:
+    for line in lines:
+        try:
+            entry = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if entry.get("type") == "turn_context" and entry.get("payload", {}).get("model"):
+            return entry["payload"]["model"]
+    return None
+
+
+CLAUDE_ALIASES = {"sonnet", "opus", "haiku", "fable", "default"}
+
+
+def require_exact_model(host: str, model: str | None) -> None:
+    # An alias can point at a different model on a different day, which silently breaks
+    # before/after comparisons (observed 2026-09-29 vs 09-30: sonnet -> claude-sonnet-5 then claude-sonnet-5-5).
+    if model is not None and host == "claude" and model.lower() in CLAUDE_ALIASES:
+        raise SystemExit(f"--model {model} is an alias; pin an exact model id (e.g. claude-sonnet-5-5) so runs stay comparable")
+
+
 def codex_rollout_for(raw: str) -> list[str]:
     for line in raw.splitlines():
         try:
@@ -387,6 +408,7 @@ def run(args: argparse.Namespace) -> int:
     if ROOT in out.parents or out == ROOT:
         raise SystemExit("--out must be outside the repository: raw transcripts are not committed")
     out.mkdir(parents=True, exist_ok=True)
+    require_exact_model(args.host, args.model)
     binary = find_binary(args.host, args.binary)
     summary = []
     for scenario_id in selected:
@@ -409,12 +431,15 @@ def run(args: argparse.Namespace) -> int:
             (out / f"{stem}.transcript.jsonl").write_text(raw, encoding="utf-8")
             normalized = normalize(args.host, raw.splitlines(), project)
             if args.host == "codex":
-                normalized["events"].extend(codex_rollout_delegates(codex_rollout_for(raw)))
+                rollout = codex_rollout_for(raw)
+                normalized["events"].extend(codex_rollout_delegates(rollout))
+                normalized["model"] = codex_rollout_model(rollout)
             assertions = evaluate(scenario, normalized, project, before, args.profile)
             decided = [item for item in assertions if item["passed"] is not None]
             result = {
                 "schemaVersion": 1, "kind": "adherence-replay", "scenarioId": scenario_id, "rule": scenario["rule"],
-                "host": args.host, "profile": args.profile, "model": normalized["model"] or args.model or "host-default",
+                "host": args.host, "profile": args.profile, "requestedModel": args.model or "host-default",
+                "model": normalized["model"] or "unobserved",
                 "runIndex": run_index, "startedAt": started, "timedOut": timed_out,
                 "guidanceObserved": normalized["guidanceObserved"], "costUsd": normalized["costUsd"],
                 "eventCounts": {kind: sum(1 for event in normalized["events"] if event["kind"] == kind)

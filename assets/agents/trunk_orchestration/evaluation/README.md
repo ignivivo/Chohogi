@@ -110,7 +110,11 @@ python3 tooling/adherence-replay.py analyze --host claude --scenario <id> --tran
 ```
 
 - `baseline`은 Claude Code에서 사용자 설정을 빼(`--setting-sources project,local`) 초호기 플러그인
-  없이 실행한다. 두 profile은 같은 모델을 고정한다. Codex는 `~/.codex/AGENTS.md`를 끄는 옵션이
+  없이 실행한다. 두 profile은 같은 모델을 고정한다.
+- 모델은 별칭(`sonnet` 등)이 아니라 정확한 id(`claude-sonnet-5-5` 등)로 고정한다. 별칭은 날짜에 따라
+  다른 모델을 가리킬 수 있어 전후 비교를 조용히 깨뜨린다(2026-09-29 `sonnet`→`claude-sonnet-5`,
+  09-30 →`claude-sonnet-5-5` 관측). 도구는 Claude 별칭을 거부하고, 결과에 요청 모델(`requestedModel`)과
+  실제로 돈 모델(`model`)을 함께 남긴다. 비교는 `model`이 같은 결과끼리만 한다. Codex는 `~/.codex/AGENTS.md`를 끄는 옵션이
   없어 baseline을 지원하지 않는다.
 - 원문 transcript는 `--out`(저장소 밖)에만 남고, 결과 JSON에는 단언별 통과 여부와 짧은 사유,
   이벤트 수, 비용만 들어간다.
