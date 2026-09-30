@@ -1,6 +1,6 @@
 # Chohogi observability and integration closure
 
-> **Status:** Active execution owner. One plan owns the current queue for work `HOM-20260923-observability-closure`; prior plans, audits, and records are evidence/history, not execution instructions.
+> **Status:** Historical. Work `HOM-20260923-observability-closure` finalized on 2026-09-23; this plan no longer owns an execution queue and is evidence only. No plan is currently active (`activeExecutionPlan: null`).
 
 ## Objective and scope
 

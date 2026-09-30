@@ -47,6 +47,26 @@
       "state": "active"
     },
     {
+      "id": "final-reviewer-role",
+      "organ": "runtime_entrypoint",
+      "function": "independent-final-whole-change-review",
+      "source": "assets/runtime_entrypoint/agents/final-reviewer.toml",
+      "pluginSlot": "agents",
+      "ownership": "managed",
+      "activation": "the task loop's final review of the whole change; mirrored into agents/final-reviewer.md for Claude Code (see critical-reviewer-role for why this is a mirror, not a symlink)",
+      "state": "active"
+    },
+    {
+      "id": "debugger-role",
+      "organ": "runtime_entrypoint",
+      "function": "read-only-cause-investigation",
+      "source": "assets/runtime_entrypoint/agents/debugger.toml",
+      "pluginSlot": "agents",
+      "ownership": "managed",
+      "activation": "debugging route delegation of reproduction and cause investigation after execution allocation; mirrored into agents/debugger.md for Claude Code (see critical-reviewer-role for why this is a mirror, not a symlink)",
+      "state": "active"
+    },
+    {
       "id": "chohogi-organs",
       "organ": "organ-library",
       "function": "internal-contracts",

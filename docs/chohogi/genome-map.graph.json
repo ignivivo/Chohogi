@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "7a0684a50b06ba631f98b6d3a97204ba29f120bf9814ec93f030e0715be386ab",
+  "sourceDigest": "45cb62f3eb1f5639ff0e9da49abfad49574fef7e652b872b010b6fc4c14df6de",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -913,9 +913,19 @@
       "path": "assets/runtime_entrypoint/agents/critical-reviewer.toml"
     },
     {
+      "id": "asset:assets/runtime_entrypoint/agents/debugger.toml",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/agents/debugger.toml"
+    },
+    {
       "id": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
       "kind": "asset",
       "path": "assets/runtime_entrypoint/agents/evidence-scout.toml"
+    },
+    {
+      "id": "asset:assets/runtime_entrypoint/agents/final-reviewer.toml",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/agents/final-reviewer.toml"
     },
     {
       "id": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
@@ -1118,6 +1128,11 @@
       "path": "tooling/tests/test_replay_scripts.py"
     },
     {
+      "id": "asset:tooling/tests/test_role_definitions.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_role_definitions.py"
+    },
+    {
       "id": "asset:tooling/tests/test_security_gate.py",
       "kind": "asset",
       "path": "tooling/tests/test_security_gate.py"
@@ -1178,6 +1193,11 @@
       "path": "tooling/verify-model-policy.py"
     },
     {
+      "id": "asset:tooling/verify-project-document-registry.py",
+      "kind": "asset",
+      "path": "tooling/verify-project-document-registry.py"
+    },
+    {
       "id": "asset:tooling/verify-provenance.py",
       "kind": "asset",
       "path": "tooling/verify-provenance.py"
@@ -1220,6 +1240,12 @@
       "state": "active"
     },
     {
+      "id": "component:debugger-role",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/agents/debugger.toml",
+      "state": "active"
+    },
+    {
       "id": "component:evidence-scout-role",
       "kind": "component",
       "path": "assets/runtime_entrypoint/agents/evidence-scout.toml",
@@ -1229,6 +1255,12 @@
       "id": "component:execution-record-tool",
       "kind": "component",
       "path": "tooling/execution-record.py",
+      "state": "active"
+    },
+    {
+      "id": "component:final-reviewer-role",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/agents/final-reviewer.toml",
       "state": "active"
     },
     {
@@ -1570,7 +1602,19 @@
     },
     {
       "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/agents/debugger.toml",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:README.md",
       "target": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/agents/final-reviewer.toml",
       "relation": "requires",
       "evidence": "README.md"
     },
@@ -2008,15 +2052,21 @@
     },
     {
       "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
-      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
-      "relation": "documents",
-      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
-    },
-    {
-      "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
       "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/debugger.toml",
+      "target": "component:debugger-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/debugger.toml",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
     },
     {
       "source": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
@@ -2026,6 +2076,18 @@
     },
     {
       "source": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/final-reviewer.toml",
+      "target": "component:final-reviewer-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/final-reviewer.toml",
       "target": "document:README.md",
       "relation": "documents",
       "evidence": "README.md"
@@ -2135,12 +2197,6 @@
     {
       "source": "asset:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
       "target": "asset:assets/runtime_entrypoint/AGENTS.md",
-      "relation": "requires",
-      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
-    },
-    {
-      "source": "asset:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
-      "target": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
       "relation": "requires",
       "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
     },
@@ -2380,7 +2436,19 @@
     },
     {
       "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/agents/debugger.toml",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
       "target": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/agents/final-reviewer.toml",
       "relation": "requires",
       "evidence": "manifest.json"
     },
@@ -2404,6 +2472,12 @@
     },
     {
       "source": "asset:manifest.json",
+      "target": "component:debugger-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
       "target": "component:evidence-scout-role",
       "relation": "activates",
       "evidence": "manifest.json"
@@ -2411,6 +2485,12 @@
     {
       "source": "asset:manifest.json",
       "target": "component:execution-record-tool",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:final-reviewer-role",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -2547,6 +2627,12 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "asset:tooling/model-catalog.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
       "source": "asset:tooling/model-policy.py",
       "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
       "relation": "governed-by",
@@ -2569,6 +2655,12 @@
       "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
       "relation": "documents",
       "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
     },
     {
       "source": "asset:tooling/model-policy.py",
@@ -2656,6 +2748,12 @@
     },
     {
       "source": "asset:tooling/tests/test_model_policy.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-recommendations.json",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_model_policy.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_model_policy.py",
       "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
@@ -2677,6 +2775,18 @@
       "target": "asset:assets/agents/trunk_orchestration/evaluation/README.md",
       "relation": "requires",
       "evidence": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_role_definitions.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-recommendations.json",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_role_definitions.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_role_definitions.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
     },
     {
       "source": "asset:tooling/tests/test_security_gate.py",
@@ -2739,6 +2849,12 @@
       "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
     },
     {
+      "source": "asset:tooling/verify-project-document-registry.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
       "source": "asset:tooling/verify-provenance.py",
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
@@ -2793,6 +2909,12 @@
       "evidence": "manifest.json"
     },
     {
+      "source": "component:debugger-role",
+      "target": "slot:agents",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
       "source": "component:evidence-scout-role",
       "target": "slot:agents",
       "relation": "exposes",
@@ -2801,6 +2923,12 @@
     {
       "source": "component:execution-record-tool",
       "target": "slot:tooling",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:final-reviewer-role",
+      "target": "slot:agents",
       "relation": "exposes",
       "evidence": "manifest.json"
     },

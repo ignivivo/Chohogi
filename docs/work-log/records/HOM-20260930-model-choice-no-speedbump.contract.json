@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "objective": "Make model selection never block the user's instructed work on Claude, matching the non-blocking policy already applied for Codex in 934d20a.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": ["model choice must not be a speed bump: when a model choice is offered at work start, the instructed work proceeds without waiting"],
+  "excluded": ["changing the recommendation values themselves (recommendations only need to be reasonable)", "raw prompts or private reasoning in records"],
+  "requestedItems": [
+    {"id": "rule", "description": "Global guidance and Claude platform doc forbid presenting the model card through a turn-stopping question tool or ending the turn to wait; the instructed work continues in the same turn."},
+    {"id": "replay-check", "description": "Adherence replay can fail a run that calls a turn-stopping question tool in the delegation scenario."},
+    {"id": "verify", "description": "Tests first; verifiers and suite pass."}
+  ],
+  "acceptance": [{"id": "verified", "description": "Suite and verifiers pass; headless limitation recorded."}]
+}

@@ -214,25 +214,84 @@ def observed_models(path: Path | None) -> dict[str, list[str]] | None:
             for item in models if isinstance(item, dict)}
 
 
+def delivery_note(model: str, aliases: dict[str, str] | None) -> str:
+    """How a saved or recommended model reaches a role on a host whose role argument takes only aliases."""
+    if aliases is None or model == "session":
+        return ""
+    if model in aliases:
+        return f" (Agent 인자: {aliases[model]})"
+    if model in set(aliases.values()):
+        return " — 별칭이라 계열의 최신 모델로 해석됨; 정확한 모델 id로 다시 저장 권장"
+    return " — 역할별 전달 불가: Agent 인자가 이 모델을 고를 수 없어 세션 모델로 실행됨"
+
+
+ROLE_FILES = Path(__file__).resolve().parents[1] / "agents"
+
+
+def role_file_placements(role_agent: dict[str, str] | None) -> dict[str, dict[str, str]]:
+    """Model and effort each role actually runs with on Claude: its plugin role file frontmatter."""
+    placements: dict[str, dict[str, str]] = {}
+    for role, agent in (role_agent or {}).items():
+        path = ROLE_FILES / f"{agent}.md"
+        if not path.is_file():
+            continue
+        front = path.read_text(encoding="utf-8").split("---", 2)[1]
+        fields = dict(line.split(": ", 1) for line in front.strip().splitlines() if ": " in line)
+        placements[role] = {"model": fields.get("model", "session"), "effort": fields.get("effort", "not-supported")}
+    return placements
+
+
+def placement_note(role: str, item: dict[str, str], placements: dict[str, dict[str, str]], aliases: dict[str, str] | None) -> str:
+    actual = placements.get(role)
+    if actual is None:
+        return delivery_note(item["model"], aliases)
+    if item["model"] == actual["model"] and item["effort"] == actual["effort"]:
+        return " (역할 파일 값 그대로; Agent model 인자 생략)"
+    note = "" if item["model"] == actual["model"] else delivery_note(item["model"], aliases)
+    if item["effort"] != actual["effort"]:
+        note += (f" — 역할 파일(frontmatter)은 {actual['model']} / {actual['effort']}: 강도는 역할 파일 값으로 실행되고"
+                 " 모델만 Agent 인자로 덮어쓸 수 있음")
+    return note
+
+
 def render_card(host: str, session_model: str, session_effort: str, profile_path: Path, catalog: dict[str, list[str]] | None) -> str:
-    if profile_path.is_file():
-        saved = validate_profile(read_json(profile_path)).get(host)
-        if saved:
-            lines = [f"초호기 모델 배치: {profile_path}의 저장된 배치를 사용합니다 ({host}).", *(f"- {role}: {item['model']} / {item['effort']}" for role, item in saved.items())]
-            return "\n".join(lines)
     data = read_json(RECOMMENDATIONS)
-    roles = data["hosts"][host]["roles"]
-    lines = [f"초호기 모델 배치 제안 ({host}) — 지금은 모든 역할이 세션 모델 {session_model} / {session_effort}로 돌고 있습니다.",
-             f"추천 (근거: {data['basis'].split(' (')[0]}; 검토일 {data['reviewedAt']}):"]
+    host_data = data["hosts"][host]
+    aliases = host_data.get("deliveryAlias")
+    placements = role_file_placements(host_data.get("roleAgent"))
+    if profile_path.is_file():
+        profile = read_json(profile_path)
+        saved = validate_profile(profile).get(host)
+        if saved:
+            lines = [f"초호기 모델 배치: {profile_path}의 저장된 배치를 사용합니다 ({host}).",
+                     *(f"- {role}: {item['model']} / {item['effort']}{placement_note(role, item, placements, aliases)}"
+                       for role, item in saved.items())]
+            for override in profile["hosts"][host].get("overrides", []):
+                lines.append(f"- {override['role']} ({override['scope']}): {override['model']} / {override['effort']}"
+                             f"{placement_note(override['role'], override, placements, aliases)}")
+            missing = [role for role in CARD_ROLES if role not in saved]
+            if missing:
+                fallback = "역할 파일 값" if placements else f"세션 모델 {session_model} / {session_effort}"
+                lines.append(f"profile에 없는 역할 — 선택해 주세요. 답을 받기 전까지 이 역할은 {fallback}로 진행합니다:")
+                for role in missing:
+                    item = host_data["roles"][role]
+                    lines.append(f"- {role}: 미저장 → 추천 {item['model']} / {item['effort']} — {item['why']}")
+            return "\n".join(lines)
+    roles = host_data["roles"]
+    lines = [f"초호기 모델 배치 제안 ({host}) — 지금은 모든 역할이 세션 모델 {session_model} / {session_effort}로 돌고 있습니다."]
+    host_catalog = host_data.get("catalog")
+    if isinstance(host_catalog, dict) and host_catalog.get("status") == "unknown":
+        lines.append(f"모델 목록: unknown — {host_catalog['reason']}")
+    lines.append(f"추천 (근거: {data['basis'].split(' (')[0]}; 검토일 {data['reviewedAt']}):")
     for role in CARD_ROLES:
         item = roles[role]
-        note = ""
+        note = delivery_note(item["model"], aliases)
         if catalog is not None:
             if item["model"] not in catalog:
-                note = " — 관측된 런타임 목록에 없음"
+                note += " — 관측된 런타임 목록에 없음"
             elif item["effort"] not in ("not-selectable", "session") and item["effort"] not in catalog[item["model"]]:
-                note = " — 이 강도는 관측된 목록에 없음"
-        lines.append(f"- {role}: {item['model']} / {item['effort']} — {item['why']}{note}")
+                note += " — 이 강도는 관측된 목록에 없음"
+        lines.append(f"- {role}: {item['model']} / {item['effort']}{note} — {item['why']}")
     lines.append("그대로 둘지, 바꿀지, 더 세세하게 정할지(예: 결제·보안 검토는 최상위) 알려주면 "
                  ".agents/chohogi-model-profile.json에 저장하고 이후 세션은 다시 묻지 않습니다. 답을 주기 전까지는 세션 모델로 계속합니다.")
     return "\n".join(lines)

@@ -68,7 +68,8 @@ Conductor가 흐름을 고른 뒤, substantial 작업은 이 계약으로 정확
 - `integrator`: 항상 주 에이전트. 흐름·범위·통합·최종 검증을 소유한다.
 - `scout`: 독립적 읽기 조사만 한다. 관측·경로·근거를 보고하고 파일을 바꾸지 않는다.
 - `implementer`: 명시된 파일 소유권 안에서만 구현·단위 검증한다.
-- `reviewer`: 구현과 독립적으로 계약·보안·회귀 위험 또는 `reviewRequired` decision packet을 검토한다. packet에는 관측 사실·선택지·선택·간결한 근거·재검토 조건만 포함하며, 파일을 바꾸지 않는다. response 뒤 integrator가 수용 또는 수정 결과를 기록한다.
+- `debugger`: 원인 불명 실패의 재현·가설 검증만 하고 수정 제안을 돌려준다. 파일을 바꾸지 않는다.
+- `reviewer`(작업 단위는 `critical-reviewer`, 전체 변경의 최종 검토는 `final-reviewer` 역할): 구현과 독립적으로 계약·보안·회귀 위험 또는 `reviewRequired` decision packet을 검토한다. packet에는 관측 사실·선택지·선택·간결한 근거·재검토 조건만 포함하며, 파일을 바꾸지 않는다. response 뒤 integrator가 수용 또는 수정 결과를 기록한다.
 
 역할의 실제 요구와 프로젝트에 저장된 profile(`.agents/chohogi-model-profile.json`의 현재 호스트
 항목)을 기준으로 provider·model·reasoning effort를 배정한다. 저장된 profile이 없으면 세션 모델을

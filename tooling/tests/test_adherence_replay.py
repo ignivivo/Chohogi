@@ -193,6 +193,24 @@ class AdherenceReplayTests(unittest.TestCase):
             replay.run(args)
         self.assertFalse((ROOT / "tmp-replay").exists())
 
+    def test_turn_stopping_question_tool_fails_the_delegation_scenario(self) -> None:
+        scenario = self.scenarios["review-delegates-on-session-model"]
+        asked = [claude_tool("AskUserQuestion", {"questions": []}), claude_text("모델을 먼저 골라 주세요.")]
+        results = {item["id"]: item["passed"] for item in
+                   replay.evaluate(scenario, replay.normalize("claude", asked, None), None, None, "chohogi")}
+        self.assertFalse(results["no-blocking-model-question"])
+        proceeded = [claude_tool("Agent", {"subagent_type": "chohogi:critical-reviewer", "prompt": "review"}), claude_text("검토 결과")]
+        results = {item["id"]: item["passed"] for item in
+                   replay.evaluate(scenario, replay.normalize("claude", proceeded, None), None, None, "chohogi")}
+        self.assertTrue(results["no-blocking-model-question"])
+
+    def test_codex_role_config_registers_every_canonical_role(self) -> None:
+        command = replay.host_command("codex", "chohogi", "codex", "p", None, 3, Path("/tmp/x"), codex_role_config=True)
+        registered = {arg.split(".")[1] for arg in command if arg.startswith("agents.")}
+        expected = {path.stem.replace("-", "_") for path in (ROOT / "assets/runtime_entrypoint/agents").glob("*.toml")}
+        self.assertEqual(registered, expected)
+        self.assertIn("final_reviewer", registered)
+
 
 if __name__ == "__main__":
     unittest.main()

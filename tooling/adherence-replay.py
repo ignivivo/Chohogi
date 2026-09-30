@@ -307,6 +307,10 @@ def evaluate(scenario: dict[str, Any], normalized: dict[str, Any], project: Path
             regex = re.compile(assertion["command"])
             hits = [event for event in events if event["kind"] == "command" and regex.search(event.get("command", ""))]
             record(aid, not hits, "no forbidden command" if not hits else f"{len(hits)} forbidden command(s)")
+        elif kind == "forbidden-tool":
+            regex = re.compile(assertion["tool"])
+            hits = [event for event in events if event["kind"] == "tool" and regex.search(event.get("tool", ""))]
+            record(aid, not hits, "no forbidden tool call" if not hits else f"{len(hits)} forbidden tool call(s)")
         elif kind == "forbidden-path":
             regex = re.compile(assertion["path"])
             touched = {path for event in events if event["kind"] == "edit" for path in event.get("paths", [])} | set(after or {})
@@ -393,9 +397,8 @@ def host_command(host: str, profile: str, binary: str, prompt: str, model: str |
     command = [binary, "exec", "--json", "--skip-git-repo-check", "--dangerously-bypass-approvals-and-sandbox", "-C", str(project)]
     if codex_role_config:
         # Registers Chohogi roles for this run only, pointing at the canonical TOMLs (no personal config edit).
-        for name, stem in (("critical_reviewer", "critical-reviewer"), ("evidence_scout", "evidence-scout"),
-                           ("implementation_worker", "implementation-worker")):
-            command += ["-c", f'agents.{name}.config_file="{ROOT / "assets/runtime_entrypoint/agents" / (stem + ".toml")}"']
+        for role_file in sorted((ROOT / "assets/runtime_entrypoint/agents").glob("*.toml")):
+            command += ["-c", f'agents.{role_file.stem.replace("-", "_")}.config_file="{role_file}"']
     if model:
         command += ["-m", model]
     return command + [prompt]

@@ -15,7 +15,7 @@
 | 활성화 | `multi_agent` stable **true**(기본값), `multi_agent_v2` false | `codex features list` |
 | 모델에게 노출된 협업 도구 | `spawn_agent`, `send_message`(턴 없이 전달), `followup_task`(기존 역할에 새 작업 + 턴), `wait_agent`, `interrupt_agent`, `list_agents` | `codex debug prompt-input`의 multi_agent_role 지시 |
 | 위임 허용 조건 | Codex가 "사용자 또는 적용되는 AGENTS.md/skill 지시가 서브에이전트·위임·병렬 작업을 명시적으로 요청하지 않으면 spawn하지 말라"는 지시를 넣는다 | 같은 출력의 `multi_agent_mode` |
-| 초호기 역할 | `config_file`로 등록하면 `critical_reviewer`, `evidence_scout`, `implementation_worker`로 스폰된다. `~/.codex/agents/`의 **심볼릭 링크는 목록에는 뜨지만 스폰이 "agent type is currently not available"로 거부된다** | 2026-09-30 시험 역할 비교: 일반 파일 성공, 같은 내용의 링크 실패, `-c agents.<name>.config_file=<정본>` 성공 |
+| 초호기 역할 | `config_file`로 등록하면 `critical_reviewer`, `evidence_scout`, `implementation_worker`, `final_reviewer`, `debugger`로 스폰된다. `~/.codex/agents/`의 **심볼릭 링크는 목록에는 뜨지만 스폰이 "agent type is currently not available"로 거부된다** | 2026-09-30 시험 역할 비교: 일반 파일 성공, 같은 내용의 링크 실패, `-c agents.<name>.config_file=<정본>` 성공 |
 | 문맥 전파 | `fork_turns`로 부모 문맥을 얼마나 넘길지 정한다. 위임 설명 원칙상 최소(`"none"`)로 넘긴다. `config_file` 역할은 `fork_turns: "all"`에서도 거부되지 않았다 | 같은 날 세션 기록 |
 | 모델 상속 | `model`을 생략한 스폰은 부모 세션의 모델·effort로 돈다 | 부모와 자식 세션 기록의 `turn_context`가 모두 `gpt-6-luna`/`medium` |
 | 스스로 위임 | 역할이 사용 가능하고 모델 확인 대기가 없을 때, 사용자가 위임을 지시하지 않은 위험 변경 검토 요청에서 `critical_reviewer`를 스스로 스폰하고 결과를 받아 전달했다(1회) | 같은 날 세션 기록 |
@@ -39,7 +39,7 @@
 `close_agent`는 이 버전의 모델 노출 목록에 없다. 회수는 끝난 역할에 새 작업을 보내지 않고
 `list_agents`로 소유 경계를 확인하는 것으로 한다. 도구 목록이 위와 다르면 실제 목록을 따른다.
 
-## 역할 정의(critical-reviewer/evidence-scout/implementation-worker) — 검증 상태: verified
+## 역할 정의(critical-reviewer/evidence-scout/implementation-worker/final-reviewer/debugger) — 검증 상태: verified
 
 Codex 플러그인 매니페스트에는 역할 슬롯이 없다(인식 필드: `name`/`version`/`interface.*`/`mcpServers`/
 `skills`). Codex 0.155의 역할 로더는 `~/.codex/agents/`의 일반 파일, 또는 `config.toml`의

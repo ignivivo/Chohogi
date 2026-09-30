@@ -28,6 +28,8 @@ portions.
 | `assets/agents/trunk_orchestration/branches_workflows/debugging.md` — additions to steps 3–4 (one hypothesis, boundary instrumentation, three failed fixes) | `skills/systematic-debugging/SKILL.md` |
 | `assets/agents/trunk_orchestration/branches_workflows/product-decision.md` — section for design work | `skills/brainstorming/SKILL.md` |
 | `agents/critical-reviewer.md`, `assets/runtime_entrypoint/agents/critical-reviewer.toml` — review rules added 2026-09-29 | `skills/requesting-code-review/code-reviewer.md` |
+| `agents/final-reviewer.md`, `assets/runtime_entrypoint/agents/final-reviewer.toml` — review rules carried over from critical-reviewer 2026-09-30 | `skills/requesting-code-review/code-reviewer.md` |
+| `agents/debugger.md`, `assets/runtime_entrypoint/agents/debugger.toml` — investigation rules condensed from the debugging route 2026-09-30 | `skills/systematic-debugging/SKILL.md` |
 | `agents/implementation-worker.md`, `assets/runtime_entrypoint/agents/implementation-worker.toml` — report contract added 2026-09-29 | `skills/subagent-driven-development/SKILL.md` |
 | `assets/agents/trunk_orchestration/platform-tools/claude-tools.md`, `codex-tools.md` — workspace isolation rules | `skills/using-git-worktrees/SKILL.md` |
 | `skills/homeostasis/references/skill-lifecycle.md` — section "Observe the failure before writing the skill" | `skills/writing-skills/SKILL.md` |

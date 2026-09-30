@@ -21,8 +21,8 @@ def main() -> int:
     catalog_tests = ROOT / "tooling/tests/test_model_catalog.py"
     tests = ROOT / "tooling/tests/test_model_policy.py"
     for path, terms in {
-        policy: ("<!-- chohogi:model-policy -->", "Model Session Policy card", "reasoning effort", "unknown", "추정하지 않는다", "learning"),
-        runtime: ("model-policy.md", "Model Session Policy", "model-catalog.py", "이 목록이 맞는가?", "user-reported correction"),
+        policy: ("<!-- chohogi:model-policy -->", "Model Session Policy card", "reasoning effort", "unknown", "추정하지 않는다", "learning", "턴을 멈추는 질문 도구"),
+        runtime: ("model-policy.md", "Model Session Policy", "model-catalog.py", "이 목록이 맞는가?", "user-reported correction", "턴을 멈추는 질문 도구"),
         evaluator: ("never discovers providers", "requiresHumanConfirmation", "requiresHumanReconfirmation"),
         catalog: ("requiresUserConfirmation", "user-reported", "MAX_OUTPUT_BYTES", "codex-vscode-runtime", "codex-path-runtime"),
     }.items():

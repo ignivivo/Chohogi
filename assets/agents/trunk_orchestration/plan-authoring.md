@@ -19,7 +19,9 @@
   `document-lifecycle.md`의 종료 검사대로 registry부터 선언한다. 도구 이름이 붙은
   고정 경로를 쓰지 않는다.
 - 새 계획을 활성 계획으로 등록하면 이전 활성 계획은 `historical`로 바꾸고 내부 배너도
-  함께 바꾼다. 활성 계획은 하나다.
+  함께 바꾼다. 활성 계획은 최대 하나다. 계획의 execution record가 finalize되면 그 계획도
+  `historical`로 바꾸고, 다음 계획이 없으면 registry의 `activeExecutionPlan`을 `null`로 둔다.
+  활성 계획 항목에 `executionRecord`를 적으면 검증기가 그 기록의 종료 여부와 대조한다.
 - 머리말: 목표 한 문장, 접근 2–3문장, 기술 스택, 근거 설계 문서 경로, 전역 제약,
   검토 초점. 실행 방법은 `execution-allocation.md`와 `task-loop.md`가 정한다고 한 줄로
   적는다. 특정 외부 스킬·도구를 실행하라는 지시를 계획 문서에 넣지 않는다 — 계획은

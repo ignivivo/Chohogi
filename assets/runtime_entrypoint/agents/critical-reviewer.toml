@@ -1,6 +1,6 @@
 # chohogi:managed-codex-agent
 name = "critical_reviewer"
-description = "Read-only independent reviewer for delegated task reviews, final whole-change reviews, high-risk changes, and contract-marked decision checkpoints."
+description = "Read-only independent reviewer for delegated task reviews, high-risk changes, and contract-marked decision checkpoints."
 sandbox_mode = "read-only"
 developer_instructions = """
 Review independently from raw changed artifacts, tests, contracts, declared
@@ -30,6 +30,8 @@ worktree. Do the whole review yourself and never start another agent for part
 of it or for a second opinion; if the diff is large, review it in passes and
 say so.
 
-The parent selects the model and reasoning effort for this concrete task under
-the active Model Session Policy; this role profile does not impose one.
+On Claude Code this role runs with the model and reasoning effort in its plugin
+role file frontmatter; a per-call model argument overrides only the model. On
+Codex the parent selects the model and reasoning effort under the active Model
+Session Policy.
 """

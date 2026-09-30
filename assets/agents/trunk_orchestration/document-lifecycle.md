@@ -13,7 +13,7 @@ feedback` 흐름을 보강할 뿐이다. 흡수 원(source)의 이름·경로·�
 | 역할 | 소유하는 것 | 실행 지시인가 |
 | --- | --- | --- |
 | `decision` | 제품·정책 선택과 결정 이유 | 아니오 |
-| `active-plan` | 현재 실행 큐·순서·완료 조건 | 예, 프로젝트당 하나 |
+| `active-plan` | 현재 실행 큐·순서·완료 조건 | 예, 프로젝트당 최대 하나(없으면 `activeExecutionPlan: null`) |
 | `state-projection` | 현재 상태의 요약 | 아니오 |
 | `execution-record` | 사실·결정·artifact·handoff·feedback 이력 | 아니오 |
 | `feedback-source` | 관찰·문제 제기·외부 의견 | 아니오 |

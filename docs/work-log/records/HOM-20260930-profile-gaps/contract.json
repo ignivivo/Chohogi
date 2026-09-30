@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "objective": "Close partial model profiles: save the user's Codex choice for final-reviewer and debugger, and make the card surface every role missing from a saved profile for the user to choose, without blocking work.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "Codex final-reviewer/debugger use GPT-6 (Luna moved to 5.6 only because a slow Luna has no merit)",
+    "roles missing from a profile are shown to the user to choose"
+  ],
+  "excluded": [
+    "Codex config.toml role registration",
+    "raw prompts or private reasoning in records"
+  ],
+  "requestedItems": [
+    {
+      "id": "codex-profile",
+      "description": "hosts.codex gains final-reviewer and debugger on gpt-6-sol per recommendation; profile validates."
+    },
+    {
+      "id": "card-missing-roles",
+      "description": "Saved-profile card lists roles absent from the profile with the recommended placement, asks the user to choose, and states that work continues on the fallback meanwhile."
+    },
+    {
+      "id": "verify",
+      "description": "Tests first; suite and verifiers pass; cowork doc updated."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "verified",
+      "description": "Suite and verifiers pass."
+    }
+  ]
+}

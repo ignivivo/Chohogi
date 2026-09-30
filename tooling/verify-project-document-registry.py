@@ -13,6 +13,16 @@ AUTHORITIES = {"product-scope", "information-architecture", "product-decision", 
 STATES = {"active", "historical", "draft", "retired"}
 
 
+def record_finalized(record_dir: Path) -> bool:
+    verification = record_dir / "verification.json"
+    if not verification.is_file():
+        return False
+    try:
+        return json.loads(verification.read_text(encoding="utf-8")).get("status") == "pass"
+    except (json.JSONDecodeError, AttributeError):
+        return False
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, required=True)
@@ -80,11 +90,28 @@ def main() -> int:
         for field in ("consumers", "allowedReferences", "forbiddenUse"):
             if field in item and (not isinstance(item[field], list) or not all(isinstance(value, str) and value.strip() for value in item[field])):
                 errors.append(f"{path}: {field} must be a string list")
-    declared = data.get("activeExecutionPlan")
-    if not isinstance(declared, str) or not declared.strip():
-        errors.append("activeExecutionPlan must be declared")
-    elif active_plans != [declared]:
-        errors.append(f"activeExecutionPlan must be the only active plan; found {active_plans}")
+    # null declares that no plan currently owns the queue; the key itself stays required.
+    if "activeExecutionPlan" not in data:
+        errors.append("activeExecutionPlan must be declared (a plan path, or null when no plan is active)")
+    else:
+        declared = data["activeExecutionPlan"]
+        if declared is None:
+            if active_plans:
+                errors.append(f"activeExecutionPlan is null but active plans are declared: {active_plans}")
+        elif not isinstance(declared, str) or not declared.strip():
+            errors.append("activeExecutionPlan must be a plan path or null")
+        elif active_plans != [declared]:
+            errors.append(f"activeExecutionPlan must be the only active plan; found {active_plans}")
+    for path, item in entries_by_path.items():
+        if item.get("role") == "active-plan" and item.get("state") == "active" and "executionRecord" in item:
+            record = item["executionRecord"]
+            record_entry = entries_by_path.get(record) if isinstance(record, str) else None
+            if record_entry is None or record_entry.get("role") != "execution-record":
+                errors.append(f"{path}: executionRecord must name a declared execution-record entry")
+            elif record_finalized(root / record):
+                errors.append(f"{path}: its execution record {record} is finalized; mark the plan historical or declare a new record")
+        if item.get("role") == "execution-record" and item.get("state") == "active" and record_finalized(root / path):
+            errors.append(f"{path}: execution record is finalized but declared active")
     for item in documents:
         if not isinstance(item, dict) or not item.get("supersededBy"):
             continue
@@ -93,8 +120,12 @@ def main() -> int:
             errors.append(f"{item.get('path')}: supersededBy must name another declared document")
             continue
         target = entries_by_path.get(superseded)
-        if target is None or target.get("role") != "active-plan" or target.get("state") != "active":
-            errors.append(f"{item.get('path')}: supersededBy must point to the active plan")
+        # A supersession chain may end at the active plan or at a closed (historical) plan.
+        if target is None or not (
+            (target.get("role") == "active-plan" and target.get("state") == "active")
+            or target.get("state") == "historical"
+        ):
+            errors.append(f"{item.get('path')}: supersededBy must point to the active plan or a historical document")
     for item in documents:
         if not isinstance(item, dict):
             continue

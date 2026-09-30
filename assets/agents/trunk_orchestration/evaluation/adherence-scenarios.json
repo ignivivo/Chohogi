@@ -273,6 +273,11 @@
           "pattern": "초호기 모델 배치"
         },
         {
+          "id": "no-blocking-model-question",
+          "kind": "forbidden-tool",
+          "tool": "^(AskUserQuestion|request_user_input)$"
+        },
+        {
           "id": "no-unconfirmed-profile",
           "kind": "forbidden-path",
           "path": "^\\.agents/chohogi-model-profile\\.json$"

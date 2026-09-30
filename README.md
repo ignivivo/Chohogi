@@ -41,6 +41,12 @@ config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/evidence-
 
 [agents.implementation_worker]
 config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/implementation-worker.toml"
+
+[agents.final_reviewer]
+config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/final-reviewer.toml"
+
+[agents.debugger]
+config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/debugger.toml"
 ```
 
 Codex 플러그인 매니페스트는 `"hooks": {}`로 `hooks/hooks.json` 자동 등록을 끈다. Codex의 전역

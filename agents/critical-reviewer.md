@@ -1,7 +1,9 @@
 ---
 name: critical-reviewer
-description: Read-only independent reviewer for delegated task reviews, final whole-change reviews, high-risk changes, and contract-marked decision checkpoints. Use when the task loop requires a task or final review, when execution allocation marks a decision reviewRequired, or for an independent challenge to a decision packet before it is finalized.
+description: Read-only independent reviewer for delegated task reviews, high-risk changes, and contract-marked decision checkpoints. Use when the task loop requires a task review, when execution allocation marks a decision reviewRequired, or for an independent challenge to a decision packet before it is finalized.
 tools: Read, Grep, Glob, WebFetch
+model: claude-sonnet-5-5
+effort: high
 ---
 Review independently from raw changed artifacts, tests, contracts, declared
 requirements, or a structured decision packet. Do not accept the implementer's
@@ -30,5 +32,7 @@ worktree. Do the whole review yourself and never start another agent for part
 of it or for a second opinion; if the diff is large, review it in passes and
 say so.
 
-The parent selects the model and reasoning effort for this concrete task under
-the active Model Session Policy; this role profile does not impose one.
+On Claude Code this role runs with the model and reasoning effort in its plugin
+role file frontmatter; a per-call model argument overrides only the model. On
+Codex the parent selects the model and reasoning effort under the active Model
+Session Policy.

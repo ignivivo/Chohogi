@@ -10,7 +10,7 @@
 
 | 개념 | Claude Code 도구 |
 | --- | --- |
-| 임시 역할 생성(scout/implementer/reviewer) | `Agent`에 `subagent_type: "critical-reviewer"` \| `"evidence-scout"` \| `"implementation-worker"` — chohogi 플러그인이 `agents/*.md`로 선언한 타입이며, `claude plugin details chohogi`로 노출을 직접 확인함(검증됨) |
+| 임시 역할 생성(scout/implementer/task-reviewer/final-reviewer/debugger) | `Agent`에 `subagent_type: "evidence-scout"` \| `"implementation-worker"` \| `"critical-reviewer"` \| `"final-reviewer"` \| `"debugger"` — chohogi 플러그인이 `agents/*.md`로 선언한 타입이며, `claude plugin details chohogi`로 노출을 직접 확인함(검증됨) |
 | 병렬 디스패치 | 한 응답 안에 `Agent` 호출을 여러 번 포함 |
 | 백그라운드 실행 + 완료 대기 | `Agent`에 `run_in_background: true` — 완료 시 **자동으로** task-notification이 도착한다. 폴링하지 않는다 |
 | 살아있는 역할 목록 확인 | `ListAgents` |
@@ -24,17 +24,27 @@
 "수정 1–3라운드는 같은 implementer에게 보낸다"를 `SendMessage`로 그대로 구현한다.
 위임할 때는 `model`을 명시한다 — 생략하면 세션 모델을 물려받는다.
 
-## 역할 모델 — 검증 상태: verified (도구 스키마)
+## 역할 모델 — 검증 상태: verified (도구 스키마, 2026-09-30 frontmatter 탐침)
 
-`Agent` 도구의 `model` 인자는 `sonnet`·`opus`·`haiku`·`fable` 별칭을 받는다. 생략하면 역할 정의의
-모델, 그것도 없으면 부모 세션 모델을 물려받는다(사용자가 기본 서브에이전트 모델을 따로 설정한
-경우 제외). 초호기 역할 정의(`agents/*.md`)에는 모델이 없으므로 생략하면 세션 모델이다. 역할별
-추론 강도는 이 도구로 지정할 수 없어 `not-selectable`로 기록하고 세션 강도를 따른다.
+`Agent` 도구의 `model` 인자는 `sonnet`·`opus`·`haiku`·`fable` 별칭만 받고 추론 강도 인자는 없다. 역할별
+모델과 강도는 역할 정의 파일(`agents/*.md`) frontmatter의 `model`(정확한 id)과 `effort`(`low`~`max`)로
+전달한다. 2026-09-30 Claude Code 2.1.284 `claude -p` 탐침에서 부모가 `high`일 때 frontmatter `low`·`max`
+역할의 transcript가 각각 `low`·`max`와 지정한 정확한 모델로 기록됐다(검증됨). frontmatter는 플러그인
+전역이라 모든 프로젝트에 같은 값이 적용되고, 위임할 때 `model` 인자를 주면 모델만 덮어쓴다. Haiku는
+effort를 받지 않으므로 그 역할에는 `effort`를 두지 않는다.
 
-`model-policy.md`의 "출발·추천·저장"에 따라, 저장된 profile이 없으면 `model`을 생략한다.
-`.agents/chohogi-model-profile.json`의 `hosts.claude`에 역할 값이 있으면 그 별칭을 `model`로 준다
-(`session`이면 생략). 추천 card의 선택지는 이 네 별칭 안에서만 만들고, 호출 가능한 전체 목록과
-가격은 공식 조회 수단이 없으면 `unknown`으로 둔다.
+역할 파일이 이미 모델·강도를 싣고 있으므로 Claude에서 위임은 모델 답을 기다릴 이유가 없다.
+모델 card는 같은 턴의 보고 텍스트로만 붙이고 `AskUserQuestion`으로 묻지 않는다(`model-policy.md`
+"출발·추천·저장"). headless replay(`claude -p`)는 대화형 질문 대기를 재현하지 못하므로, 이 규칙의
+검증은 replay의 `no-blocking-model-question` 단언(질문 도구 호출 자체를 실패로 판정)과 실제 대화 관측에 둔다.
+
+`model-policy.md`의 "출발·추천·저장"에 따라, 저장된 profile이 역할 파일 값과 같거나 없으면 `model`을 생략한다.
+결정과 전달은 분리한다. 추천 card와 profile은 정확한 모델 id(`claude-sonnet-5-5` 등)로 적고, 위임할
+때만 `model-recommendations.json`의 `deliveryAlias`로 그 id를 별칭으로 바꿔 `model`에 준다
+(`session`이면 생략). 별칭은 그 계열의 최신 모델로 해석되므로(Claude Code `--model` 도움말), 매핑에
+없는 모델(예: 이전 세대)은 역할별로 전달할 수 없고 card가 그렇게 표시한다. Claude Code에는 모델 목록
+조회 명령이 없어 카탈로그는 `unknown`이며, 사용자가 모델 선택 화면에서 본 목록을 사용자 보고 교정으로
+기록한다. 도구 인자의 허용값을 모델 목록으로 쓰지 않는다.
 
 ## 격리 작업공간
 

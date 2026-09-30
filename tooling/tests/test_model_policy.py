@@ -186,6 +186,88 @@ class ModelPolicyTests(unittest.TestCase):
         self.assertIn("task-reviewer: haiku", result.stdout)
         self.assertNotIn("알려주면", result.stdout)
 
+    def test_claude_recommendation_card_uses_exact_ids_and_unknown_catalog(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            result = self.run_tool("card", "--host", "claude", "--session-model", "claude-opus-5-5", "--session-effort", "medium",
+                                   "--profile", str(Path(directory) / "missing.json"))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("claude-sonnet-5-5", result.stdout)
+        self.assertIn("unknown", result.stdout)
+        self.assertIn("Agent 인자: sonnet", result.stdout)
+        self.assertNotRegex(result.stdout, r"- [\w-]+: (sonnet|opus|haiku|fable) /")
+
+    def test_saved_claude_profile_card_shows_delivery_alias_and_overrides(self) -> None:
+        profile = self.profile()
+        profile["hosts"]["claude"]["roles"] = {"scout": {"model": "claude-haiku-4-5", "effort": "not-supported"}}
+        profile["hosts"]["claude"]["overrides"] = [{"scope": "payment review", "role": "scout", "model": "claude-opus-5-5", "effort": "not-selectable"}]
+        with tempfile.TemporaryDirectory() as directory:
+            path = self.write_json(Path(directory), "profile.json", profile)
+            result = self.run_tool("card", "--host", "claude", "--session-model", "claude-opus-5-5", "--session-effort", "medium", "--profile", str(path))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("scout: claude-haiku-4-5", result.stdout)
+        scout_line = next(line for line in result.stdout.splitlines() if line.startswith("- scout:"))
+        self.assertIn("역할 파일 값 그대로", scout_line)
+        self.assertNotIn("Agent 인자", scout_line)
+        self.assertIn("payment review", result.stdout)
+        self.assertIn("Agent 인자: opus", result.stdout)
+
+    def test_saved_claude_profile_flags_bare_alias_and_undeliverable_model(self) -> None:
+        profile = self.profile()
+        profile["hosts"]["claude"]["roles"] = {"implementer": {"model": "claude-sonnet-5", "effort": "not-selectable"},
+                                                "task-reviewer": {"model": "haiku", "effort": "not-selectable"},
+                                                "debugger": {"model": "session", "effort": "not-selectable"}}
+        profile["hosts"]["claude"]["overrides"] = []
+        with tempfile.TemporaryDirectory() as directory:
+            path = self.write_json(Path(directory), "profile.json", profile)
+            result = self.run_tool("card", "--host", "claude", "--session-model", "claude-opus-5-5", "--session-effort", "medium", "--profile", str(path))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        lines = {line.split(":")[0].lstrip("- "): line for line in result.stdout.splitlines() if line.startswith("- ")}
+        self.assertIn("역할별 전달 불가", lines["implementer"])
+        self.assertIn("별칭", lines["task-reviewer"])
+        self.assertNotIn("전달 불가", lines["debugger"])
+        self.assertNotIn("별칭", lines["debugger"])
+
+    def test_saved_claude_profile_flags_placement_that_differs_from_role_file(self) -> None:
+        profile = self.profile()
+        profile["hosts"]["claude"]["roles"] = {"scout": {"model": "claude-opus-5-5", "effort": "max"}}
+        profile["hosts"]["claude"]["overrides"] = []
+        with tempfile.TemporaryDirectory() as directory:
+            path = self.write_json(Path(directory), "profile.json", profile)
+            result = self.run_tool("card", "--host", "claude", "--session-model", "claude-opus-5-5", "--session-effort", "medium", "--profile", str(path))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("역할 파일", result.stdout)
+
+    def test_saved_profile_card_asks_user_to_choose_roles_missing_from_the_profile(self) -> None:
+        profile = self.profile()
+        profile["hosts"]["codex"]["roles"] = {"scout": {"model": "gpt-5.6-luna", "effort": "low"}}
+        with tempfile.TemporaryDirectory() as directory:
+            path = self.write_json(Path(directory), "profile.json", profile)
+            result = self.run_tool("card", "--host", "codex", "--session-model", "gpt-6-luna", "--session-effort", "medium", "--profile", str(path))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        lines = result.stdout.splitlines()
+        missing = [line for line in lines if "미저장" in line]
+        self.assertEqual({line.split(":")[0].lstrip("- ") for line in missing}, {"implementer", "task-reviewer", "final-reviewer", "debugger"})
+        self.assertTrue(any("gpt-6-sol" in line for line in missing if line.startswith("- final-reviewer")))
+        self.assertIn("선택", result.stdout)
+        self.assertIn("세션 모델 gpt-6-luna", result.stdout)
+
+    def test_complete_saved_profile_card_does_not_ask(self) -> None:
+        profile = self.profile()
+        profile["hosts"]["codex"]["roles"] = {role: {"model": "gpt-6-sol", "effort": "medium"}
+                                              for role in ("scout", "implementer", "task-reviewer", "final-reviewer", "debugger")}
+        with tempfile.TemporaryDirectory() as directory:
+            path = self.write_json(Path(directory), "profile.json", profile)
+            result = self.run_tool("card", "--host", "codex", "--session-model", "gpt-6-luna", "--session-effort", "medium", "--profile", str(path))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn("미저장", result.stdout)
+
+    def test_claude_recommendations_are_exact_ids_with_delivery_aliases(self) -> None:
+        data = json.loads((ROOT / "assets/agents/trunk_orchestration/model-recommendations.json").read_text(encoding="utf-8"))
+        claude = data["hosts"]["claude"]
+        self.assertEqual(claude["catalog"]["status"], "unknown")
+        for role, item in claude["roles"].items():
+            self.assertIn(item["model"], claude["deliveryAlias"], role)
+
     def test_card_marks_recommendations_missing_from_an_observed_catalog(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             catalog = self.write_json(Path(directory), "catalog.json", {"schemaVersion": 1, "provider": "codex-vscode-runtime", "models": [

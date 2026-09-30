@@ -12,14 +12,19 @@
    화면의 `Opus 5.5 Medium`, Codex에서 고른 모델)가 모든 역할의 출발 기본값이다. 세션 모델을
    고른 것이 이미 사람의 선택이므로, 임시 역할은 모델을 따로 지정하지 않고 세션 모델을 물려받아
    즉시 배정할 수 있다. 모델 확인을 기다리느라 작업이나 위임을 멈추지 않는다.
-2. **실제 역할 배정이 필요할 때 추천한다.** 프로젝트에 현재 호스트의 저장된 배치가 없으면,
+2. **실제 역할 배정이 필요할 때 추천한다.** 프로젝트에 현재 호스트의 저장된 배치가 없거나 배정할 역할이 배치에 빠져 있으면(card는 빠진 역할을
+   "미저장 → 추천"으로 보여 사용자가 고르게 한다),
    처음 역할을 위임하거나 모델을 지정하기 직전에
    `python3 tooling/model-policy.py card --host <claude|codex> --session-model <모델> --session-effort <강도>`를
    실행한다. 위임 없는 읽기 전용·직접 처리 작업에는 카드를 붙이지 않는다. 추천값은 `model-recommendations.json`(검토일·근거 포함)에
    있으며, Codex는 `--observed-catalog`에 `model-catalog.py codex` 출력을 주면 관측 목록에 없는 추천을
    표시한다. 모델 배정에 필요한 시점에 카드를 명령으로 실행한다. 사용자는 그대로 수용하거나,
    바꾸거나, 더 세세하게(예: "결제·보안 검토는 최상위") 정할 수 있다. 답을 기다리지 않고
-   역할은 세션 모델로 배정해 원래 작업을 계속한다. 실행 중 답이 오면 저장한 뒤 기존 작업을
+   역할은 세션 모델(Claude는 역할 파일 frontmatter 값)로 배정해 원래 작업을 계속한다. 카드는
+   같은 턴의 보고 텍스트로만 내고, 턴을 멈추는 질문 도구(Claude `AskUserQuestion`, Codex
+   `request_user_input` 등)로 묻거나 답을 기다리며 턴을 끝내지 않는다. 추천은 적절한 출발점이면
+   충분하며 최종 선택은 사용자 몫이므로, 추천의 정밀도를 이유로 지시받은 작업을 늦추지 않는다.
+   사용자가 모델부터 정하고 시작하겠다고 명시한 경우만 예외다. 실행 중 답이 오면 저장한 뒤 기존 작업을
    이어간다. 이미 작업이 끝난 다음 답이 오면 프로필 변경만 반영하고 이전 완료 결과를 다시 열지
    않는다. 답할 사람이 없는 실행(headless 등)도 세션 모델로 끝까지 진행하며, 역할 위임이 있었다면
    실행한 카드 출력을 최종 보고에 남긴다.
@@ -34,8 +39,9 @@
    것은 묻지 않는다.
 
 역할 단위는 `scout`, `implementer`, `task-reviewer`, `final-reviewer`, `debugger`에서 시작한다.
-`scout`는 evidence-scout, `implementer`는 implementation-worker, `task-reviewer`와 `final-reviewer`는
-critical-reviewer 역할에 대응하고, `debugger`는 디버깅 조사를 맡긴 역할에 대응한다. 사용자가 원하면
+`scout`는 evidence-scout, `implementer`는 implementation-worker, `task-reviewer`는 critical-reviewer,
+`final-reviewer`는 final-reviewer, `debugger`는 debugger 역할 파일에 대응한다(`model-recommendations.json`의
+`roleAgent`). Claude에서는 역할 파일 frontmatter가 실제 모델·강도를 싣는다(`platform-tools/claude-tools.md`). 사용자가 원하면
 `overrides`에 범위(scope)별 예외를 둔다. 모델 값 `session`은 "세션 모델을
 그대로 쓴다"는 뜻이고, 추론 강도 `session`은 세션 강도를, `not-selectable`은 그 호스트가 역할별
 강도를 지정할 수 없음을 뜻한다.
@@ -233,13 +239,13 @@ provider 설정이나 개인 세션 저장소를 관리하지 않는다.
       "sessionModelAtConfirmation": {"model": "claude-opus-5-5", "effort": "medium"},
       "catalogSource": "user-reported-from-runtime-ui",
       "roles": {
-        "scout": {"model": "sonnet", "effort": "not-selectable"},
-        "implementer": {"model": "session", "effort": "not-selectable"},
-        "task-reviewer": {"model": "session", "effort": "not-selectable"},
-        "final-reviewer": {"model": "opus", "effort": "not-selectable"},
-        "debugger": {"model": "session", "effort": "not-selectable"}
+        "scout": {"model": "claude-haiku-4-5", "effort": "not-supported"},
+        "implementer": {"model": "claude-sonnet-5-5", "effort": "medium"},
+        "task-reviewer": {"model": "claude-sonnet-5-5", "effort": "high"},
+        "final-reviewer": {"model": "claude-opus-5-5", "effort": "high"},
+        "debugger": {"model": "claude-opus-5-5", "effort": "high"}
       },
-      "overrides": [{"scope": "payment or security review", "role": "task-reviewer", "model": "opus", "effort": "not-selectable"}]
+      "overrides": [{"scope": "payment or security review", "role": "task-reviewer", "model": "claude-opus-5-5", "effort": "high"}]
     }
   }
 }

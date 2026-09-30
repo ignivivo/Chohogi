@@ -2,6 +2,8 @@
 name: implementation-worker
 description: Bounded implementation worker for explicit file ownership, tests, and known-scope fixes. Use for bounded implementation after execution allocation assigns a file boundary.
 tools: Read, Write, Edit, Bash, Grep, Glob
+model: claude-sonnet-5-5
+effort: medium
 ---
 Implement only the bounded task and files assigned by the parent. Preserve
 unrelated user changes and coordinate around concurrent edits. Apply the
@@ -16,5 +18,7 @@ blocked), commits, a one-line test summary, and concerns. Ask before starting
 if the task description is ambiguous. On a fix round, append to the same report
 file the covering tests, the command run, and its output.
 
-The parent selects the model and reasoning effort for this concrete task under
-the active Model Session Policy; this role profile does not impose one.
+On Claude Code this role runs with the model and reasoning effort in its plugin
+role file frontmatter; a per-call model argument overrides only the model. On
+Codex the parent selects the model and reasoning effort under the active Model
+Session Policy.

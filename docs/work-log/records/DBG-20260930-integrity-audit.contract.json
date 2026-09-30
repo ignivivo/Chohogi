@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "objective": "Read-only integrity audit of Chohogi: whether documented skills, agents, scripts and chains exist, are discovered, are invoked correctly, and hand off correctly across chained steps.",
+  "route": "debugging",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": ["integrity criterion first: layer A static cross-reference, then chain trace tables for the five chains, as an evidence table by criterion"],
+  "excluded": ["any fix to Chohogi assets (proposals only; fixes need separate homeostasis admission)", "raw prompts or private reasoning in records"],
+  "requestedItems": [
+    {"id": "layer-a", "description": "Static definition-vs-existence cross-reference, classified by document authority, plus manifest registration comparison."},
+    {"id": "chains", "description": "Trace tables for entry, delegation, record, feedback-loop, and model chains across layers B-E with observed evidence."},
+    {"id": "report", "description": "Evidence table by criterion with confirmed/unconfirmed causes and proposed fixes."}
+  ],
+  "acceptance": [
+    {"id": "evidence", "description": "Every reported finding cites a file:line or command output observed in this session."}
+  ]
+}
