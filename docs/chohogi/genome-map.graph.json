@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "4a0a117de4a8b3963e3b14e4aecd324f64f2e6f8b0c4abb7526d793eeb199971",
+  "sourceDigest": "a54299ae643158890ec6e23ac0e01240d8e4d477c9844dd1c72ccb70e1423633",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -1226,6 +1226,11 @@
       "id": "asset:tooling/verify-routes.py",
       "kind": "asset",
       "path": "tooling/verify-routes.py"
+    },
+    {
+      "id": "asset:tooling/verify-runtime-entrypoint.py",
+      "kind": "asset",
+      "path": "tooling/verify-runtime-entrypoint.py"
     },
     {
       "id": "asset:tooling/verify-security-boundary.py",
@@ -2909,6 +2914,12 @@
       "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-runtime-entrypoint.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
     },
     {
       "source": "asset:tooling/verify-security-boundary.py",

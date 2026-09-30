@@ -270,12 +270,12 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 | parser-test | replay 파서 수정에 테스트 없음(테스트 우선 위반) | 3.17 작업 중 생략 | 빈 값·`/session` agent_type 무시 테스트 추가 | HEAD 파서에서 실패, 수정본에서 통과 |
 | setup-hardening | 역할 목록 하드코딩, 섹션 존재만 확인, 백업 없음 | F8과 같은 패턴 | 정본 TOML 디렉토리에서 역할 도출, 다른 경로를 가리키면 `WRONG_PATH`(apply가 덮어쓰지 않음), 쓰기 전 백업 | 테스트 4개. 실제 설정은 강화된 검사에서도 `OK` |
 | record-reopen (F26) | finalize 뒤 이벤트가 붙어도 pass 유지 | `execution-record.py`가 추가 이벤트에서 verification을 갱신하지 않음 | finalize 이후 이벤트는 상태를 `reopened`로 바꾸고 경고. 기존 기록 3개(Codex 1, Claude 2)에 소급 적용(파생 파일만) | 테스트 red→green |
-| F17 | fixed | — | 기록을 쓰는 프로젝트의 활성 계획은 `executionRecord` 필수 | 같은 기록, mutation M14 | — |
-| F22 | fixed | — | `verify-runtime-entrypoint.py`, mutation 17/17 | 같은 기록 | 문구 존재만 증명(준수는 C2) |
-| F20 | fixed | — | 세션 모델 상속 서술 3곳을 호스트별 사실로 교체 | 같은 기록 | — |
-| F11 | fixed | — | critical-reviewer에 Bash | 같은 기록 | — |
-| F3 | fixed | — | skill-creator 호스트 매핑 | `HOM-20260930-review-fixes` | — |
-| F23 | partial | medium | 오류에 허용값, 주입 지침에 검증 실행 한 줄 | 같은 기록 | replay 재측정 필요 |
+| F17 | finalize된 계획을 다시 active로 선언해도 PASS | `executionRecord`가 선택 필드 | 기록을 쓰는 프로젝트는 활성 계획에 `executionRecord` 필수. 잘못된 role/authority/state 오류에 허용값 표시(F23) | mutation M14 검출 |
+| F22 | 핵심 규칙 파손 12/17 미검출 | 주입 지침 문장·hook 경로·route 기준 문구를 보는 검사가 없음 | `tooling/verify-runtime-entrypoint.py` 신설(hook `$root/` 경로 존재, 규칙별 기준 문구) | mutation **17/17** 검출(이전 5/17). 결과: 기록의 `mutate-result-after.jsonl` |
+| F20 | "역할은 세션 모델을 물려받는다" 3곳 | 3.13에서 갱신 누락 | Codex는 세션 모델, Claude는 역할 파일 frontmatter로 호스트별 서술. Claude는 저장값이 역할 파일과 다를 때만 `model` 인자 | grep상 잔존 없음 |
+| F11 | critical-reviewer가 git을 지시받지만 Bash 없음 | 역할 정의 작성 시 도구 목록 미대조 | Bash 추가. "git을 지시하면 Bash 필요" 테스트 | red→green |
+| F3 | skill-creator를 Codex에만 허용 | 호스트 매핑 부재 | Claude `anthropic-skills:skill-creator` 매핑(`init_skill.py`는 Codex만) | 두 공식 `quick_validate.py` 모두 homeostasis valid |
+| F23 | registry 상태 오류, 검증기 미실행 | 규칙이 읽히지 않는 문서에만 있음(F21) | 주입 지침에 "registry를 고치면 검증기 실행" 한 줄, 오류에 허용값 | replay 재측정은 안 함 |
 | scenario (F18) | Codex가 두 review 시나리오 모두에 역할을 명시함 | 3.17의 가설(문구 모호) 검증용이었으나 Codex 스스로 반증 | 자율 위임 시나리오는 원래 문구로 복원, profile 시나리오는 명시 문구 유지 | 각 시나리오가 자기 주장만 시험 |
 
 - **검증:** unittest 140개 OK, 검증기 17개 PASS(신규 1), genome map OK.
@@ -415,23 +415,23 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 |---|---|---|---|---|---|
 | F1 | fixed | — | 검증기가 "활성 계획 정확히 1개"를 강제해 finalize된 계획이 active로 남음 | `HOM-20260930-integrity-repair` | F17로 보완 필요 |
 | F2 | candidate(Codex) | low | homeostasis skill의 루트 없는 상대 경로. Claude는 hook 루트로 해결됨(live, $0.12) | phase2 fact | Codex에서 1회 확인 |
-| F3 | open | medium | skill-creator를 Codex에만 허용. Claude `anthropic-skills:skill-creator`의 `quick_validate.py`가 14개 skill 모두 Codex판과 같은 판정 | `skill-lifecycle.md:10,59`, phase2 fact | 호스트별 매핑 추가(`init_skill.py`는 Claude에 없음) |
+| F3 | fixed | — | skill-creator 호스트 매핑 | `HOM-20260930-review-fixes` | — |
 | F4 | fixed (this host) | high | Codex 역할 5종이 설치 뒤 미등록이었던 설치·발견 결함. `codex-role-setup.py --apply`로 정본 TOML을 등록하고, 새 `gpt-5.6-luna` 세션에서 5종 모두 실제 spawn | `HOM-20260930-codex-role-install-live`, `/tmp/chohogi-live-codex-pe6ZIa` | native plugin add에는 역할 lifecycle이 없으므로 setup/doctor adapter를 설치 절차에 포함 |
 | F5–F9 | fixed | — | 3.12–3.14 참조 | 각 기록 | — |
 | F10 | open | low | manifest 폐기 항목 보존 규칙 비일관, 검증기도 확인 안 함 | `manifest.json` | 규칙 하나로 정리 |
-| F11 | open | medium | critical-reviewer가 `git show/diff` 사용을 지시받지만 도구에 Bash 없음 | `agents/critical-reviewer.md:4` | Bash 추가 또는 diff를 packet으로 전달하도록 본문 변경 |
+| F11 | fixed | — | critical-reviewer에 Bash | `HOM-20260930-review-fixes` | — |
 | F12 | open | low | genome impact가 114개를 반환해 선별력 없음 | 명령 출력 | 소비 관계 기준으로 축소 |
 | F13 | fixed | — | profile 파일 커밋 | `e95323b` | — |
 | F14 | open | medium | 모델 선택 비차단을 실제 대화에서 미관측 | 3.14 | 대화형 세션 관측 |
 | F15 | fixed | — | 부분 저장 profile | `HOM-20260930-profile-gaps` | — |
 | F16 | open | high | learning이 2026-08-12 이후 미사용. 확정 실패 수리 11건이 모두 homeostasis로 직행. learning-우선 규칙은 `skills/homeostasis/SKILL.md:111`에만 있음 | phase2 fact | 규칙을 conductor·주입 지침으로 올리거나, 실효가 없으면 규칙을 줄임(사용자 판단) |
-| F17 | open | high | F1 수리가 부분적: `executionRecord`가 선택 필드라 finalize된 계획을 다시 active로 선언해도 PASS | mutation M14 | 활성 계획에 `executionRecord` 필수화 또는 records 디렉토리 역참조 |
+| F17 | fixed | — | 기록을 쓰는 프로젝트의 활성 계획은 `executionRecord` 필수 | `HOM-20260930-review-fixes`, mutation M14 | — |
 | F18 | fixed | — | 시나리오 분리(자율 위임은 원래 문구, profile은 명시 문구) | 같은 기록 | replay 재측정 필요 |
-| F19 | open | medium | profile 없는 위임에서 카드 미실행, "세션 모델을 물려받았다"고 틀리게 보고 | C2 transcript | F20 수정됨. 같은 시나리오 재측정으로 남은 원인 확인 |
-| F20 | open | high | "역할은 세션 모델을 물려받는다"가 `AGENTS.md:11`, `model-policy.md:13`, `claude-tools.md:25`에 남아 역할 파일 frontmatter 사실과 모순. `claude-tools.md:25`는 같은 문서의 '역할 파일과 같으면 model 생략'과도 모순 | grep, C2 transcript | 세 문장을 호스트별 사실로 교체. **3.13에서 놓친 갱신** |
+| F19 | open | medium | profile 없는 위임에서 card 미실행. Claude 역할은 frontmatter 기본값이 있어 card 없이도 위임이 성립 | C2 transcript, 3.20 replay(축소 전후 모두 실패) | Claude에서 card 규칙 필요 여부를 D1로 결정 |
+| F20 | fixed | — | 세션 모델 상속 서술 3곳을 호스트별 사실로 교체 | `HOM-20260930-review-fixes` | — |
 | F21 | open | high | replay 7/7 세션이 초호기 route 문서를 한 번도 읽지 않음. skill 호출 0. 행동은 주입 지침만으로 결정 | C2 transcript 분석 | 규칙 배치 재설계: 행동을 바꿔야 하는 규칙은 주입 지침에, 나머지는 필요 시 명령(검증기·card)으로 묶기. C3과 함께 판단 |
-| F22 | open | high | 핵심 규칙 17곳 파손 중 12곳 미검출. hook의 지침 경로가 깨져도 PASS | mutation 결과 | 주입 지침 핵심 문장·hook 경로의 존재 검사 추가. 검증기의 한계를 functional-assurance에 명시 |
-| F23 | open | medium | 계획 작성 세션이 registry에 허용되지 않는 상태 `completed`를 쓰고 검증기를 돌리지 않음. 프로젝트 밖 `/tmp/placeholder`에 잘못 쓰고 삭제 | C2 transcript, 재현 | 상태 어휘를 주입 지침 또는 검증 명령 안내로. F21과 같은 뿌리 |
+| F22 | fixed | — | `verify-runtime-entrypoint.py`, mutation 17/17 | `HOM-20260930-review-fixes` | 문구 존재만 증명(준수는 C2) |
+| F23 | fixed | — | 오류에 허용값, 주입 지침에 "계획을 만들면 registry 등록·검증기 실행" | `HOM-20260930-review-fixes`, `HOM-20261001-guidance-slim` | 2026-10-01 replay에서 plan-location 통과(축소 전·복원 후) |
 | F24 | partial | medium | 주입 지침 8,520 → 3,331자, 첫 턴 컨텍스트 약 -4.5k 토큰, 4,000자 상한 | `HOM-20261001-guidance-slim` | skill·역할 설명 목록(약 4.9k자)은 미조정 |
 | F26 | fixed | — | finalize 뒤 이벤트가 상태를 reopened로 바꿈. 기존 기록 3개 소급 | 같은 기록 | — |
 | F27 | open(Codex) | medium | 3.17 기록의 spawn_agent 관측 두 사실이 서로 충돌 | `HOM-20260930-codex-role-install-live` events | Codex가 rollout 경로로 정리 |
