@@ -15,6 +15,9 @@ import re
 from pathlib import Path
 
 T = "assets/agents/trunk_orchestration/"
+# Every session pays for the injected guidance (+11.2k first-turn tokens measured on 2026-09-30, F24).
+# Raising this cap is a deliberate homeostasis decision, not a side effect of adding a paragraph.
+GUIDANCE_CAP_CHARS = 4000
 ANCHORS = {
     "assets/runtime_entrypoint/AGENTS.md": (
         "~/.agents/chohogi/trunk_orchestration/conductor.md",  # route selection entry (the red-flag text names it again)
@@ -52,6 +55,8 @@ def main() -> int:
             errors.append(f"{rel} is missing")
             continue
         text = path.read_text(encoding="utf-8")
+        if rel.endswith("AGENTS.md") and len(text) > GUIDANCE_CAP_CHARS:
+            errors.append(f"{rel} is {len(text)} characters, over the size cap of {GUIDANCE_CAP_CHARS}")
         for anchor in anchors:
             if anchor not in text:
                 errors.append(f"{rel} lost its core-rule anchor: {anchor}")

@@ -283,6 +283,30 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
   "원본 기록에 spawn_agent 호출이 있었지만 필드가 비어 있음"이 같은 실행을 말하는지 Codex가 rollout 경로로 정리해야 한다.
 - **AGENTS.md 크기:** 16,199 → 16,541 bytes(+342). F24와 함께 판단할 증가분이다.
 
+### 3.20 주입 지침 축소 ([`HOM-20261001-guidance-slim`](../../work-log/records/HOM-20261001-guidance-slim/events.jsonl))
+
+- **문제:** AGENTS.md 8,520자(16.5KB). 모델 정책(21.7%)과 기록 방법(17.2%) 두 문단이 39%였고, replay에서 효과가
+  관측된 테스트 우선·완료 관문은 7%였다. 세션은 주입 지침만 읽는다(F21).
+- **방법:** 행동을 바꾸는 규칙은 명령문 한 문장씩 남기고, 도구를 쓸 때만 필요한 절차는 그 도구 출력으로 옮겼다.
+  기록 방법 → `execution-record.py --help` 끝부분, 저장·상향 확인·재제시·늦은 답 규칙 → 모델 card 출력.
+  `verify-runtime-entrypoint.py`에 4,000자 상한을 추가했다(상한을 올리는 것은 homeostasis 결정).
+- **전후 비교(Claude, `claude-sonnet-5-5`, 시나리오당 1회):**
+
+| 시점 | 크기 | 첫 턴 컨텍스트 | 비용(7개) | 통과 |
+|---|---|---|---|---|
+| 이전 (`b8ea864`) | 8,520자 | 약 38.5k | 1.115 USD | 5/7 |
+| 1차 축소 | 3,191자 | 약 34.0k | 0.946 USD | 4/7(회귀 2) |
+| 복원 후 | 3,331자 | 약 34.1k | 영향 시나리오 3개만 재실행 | 6/7 |
+
+- **회귀 원인(도구 호출 비교로 확인):** (1) "계획을 만들면 registry에 등록한다"는 무조건 규칙을 빼고 조건부
+  규칙("registry를 고쳤으면 검증기 실행")만 남겨, 세션이 registry를 건드리지 않았다. (2) "저장된 배치를 쓴다"를
+  "Claude 역할은 역할 파일 값으로 돈다"로 줄여, 세션이 profile을 읽지 않고 위임했다. 두 규칙을 한 문장씩 복원했다.
+- **교훈:** 주입 지침의 문장 하나가 곧 행동 하나다. 축소는 replay 전후 비교 없이는 하지 않는다. 도구 출력으로
+  옮긴 절차는 회귀를 만들지 않았다.
+- **남은 실패:** `review-delegates-on-session-model`(F19)은 축소 전후 모두 실패한다. Claude 역할은 이미
+  frontmatter 기본값이 있어 card 없이도 위임이 성립한다. card 규칙이 Claude에서 필요한지 자체를 D1과 함께 재검토한다.
+- **Codex 영향:** Codex는 AGENTS.md를 링크로 읽으므로 축소본을 즉시 쓴다. Codex replay 전후 비교는 아직 없다.
+
 ## 4. 두 호스트 차이 (실측 기준)
 
 | 항목 | Claude Code (2.1.284) | Codex (codex-cli 0.155.0-alpha.16.3) |
@@ -324,6 +348,8 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
    같은 턴에 진행하고 card는 텍스트로 붙인다. 질문 도구로 턴을 멈추지 않는다.
 10. 다른 세션이 동시에 커밋할 수 있다(3.11은 3.12 작업 도중 올라왔다). 편집 전후로 `git log`와 대상
     파일 diff를 확인하고 남의 변경을 덮어쓰지 않는다.
+11. **주입 지침을 고칠 때는 replay 전후 비교를 한다.** 문장 하나가 행동 하나다(3.20). 4,000자 상한을 넘기려면
+    homeostasis로 결정한다.
 
 ## 7. 커밋 목록
 
@@ -345,6 +371,7 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 | `e95323b` | 09-30 | 3.12–3.15: `DBG-20260930-integrity-audit`, `HOM-20260930-integrity-repair`, `HOM-20260930-claude-role-effort`, `HOM-20260930-model-choice-no-speedbump`, `HOM-20260930-profile-gaps` |
 | `ecc1e78` | 09-30 | 3.16: 2차 진단 `DBG-20260930-diagnosis-phase2` |
 | (이 행 다음 커밋, `git log --grep HOM-20260930-review-fixes`) | 09-30 | 3.17(Codex 작업, 함께 커밋)·3.19: `HOM-20260930-codex-role-install-live`, `HOM-20260930-review-fixes` |
+| (`git log --grep HOM-20261001-guidance-slim`) | 10-01 | 3.20: 주입 지침 축소 |
 
 ## 8. 초호기 검토안 (2026-09-30 시작, 2차 진단 완료)
 
@@ -405,7 +432,7 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 | F21 | open | high | replay 7/7 세션이 초호기 route 문서를 한 번도 읽지 않음. skill 호출 0. 행동은 주입 지침만으로 결정 | C2 transcript 분석 | 규칙 배치 재설계: 행동을 바꿔야 하는 규칙은 주입 지침에, 나머지는 필요 시 명령(검증기·card)으로 묶기. C3과 함께 판단 |
 | F22 | open | high | 핵심 규칙 17곳 파손 중 12곳 미검출. hook의 지침 경로가 깨져도 PASS | mutation 결과 | 주입 지침 핵심 문장·hook 경로의 존재 검사 추가. 검증기의 한계를 functional-assurance에 명시 |
 | F23 | open | medium | 계획 작성 세션이 registry에 허용되지 않는 상태 `completed`를 쓰고 검증기를 돌리지 않음. 프로젝트 밖 `/tmp/placeholder`에 잘못 쓰고 삭제 | C2 transcript, 재현 | 상태 어휘를 주입 지침 또는 검증 명령 안내로. F21과 같은 뿌리 |
-| F24 | open | medium | 비용: 세션당 +11.2k 토큰, 작은 작업 약 2배. 주입 지침 3.5배 성장, 추가:삭제 19:1 | C3·C6 | 규칙 정리 기준(C3 근거 대조) 수립. F21과 함께 |
+| F24 | partial | medium | 주입 지침 8,520 → 3,331자, 첫 턴 컨텍스트 약 -4.5k 토큰, 4,000자 상한 | `HOM-20261001-guidance-slim` | skill·역할 설명 목록(약 4.9k자)은 미조정 |
 | F26 | fixed | — | finalize 뒤 이벤트가 상태를 reopened로 바꿈. 기존 기록 3개 소급 | 같은 기록 | — |
 | F27 | open(Codex) | medium | 3.17 기록의 spawn_agent 관측 두 사실이 서로 충돌 | `HOM-20260930-codex-role-install-live` events | Codex가 rollout 경로로 정리 |
 | F28 | decision | medium | `codex-role-setup.py --apply`가 "개인 config.toml은 관리 대상이 아니다" 원칙의 예외가 됨 | AGENTS.md, assurance nonTrigger | 사용자가 예외를 상시로 둘지 결정(8.6) |
@@ -439,6 +466,6 @@ Codex 검토자는 아래를 독립적으로 확인하고, 결과를 이 문서 
 
 | id | 질문 | 선택지와 trade-off | 추천 |
 |---|---|---|---|
-| D1 (F21·F24) | 규칙을 어디에 둘 것인가 | (a) 행동을 바꿔야 하는 규칙만 주입 지침에 두고 나머지는 명령·검증기로 묶는다: 비용↓, 문서 재구성 필요. (b) 현 구조 유지하고 route 문서 읽기를 강제한다: 비용↑, 강제 수단 불확실. (c) 주입 지침을 계속 늘린다: 준수↑(관측상), 비용·크기↑ | (a). 근거: 준수된 규칙은 모두 주입 지침에 있었고(F21), 비용은 세션당 +11k 토큰(F24) |
+| D1 (F21·F24) | 규칙을 어디에 둘 것인가 | (a) 행동 규칙은 주입 지침에 한 문장씩, 절차는 도구 출력으로: 3.20에서 적용·검증됨. 남은 질문은 Claude에서 card 규칙이 필요한가(F19) | (a) 유지. card 규칙의 Claude 적용 여부만 결정 필요 |
 | D2 (F16) | learning을 살릴 것인가 | (a) learning-우선을 conductor·주입 지침에 올린다. (b) 실효가 없으니 homeostasis가 예방 범위를 직접 판정하도록 규칙을 줄인다 | 판단 보류. 6주간 미사용이 "불필요"인지 "진입 경로 부재"인지 증거가 없다 |
 | D3 (F28) | `codex-role-setup.py --apply`를 원칙 예외로 둘 것인가 | (a) 상시 예외(명시 실행·백업·추가만). (b) 점검만 허용하고 등록은 README 수동 절차 | (a). Codex는 플러그인에 역할 슬롯이 없어 설치만으로 역할이 동작하지 않는다(3.17) |

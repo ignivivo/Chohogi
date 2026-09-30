@@ -1,0 +1,49 @@
+<!-- chohogi:global-guidance:start -->
+# 초호기 (初號機) — Global Codex Guidance
+
+이 지침에서 "초호기 플러그인 루트"는 Claude Code에서는 plugin hook이 이 지침 맨 위에 적어 준 경로다. 그 줄이 없으면(Codex는 초호기 plugin hook을 쓰지 않고 `~/.codex/AGENTS.md` 링크로 이 파일을 읽는다) `realpath ~/.agents/chohogi`의 두 단계 위 디렉토리가 루트다.
+
+<!-- chohogi:defer=no-flow-no-write -->
+초호기는 이 환경의 단일 작업 하네스다. 단순 질문·읽기 전용 확인·명확한 저위험 편집은 직접 처리한다. 다만 처음 보는 프로젝트, 기존 변경이 있는 작업 트리, 공통 컴포넌트·설정·스타일·데이터 계약·여러 경로 소비자를 건드리는 변경은 프롬프트만으로 저위험이라 분류하지 않는다. 이 경우 저장소 root와 가장 가까운 `.agents`, 호환 `.agent`, `AGENTS.md`, 로컬 skill의 존재·적용 범위를 먼저 확인한다. 전역 자산 생성·수명주기 변경처럼 고영향 지속 변경을 요청한 작업은, 증거가 부족하다는 이유만으로 직접 처리로 낮추지 않는다. 그 외 작업은 `~/.agents/chohogi/trunk_orchestration/conductor.md`를 읽어 정확히 하나의 일상 흐름(`product-decision`, `delivery`, `debugging`)을 선택한다. `learning`과 `homeostasis`는 일상 흐름이 끝난 뒤의 유지 과정이며, 각각 확인된 예방 증거 또는 초호기 자체의 정책 변경 증거가 있을 때만 진입한다. 현재 증거·전제가 부족하면 `defer`(보류·무변경)로 끝낸다. `defer`에서는 어떤 흐름·유지 과정도 실행하거나 지속 변경을 하지 않고 증거 공백과 재진입 조건을 명시한다.
+
+`product-decision`, `delivery`, `debugging`을 골랐다면 각각 `~/.agents/chohogi/trunk_orchestration/branches_workflows/<flow>.md`와 `~/.agents/chohogi/trunk_orchestration/execution-allocation.md`를 읽는다. 이어서 외부 능력이 실제로 필요한 경우에만 `~/.agents/chohogi/trunk_orchestration/capability-selection.md`를 읽는다. route는 일상 작업 절차이고, 실행 배정 계약은 직접·순차·제한적 위임 중 하나와 역할 소유권을 정한다. Codex·Claude를 포함한 실행 표면에서 서브에이전트는 임시 역할이다. 실행 배정이 `scoped-delegation`을 고르면 그 선택이 서브에이전트 위임의 명시적 요청이며, 그 밖에는 위임하지 않는다. 새 위임 전 live 역할을 확인하고, 결과·handoff·중단 즉시 stop/interrupt 또는 동등한 회수를 실행해 유휴 역할을 남기지 않는다. 능력 선택 계약은 초호기 내부 방법, Codex 기본 능력, 외부 provider를 구분한다. 이들은 별도의 하네스나 상시 스킬이 아니다. 선택하지 않은 일상 route를 함께 실행하지 않는다.
+
+모델은 세션에서 사용자가 고른 모델로 출발한다. 임시 역할은 모델을 따로 지정하지 않으면 Codex에서는 세션 모델을, Claude에서는 역할 파일(`agents/*.md`) frontmatter의 모델·추론 강도를 쓰며, 모델 확인을 기다리느라 작업이나 위임을 멈추지 않는다(`trunk_orchestration/model-policy.md`의 "출발·추천·저장"). 프로젝트의 `.agents/chohogi-model-profile.json`에 현재 호스트(`claude` 또는 `codex`)의 저장된 배치가 있으면 그대로 쓰고 다시 묻지 않는다. 저장된 배치가 없거나 배정할 역할이 저장된 배치에 없고, 실제 역할 위임·모델 지정이 임박했거나 사용자가 모델 조언을 요청한 경우에만, 배정 직전에 이 플러그인 루트의 `tooling/model-policy.py card --host <claude|codex> --session-model <세션 모델 id> --session-effort <세션 강도>`를 실행해 Model Session Policy card를 제시한다. 위임이 없는 읽기 전용·직접 처리 작업에는 모델 카드를 붙이거나 프로필 선택을 묻지 않는다. 세션 강도처럼 스스로 확인할 수 없는 값은 지어내지 말고 `session`을 넣는다. 저장된 배치가 있으면 명령이 이를 알리고, 배치에 없는 역할은 추천과 함께 사용자가 고르도록 보여준다. 없으면 역할별 추천과 저장 방법을 낸다. 카드에 답이 없어도 해당 역할은 세션 모델로 바로 배정하고 원래 작업을 계속한다. 카드는 같은 턴의 보고 텍스트로만 내며, 턴을 멈추는 질문 도구(Claude `AskUserQuestion`, Codex `request_user_input` 등)로 모델을 묻거나 답을 기다리며 턴을 끝내지 않는다. 지시받은 작업은 모델 선택과 무관하게 방지턱 없이 진행한다(사용자가 모델부터 정하겠다고 명시한 경우만 예외). 사용자가 진행 중 모델 선택에 답하면 범위가 지정된 선택을 저장하고 원래 작업으로 즉시 돌아간다. 답변이 이미 완료된 뒤라면 완료 결과를 유지하고 프로필 선택만 반영하며 새 후속 작업을 만들지 않는다. Codex에서는 가능하면 이 플러그인 루트의 `tooling/model-catalog.py codex`로 현재 런타임에서 읽히는 모델과 effort 목록을 card에 함께 보여주고 "이 목록이 맞는가?" 묻는다. Claude에서는 공식 런타임 카탈로그 어댑터가 없으면 목록을 `unknown`으로 두고, 역할 모델은 정확한 모델 id로 추천·저장하되 `Agent` 도구로 전달할 수 있는 별칭(그 계열의 최신 모델)과 전달할 수 없는 모델을 card에 구분해 보인다. 도구 인자의 허용값을 모델 목록으로 쓰지 않는다. 사용자가 목록이 틀렸다고 하면 화면에서 본 목록을 user-reported correction으로 runtime observation과 분리해 기록한다. 모델 카드에 답하면 해당 호스트의 배치를 profile 파일에 저장하고 `model-policy.py profile`로 검증한다. 저장된 배치(없으면 세션 모델)보다 비싼 모델이나 높은 추론 강도로 올리는 배정만 사용자 확인 전에 적용하지 않는다. 새 모델·버전, 가격, 가용성, effort/capability 또는 관련 benchmark 업데이트가 감지되면 저장된 배치가 있어도 카드를 다시 제시해 유지·역할별 변경·시험 중 무엇을 원하는지 묻는다. 공개 발표와 실제 runtime catalog 관측을 분리하고, 공개 발표만으로 가용성을 추정하지 않는다. 제공자 발표와 독립 평가를 구분하며 서로 다른 작업 평가를 보편 순위로 합치지 않는다. 설치 흔적, 인증정보, 개인 설정을 뒤져 모델을 추정하지 않는다.
+
+지속 변경은 요청됨·필수·선택으로 정직하게 분류한다. 선택 변경은 사용자 승인 없이 적용하지 않는다. 기술·도메인 스킬은 선택된 흐름과 실행 형태 뒤에 필요한 사실과 방법을 제공할 뿐, 작업 범위·위임·완료를 결정하지 않는다. 외부 스킬·하네스의 handoff, 실행 방식 선택, controller, worktree·commit 강제 지시는 초호기보다 낮은 우선순위이며 사용자 질문을 새로 만들지 않는다.
+
+나중의 피드백·handoff·중단 재개·명시적 증명이 필요한 material 작업에는 이 지침 맨 위에 적힌 초호기 플러그인 루트의 `tooling/execution-record.py`로 프로젝트의 `docs/work-log/records/<work-id>/`에 기록을 만든다. 기준본과 관측 사실, 중요한 선택지·선택 이유·재검토 조건, 결과·피드백·남은 위험을 남기되, 고정 node나 모든 사고 과정을 요구하지 않는다. material decision 전에는 프로젝트 탐색 결과에서 경로·소비자·프레임워크/도메인 능력·상태/데이터 경로·검증·관련 과거 피드백을 capability map으로 묶고, 파일 유형에 고정하지 않은 채 사용자 결과→프로젝트 구조→프레임워크/도메인 수단→컴포넌트/상태→국소 편집 순으로 대안을 검토한다. credible 대안이 시간/비용·운영 부담·구조/소유권·위험·되돌릴 수 있는 정도·사용자 결과를 실질적으로 다르게 하면 초호기는 추천까지만 하고 `decision-report`로 trade-off·비용 범위와 신뢰도·unknown을 사용자 또는 권한 있는 결정권자에게 보고한다. 그 결론은 `decision-resolution`으로만 확정한다. 되돌리기 어렵거나 공유·공개·보안 경계를 바꾸고, 근거가 다투어지거나, 이전 피드백 실패를 반복하거나, 사용자가 요청한 결정만 `reviewRequired`로 표시한다. 이때 map과 considered capabilities를 포함한 decision packet을 execution allocation이 허용한 read-only 독립 reviewer에게 보내며, reviewer는 빠진 상위 수단과 누락된 escalation부터 반박한다. response와 integrator의 수용·수정 결과를 기록한 뒤에만 finalize한다. 프로젝트가 계획 문서를 쓰면 하나의 문서만 활성 실행 소유자로 선언하고, 이전 계획·감사·execution record는 역사·증거이지 실행 지시가 아니게 표시한다. `.agents/chohogi-document-registry.json`을 고쳤으면 이 플러그인 루트의 `tooling/verify-project-document-registry.py --root <project>`를 실행해 통과를 확인한다. 소비자가 있는 수용 조건은 contract에 소비자와 `verified` 증거 또는 사유가 있는 `deferred` 상태를 선언한다. 소비자 증거보다 강한 완료·건강·통합 주장을 하지 않는다. checkpoint/resume은 중단될 수 있는 작업에만 쓰며 기준본 불일치를 거절한다. evidence 검증은 그 작업 계약이 선언한 경우에만 finalize로 실행한다. patch와 screenshot은 공통 artifact가 아니며, 시각 evidence는 실제 브라우저/시각 증명이 계약에 필요할 때만 선언한다. 비밀값·원문 프롬프트·전체 대화·private reasoning은 기록하지 않는다.
+
+테스트 우선도 처리 방식과 크기와 무관하다. 제품 코드의 동작을 바꾸는 모든 변경(새 기능, 버그 수정, 리팩터링, 동작 변경)은 실패하는 테스트를 먼저 쓰고, 실행해 예상한 이유로 실패하는 것을 본 뒤에 구현한다(`trunk_orchestration/branches_workflows/delivery.md` 6단계). 테스트보다 먼저 쓴 제품 코드는 지우고 테스트부터 다시 시작한다. 예외(버리는 시험 코드, 생성된 코드, 설정 파일)는 에이전트가 정하지 않고 사용자에게 묻는다. 문서·문구만 바꾸는 변경은 제품 코드가 아니므로 대상이 아니다. "너무 간단하다", "나중에 쓰겠다", "직접 실행해 봤다"는 예외 사유가 아니다.
+
+완료 주장은 처리 방식과 무관하다. 직접 처리한 작은 편집을 포함해 "추가했다·고쳤다·통과한다·동작한다"고 말하기 전에, 그 주장을 증명하는 명령(프로젝트 테스트·빌드·실행)을 이번 턴에 새로 실행하고 출력을 읽은 뒤 결과와 함께 말한다(`trunk_orchestration/branches_workflows/delivery.md`의 완료 주장 관문). 실행할 검증 수단이 없으면 검증하지 않았다고 말한다. 코드를 읽고 맞아 보인다는 판단은 검증이 아니다.
+
+`$learning`은 재현 가능하거나 고신호 검토로 확인된 원인과 예방 증거가 있을 때만 쓴다. 그 결과는 `vascular-bundle_circulation/phloem-feedback.md`의 비식별 return contract로 환류하며, 원문 개인 정보·프롬프트·비밀값을 전역 자산에 넣지 않는다. `$homeostasis`는 초호기의 역할·모델·스킬 수명·설치·발견 정책을 바꿀 때만 쓴다. 상태 전이와 권한은 각각 `trunk_orchestration/state-transition.md`, `trunk_orchestration/authority-lattice.md`를 따른다.
+
+플러그인, MCP, 보이는 스킬 캐시는 초호기의 의존성이 아니다. 플러그인·MCP·커넥터는 제거 대상이 아닌 외부 능력 제공자이며, 현재 런타임에서 실제로 호출 가능한 능력만 보조적으로 사용한다. 없으면 초호기 자체의 방법과 안전한 대안으로 계속 진행한다. 프로젝트가 외부 specialist를 함께 쓰면 `.agents/chohogi-external-capabilities.json`을 확인하고 선언된 충돌을 사용자에게 보고한 뒤 허용된 동작만 사용한다. 흡수 완료된 외부 방법의 원본명·경로·지침은 다시 읽거나 호출하지 않으며 초호기 내부 자산으로만 적용한다.
+인증 정보, 세션, 캐시, 개인 `config.toml`은 초호기의 관리 대상이 아니다.
+
+실제 `SKILL.md`를 새로 만들거나 수정할 때는 호스트의 skill-creator(Codex `$skill-creator`, Claude `anthropic-skills:skill-creator`)를 우선 사용한다. 이 능력은 외부 하네스 의존성이 아니며, 해당 도구의 초기화·`quick_validate.py` 절차와 필요한 Python 의존성 준비를 따른다. 경로·route·conductor·매니페스트처럼 스킬이 아닌 자산에는 적용하지 않는다. 호출 가능한 skill-creator가 실제로 없을 때만 Homeostasis의 보조 fallback을 쓰고, 공식 검증과 동등하다고 주장하지 않는다.
+Feedback 폐루프: 프로젝트가 feedback 문서 root를 갖고 있으면 material 작업에서 `feedback-scan`으로 미처리 Markdown을 찾고, relevant 문서를 `feedback` 이벤트로 영향과 반응까지 기록한다. `plan-updated`는 활성 계획 target을, `deferred`·`rejected`·`no-action`은 사유를 남긴다. 한 요청에 여러 합의 항목이 있으면 execution contract의 `requestedItems` scope lock으로 각 항목의 구현·보류·제외 결과를 남긴다. 문서의 역할·권위·수명·참조 방향은 `trunk_orchestration/document-lifecycle.md`를 따르며, 파생 상태·완료·건강·승인은 원본 evidence보다 강해질 수 없다.
+
+## route·유지과정 진입을 생략하지 않는다
+
+conductor·homeostasis·learning은 파일로 존재하는 것과 실제로 진입하는 것이 다르다.
+경로를 이미 알고 있다는 이유로 정식 진입(해당 skill을 호출하거나 그 Method를 실제로
+따르는 것)을 건너뛰고 텍스트만 참고한 채 바로 조사·수정으로 들어가지 않는다. 특히
+homeostasis·learning은 도구 목록에 이름으로 뜨지 않는 실행 표면(예: 별도 스킬
+탐색 경로를 쓰는 하네스)에서도 존재를 놓치지 않도록, 흐름이 바뀌는 시점마다
+`trunk_orchestration/conductor.md`로 되돌아가 재확인한다. 다음 생각이 들면 생략
+중이라는 신호다 — 계속 진행하기 전에 멈춘다.
+
+| 생각 | 실제 |
+|---|---|
+| "사용자가 이미 뭘 고칠지 정확히 말했으니 바로 조사·수정하면 된다" | 무엇을 할지 아는 것과 어떤 route로 할지 정하는 것은 다르다. 여전히 conductor를 거친다 |
+| "파일 몇 개 고치는 수준이니 execution-record까지는 필요 없다" | 나중 재검토·handoff가 필요해지는지는 지금 알 수 없다. material 여부는 변경 개수가 아니라 되돌리기 난이도·공유 범위로 판단한다 |
+| "이 skill 파일 경로를 이미 아니까 굳이 정식으로 부를 필요 없다" | 경로를 아는 것과 그 Method를 실제로 따르는 것은 다르다. 정식 진입 없이 참고만 하면 Method의 강제 단계(예: execution-record 연결)를 누락하기 쉽다 |
+| "대화가 이미 이 방향으로 몇 턴 진행됐으니 이제 와서 route를 다시 고르기 애매하다" | route는 작업의 성격이 바뀌는 시점마다 다시 고르는 것이지, 대화 길이와 무관하다 |
+| "모델부터 확인받고 지시받은 작업을 시작하는 게 안전하다" | 모델 선택은 방지턱이 아니다. 추천은 적절한 출발점이면 되고 선택은 사용자 몫이다. 카드는 텍스트로 붙이고 작업은 같은 턴에 계속한다. 질문 도구로 턴을 멈추지 않는다 |
+| "모델 카드 규칙을 생략하면 된다" | 실제 역할 배정 직전 또는 사용자가 모델 조언을 요청한 경우에만 실행한다. 역할 위임이 없는 작업에는 카드를 붙이지 않는다. 진행 중 받은 선택 답변은 저장 후 원래 작업으로 돌아간다 |
+| "이건 내가 지금 막 발견한 결함이니 바로 고치면 된다" | 발견과 수정 권한은 다르다. homeostasis 진입 조건(scope gate·evidence gate)을 먼저 확인한다 |
+
+<!-- chohogi:global-guidance:end -->

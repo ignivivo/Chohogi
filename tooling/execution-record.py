@@ -18,6 +18,32 @@ def digest(path: Path) -> str:
             continue
         h.update(str(relative).encode()); h.update(file.read_bytes())
     return h.hexdigest()
+# Moved here from the injected guidance (HOM-20261001-guidance-slim): sessions read it when they run this tool.
+METHOD = """recording method (details: assets/agents/trunk_orchestration/execution-record-contract.md):
+  begin      contract JSON with objective, route, requested/excluded, requestedItems (scope lock:
+             every item ends implemented, deferred, or excluded via scope-item), acceptance.
+  fact       baseline and observed facts, commands and results. Not every thought; no fixed nodes.
+  capability-map  before a material decision, record a capability map: paths, consumers, framework/domain means,
+             state/data paths, existing verification, relevant past feedback. Compare options
+             from user outcome -> project structure -> framework means -> component/state -> local edit.
+  decision   observations, options, selection, rationale, review trigger. When credible options
+             differ in cost, operations, ownership, risk, reversibility, or user outcome, only
+             recommend: decision-report to the user, then decision-resolution records their answer.
+             Mark reviewRequired only for hard-to-reverse, shared/public/security-boundary, contested,
+             repeated-failure, or user-requested decisions; send the packet to a read-only reviewer,
+             record review-response and review-resolution before finalize.
+  feedback-scan / feedback  find unprocessed Markdown under a feedback root and record each
+             relevant one with impact and plan-updated (active plan target) or deferred/rejected/
+             no-action (reason).
+  artifact   only what the contract's acceptance declares. A consumer-facing acceptance names its
+             consumer with verified evidence or a deferred reason. Patch and screenshot are not
+             default artifacts; declare visual evidence only when a real browser proof is required.
+  checkpoint / resume  only for interruptible work; resume rejects a changed baseline.
+  outcome, finalize  finalize checks scope items, feedback, reviews, and artifacts. An event
+             after finalize reopens the record until it is finalized again.
+Never record secrets, raw prompts, full conversations, or private reasoning."""
+
+
 def root(project: Path, work_id: str) -> Path: return project / 'docs/work-log/records' / work_id
 def load(path: Path): return json.loads(path.read_text(encoding='utf-8'))
 def event(folder: Path, data: dict):
@@ -163,7 +189,7 @@ def capability_map_event(folder: Path, map_id: str):
             return item
     return None
 def main() -> int:
-    p=argparse.ArgumentParser(); p.add_argument('--project',type=Path,required=True); sub=p.add_subparsers(dest='cmd',required=True)
+    p=argparse.ArgumentParser(description=__doc__, epilog=METHOD, formatter_class=argparse.RawDescriptionHelpFormatter); p.add_argument('--project',type=Path,required=True); sub=p.add_subparsers(dest='cmd',required=True)
     b=sub.add_parser('begin'); b.add_argument('--work-id',required=True); b.add_argument('--contract',type=Path,required=True)
     for name in ('artifact','checkpoint','resume','fact','prior-feedback','feedback','feedback-scan','scope-item','capability-map','decision','review-request','review-response','review-resolution','decision-report','decision-resolution','outcome','review','handoff','finalize'):
         q=sub.add_parser(name); q.add_argument('--work-id',required=name != 'feedback-scan')

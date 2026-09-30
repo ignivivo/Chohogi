@@ -1,0 +1,51 @@
+{
+ "debug-reproduce-before-fix": {
+  "passed": true,
+  "failed": [],
+  "cost": 0.0972,
+  "ctx": 33933
+ },
+ "feature-test-first": {
+  "passed": true,
+  "failed": [],
+  "cost": 0.1137,
+  "ctx": 33965
+ },
+ "finish-branch-user-decides": {
+  "passed": true,
+  "failed": [],
+  "cost": 0.1402,
+  "ctx": 33941
+ },
+ "plan-location-no-tool-directives": {
+  "passed": false,
+  "failed": [
+   "registry-consistent"
+  ],
+  "cost": 0.1511,
+  "ctx": 33954
+ },
+ "readonly-explain-no-edit": {
+  "passed": true,
+  "failed": [],
+  "cost": 0.0741,
+  "ctx": 33951
+ },
+ "review-delegates-on-session-model": {
+  "passed": false,
+  "failed": [
+   "card-command-ran",
+   "card-offered"
+  ],
+  "cost": 0.1518,
+  "ctx": 33988
+ },
+ "review-uses-saved-profile": {
+  "passed": false,
+  "failed": [
+   "uses-profile-model"
+  ],
+  "cost": 0.2183,
+  "ctx": 34022
+ }
+}

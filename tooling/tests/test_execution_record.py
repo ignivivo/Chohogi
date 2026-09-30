@@ -37,6 +37,13 @@ class ExecutionRecordTests(unittest.TestCase):
             result = self.invoke(project, "finalize", "--work-id", "sample")
             self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_help_carries_the_recording_method_moved_out_of_the_injected_guidance(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            text = self.invoke(Path(temporary), "--help").stdout
+        for term in ("capability map", "decision-report", "decision-resolution", "reviewRequired", "feedback-scan",
+                     "requestedItems", "consumer", "checkpoint", "screenshot", "private reasoning"):
+            self.assertIn(term, text)
+
     def test_event_after_finalize_reopens_the_record_until_finalized_again(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             project = Path(temporary)

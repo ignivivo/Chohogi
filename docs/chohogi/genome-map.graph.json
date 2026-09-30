@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "139b6e5fd01b4e0995ed5f677fee394131054edc83d3d16dff429cf2f73e20f8",
+  "sourceDigest": "4a0a117de4a8b3963e3b14e4aecd324f64f2e6f8b0c4abb7526d793eeb199971",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -2597,6 +2597,12 @@
       "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
       "relation": "documents",
       "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "tooling/execution-record.py"
     },
     {
       "source": "asset:tooling/execution-record.py",

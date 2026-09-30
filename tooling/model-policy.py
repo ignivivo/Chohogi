@@ -254,6 +254,13 @@ def placement_note(role: str, item: dict[str, str], placements: dict[str, dict[s
     return note
 
 
+# Moved here from the injected guidance (HOM-20261001-guidance-slim): shown whenever the card asks.
+ASK_RULES = ("저장한 뒤 `python3 tooling/model-policy.py profile --file .agents/chohogi-model-profile.json`로 검증합니다. "
+             "저장된 배치(없으면 세션 모델)보다 비싼 모델·높은 강도는 사용자 확인 뒤에만 적용합니다. "
+             "새 모델·가격·가용성·관련 평가 변화가 감지되면 저장된 배치가 있어도 이 card를 다시 제시합니다. "
+             "답이 작업이 끝난 뒤에 오면 profile만 갱신하고 끝난 작업은 다시 열지 않습니다.")
+
+
 def render_card(host: str, session_model: str, session_effort: str, profile_path: Path, catalog: dict[str, list[str]] | None) -> str:
     data = read_json(RECOMMENDATIONS)
     host_data = data["hosts"][host]
@@ -276,6 +283,7 @@ def render_card(host: str, session_model: str, session_effort: str, profile_path
                 for role in missing:
                     item = host_data["roles"][role]
                     lines.append(f"- {role}: 미저장 → 추천 {item['model']} / {item['effort']} — {item['why']}")
+                lines.append(ASK_RULES)
             return "\n".join(lines)
     roles = host_data["roles"]
     lines = [f"초호기 모델 배치 제안 ({host}) — 지금은 모든 역할이 세션 모델 {session_model} / {session_effort}로 돌고 있습니다."]
@@ -294,6 +302,7 @@ def render_card(host: str, session_model: str, session_effort: str, profile_path
         lines.append(f"- {role}: {item['model']} / {item['effort']}{note} — {item['why']}")
     lines.append("그대로 둘지, 바꿀지, 더 세세하게 정할지(예: 결제·보안 검토는 최상위) 알려주면 "
                  ".agents/chohogi-model-profile.json에 저장하고 이후 세션은 다시 묻지 않습니다. 답을 주기 전까지는 세션 모델로 계속합니다.")
+    lines.append(ASK_RULES)
     return "\n".join(lines)
 
 

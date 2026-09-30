@@ -40,6 +40,17 @@ class RuntimeEntrypointTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("AGENT.md", result.stdout)
 
+    def test_guidance_over_the_size_cap_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            copy_tree(root)
+            guidance = root / "assets/runtime_entrypoint/AGENTS.md"
+            text = guidance.read_text()
+            guidance.write_text(text.replace("<!-- chohogi:global-guidance:end -->", "가" * 4001 + "\n<!-- chohogi:global-guidance:end -->"))
+            result = verify(root)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("size cap", result.stdout)
+
     def test_each_removed_core_rule_anchor_fails(self) -> None:
         cases = [("assets/runtime_entrypoint/AGENTS.md", "실패하는 테스트를 먼저"),
                  ("assets/runtime_entrypoint/AGENTS.md", "완료 주장은 처리 방식과 무관하다"),

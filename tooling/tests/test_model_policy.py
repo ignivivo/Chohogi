@@ -251,6 +251,19 @@ class ModelPolicyTests(unittest.TestCase):
         self.assertIn("선택", result.stdout)
         self.assertIn("세션 모델 gpt-6-luna", result.stdout)
 
+    def test_cards_that_ask_carry_the_save_and_upgrade_rules(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            fresh = self.run_tool("card", "--host", "codex", "--session-model", "gpt-6-luna", "--session-effort", "medium",
+                                  "--profile", str(Path(directory) / "missing.json"))
+            profile = self.profile()
+            profile["hosts"]["codex"]["roles"] = {"scout": {"model": "gpt-5.6-luna", "effort": "low"}}
+            partial = self.run_tool("card", "--host", "codex", "--session-model", "gpt-6-luna", "--session-effort", "medium",
+                                    "--profile", str(self.write_json(Path(directory), "profile.json", profile)))
+        for result in (fresh, partial):
+            self.assertIn("model-policy.py profile --file", result.stdout)
+            self.assertIn("확인 뒤에만", result.stdout)
+            self.assertIn("다시 제시", result.stdout)
+
     def test_complete_saved_profile_card_does_not_ask(self) -> None:
         profile = self.profile()
         profile["hosts"]["codex"]["roles"] = {role: {"model": "gpt-6-sol", "effort": "medium"}
