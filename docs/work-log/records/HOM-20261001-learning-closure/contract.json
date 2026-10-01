@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "objective": "Make every confirmed Chohogi defect close with an explicit, structured Learning disposition so that a verified prevention is retained at its smallest scope.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "repair F16",
+    "make Learning disposition enforceable at execution-record finalize",
+    "record the prevention boundary and evidence in the cowork document"
+  ],
+  "requestedItems": [
+    {
+      "id": "learning-gate",
+      "description": "A contract can require an explicit Learning assessment before finalization."
+    },
+    {
+      "id": "structured-intake",
+      "description": "The assessment records destination, cause, prevention, trigger, non-trigger, and verification."
+    },
+    {
+      "id": "runtime-guidance",
+      "description": "Conductor and injected guidance tell a session when to require the assessment."
+    },
+    {
+      "id": "evidence",
+      "description": "Regression tests, verifier output, work log, and cowork status agree."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "verified",
+      "description": "Focused regression tests and relevant static verification pass."
+    }
+  ]
+}

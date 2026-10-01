@@ -1,0 +1,18 @@
+{"baseline_failures": []}
+{"mutation": "M1 test-first paragraph removed from AGENTS.md", "caught": false, "by": []}
+{"mutation": "M2 completion gate removed from AGENTS.md", "caught": false, "by": []}
+{"mutation": "M3 red-flag table removed from AGENTS.md", "caught": false, "by": []}
+{"mutation": "M4 conductor path removed from AGENTS.md", "caught": false, "by": []}
+{"mutation": "M5 debugging row removed from conductor", "caught": true, "by": ["verify-routes.py"]}
+{"mutation": "M6 maintenance entry paragraph removed from conductor", "caught": false, "by": []}
+{"mutation": "M7 delivery test-first step weakened", "caught": false, "by": []}
+{"mutation": "M8 three-failed-fixes stop removed from debugging", "caught": false, "by": []}
+{"mutation": "M9 scoped-delegation row removed from execution allocation", "caught": true, "by": ["verify-execution-allocation.py"]}
+{"mutation": "M10 homeostasis Method step 1 (execution record) removed", "caught": false, "by": []}
+{"mutation": "M11 Claude role mirror body diverges", "caught": true, "by": ["unittest"]}
+{"mutation": "M12 Claude recommendation reverts to bare alias", "caught": true, "by": ["verify-model-policy.py", "unittest"]}
+{"mutation": "M13 non-blocking model rule removed", "caught": true, "by": ["verify-model-policy.py"]}
+{"mutation": "M14 finalized plan marked active again", "caught": false, "by": []}
+{"mutation": "M15 SessionStart hook points at a wrong guidance path", "caught": false, "by": []}
+{"mutation": "M16 final review section removed from task loop", "caught": false, "by": []}
+{"mutation": "M17 learning-first rule removed from homeostasis result", "caught": false, "by": []}

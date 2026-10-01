@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "package": {
+    "id": "chohogi",
+    "layoutVersion": 3,
+    "portability": "self-governing-method-assets"
+  },
+  "components": [
+    {
+      "id": "global-guidance",
+      "organ": "runtime_entrypoint",
+      "function": "global-guidance",
+      "source": "assets/runtime_entrypoint/AGENTS.md",
+      "pluginSlot": "hooks",
+      "ownership": "runtime-endpoint",
+      "activation": "every session: on Claude Code via the SessionStart hook in hooks/hooks.json; on Codex via a ~/.codex/AGENTS.md symlink to this file (the Codex manifest declares hooks {} so the hook is not also registered there)",
+      "state": "active"
+    },
+    {
+      "id": "critical-reviewer-role",
+      "organ": "runtime_entrypoint",
+      "function": "independent-high-risk-review",
+      "source": "assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "pluginSlot": "agents",
+      "ownership": "managed",
+      "activation": "explicit bounded independent review after execution allocation; the TOML's developer_instructions is the source of truth, mirrored (not symlinked — incompatible formats) into agents/critical-reviewer.md for Claude Code, which recognizes a plugin agents/ slot that Codex's plugin.json schema does not have (verified against both CLI binaries)",
+      "state": "active"
+    },
+    {
+      "id": "evidence-scout-role",
+      "organ": "runtime_entrypoint",
+      "function": "bounded-read-only-evidence-collection",
+      "source": "assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "pluginSlot": "agents",
+      "ownership": "managed",
+      "activation": "explicit bounded read-only investigation after execution allocation; mirrored into agents/evidence-scout.md for Claude Code (see critical-reviewer-role for why this is a mirror, not a symlink)",
+      "state": "active"
+    },
+    {
+      "id": "implementation-worker-role",
+      "organ": "runtime_entrypoint",
+      "function": "bounded-implementation",
+      "source": "assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "pluginSlot": "agents",
+      "ownership": "managed",
+      "activation": "explicit bounded implementation after execution allocation; mirrored into agents/implementation-worker.md for Claude Code (see critical-reviewer-role for why this is a mirror, not a symlink)",
+      "state": "active"
+    },
+    {
+      "id": "final-reviewer-role",
+      "organ": "runtime_entrypoint",
+      "function": "independent-final-whole-change-review",
+      "source": "assets/runtime_entrypoint/agents/final-reviewer.toml",
+      "pluginSlot": "agents",
+      "ownership": "managed",
+      "activation": "the task loop's final review of the whole change; mirrored into agents/final-reviewer.md for Claude Code (see critical-reviewer-role for why this is a mirror, not a symlink)",
+      "state": "active"
+    },
+    {
+      "id": "debugger-role",
+      "organ": "runtime_entrypoint",
+      "function": "read-only-cause-investigation",
+      "source": "assets/runtime_entrypoint/agents/debugger.toml",
+      "pluginSlot": "agents",
+      "ownership": "managed",
+      "activation": "debugging route delegation of reproduction and cause investigation after execution allocation; mirrored into agents/debugger.md for Claude Code (see critical-reviewer-role for why this is a mirror, not a symlink)",
+      "state": "active"
+    },
+    {
+      "id": "chohogi-organs",
+      "organ": "organ-library",
+      "function": "internal-contracts",
+      "source": "assets/agents",
+      "pluginSlot": "policy",
+      "ownership": "managed",
+      "activation": "selected Chohogi contract",
+      "state": "active"
+    },
+    {
+      "id": "execution-record-tool",
+      "organ": "trunk_orchestration",
+      "function": "durable-execution-record",
+      "source": "tooling/execution-record.py",
+      "pluginSlot": "tooling",
+      "ownership": "managed",
+      "activation": "material work needing feedback evidence, handoff, interruption recovery, or contract-scoped proof",
+      "state": "active"
+    },
+    {
+      "id": "model-catalog-tool",
+      "organ": "trunk_orchestration",
+      "function": "bounded-runtime-model-observation",
+      "source": "tooling/model-catalog.py",
+      "pluginSlot": "tooling",
+      "ownership": "managed",
+      "activation": "the first actual role/model assignment in a new project, a model-policy reconfirmation trigger, or an explicit request to verify runtime-visible model options",
+      "state": "active"
+    },
+    {
+      "id": "reusable-methods",
+      "organ": "reusable_methods",
+      "function": "reusable-skills",
+      "source": "skills",
+      "pluginSlot": "skills",
+      "ownership": "managed",
+      "activation": "matching concrete capability boundary; never a project leaf",
+      "state": "active"
+    },
+    {
+      "id": "grill-me",
+      "organ": "horizontal-transfer",
+      "function": "design-interview",
+      "source": "assets/agents/genome_inheritance/retired_assets/grill-me",
+      "pluginSlot": "none",
+      "ownership": "retired",
+      "activation": "none",
+      "state": "retired",
+      "retirementReason": "unverified active provenance and conflicting interaction contract"
+    },
+    {
+      "id": "frontend-surface",
+      "organ": "epidermal-tissue-system",
+      "function": "frontend-preflight",
+      "source": "assets/agents/genome_inheritance/retired_assets/frontend-surface.md",
+      "pluginSlot": "none",
+      "ownership": "retired",
+      "activation": "none",
+      "state": "retired",
+      "retirementReason": "superseded by the complete Hallmark frontend expression method"
+    },
+    {
+      "id": "react-async-state-safety",
+      "organ": "genome-inheritance",
+      "function": "unpromoted-learning-candidate",
+      "source": "assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
+      "pluginSlot": "none",
+      "ownership": "retired",
+      "activation": "none",
+      "state": "retired",
+      "retirementReason": "single-project learned prevention lacks the independent multi-project evidence required for active global discovery"
+    }
+  ]
+}

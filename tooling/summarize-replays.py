@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -14,6 +15,15 @@ BOOLEAN_OUTCOMES = (
 )
 
 def load(path: Path) -> dict[str, Any]:
+    validator = Path(__file__).with_name("validate-replay-result.py")
+    validation = subprocess.run(
+        [sys.executable, str(validator), str(path)],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if validation.returncode != 0:
+        raise ValueError(validation.stderr.strip() or f"{path}: canonical replay validation failed")
     data = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(data, dict) or data.get("schemaVersion") != 1:
         raise ValueError(f"{path}: not a schemaVersion 1 replay result")

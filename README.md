@@ -1,154 +1,92 @@
 # 초호기 (初號機) / Chohogi
 
-초호기는 Codex 작업 방식을 위한 단일, 이식 가능한 하네스입니다.
+초호기는 Codex·Claude Code 작업을 위한 이식 가능한 단일 하네스다. 초호기는 workflow,
+authority, skill lifecycle, 설치·발견, 검증 정책을 소유한다. 플러그인·MCP·인증·개인
+설정은 필요할 때 호출하는 provider이지 초호기의 controller가 아니다.
 
-초호기 자체는 Git으로 옮길 수 있는 Markdown·스크립트 자산입니다. Codex Desktop 플러그인, MCP 연결, 인증 정보, 세션, 개인 `config.toml`을 포함하거나 요구하지 않습니다. 그런 기능은 설치 뒤 현재 런타임에 실제로 노출되어 있을 때만 선택적으로 사용할 수 있는 능력일 뿐, 초호기의 제어자가 아닙니다.
-
-이 독립성은 Codex의 기본 능력을 배제한다는 뜻이 아닙니다. 실제 `SKILL.md`를 만들거나 고칠 때는 현재 호출 가능한 `$skill-creator`의 초기화·검증 절차를 우선 사용합니다. Python 같은 그 절차의 정상 의존성도 작업 단위의 격리 환경에서 준비합니다. 초호기의 자체 검사는 이 정식 검증을 대체하지 않는 보조 안전망입니다.
-
-## 개념 구조
-
-- `roots`: 변하지 않는 경계와 소유권
-- `trunk`: 매 작업을 하나의 작업 흐름으로 분류하는 `conductor`
-- `branches`: product-decision, delivery, debugging 일상 흐름
-- `vascular bundle`: xylem은 문맥·근거를 전달하고 phloem은 검증된 결과를 환류
-- `leaves`: 조건부로 발현되는 기술·도메인 capability
-- `meristem`: 반복 증거가 있는 role·skill 후보의 시험·승격·퇴화 gate
-- `leaves`: 각 프로젝트 Git 저장소의 도메인 스킬·계약·회귀 테스트
-- `amyloplast`: 검증되어 전역 자산 후보가 된 학습 결과의 저장소
-
-이 개념 구조와 Codex의 실제 탐색 경로는 다릅니다. `manifest.yaml`과 설치 스크립트가 둘을 연결합니다.
-
-전체 호출 경계·provider·프로젝트 leaf의 관계는 [운영 지도](docs/OPERATING-MAP.md)에
-있다. 외부 skill을 초호기에 들일지, 외부 specialist로 둘지, provider로 둘지는
-`trunk/skill-adoption.md`와 `xylem/provenance.json`으로 Homeostasis가 판정한다.
+초호기는 자기 자신을 각 실행 표면의 공식 로컬 플러그인 마켓플레이스로 배포한다.
+copy-install 스크립트는 없다 — 정본 저장소가 곧 배포되는 자산이다.
 
 ## 빠른 시작
 
-Windows PowerShell:
+```bash
+# Claude Code
+claude plugin marketplace add <이 저장소 경로>
+claude plugin install chohogi@chohogi-marketplace
 
-```powershell
-./tooling/install.ps1
-./tooling/verify-install.ps1
+# Codex
+codex plugin marketplace add <이 저장소 경로>
+codex plugin add chohogi@chohogi-marketplace
 ```
 
-Linux/macOS:
+Claude Code는 플러그인의 `skills/`, `agents/`, `hooks/hooks.json`(전역 지침 주입)을 바로
+노출한다. Codex는 플러그인의 `skills/`만 쓴다(hook은 아래처럼 끄고, 역할 슬롯은 없다). 전역
+지침은 정본을 가리키는 링크로, 역할은 `config.toml`의 정본 경로 등록으로 연결한다(복사하지 않는다):
 
 ```bash
-./tooling/install.sh
-./tooling/verify-install.sh
+R=<이 저장소 경로>
+ln -s $R/assets/runtime_entrypoint/AGENTS.md ~/.codex/AGENTS.md
+ln -s $R/assets/agents ~/.agents/chohogi
 ```
 
-일반 설치는 인증·플러그인·MCP·개인 설정과 기존 사용자 자산을 건드리지 않는다.
+역할은 링크가 아니라 `~/.codex/config.toml`에 정본 경로로 등록한다. `~/.codex/agents/`에 링크를
+두면 역할 목록에는 보이지만 스폰이 거부된다.
 
-## 일상 route와 평가
-
-`trunk/conductor.md`는 substantial 작업에서 엄격한 진입 조건을 만족하는 흐름 하나를
-고른다. 전역 자산 생성처럼 고영향 지속 변경을 요청했지만 근거가 부족한 경우도 `direct`가
-아닌 `defer`다. `defer`는 어떤 route·branch도 실행하거나 지속 변경을 하지 않는다. 그중
-일상 작업 절차는 `trunk/routes/`에 있다.
-
-- `product-decision`: 사용자의 선택 또는 제품 정책이 아직 열려 있을 때만 선택지를
-  근거와 함께 정리한다.
-- `delivery`: 요구사항과 성공 조건이 확정된 구현을 변경·검증 증거까지 완성한다.
-- `debugging`: 관측 가능한 실패의 원인을 재현과 증거로 확인한 뒤 최소 수정한다.
-
-`learning`과 `homeostasis`는 이 일상 route와 경쟁하지 않는 유지 과정이다. 확인된 실패는
-phloem의 비식별 return contract로 learning에 환류하고, Homeostasis는 전역 정책·수명주기
-변경 요청 또는 초호기 경계의 확인된 결함이 scope/evidence gate를 모두 통과할 때만 시작한다.
-
-흐름이 선택되면 `trunk/execution-allocation.md`가 실행 형태를 하나 정한다.
-`direct`는 짧은 한 경계 작업, `sequential`은 공유 구현의 기본값, `scoped-delegation`은
-독립적인 읽기 조사 또는 변경 뒤 검토에만 쓴다. 이 선택은 사용자 메뉴가 아니다. 역할,
-파일 소유권, 모델 수준, 검증 경계는 이 계약 안에서 정하며 주 에이전트가 통합한다.
-
-외부 하네스에서 배운 절차는 `trunk/leaf-methods.md`와 `trunk/context-packet.md`로
-흡수했다. 전자는 leaf가 쓸 계획·TDD·디버깅·검토·검증 방법만 공급하고, 후자는 긴 작업의
-최소 상태를 잇는다. 둘 다 controller·별도 팀·실행 방식 선택지를 만들지 않는다.
-
-`trunk/capability-selection.md`는 이 내부 방법과 실제 외부 능력을 구분한다. Codex 기본
-스킬은 현재 표면에 노출됐을 때 사용하고, 플러그인·MCP·커넥터는 외부 데이터·인증된
-작업·브라우저 같은 실제 능력이 필요할 때만 provider로 사용한다. provider는 삭제 대상도
-controller도 아니다. 반면 Superpowers·구 Meta-harness·Caveman에서 흡수한 방법은
-초호기 내부 자산만 사용하며 원본을 실행 중 다시 읽거나 호출하지 않는다.
-
-route 문서·fixture의 정합성은 다음으로 확인한다.
-
-Windows PowerShell:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\tooling\verify-routes.ps1
-```
-
-Linux/macOS:
+아래 수동 블록 대신 설치 뒤 정본에서 한 번 실행하면 누락된 역할만 등록하고, 이미 등록된
+역할은 바꾸지 않는다.
 
 ```bash
-python3 ./tooling/verify-routes.py
+python3 tooling/codex-role-setup.py --apply
 ```
 
-`assets/agents/chohogi/trunk/evals/README.md`는 지금 할 수 있는 route 적합성 검증과,
-실제 작업이 쌓인 뒤 수행할 성능 비교를 분리해 설명한다.
+```toml
+[agents.critical_reviewer]
+config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/critical-reviewer.toml"
 
-Learning–Phloem–Amyloplast의 scope·민감 정보·승격 fixture는 다음으로 확인한다.
+[agents.evidence_scout]
+config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/evidence-scout.toml"
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\tooling\verify-learning-contract.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File .\tooling\verify-homeostasis-policy.ps1
+[agents.implementation_worker]
+config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/implementation-worker.toml"
+
+[agents.final_reviewer]
+config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/final-reviewer.toml"
+
+[agents.debugger]
+config_file = "<이 저장소 경로>/assets/runtime_entrypoint/agents/debugger.toml"
 ```
 
-후보는 자동 호출되지 않으며, 전역 amyloplast 자산은 독립된 실제 프로젝트 두 곳에서의
-검증과 trigger/non-trigger·퇴역 조건이 있어야 활성화한다.
+Codex 플러그인 매니페스트는 `"hooks": {}`로 `hooks/hooks.json` 자동 등록을 끈다. Codex의 전역
+지침은 위 AGENTS.md 링크 하나로만 들어간다.
 
-실행 배정 계약과 행동 fixture는 다음으로 검증한다.
+링크는 작업 트리를 바로 가리키지만, Codex의 플러그인 스킬은 마켓플레이스 root를 git 커밋
+상태로 복사한 것이고 Claude Code는
+심볼릭 링크를 세션 로드 시점에 따라간다 — **정본을 바꾼 뒤에는 반드시 커밋**해야
+Codex 쪽에도 반영된다.
 
-Windows PowerShell:
+## 현재 구조
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\tooling\verify-execution-allocation.ps1
-```
-
-Linux/macOS:
+현재 기관, 호출 관계, active capability, verification coverage는 사람이 직접 갱신하는
+문서가 아니라 source에서 생성한 [genome map](docs/chohogi/genome-map.md)으로 본다.
+AI agent는 같은 내용의 `docs/chohogi/genome-map.graph.json`을 읽어 변경 영향 범위를
+계산한다.
 
 ```bash
-python3 ./tooling/verify-execution-allocation.py
+python3 tooling/genome_map.py build
+python3 tooling/genome_map.py impact assets/agents/reusable_methods/security-and-hardening/SKILL.md
+python3 tooling/genome_map.py check
+python3 tooling/verify-security-boundary.py
 ```
 
-능력 선택 경계와 fixture는 다음으로 검증한다.
+## 운영 원칙
 
-Windows PowerShell:
+- conductor는 substantial 작업에서 하나의 workflow만 선택한다.
+- capability와 provider는 선택된 workflow 뒤에만 사용하며 controller가 될 수 없다.
+- `learning`은 확인된 실패의 최소 예방을 다루고, `homeostasis`는 초호기 자체의
+  정책·수명주기·설치·발견·정합성을 다룬다.
+- `security_immune_system`은 위험 신호를 코드 전 수용 조건으로 분류하고, 전 프로젝트가
+  공유하는 scanner/CI gate protocol을 소유한다. 프로젝트별 scanner 설정은 adapter이지 leaf가 아니다.
+- Homeostasis repair loop는 변경점의 영향 집합을 계산하고, 선언 대비 실제 상태를
+  검사한 뒤 repair packet을 낸다. 수리와 재검증은 정상 권한 절차로 수행한다.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\tooling\verify-capability-boundary.ps1
-```
-
-Linux/macOS:
-
-```bash
-python3 ./tooling/verify-capability-boundary.py
-```
-
-## 스킬 수명주기와 검증
-
-새 전역 스킬은 반복 가능한 경계와 검증 근거가 있을 때만 `homeostasis` 또는 `learning`의
-결정으로 만든다. 실제 스킬 생성·수정은 `$skill-creator`를 우선 사용하고, 그
-`quick_validate.py`를 실행한다. 이 저장소의 보조 포장 검사는 다음과 같다.
-
-전역 skill·route·role/model 정책 후보의 비교 평가는
-`trunk/evals/evaluation-budget-policy.md`의 제한된 Paired Replay만 사용한다. 일반 사용자
-작업을 baseline과 candidate로 이중 실행하지 않는다.
-
-Windows PowerShell:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\tooling\verify-skills.ps1
-```
-
-Linux/macOS:
-
-```bash
-python3 ./tooling/verify-skills.py
-```
-
-보조 검사는 전역 플러그인이나 다른 하네스를 요구하지 않지만, 공식 YAML 검증을 대신한다고
-주장하지 않는다. 상세 절차와 fallback 표기는
-`assets/agents/skills/homeostasis/references/skill-lifecycle.md`에 있다.
+세부 계약은 `assets/agents/`에, 설치 대상 연결은 `manifest.json`에 있다.

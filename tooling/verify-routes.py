@@ -239,22 +239,22 @@ def main() -> int:
     guidance_text: str | None = None
     conductor_text: str | None = None
 
-    guidance = root / "assets/codex/AGENTS.md"
+    guidance = root / "assets/runtime_entrypoint/AGENTS.md"
     if not guidance.is_file():
         errors.append(f"Missing global guidance: {guidance}")
     else:
         guidance_text = guidance.read_text(encoding="utf-8")
-        if "trunk/routes/<flow>.md" not in guidance_text:
-            errors.append("Global guidance does not direct selected daily routes to trunk/routes/<flow>.md.")
+        if "trunk_orchestration/branches_workflows/<flow>.md" not in guidance_text:
+            errors.append("Global guidance does not direct selected daily routes to trunk_orchestration/branches_workflows/<flow>.md.")
         errors.extend(validate_defer_policy_text("Global guidance", guidance_text))
 
-    conductor = root / "assets/agents/chohogi/trunk/conductor.md"
+    conductor = root / "assets/agents/trunk_orchestration/conductor.md"
     if not conductor.is_file():
         errors.append(f"Missing conductor: {conductor}")
     else:
         conductor_text = conductor.read_text(encoding="utf-8")
-        if "routes/<flow>.md" not in conductor_text:
-            errors.append("Conductor does not direct selected daily routes to routes/<flow>.md.")
+        if "branches_workflows/<flow>.md" not in conductor_text:
+            errors.append("Conductor does not direct selected daily routes to branches_workflows/<flow>.md.")
         errors.extend(validate_defer_policy_text("Conductor", conductor_text))
         for route in DAILY_ROUTES:
             if f"`{route}`" not in conductor_text:
@@ -262,14 +262,26 @@ def main() -> int:
 
     route_texts: dict[str, str] = {}
     for route in DAILY_ROUTES:
-        route_path = root / f"assets/agents/chohogi/trunk/routes/{route}.md"
+        route_path = root / f"assets/agents/trunk_orchestration/branches_workflows/{route}.md"
         if not route_path.is_file():
             errors.append(f"Missing route: {route_path}")
             continue
         route_texts[route] = route_path.read_text(encoding="utf-8")
         errors.extend(validate_route_text(route, route_texts[route]))
 
-    fixture_path = root / "assets/agents/chohogi/trunk/evals/route-fixtures.json"
+    delivery_text = route_texts.get("delivery", "")
+    if "verify-functional-assurance.py" not in delivery_text:
+        errors.append("Delivery route does not require functional assurance for changed Chohogi assets.")
+    if "security_immune_system/boundary-policy.md" not in delivery_text or "pre-code-security-acceptance" not in delivery_text:
+        errors.append("Delivery route does not require pre-code security acceptance for risk-bearing changes.")
+    visual_acceptance_terms = ("경로·컴포넌트·데스크톱 상태·모바일 상태·확인 방법", "실제 경로와", "해당 viewport", "단순히 숨겨진 요소를 수용으로 간주하지 않는다", "열 수·폭·간격·정렬", "PC·태블릿 분류", "1024px", "자산의 최대폭과 정렬", "viewport breakpoint", "실제 컨테이너 폭", "컨테이너 임계값 공식", "바로 전·정확한 값·바로 다음")
+    if any(term not in delivery_text for term in visual_acceptance_terms):
+        errors.append("Delivery route does not require acceptance mapping and viewport verification for visual requirements.")
+    reconnaissance_terms = (".agents", "호환 `.agent`", "적용할 project leaf 또는 `없음`", "의도 계약", "작업 트리와 기존 diff", "정의·import·호출·조건부 렌더링·데이터 소비의 참조 그래프", "요청됨·필수·선택", "모든 import·호출·경로 노출 지점", "코멘트 아웃", "실제 브라우저", "같은 출력 디렉터리", "테스트·린트·타입 검사·빌드·실행", "깨끗한 기준에 적용 가능한지")
+    if any(term not in delivery_text for term in reconnaissance_terms):
+        errors.append("Delivery route does not require pre-edit reconnaissance, consumer-reference mapping, scope containment, and completion verification.")
+
+    fixture_path = root / "assets/agents/trunk_orchestration/evaluation/route-fixtures.json"
     data: dict[str, Any] | None = None
     if not fixture_path.is_file():
         errors.append(f"Missing route fixture file: {fixture_path}")

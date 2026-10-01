@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "objective": "Deliver the saved Claude role model and effort placement to delegated roles through plugin agent frontmatter, after observing that frontmatter model/effort apply at runtime.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "verify frontmatter effort and exact-id model on a live claude -p probe",
+    "if it works, split role files to the five profile roles and set model/effort; replace not-selectable in the profile"
+  ],
+  "excluded": [
+    "Codex role registration in private config.toml",
+    "raw prompts or private reasoning in records"
+  ],
+  "requestedItems": [
+    {
+      "id": "probe",
+      "description": "One budget-capped claude -p session with a throwaway plugin agent declaring model and effort; judge from the transcript."
+    },
+    {
+      "id": "roles",
+      "description": "Role files, profile, card, and docs deliver per-role model and effort on Claude, if the probe supports it."
+    },
+    {
+      "id": "verify",
+      "description": "Tests first; all verifiers and unittests pass."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "verified",
+      "description": "Probe evidence recorded; suite and verifiers pass."
+    }
+  ]
+}

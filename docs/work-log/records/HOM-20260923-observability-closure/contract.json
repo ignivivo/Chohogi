@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "objective": "Independently audit and close remaining cross-harness gaps in Chohogi document ownership, feedback circulation, derived-state provenance, and verification confidence while preserving existing worktree changes.",
+  "route": "homeostasis",
+  "execution": "scoped-read-only-audit-then-bounded-repair",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "three separate reviews of document/registry flow, feedback circulation, and source-to-consumer evidence",
+    "cross-challenge of review findings before repair choices",
+    "repair only confirmed gaps and verify affected consumers and installation boundaries"
+  ],
+  "excluded": [
+    "model-selection policy and user model choices",
+    "automatic semantic deduplication of all project documents",
+    "claiming that static tests prove runtime behavior or future model adherence",
+    "discarding, restoring, or rewriting unrelated pre-existing worktree changes",
+    "raw prompts, private reasoning, credentials, or private user-project data"
+  ],
+  "requestedItems": [
+    {
+      "id": "document-ownership",
+      "description": "Verify one active execution owner and document-registry coverage for Chohogi's actual document layout."
+    },
+    {
+      "id": "feedback-circulation",
+      "description": "Trace feedback discovery through explicit response and active-plan update, including relevant record synthesis."
+    },
+    {
+      "id": "provenance-strength",
+      "description": "Verify derived status, health, completion, and consumer claims cannot outrank source evidence."
+    },
+    {
+      "id": "independent-cross-review",
+      "description": "Obtain three independent first-pass reviews and cross-challenge their material findings."
+    },
+    {
+      "id": "verification-installation",
+      "description": "Run relevant behavioral/static checks and source-to-install verification, reporting unobservable runtime limits."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "baseline-and-plan",
+      "description": "Pre-existing modifications are preserved, and one active plan owner scopes audit, repair, and verification."
+    },
+    {
+      "id": "review-packet",
+      "description": "Each review names concrete paths, call paths, reproduction or counterevidence, and confidence; disagreements remain explicit."
+    },
+    {
+      "id": "bounded-repair",
+      "description": "Every persistent repair maps to confirmed evidence and its owning source, consumer, fixture, and verifier; unsupported optional work is excluded."
+    },
+    {
+      "id": "consumer-proof",
+      "description": "Changed active contracts are verified against the declared source and isolated-install tool consumers; unavailable interactive host runtime behavior is explicitly deferred.",
+      "consumerEvidence": [
+        {
+          "consumer": "source CLI and isolated installation layout",
+          "status": "verified",
+          "artifactKind": "test"
+        },
+        {
+          "consumer": "interactive Codex/Claude host session consuming the installed assets",
+          "status": "deferred",
+          "reason": "This checkout can verify source and isolated install parity, but cannot observe a fresh Codex or Claude host session consuming the installed guidance."
+        }
+      ]
+    },
+    {
+      "id": "final-reconciliation",
+      "description": "All requested items are implemented, deferred, or excluded with reasons; final claims stay within observed evidence."
+    }
+  ],
+  "reviewRequired": true,
+  "verification": [
+    "tooling/verify-project-document-registry.py and nested-plan fixtures",
+    "tooling/verify-document-lifecycle.py",
+    "tooling/verify-status-provenance.py",
+    "tooling/verify-functional-assurance.py",
+    "tooling/verify-semantic-assurance.py",
+    "tooling/verify-homeostasis-policy.py",
+    "relevant execution-record, replay, manifest and install tests",
+    "three independent reviews plus cross-review responses"
+  ]
+}

@@ -1,0 +1,65 @@
+---
+name: learning
+metadata:
+  chohogi_assurance: policy-gate
+description: "Use only after a confirmed reproducible defect or high-signal review finding has an evidenced root cause and a verified smallest prevention. Classify the prevention scope, return a redacted phloem record, and keep the asset local unless independent evidence justifies promotion. Do not use for suspicions, routine fixes, or automatic global skill creation."
+---
+
+# Learning
+
+Turn a confirmed failure into the smallest prevention that catches the same
+signature without governing unrelated work. A failure is an observation, not an
+asset: only its verified prevention can become reusable memory.
+
+## Entry and boundary
+
+Enter only after Delivery or Debugging is terminal and all are true:
+
+- root cause is `confirmed` by reproduction or high-signal review;
+- a smallest prevention exists and catches the signature;
+- trigger, non-trigger, ownership, and sensitive-data boundary are known.
+
+Otherwise return `closed-no-learning`. Learning is a maintenance process, not a
+daily route, second controller, automatic skill generator, or permanent-agent
+factory.
+
+## Procedure
+
+1. Read `references/learning-record.md` and produce a redacted phloem return.
+2. Classify mechanism layer, primary prevention scope, applicability, and
+   contributing context separately. Keep the prevention at the narrowest owner.
+3. Prefer: regression test/fixture → type/schema/lint/contract → project rule
+   → existing reusable asset → narrowly triggered candidate.
+4. Verify the guard catches the signature and does not create unrelated work.
+5. Choose exactly one destination: `closed-no-learning`, project record,
+   project leaf, provisional global candidate, genome_inheritance asset, or Homeostasis
+   escalation.
+6. Record the disposition with `execution-record.py learning-assessment` before finalize.
+   `finalize` requires it for debugging and homeostasis records and for any record
+   with a user-correction, verifier-failure, replay-failure, or review-finding fact,
+   unless the contract sets `learningRequired: false` with a `learningOptOut` reason;
+   `learningRequired: true` or `confirmedDefect: true` also requires it. Each assessment names one registered `--signature` from
+   `vascular-bundle_circulation/failure-signatures.json` (new signatures go through
+   Homeostasis) and appends to the learning ledger. When the signature already appears
+   in another work, the assessment must name an existing `--guard` (test or verifier)
+   and cannot be `closed-no-learning`: a repeat means the previous prevention did not
+   hold. `execution-record.py learning-scan` shows occurrences, works, and guards.
+
+## Rework signal
+
+When a user correction or high-signal review establishes that required reconnaissance,
+consumer-reference discovery, scope containment, or completion verification was omitted,
+record it as a confirmed failure only after the smallest guard has been demonstrated.
+Repeated rework alone does not create a leaf or global rule. Keep project-specific layout
+numbers, framework quirks, and asset choices in the project record; escalate to
+Homeostasis only when the prevention changes Chohogi's route, lifecycle, installation,
+or evaluation boundary.
+
+## Promotion and retirement
+
+Project evidence remains in that project's Git and work-log. A provisional
+global candidate is not auto-discovered or auto-applied. Promote to genome_inheritance
+only after independent cross-project evidence, bounded trigger/non-trigger, and
+verification. Use `$homeostasis` for core policy, role, model, installation, or
+discovery changes. Retire stale, duplicate, or repeatedly false-positive assets
+with evidence; do not preserve them merely because they exist.

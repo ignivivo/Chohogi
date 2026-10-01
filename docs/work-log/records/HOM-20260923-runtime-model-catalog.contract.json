@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "objective": "Implement a bounded Codex VS Code runtime model catalog observation, require user confirmation and preserve UI-provided corrections separately, while accurately delimiting Claude runtime availability.",
+  "route": "homeostasis",
+  "execution": "direct-policy-change",
+  "requested": [
+    "use the official Codex VS Code runtime rather than treating standalone CLI absence as catalog absence",
+    "show the readable runtime model list and ask the user whether it matches; accept a direct correction from the runtime UI",
+    "preserve Claude support without claiming an unavailable official catalog source"
+  ],
+  "excluded": [
+    "read provider credentials, private configuration, session state, or current conversation selection",
+    "infer quality, price, or active selection from the runtime catalog",
+    "silently overwrite runtime observations with user corrections"
+  ],
+  "requestedItems": [
+    {"id": "runtime-adapter", "description": "Add and install a narrowly scoped Codex runtime catalog reader with allowlisted output and failure-safe behavior."},
+    {"id": "global-confirmation", "description": "Update Codex and Claude shared model policy so the catalog is shown for user confirmation and correction provenance remains distinct."},
+    {"id": "claude-boundary", "description": "Represent unavailable official Claude catalog access as unknown, with user-reported UI correction allowed."}
+  ],
+  "acceptance": [
+    {"id": "catalog-adapter", "description": "Runtime model IDs, display names, reasoning efforts and defaults are projected; free-form runtime fields are discarded."},
+    {"id": "user-confirmation", "description": "Runtime catalog output explicitly requires user confirmation and supports a separately attributed UI correction."},
+    {"id": "installation", "description": "A clean manifest installation contains the new executable and the active installation can query the VS Code-shipped runtime."},
+    {"id": "independent-review", "description": "Two independent read-only reviews check the implementation and policy; findings are resolved or recorded."},
+    {"id": "verification", "description": "Model catalog/policy, semantic, functional, homeostasis, routes, allocation and installation checks pass."}
+  ],
+  "reviewRequired": true,
+  "verification": [
+    "tooling/tests/test_model_catalog.py",
+    "tooling/tests/test_graft_compatibility_audit.py",
+    "tooling/verify-model-policy.py",
+    "tooling/verify-functional-assurance.py",
+    "tooling/verify-semantic-assurance.py",
+    "tooling/verify-homeostasis-policy.py",
+    "tooling/verify-routes.py",
+    "tooling/verify-execution-allocation.py"
+  ]
+}

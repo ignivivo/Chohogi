@@ -23,7 +23,7 @@ def validate(validator: Path, data: dict[object, object]) -> bool:
 
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
-    evals = root / "assets/agents/chohogi/trunk/evals"
+    evals = root / "assets/agents/trunk_orchestration/evaluation"
     schema_path = evals / "replay-result.schema.json"
     example_path = evals / "replay-result.example.json"
     validator = root / "tooling/validate-replay-result.py"

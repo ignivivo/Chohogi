@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Security Audit"
+  short_description: "Audit agent permissions and guardrails"
+  default_prompt: "Use $agent-security-audit to audit this agent configuration."

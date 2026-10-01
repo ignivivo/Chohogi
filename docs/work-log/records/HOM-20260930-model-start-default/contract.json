@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "objective": "Replace the confirm-before-start model gate with start-on-session-model, a non-blocking recommendation card, and a per-project per-host saved profile, on both Claude Code and Codex; correct the Codex hook and role-wiring claims.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "start every role on the user's session model without waiting for confirmation",
+    "after starting, recommend per-role model and effort; the user can accept, change, or refine",
+    "save the user's answer per project and host so later sessions do not ask again",
+    "apply to Claude Code and Codex",
+    "add hooks {} to the Codex manifest and correct Codex documentation"
+  ],
+  "excluded": [
+    "editing ~/.codex/config.toml (role registration needs separate approval)",
+    "raising any role above the session model or saved profile without user confirmation",
+    "raw prompts, private reasoning, credentials, or account data in the profile"
+  ],
+  "requestedItems": [
+    {
+      "id": "policy",
+      "description": "model-policy.md, AGENTS.md, execution-allocation.md describe start-on-session-model, non-blocking card, saved profile, and upgrade-only confirmation."
+    },
+    {
+      "id": "profile-tool",
+      "description": "model-policy.py profile validation with tests; profile file format documented."
+    },
+    {
+      "id": "host-maps",
+      "description": "claude-tools.md and codex-tools.md state how each host inherits the session model and how a saved profile is applied, with verification status."
+    },
+    {
+      "id": "codex-corrections",
+      "description": "hooks {} in .codex-plugin/plugin.json; constitution, README and codex-tools.md corrected about hook trust, symlinked roles, and fork_turns."
+    },
+    {
+      "id": "replay",
+      "description": "Live scenarios on Claude and Codex: delegation without a saved profile does not stall; a saved profile's reviewer model is used."
+    },
+    {
+      "id": "commit",
+      "description": "Commit verified changes."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "verified",
+      "description": "All Chohogi verifiers and the unittest suite pass."
+    }
+  ]
+}

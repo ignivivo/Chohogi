@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "nonvisual-code-change",
+      "contract": {"schemaVersion": 1, "acceptance": [{"id": "typecheck", "requiredArtifacts": [{"kind": "test-result"}]}]},
+      "expects": "finalize passes with a registered test result; neither patch nor screenshot is required"
+    },
+    {
+      "id": "visual-change",
+      "contract": {"schemaVersion": 1, "acceptance": [{"id": "mobile-ui", "requiredArtifacts": [{"kind": "screenshot"}]}]},
+      "expects": "finalize fails until the declared screenshot is registered"
+    },
+    {
+      "id": "interrupted-work",
+      "expects": "resume rejects a passing checkpoint when the project digest has changed"
+    },
+    {
+      "id": "material-decision-review",
+      "expects": "a reviewRequired decision fails finalization until a read-only reviewer response and integrator resolution are recorded"
+    },
+    {
+      "id": "decision-owner-report",
+      "expects": "material time, cost, risk, ownership, reversibility, or user-impact trade-offs are reported with uncertainty and require a declared owner resolution"
+    },
+    {
+      "id": "consumer-evidence",
+      "contract": {"schemaVersion": 1, "acceptance": [{"id": "result-route", "consumerEvidence": [{"consumer": "result route", "status": "verified", "artifactKind": "consumer-test"}]}]},
+      "expects": "finalize fails until the acceptance has its declared consumer-test artifact; deferred consumers must state a reason"
+    },
+    {
+      "id": "feedback-closure",
+      "expects": "feedback-scan exposes unprocessed Markdown and a recorded source requires an impact plus explicit plan-updated, deferred, rejected, or no-action response"
+    },
+    {
+      "id": "scope-lock",
+      "contract": {"schemaVersion": 1, "requestedItems": [{"id": "one", "description": "first accepted item"}, {"id": "two", "description": "second accepted item"}], "acceptance": []},
+      "expects": "finalize fails until every requested item has implemented, deferred, or excluded scope-item evidence; deferred and excluded require a reason"
+    }
+  ]
+}

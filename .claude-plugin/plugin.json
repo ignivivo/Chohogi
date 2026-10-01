@@ -1,0 +1,6 @@
+{
+  "name": "chohogi",
+  "version": "1.0.0",
+  "description": "Chohogi single-harness orchestration: conductor routing, execution allocation, learning, and homeostasis.",
+  "author": {"name": "ignivivo"}
+}

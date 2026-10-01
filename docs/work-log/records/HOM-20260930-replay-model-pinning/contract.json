@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "objective": "Correct a wrong claim about Claude's session model id, remove the model-alias confound from adherence replays, and re-check the test-first result on the pre-change model.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "user pointed out that claude-sonnet-5-5 and claude-sonnet-5 are different models"
+  ],
+  "excluded": [
+    "editing finalized execution records",
+    "raw prompts or private reasoning"
+  ],
+  "requestedItems": [
+    {
+      "id": "correction",
+      "description": "Record that Claude's reported model id was correct and the earlier 'misstated id' claim was wrong."
+    },
+    {
+      "id": "pinning",
+      "description": "adherence-replay rejects Claude aliases and records requested and resolved models; README documents exact-id pinning."
+    },
+    {
+      "id": "deconfound",
+      "description": "Re-run feature-test-first on claude-sonnet-5 under the current rules."
+    },
+    {
+      "id": "commit",
+      "description": "Commit verified changes."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "verified",
+      "description": "All Chohogi verifiers and the unittest suite pass."
+    }
+  ]
+}

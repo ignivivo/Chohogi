@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Security boundary fixtures require pre-code acceptance criteria for risk-bearing changes and reject security theatre.",
+  "fixtures": [
+    {
+      "id": "ordinary-copy-change",
+      "riskSignals": [],
+      "expectedDisposition": "no-special-security-boundary",
+      "forbiddenArtifacts": ["scanner-gate-claim"]
+    },
+    {
+      "id": "authenticated-api-change",
+      "riskSignals": ["authentication", "untrusted-input", "authorization"],
+      "expectedDisposition": "pre-code-security-acceptance",
+      "requiredArtifacts": ["trust-boundaries", "abuse-cases", "authorization-tests", "security-review-method"]
+    },
+    {
+      "id": "agent-tool-change",
+      "riskSignals": ["llm-output", "agent-tool", "external-fetch"],
+      "expectedDisposition": "pre-code-security-acceptance",
+      "requiredArtifacts": ["trust-boundaries", "prompt-injection-tests", "tool-permission-tests", "ssrf-controls"]
+    },
+    {
+      "id": "release-gate-claim",
+      "riskSignals": ["dependency-change"],
+      "expectedDisposition": "project-execution-gate-required",
+      "requiredArtifacts": ["project-security-plan", "scanner-command", "machine-readable-observation", "failure-exit-path"]
+    }
+  ]
+}

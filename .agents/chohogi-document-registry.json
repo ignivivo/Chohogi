@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "activeExecutionPlan": null,
+  "documents": [
+    {"path": "docs/chohogi/plans/2026-10-01-chohogi-rebuild.md", "role": "active-plan", "authority": "execution-queue", "state": "draft", "consumers": ["next Chohogi rebuild session"], "forbiddenUse": ["current execution queue until the user starts it", "model selection"]},
+    {"path": "docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md", "role": "history", "authority": "evidence", "state": "historical", "consumers": ["HOM-20261001-loop-engine-and-pruning execution record"], "forbiddenUse": ["model selection", "replacing execution evidence"]},
+    {"path": "docs/work-log/records/HOM-20261001-loop-engine-and-pruning", "role": "execution-record", "authority": "evidence", "state": "historical"},
+    {
+      "path": "docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "role": "history",
+      "authority": "evidence",
+      "state": "historical",
+      "consumers": ["HOM-20260923-observability-closure execution record", "integrator and assigned reviewers"],
+      "allowedReferences": ["docs/chohogi/feedback/chohogi-harness-comparison.md", "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md", "docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md", "docs/chohogi/audits/2026-09-03-functional-reality-gap.md"],
+      "forbiddenUse": ["current execution queue", "model selection", "replacing execution evidence"]
+    },
+    {"path": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md", "role": "history", "authority": "evidence", "state": "historical", "supersededBy": "docs/chohogi/plans/2026-09-23-observability-closure.md"},
+    {"path": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md", "role": "history", "authority": "evidence", "state": "historical", "supersededBy": "docs/chohogi/plans/2026-09-23-observability-closure.md"},
+    {"path": "docs/chohogi/plans/2026-09-03-execution-state-gate.md", "role": "history", "authority": "evidence", "state": "historical", "supersededBy": "docs/chohogi/plans/2026-09-23-observability-closure.md"},
+    {"path": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md", "role": "history", "authority": "evidence", "state": "historical", "supersededBy": "docs/chohogi/plans/2026-09-23-observability-closure.md"},
+    {"path": "docs/chohogi/feedback/chohogi-harness-comparison.md", "role": "feedback-source", "authority": "observation", "state": "active"},
+    {"path": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md", "role": "feedback-source", "authority": "observation", "state": "active"},
+    {"path": "docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md", "role": "feedback-source", "authority": "observation", "state": "active"},
+    {"path": "docs/chohogi/feedback/codex-claude-cowork-20260928.md", "role": "feedback-source", "authority": "observation", "state": "historical"},
+    {"path": "docs/chohogi/audits/2026-09-03-functional-reality-gap.md", "role": "review-synthesis", "authority": "review", "state": "historical"},
+    {"path": "docs/chohogi/specs/2026-09-03-execution-record.md", "role": "decision", "authority": "information-architecture", "state": "active"},
+    {"path": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md", "role": "history", "authority": "evidence", "state": "historical", "supersededBy": "docs/chohogi/plans/2026-09-23-observability-closure.md"},
+    {"path": "docs/work-log/records/", "role": "history", "authority": "evidence", "state": "historical", "consumers": ["future planning and audit workflows"], "forbiddenUse": ["current execution queue", "current completion status"]},
+    {"path": "docs/work-log/records/HOM-20260923-observability-closure/", "role": "execution-record", "authority": "evidence", "state": "historical", "consumers": ["active execution plan", "final handoff"]}
+  ]
+}

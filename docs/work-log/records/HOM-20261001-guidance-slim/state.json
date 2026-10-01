@@ -1,0 +1,82 @@
+{
+  "workId": "HOM-20261001-guidance-slim",
+  "baseline": "4dd39d0ad42ec873aab9738fc51ad5c0f063c9b73b9dfa6797a9cbcf8ba39135",
+  "contract": {
+    "schemaVersion": 1,
+    "objective": "Cut the injected guidance (AGENTS.md) to about half by keeping behavior-changing rules and moving tool-specific detail into tool output, without losing measured adherence.",
+    "route": "homeostasis",
+    "execution": "direct",
+    "feedbackRegistry": ".agents/chohogi-document-registry.json",
+    "requested": [
+      "reduce AGENTS.md size (D1 proposal): about 4,000 characters, detail moved to model-policy.py card / execution-record.py help, before/after replay comparison, size cap"
+    ],
+    "excluded": [
+      "removing test-first, completion gate, or route entry rules",
+      "F16 learning decision (D2)",
+      "raw prompts or private reasoning in records"
+    ],
+    "requestedItems": [
+      {
+        "id": "before",
+        "description": "Claude replay of all 7 scenarios on the current guidance, pinned model."
+      },
+      {
+        "id": "slim",
+        "description": "Rewrite AGENTS.md to about 4,000 characters keeping every verifier-required term and core-rule anchor."
+      },
+      {
+        "id": "tool-detail",
+        "description": "Detail removed from the guidance is reachable from the owning tool's output or help."
+      },
+      {
+        "id": "cap",
+        "description": "verify-runtime-entrypoint.py fails when AGENTS.md exceeds a size cap."
+      },
+      {
+        "id": "after",
+        "description": "Same 7 scenarios after the change; compare pass/fail, cost, first-turn context."
+      },
+      {
+        "id": "doc",
+        "description": "Cowork log and work log updated."
+      }
+    ],
+    "acceptance": [
+      {
+        "id": "verified",
+        "description": "Suite and verifiers pass; after-replay does not lose a rule that passed before."
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "acceptanceId": "verified",
+      "kind": "result",
+      "path": "/home/ignivivo/github/Chohogi/docs/work-log/records/HOM-20261001-guidance-slim/replay-before.json",
+      "sha256": "a3f965ce4540d8fea5e307c1a5674fee2c82f0e7fdbddc36399fca7b644b461b",
+      "status": "pass"
+    },
+    {
+      "acceptanceId": "verified",
+      "kind": "baseline",
+      "path": "/home/ignivivo/github/Chohogi/docs/work-log/records/HOM-20261001-guidance-slim/AGENTS.before.md",
+      "sha256": "1a9f6e9c3df2d134c174bff8c067245b2409df6d0a3e5dc20d34e07b8443ee6a",
+      "status": "pass"
+    },
+    {
+      "acceptanceId": "verified",
+      "kind": "result",
+      "path": "/home/ignivivo/github/Chohogi/docs/work-log/records/HOM-20261001-guidance-slim/replay-after.json",
+      "sha256": "aaf018da3bc4fcef4b0b0beb56dfc8cfb225d50dc79667b9a3053ad00877e3fd",
+      "status": "pass"
+    },
+    {
+      "acceptanceId": "verified",
+      "kind": "result",
+      "path": "/home/ignivivo/github/Chohogi/docs/work-log/records/HOM-20261001-guidance-slim/replay-after-restored.json",
+      "sha256": "e0990e9bbc8d594f815144280d84b29827e720c7f58706d52ff3d0093664bedb",
+      "status": "pass"
+    }
+  ],
+  "checkpoints": []
+}

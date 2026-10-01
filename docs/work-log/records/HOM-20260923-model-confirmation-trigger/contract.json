@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "objective": "Require role-by-role model confirmation when entering every distinct new project, and renewed confirmation when relevant model information updates are detected even in an existing project.",
+  "route": "homeostasis",
+  "execution": "direct-policy-change",
+  "requested": [
+    "distinguish a new project from a new conversation/session",
+    "require user confirmation of model assignments for each distinct new project",
+    "require renewed user confirmation when model updates are detected for existing projects"
+  ],
+  "excluded": [
+    "build asynchronous model-update monitoring or notifications",
+    "infer runtime model availability from public announcements",
+    "change a confirmed project model profile without user confirmation"
+  ],
+  "requestedItems": [
+    {
+      "id": "project-confirmation",
+      "description": "Specify a one-time, role-by-role confirmation at first substantial model allocation in every distinct project, not every new session."
+    },
+    {
+      "id": "update-confirmation",
+      "description": "Require renewed user confirmation when a model/version, price, availability, capability, or relevant benchmark update is detected."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "policy",
+      "description": "Active model policy, runtime guidance, and execution allocation state the confirmation triggers and no-silent-change boundary."
+    },
+    {
+      "id": "assurance",
+      "description": "Functional assurance claim/limits align with policy and explicitly do not claim automatic detection or prompting."
+    },
+    {
+      "id": "verification",
+      "description": "Semantic, functional, and affected route/allocation checks pass."
+    }
+  ],
+  "reviewRequired": false,
+  "verification": [
+    "python3 tooling/verify-semantic-assurance.py",
+    "python3 tooling/verify-functional-assurance.py",
+    "python3 tooling/verify-routes.py",
+    "python3 tooling/verify-execution-allocation.py"
+  ]
+}

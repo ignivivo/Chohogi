@@ -1,0 +1,23 @@
+{
+ "plan-location-no-tool-directives": {
+  "passed": true,
+  "failed": [],
+  "cost": 0.2051,
+  "ctx": 34077
+ },
+ "review-delegates-on-session-model": {
+  "passed": false,
+  "failed": [
+   "card-command-ran",
+   "card-offered"
+  ],
+  "cost": 0.1614,
+  "ctx": 34102
+ },
+ "review-uses-saved-profile": {
+  "passed": true,
+  "failed": [],
+  "cost": 0.2096,
+  "ctx": 34140
+ }
+}

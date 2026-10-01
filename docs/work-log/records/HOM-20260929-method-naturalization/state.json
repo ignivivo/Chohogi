@@ -1,0 +1,59 @@
+{
+  "workId": "HOM-20260929-method-naturalization",
+  "baseline": "62dfc2775153a74aef703e62a1741226810ce809f26158f352388e9155600ec2",
+  "contract": {
+    "schemaVersion": 1,
+    "objective": "Replace the name-based deny/scan approach to an external development-methodology plugin with Chohogi-native organs that perform each of its functions, so the capability is carried by Chohogi's own contracts instead of being blocked.",
+    "route": "homeostasis",
+    "execution": "direct",
+    "feedbackRegistry": ".agents/chohogi-document-registry.json",
+    "requested": [
+      "remove the deny rules and the name-marker scanner added in this session",
+      "map every skill of the external methodology plugin to the Chohogi organ that owns that function",
+      "rebuild missing functions in Chohogi's own structure and vocabulary, not by copying source",
+      "record attribution only in the provenance ledger",
+      "commit the result"
+    ],
+    "excluded": [
+      "copying the external plugin's text, file layout, or skill names into active Chohogi assets",
+      "making the external plugin a runtime dependency or controller",
+      "editing the user's private ~/.claude/CLAUDE.md without explicit approval",
+      "Sazu repository changes",
+      "raw prompts, private reasoning, credentials"
+    ],
+    "requestedItems": [
+      {
+        "id": "remove-blocking",
+        "description": "Remove deny paragraphs in AGENTS.md and capability-selection.md and the retired-capability marker scanner with its manifest, registry, README, and test consumers."
+      },
+      {
+        "id": "function-map",
+        "description": "Map each of the 15 external skills to an existing or new Chohogi organ with a covered/partial/missing verdict backed by file evidence."
+      },
+      {
+        "id": "naturalize",
+        "description": "Implement the missing and partial functions inside the owning Chohogi organ using Chohogi vocabulary."
+      },
+      {
+        "id": "attribution",
+        "description": "Keep origin naming only in xylem_provenance/provenance.json."
+      },
+      {
+        "id": "commit",
+        "description": "Commit verified changes."
+      }
+    ],
+    "acceptance": [
+      {
+        "id": "no-blocking",
+        "description": "No active asset carries a name-based deny rule or name-marker gate for the external plugin."
+      },
+      {
+        "id": "verified",
+        "description": "Semantic, functional-assurance, provenance, document-registry, source-layout, skills verifiers and the unittest suite pass after the change."
+      }
+    ]
+  },
+  "artifacts": [],
+  "checkpoints": []
+}

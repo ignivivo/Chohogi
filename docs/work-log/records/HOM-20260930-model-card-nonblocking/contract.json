@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "objective": "Prevent optional model-profile prompts from distracting or interrupting the user's requested work while preserving explicit per-project model selection when delegation needs it.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "avoid a model-selection speed bump that delays or displaces the user's original instruction"
+  ],
+  "excluded": [
+    "change the current session's model",
+    "silently change model choices beyond the user's stated preference",
+    "remove profile selection when an actual role assignment needs a model"
+  ],
+  "requestedItems": [
+    {
+      "id": "card-trigger",
+      "description": "Do not present a model-profile card solely because a substantial task has no delegation; present it when an actual delegation/model assignment is imminent or when user requests model advice."
+    },
+    {
+      "id": "resume-work",
+      "description": "A user's model/profile answer must not replace, restart, or pause unfinished work; save the scoped choice and continue the existing task."
+    },
+    {
+      "id": "completed-work",
+      "description": "If the original task is already complete when the user answers, acknowledge completion and apply only the requested profile change without inventing follow-up work."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "policy-consistency",
+      "description": "Global entrypoint, model policy and execution allocation agree on a non-blocking, work-first trigger for model cards."
+    },
+    {
+      "id": "verified",
+      "description": "Affected model-policy and functional-assurance verifiers pass; replay contract documents the observable boundaries and remaining runtime limits."
+    }
+  ]
+}

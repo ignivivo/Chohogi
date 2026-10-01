@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "objective": "Fix the confirmed problems from the phase-2 diagnosis and the Claude review of the Codex role-install work, record cause and repair per item, and hand the result back through the cowork log.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "proceed with the found problems: cause, repair method, and how it was repaired, linked to work logs"
+  ],
+  "excluded": [
+    "design decisions reserved for the user (F16, F21, F24, config.toml principle exception)",
+    "editing ~/.codex/config.toml",
+    "raw prompts or private reasoning in records"
+  ],
+  "requestedItems": [
+    {
+      "id": "assurance-setup",
+      "description": "Register tooling/codex-role-setup.py in functional assurance so the failing verifiers and test pass."
+    },
+    {
+      "id": "parser-test",
+      "description": "Add the missing test for the Codex rollout parser change, observed red before the change."
+    },
+    {
+      "id": "setup-hardening",
+      "description": "codex-role-setup.py derives roles from the canonical TOML directory, reports wrong config_file paths, and backs up before apply."
+    },
+    {
+      "id": "record-reopen",
+      "description": "execution-record.py marks a finalized record as reopened when a later event is appended (F26)."
+    },
+    {
+      "id": "f17",
+      "description": "Registry verifier requires executionRecord on an active plan when the project keeps execution records."
+    },
+    {
+      "id": "f22",
+      "description": "A verifier checks the injected guidance, hook path, and core route-rule anchors; mutation test rerun."
+    },
+    {
+      "id": "f20",
+      "description": "Replace stale session-model inheritance statements with host-specific facts."
+    },
+    {
+      "id": "f11",
+      "description": "critical-reviewer tools match its git instructions."
+    },
+    {
+      "id": "f3",
+      "description": "skill-creator host mapping for Claude."
+    },
+    {
+      "id": "f23",
+      "description": "Registry state errors list valid values; injected guidance says to run the registry verifier after editing the registry."
+    },
+    {
+      "id": "scenario",
+      "description": "Restore the autonomous-delegation scenario prompt; keep the explicit role in the saved-profile scenario (F18)."
+    },
+    {
+      "id": "doc",
+      "description": "Cowork log: Claude review of 3.17/3.18, repairs with record links, updated F table, decision items."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "verified",
+      "description": "Suite, all verifiers, genome map pass; mutation rerun recorded."
+    }
+  ]
+}

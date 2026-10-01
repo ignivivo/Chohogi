@@ -1,0 +1,4156 @@
+{
+  "schemaVersion": 1,
+  "sourceDigest": "d9b44edd5d79a9d9874893b1070172715def45a84b1aa5f31d492fe43b79c919",
+  "nodes": [
+    {
+      "id": "asset:.claude-plugin/marketplace.json",
+      "kind": "asset",
+      "path": ".claude-plugin/marketplace.json"
+    },
+    {
+      "id": "asset:.claude-plugin/plugin.json",
+      "kind": "asset",
+      "path": ".claude-plugin/plugin.json"
+    },
+    {
+      "id": "asset:.codex-plugin/plugin.json",
+      "kind": "asset",
+      "path": ".codex-plugin/plugin.json"
+    },
+    {
+      "id": "asset:README.md",
+      "kind": "asset",
+      "path": "README.md"
+    },
+    {
+      "id": "asset:assets/agents",
+      "kind": "asset",
+      "path": "assets/agents"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/homeostasis/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/homeostasis/references/admission-policy.md",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/homeostasis/references/admission-policy.md"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/homeostasis/references/skill-lifecycle.md",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/homeostasis/references/skill-lifecycle.md"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/learning/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/learning/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/adaptive-regulation/learning/references/learning-record.md",
+      "kind": "asset",
+      "path": "assets/agents/adaptive-regulation/learning/references/learning-record.md"
+    },
+    {
+      "id": "asset:assets/agents/functional_assurance/registry.json",
+      "kind": "asset",
+      "path": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "id": "asset:assets/agents/functional_assurance/semantic-contract-registry.json",
+      "kind": "asset",
+      "path": "assets/agents/functional_assurance/semantic-contract-registry.json"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/README.md",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/README.md"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/candidates/react-async-state-safety.md"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/index_registry.yaml",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/index_registry.yaml"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/retired_assets/frontend-surface.md",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/retired_assets/frontend-surface.md"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/retired_assets/grill-me",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/retired_assets/grill-me"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/retired_assets/grill-me/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/retired_assets/grill-me/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/genome_inheritance/xylem_provenance/provenance.json",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/xylem_provenance/provenance.json"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/accessibility/references/A11Y-PATTERNS.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/accessibility/references/A11Y-PATTERNS.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/accessibility/references/WCAG.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/accessibility/references/WCAG.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/agent-security-audit/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/agent-security-audit/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/core-web-vitals/references/LCP.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/core-web-vitals/references/LCP.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/LICENSE",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/LICENSE"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/anti-patterns.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/anti-patterns.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/assets.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/assets.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/color.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/color.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/component-cookbook.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/component-cookbook.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/c1-outlined-chip.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/c1-outlined-chip.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/c2-inline-form-as-cta.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/c2-inline-form-as-cta.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/c3-typographic-link.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/c3-typographic-link.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/c4-sticky-bottom-bar.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/c4-sticky-bottom-bar.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f1-bento-grid.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f1-bento-grid.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f2-sticky-scroll-stack.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f2-sticky-scroll-stack.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f3-tabular-spec-sheet.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f3-tabular-spec-sheet.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f4-step-sequence.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f4-step-sequence.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f5-annotated-screenshot.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f5-annotated-screenshot.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/f6-product-card-grid.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/f6-product-card-grid.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft1-mast-headed.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft1-mast-headed.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft2-inline-rule-single-line.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft2-inline-rule-single-line.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft3-index-style-category-list.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft3-index-style-category-list.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft4-dense-typographic.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft4-dense-typographic.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft5-statement.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft5-statement.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft6-letter-close.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft6-letter-close.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft7-newsletter-first.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft7-newsletter-first.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/ft8-marquee-scroll.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/ft8-marquee-scroll.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h1-marquee.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h1-marquee.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h2-split-diptych.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h2-split-diptych.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h3-quote-led.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h3-quote-led.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h4-stat-led.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h4-stat-led.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h5-letter-hero.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h5-letter-hero.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h6-photographic-fold.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h6-photographic-fold.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h7-demo-video-clipped-by-viewport-edge.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h7-demo-video-clipped-by-viewport-edge.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h8-mockup-split-browser-framed.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h8-mockup-split-browser-framed.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/h9-custom-illustration-centerpiece.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/h9-custom-illustration-centerpiece.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n1-wordmark-2-links.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n1-wordmark-2-links.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n10-floating-on-scroll-morph.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n10-floating-on-scroll-morph.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n11-mega-menu.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n11-mega-menu.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n12-banner-retract.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n12-banner-retract.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n13-inline-cmdk-pill.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n13-inline-cmdk-pill.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n1b-saas-three-section.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n1b-saas-three-section.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n2-floating-chip.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n2-floating-chip.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n3-side-rail.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n3-side-rail.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n4-hidden-behind-k.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n4-hidden-behind-k.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n5-floating-pill.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n5-floating-pill.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n6-newspaper-masthead.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n6-newspaper-masthead.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n7-brutal-slab.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n7-brutal-slab.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n8-terminal-command.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n8-terminal-command.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/n9-edge-aligned-minimal.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/n9-edge-aligned-minimal.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/s1-left-margin-numbered.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/s1-left-margin-numbered.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/s2-hanging.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/s2-hanging.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/s3-sticky-pinned.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/s3-sticky-pinned.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/s4-inline-no-break.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/s4-inline-no-break.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/s5-bottom-anchored.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/s5-bottom-anchored.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/t1-pull-quote-with-marginalia.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/t1-pull-quote-with-marginalia.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/t2-logo-wall-hairline.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/t2-logo-wall-hairline.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/t3-single-huge-quote.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/t3-single-huge-quote.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/components/t4-numbered-stat-strip.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/components/t4-numbered-stat-strip.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/contract.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/contract.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/copy.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/copy.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/custom-craft.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/custom-craft.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/custom-theme.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/custom-theme.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/design-md.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/design-md.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/export-formats.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/export-formats.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/floating-nav.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/floating-nav.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/genres/atmospheric.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/genres/atmospheric.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/genres/editorial.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/genres/editorial.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/genres/modern-minimal.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/genres/modern-minimal.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/genres/playful.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/genres/playful.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/hero-enrichment.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/hero-enrichment.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/imagery-kit.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/imagery-kit.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/interaction-and-states.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/interaction-and-states.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/layout-and-space.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/layout-and-space.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/01-bento-grid.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/01-bento-grid.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/02-long-document.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/02-long-document.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/03-marquee-hero.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/03-marquee-hero.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/04-stat-led.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/04-stat-led.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/05-workbench.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/05-workbench.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/06-conversational-faq.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/06-conversational-faq.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/07-manifesto.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/07-manifesto.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/08-photographic.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/08-photographic.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/09-quote-led.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/09-quote-led.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/10-specimen.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/10-specimen.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/11-catalogue.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/11-catalogue.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/12-letter.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/12-letter.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/13-index-first.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/13-index-first.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/14-narrative-workflow.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/14-narrative-workflow.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/15-split-studio.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/15-split-studio.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/16-feature-stack.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/16-feature-stack.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/17-type-specimen.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/17-type-specimen.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/18-portfolio-grid.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/18-portfolio-grid.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/19-map-diagram.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/19-map-diagram.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/20-ecosystem-index.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/20-ecosystem-index.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/21-component-playground.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/macrostructures/21-component-playground.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/microinteractions.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/microinteractions.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/motion.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/motion.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/preview-examples.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/preview-examples.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/responsive.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/responsive.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/slop-test.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/slop-test.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/structure.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/structure.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/study.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/study.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/themes/carnival.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/themes/carnival.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/themes/cobalt.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/themes/cobalt.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/themes/grid.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/themes/grid.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/themes/hum.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/themes/hum.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/themes/lumen.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/themes/lumen.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/tokens.css",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/tokens.css"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/typography.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/typography.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/verbs/audit.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/verbs/audit.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/hallmark/references/verbs/redesign.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/hallmark/references/verbs/redesign.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/mcp-server-review/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/mcp-server-review/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/prompt-injection/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/prompt-injection/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/secure-code-review/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/secure-code-review/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/security-and-hardening/SKILL.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/security-and-hardening/SKILL.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/security-and-hardening/references/security-checklist.md",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/security-and-hardening/references/security-checklist.md"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/session-forensics/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/session-forensics/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/reusable_methods/threat-modeling/agents/openai.yaml",
+      "kind": "asset",
+      "path": "assets/agents/reusable_methods/threat-modeling/agents/openai.yaml"
+    },
+    {
+      "id": "asset:assets/agents/roots_constitution/constitution.md",
+      "kind": "asset",
+      "path": "assets/agents/roots_constitution/constitution.md"
+    },
+    {
+      "id": "asset:assets/agents/security_immune_system/boundary-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/security_immune_system/boundary-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/security_immune_system/boundary-policy.md",
+      "kind": "asset",
+      "path": "assets/agents/security_immune_system/boundary-policy.md"
+    },
+    {
+      "id": "asset:assets/agents/security_immune_system/project-adapter-contract.md",
+      "kind": "asset",
+      "path": "assets/agents/security_immune_system/project-adapter-contract.md"
+    },
+    {
+      "id": "asset:assets/agents/security_immune_system/signal-policy.json",
+      "kind": "asset",
+      "path": "assets/agents/security_immune_system/signal-policy.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/authority-lattice.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/authority-lattice.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/branches_workflows/debugging.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/branches_workflows/debugging.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/branches_workflows/delivery.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/branches_workflows/product-decision.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/branches_workflows/product-decision.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/capability-selection.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/capability-selection.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/conductor.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/context-packet.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/document-lifecycle.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/document-lifecycle.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/README.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/README.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/capability-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/capability-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/execution-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/execution-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/learning-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/learning-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/replay-result.example.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/replay-result.example.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/replay-result.schema.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/replay-result.schema.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/evaluation/route-fixtures.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/evaluation/route-fixtures.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/execution-allocation.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/execution-record-contract.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/horizontal-transfer_adoption.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/horizontal-transfer_adoption.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/method-selection.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/method-selection.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/model-policy.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/model-recommendations.json",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/model-recommendations.json"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/plan-authoring.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/plan-authoring.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/platform-tools/claude-tools.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/platform-tools/claude-tools.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/platform-tools/codex-tools.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/platform-tools/codex-tools.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/project-leaves.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/project-leaves.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/state-transition.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/state-transition.md"
+    },
+    {
+      "id": "asset:assets/agents/trunk_orchestration/task-loop.md",
+      "kind": "asset",
+      "path": "assets/agents/trunk_orchestration/task-loop.md"
+    },
+    {
+      "id": "asset:assets/agents/vascular-bundle_circulation/failure-signatures.json",
+      "kind": "asset",
+      "path": "assets/agents/vascular-bundle_circulation/failure-signatures.json"
+    },
+    {
+      "id": "asset:assets/agents/vascular-bundle_circulation/learning-ledger.jsonl",
+      "kind": "asset",
+      "path": "assets/agents/vascular-bundle_circulation/learning-ledger.jsonl"
+    },
+    {
+      "id": "asset:assets/agents/vascular-bundle_circulation/phloem-feedback.md",
+      "kind": "asset",
+      "path": "assets/agents/vascular-bundle_circulation/phloem-feedback.md"
+    },
+    {
+      "id": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/AGENTS.md"
+    },
+    {
+      "id": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/agents/critical-reviewer.toml"
+    },
+    {
+      "id": "asset:assets/runtime_entrypoint/agents/debugger.toml",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/agents/debugger.toml"
+    },
+    {
+      "id": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/agents/evidence-scout.toml"
+    },
+    {
+      "id": "asset:assets/runtime_entrypoint/agents/final-reviewer.toml",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/agents/final-reviewer.toml"
+    },
+    {
+      "id": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "kind": "asset",
+      "path": "assets/runtime_entrypoint/agents/implementation-worker.toml"
+    },
+    {
+      "id": "asset:docs/chohogi/audits/2026-09-03-functional-reality-gap.md",
+      "kind": "asset",
+      "path": "docs/chohogi/audits/2026-09-03-functional-reality-gap.md"
+    },
+    {
+      "id": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "kind": "asset",
+      "path": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "id": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "kind": "asset",
+      "path": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "id": "asset:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "kind": "asset",
+      "path": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "id": "asset:docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md",
+      "kind": "asset",
+      "path": "docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md"
+    },
+    {
+      "id": "asset:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "kind": "asset",
+      "path": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md"
+    },
+    {
+      "id": "asset:docs/chohogi/genome-map.graph.json",
+      "kind": "asset",
+      "path": "docs/chohogi/genome-map.graph.json"
+    },
+    {
+      "id": "asset:docs/chohogi/genome-map.md",
+      "kind": "asset",
+      "path": "docs/chohogi/genome-map.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-10-01-chohogi-rebuild.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-10-01-chohogi-rebuild.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md"
+    },
+    {
+      "id": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "kind": "asset",
+      "path": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
+    },
+    {
+      "id": "asset:docs/chohogi/specs/2026-09-03-execution-record.md",
+      "kind": "asset",
+      "path": "docs/chohogi/specs/2026-09-03-execution-record.md"
+    },
+    {
+      "id": "asset:docs/work-log/records/DBG-20260930-diagnosis-phase2/mutate.py",
+      "kind": "asset",
+      "path": "docs/work-log/records/DBG-20260930-diagnosis-phase2/mutate.py"
+    },
+    {
+      "id": "asset:manifest.json",
+      "kind": "asset",
+      "path": "manifest.json"
+    },
+    {
+      "id": "asset:skills",
+      "kind": "asset",
+      "path": "skills"
+    },
+    {
+      "id": "asset:tooling/adherence-replay.py",
+      "kind": "asset",
+      "path": "tooling/adherence-replay.py"
+    },
+    {
+      "id": "asset:tooling/classify-security-boundary.py",
+      "kind": "asset",
+      "path": "tooling/classify-security-boundary.py"
+    },
+    {
+      "id": "asset:tooling/codex-role-setup.py",
+      "kind": "asset",
+      "path": "tooling/codex-role-setup.py"
+    },
+    {
+      "id": "asset:tooling/execution-record.py",
+      "kind": "asset",
+      "path": "tooling/execution-record.py"
+    },
+    {
+      "id": "asset:tooling/genome_map.py",
+      "kind": "asset",
+      "path": "tooling/genome_map.py"
+    },
+    {
+      "id": "asset:tooling/manifest_registry.py",
+      "kind": "asset",
+      "path": "tooling/manifest_registry.py"
+    },
+    {
+      "id": "asset:tooling/model-catalog.py",
+      "kind": "asset",
+      "path": "tooling/model-catalog.py"
+    },
+    {
+      "id": "asset:tooling/model-policy.py",
+      "kind": "asset",
+      "path": "tooling/model-policy.py"
+    },
+    {
+      "id": "asset:tooling/run-security-gate.py",
+      "kind": "asset",
+      "path": "tooling/run-security-gate.py"
+    },
+    {
+      "id": "asset:tooling/scan-skill-intake.py",
+      "kind": "asset",
+      "path": "tooling/scan-skill-intake.py"
+    },
+    {
+      "id": "asset:tooling/semantic_contracts.py",
+      "kind": "asset",
+      "path": "tooling/semantic_contracts.py"
+    },
+    {
+      "id": "asset:tooling/summarize-replays.py",
+      "kind": "asset",
+      "path": "tooling/summarize-replays.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_adherence_replay.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_adherence_replay.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_codex_role_setup.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_codex_role_setup.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_execution_record.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_execution_record.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_external_capability_contract.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_external_capability_contract.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_functional_assurance.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_functional_assurance.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_genome_map.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_genome_map.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_learning_ledger.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_learning_ledger.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_manifest_registry.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_manifest_registry.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_model_catalog.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_model_catalog.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_model_policy.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_model_policy.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_posix_only.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_project_document_registry.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_project_document_registry.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_replay_scripts.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_replay_scripts.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_role_definitions.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_role_definitions.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_runtime_entrypoint.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_runtime_entrypoint.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_security_gate.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_security_gate.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_semantic_assurance.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_semantic_assurance.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_skills.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_skills.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_source_layout.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_source_layout.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_status_provenance.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_status_provenance.py"
+    },
+    {
+      "id": "asset:tooling/validate-replay-result.py",
+      "kind": "asset",
+      "path": "tooling/validate-replay-result.py"
+    },
+    {
+      "id": "asset:tooling/verify-capability-boundary.py",
+      "kind": "asset",
+      "path": "tooling/verify-capability-boundary.py"
+    },
+    {
+      "id": "asset:tooling/verify-execution-allocation.py",
+      "kind": "asset",
+      "path": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "id": "asset:tooling/verify-functional-assurance.py",
+      "kind": "asset",
+      "path": "tooling/verify-functional-assurance.py"
+    },
+    {
+      "id": "asset:tooling/verify-homeostasis-policy.py",
+      "kind": "asset",
+      "path": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "id": "asset:tooling/verify-learning-contract.py",
+      "kind": "asset",
+      "path": "tooling/verify-learning-contract.py"
+    },
+    {
+      "id": "asset:tooling/verify-model-policy.py",
+      "kind": "asset",
+      "path": "tooling/verify-model-policy.py"
+    },
+    {
+      "id": "asset:tooling/verify-provenance.py",
+      "kind": "asset",
+      "path": "tooling/verify-provenance.py"
+    },
+    {
+      "id": "asset:tooling/verify-replay-evaluation.py",
+      "kind": "asset",
+      "path": "tooling/verify-replay-evaluation.py"
+    },
+    {
+      "id": "asset:tooling/verify-routes.py",
+      "kind": "asset",
+      "path": "tooling/verify-routes.py"
+    },
+    {
+      "id": "asset:tooling/verify-runtime-entrypoint.py",
+      "kind": "asset",
+      "path": "tooling/verify-runtime-entrypoint.py"
+    },
+    {
+      "id": "asset:tooling/verify-security-boundary.py",
+      "kind": "asset",
+      "path": "tooling/verify-security-boundary.py"
+    },
+    {
+      "id": "asset:tooling/verify-skills.py",
+      "kind": "asset",
+      "path": "tooling/verify-skills.py"
+    },
+    {
+      "id": "asset:tooling/verify-source-layout.py",
+      "kind": "asset",
+      "path": "tooling/verify-source-layout.py"
+    },
+    {
+      "id": "component:chohogi-organs",
+      "kind": "component",
+      "path": "assets/agents",
+      "state": "active"
+    },
+    {
+      "id": "component:critical-reviewer-role",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "state": "active"
+    },
+    {
+      "id": "component:debugger-role",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/agents/debugger.toml",
+      "state": "active"
+    },
+    {
+      "id": "component:evidence-scout-role",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "state": "active"
+    },
+    {
+      "id": "component:execution-record-tool",
+      "kind": "component",
+      "path": "tooling/execution-record.py",
+      "state": "active"
+    },
+    {
+      "id": "component:final-reviewer-role",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/agents/final-reviewer.toml",
+      "state": "active"
+    },
+    {
+      "id": "component:frontend-surface",
+      "kind": "component",
+      "path": "assets/agents/genome_inheritance/retired_assets/frontend-surface.md",
+      "state": "retired"
+    },
+    {
+      "id": "component:global-guidance",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/AGENTS.md",
+      "state": "active"
+    },
+    {
+      "id": "component:grill-me",
+      "kind": "component",
+      "path": "assets/agents/genome_inheritance/retired_assets/grill-me",
+      "state": "retired"
+    },
+    {
+      "id": "component:implementation-worker-role",
+      "kind": "component",
+      "path": "assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "state": "active"
+    },
+    {
+      "id": "component:model-catalog-tool",
+      "kind": "component",
+      "path": "tooling/model-catalog.py",
+      "state": "active"
+    },
+    {
+      "id": "component:react-async-state-safety",
+      "kind": "component",
+      "path": "assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
+      "state": "retired"
+    },
+    {
+      "id": "component:reusable-methods",
+      "kind": "component",
+      "path": "skills",
+      "state": "active"
+    },
+    {
+      "id": "document:README.md",
+      "kind": "document",
+      "path": "README.md"
+    },
+    {
+      "id": "document:docs/chohogi/audits/2026-09-03-functional-reality-gap.md",
+      "kind": "document",
+      "path": "docs/chohogi/audits/2026-09-03-functional-reality-gap.md"
+    },
+    {
+      "id": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "kind": "document",
+      "path": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "id": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "kind": "document",
+      "path": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "id": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "kind": "document",
+      "path": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "id": "document:docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md",
+      "kind": "document",
+      "path": "docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md"
+    },
+    {
+      "id": "document:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "kind": "document",
+      "path": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-10-01-chohogi-rebuild.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-10-01-chohogi-rebuild.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md"
+    },
+    {
+      "id": "document:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "kind": "document",
+      "path": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
+    },
+    {
+      "id": "document:docs/chohogi/specs/2026-09-03-execution-record.md",
+      "kind": "document",
+      "path": "docs/chohogi/specs/2026-09-03-execution-record.md"
+    },
+    {
+      "id": "skill:accessibility",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/accessibility/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:agent-security-audit",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/agent-security-audit/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:core-web-vitals",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/core-web-vitals/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:dependency-scanning",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/dependency-scanning/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:hallmark",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/hallmark/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:mcp-server-review",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/mcp-server-review/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:performance",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/performance/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:prompt-injection",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/prompt-injection/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:secure-code-review",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/secure-code-review/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:security-and-hardening",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/security-and-hardening/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:session-forensics",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/session-forensics/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "skill:threat-modeling",
+      "kind": "skill",
+      "path": "assets/agents/reusable_methods/threat-modeling/SKILL.md",
+      "state": "active"
+    },
+    {
+      "id": "slot:agents",
+      "kind": "slot",
+      "path": "agents"
+    },
+    {
+      "id": "slot:hooks",
+      "kind": "slot",
+      "path": "hooks"
+    },
+    {
+      "id": "slot:policy",
+      "kind": "slot",
+      "path": "policy"
+    },
+    {
+      "id": "slot:skills",
+      "kind": "slot",
+      "path": "skills"
+    },
+    {
+      "id": "slot:tooling",
+      "kind": "slot",
+      "path": "tooling"
+    },
+    {
+      "id": "verifier:capability-boundary",
+      "kind": "verifier",
+      "path": "tooling/verify-capability-boundary.py"
+    },
+    {
+      "id": "verifier:document-lifecycle",
+      "kind": "verifier",
+      "path": "tooling/verify-document-lifecycle.py"
+    },
+    {
+      "id": "verifier:execution-allocation",
+      "kind": "verifier",
+      "path": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "id": "verifier:external-capability-contract",
+      "kind": "verifier",
+      "path": "tooling/verify-external-capability-contract.py"
+    },
+    {
+      "id": "verifier:functional-assurance",
+      "kind": "verifier",
+      "path": "tooling/verify-functional-assurance.py"
+    },
+    {
+      "id": "verifier:homeostasis-policy",
+      "kind": "verifier",
+      "path": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "id": "verifier:learning-contract",
+      "kind": "verifier",
+      "path": "tooling/verify-learning-contract.py"
+    },
+    {
+      "id": "verifier:model-policy",
+      "kind": "verifier",
+      "path": "tooling/verify-model-policy.py"
+    },
+    {
+      "id": "verifier:project-document-registry",
+      "kind": "verifier",
+      "path": "tooling/verify-project-document-registry.py"
+    },
+    {
+      "id": "verifier:provenance",
+      "kind": "verifier",
+      "path": "tooling/verify-provenance.py"
+    },
+    {
+      "id": "verifier:replay-evaluation",
+      "kind": "verifier",
+      "path": "tooling/verify-replay-evaluation.py"
+    },
+    {
+      "id": "verifier:retired-capability",
+      "kind": "verifier",
+      "path": "tooling/verify-retired-capability.py"
+    },
+    {
+      "id": "verifier:routes",
+      "kind": "verifier",
+      "path": "tooling/verify-routes.py"
+    },
+    {
+      "id": "verifier:runtime-entrypoint",
+      "kind": "verifier",
+      "path": "tooling/verify-runtime-entrypoint.py"
+    },
+    {
+      "id": "verifier:security-boundary",
+      "kind": "verifier",
+      "path": "tooling/verify-security-boundary.py"
+    },
+    {
+      "id": "verifier:semantic-assurance",
+      "kind": "verifier",
+      "path": "tooling/verify-semantic-assurance.py"
+    },
+    {
+      "id": "verifier:skills",
+      "kind": "verifier",
+      "path": "tooling/verify-skills.py"
+    },
+    {
+      "id": "verifier:source-layout",
+      "kind": "verifier",
+      "path": "tooling/verify-source-layout.py"
+    },
+    {
+      "id": "verifier:status-provenance",
+      "kind": "verifier",
+      "path": "tooling/verify-status-provenance.py"
+    }
+  ],
+  "edges": [
+    {
+      "source": "asset:.claude-plugin/marketplace.json",
+      "target": "asset:manifest.json",
+      "relation": "requires",
+      "evidence": ".claude-plugin/marketplace.json"
+    },
+    {
+      "source": "asset:.claude-plugin/plugin.json",
+      "target": "asset:manifest.json",
+      "relation": "requires",
+      "evidence": ".claude-plugin/plugin.json"
+    },
+    {
+      "source": "asset:.codex-plugin/plugin.json",
+      "target": "asset:manifest.json",
+      "relation": "requires",
+      "evidence": ".codex-plugin/plugin.json"
+    },
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/agents/reusable_methods/security-and-hardening/SKILL.md",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/agents/debugger.toml",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/agents/final-reviewer.toml",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:README.md",
+      "target": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "relation": "requires",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/agents",
+      "target": "component:chohogi-organs",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/adaptive-regulation/learning/SKILL.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/functional_assurance/semantic-contract-registry.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/genome_inheritance/index_registry.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/security_immune_system/boundary-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/document-lifecycle.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/capability-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/learning-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/route-fixtures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/model-recommendations.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/plan-authoring.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/project-leaves.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/trunk_orchestration/task-loop.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/vascular-bundle_circulation/failure-signatures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/vascular-bundle_circulation/learning-ledger.jsonl",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
+      "target": "component:react-async-state-safety",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/genome_inheritance/retired_assets/frontend-surface.md",
+      "target": "component:frontend-surface",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/genome_inheritance/retired_assets/grill-me",
+      "target": "component:grill-me",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/agents/reusable_methods/security-and-hardening/SKILL.md",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/agents/roots_constitution/constitution.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "assets/agents/roots_constitution/constitution.md"
+    },
+    {
+      "source": "asset:assets/agents/roots_constitution/constitution.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/debugging.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/debugging.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/branches_workflows/product-decision.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "target": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "target": "document:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/evaluation/README.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/evaluation/replay-result.schema.json",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "target": "asset:assets/agents/vascular-bundle_circulation/failure-signatures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/trunk_orchestration/execution-record-contract.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/platform-tools/codex-tools.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "assets/agents/trunk_orchestration/platform-tools/codex-tools.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/state-transition.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "component:global-guidance",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "target": "document:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "target": "component:critical-reviewer-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/debugger.toml",
+      "target": "component:debugger-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/debugger.toml",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "target": "component:evidence-scout-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/final-reviewer.toml",
+      "target": "component:final-reviewer-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/final-reviewer.toml",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "target": "component:implementation-worker-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-03-functional-reality-gap.md",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "target": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "target": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/roots_constitution/constitution.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/README.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/replay-result.schema.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "target": "document:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "target": "document:docs/chohogi/plans/2026-10-01-chohogi-rebuild.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-10-01-chohogi-rebuild.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "target": "document:docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md",
+      "target": "document:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/feedback/sazu-project-plan-audit-20260922.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "target": "document:docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-28-sazu-source-first-divergence.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/sazu-project-plan-audit-20260922.md",
+      "target": "document:docs/chohogi/plans/2026-09-23-observability-closure.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
+      "source": "asset:docs/chohogi/genome-map.graph.json",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:docs/chohogi/genome-map.graph.json",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/genome-map.md",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:docs/chohogi/genome-map.md",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/product-decision.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/debugging.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "target": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/debugging.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-record-fixtures.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/agents/trunk_orchestration/state-transition.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
+    },
+    {
+      "source": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:docs/chohogi/specs/2026-09-03-execution-record.md",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:docs/work-log/records/DBG-20260930-diagnosis-phase2/mutate.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/agents/genome_inheritance/candidates/react-async-state-safety.md",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/agents/genome_inheritance/retired_assets/frontend-surface.md",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/agents/critical-reviewer.toml",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/agents/debugger.toml",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/agents/evidence-scout.toml",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/agents/final-reviewer.toml",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "asset:assets/runtime_entrypoint/agents/implementation-worker.toml",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:chohogi-organs",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:critical-reviewer-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:debugger-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:evidence-scout-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:execution-record-tool",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:final-reviewer-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:frontend-surface",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:global-guidance",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:grill-me",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:implementation-worker-role",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:model-catalog-tool",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:react-async-state-safety",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
+      "target": "component:reusable-methods",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:skills",
+      "target": "component:reusable-methods",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:tooling/adherence-replay.py",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/adherence-scenarios.json",
+      "relation": "requires",
+      "evidence": "tooling/adherence-replay.py"
+    },
+    {
+      "source": "asset:tooling/adherence-replay.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:tooling/classify-security-boundary.py",
+      "target": "asset:assets/agents/security_immune_system/signal-policy.json",
+      "relation": "requires",
+      "evidence": "tooling/classify-security-boundary.py"
+    },
+    {
+      "source": "asset:tooling/codex-role-setup.py",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:tooling/codex-role-setup.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "relation": "requires",
+      "evidence": "tooling/execution-record.py"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "component:execution-record-tool",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/execution-record.py",
+      "target": "document:docs/chohogi/specs/2026-09-03-execution-record.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/specs/2026-09-03-execution-record.md"
+    },
+    {
+      "source": "asset:tooling/genome_map.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/genome_map.py"
+    },
+    {
+      "source": "asset:tooling/genome_map.py",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:tooling/genome_map.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/manifest_registry.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/model-catalog.py",
+      "target": "component:model-catalog-tool",
+      "relation": "activates",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:tooling/model-catalog.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "governed-by",
+      "evidence": "tooling/genome_map.py: model-policy dependencies"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-recommendations.json",
+      "relation": "requires",
+      "evidence": "tooling/model-policy.py"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "asset:tooling/tests/test_model_policy.py",
+      "relation": "verified-by",
+      "evidence": "tooling/genome_map.py: model-policy dependencies"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/model-policy.py",
+      "target": "verifier:model-policy",
+      "relation": "verified-by",
+      "evidence": "tooling/genome_map.py: model-policy dependencies"
+    },
+    {
+      "source": "asset:tooling/semantic_contracts.py",
+      "target": "document:docs/chohogi/feedback/chohogi-harness-comparison.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/chohogi-harness-comparison.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_execution_record.py",
+      "target": "document:docs/chohogi/audits/2026-09-03-functional-reality-gap.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/audits/2026-09-03-functional-reality-gap.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_execution_record.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_execution_record.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_execution_record.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_functional_assurance.py",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_functional_assurance.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_functional_assurance.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_functional_assurance.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_functional_assurance.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_genome_map.py",
+      "target": "asset:assets/agents/reusable_methods/security-and-hardening/SKILL.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_genome_map.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_genome_map.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_genome_map.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_genome_map.py",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_genome_map.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_genome_map.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_model_policy.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-recommendations.json",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_model_policy.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_model_policy.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_posix_only.py",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_posix_only.py",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/references/skill-lifecycle.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_posix_only.py",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/README.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_posix_only.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_role_definitions.py",
+      "target": "asset:assets/agents/trunk_orchestration/model-recommendations.json",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_role_definitions.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_role_definitions.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:tooling/tests/test_runtime_entrypoint.py",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_runtime_entrypoint.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_security_gate.py",
+      "target": "asset:assets/agents/security_immune_system/boundary-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_security_gate.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_semantic_assurance.py",
+      "target": "asset:assets/agents/functional_assurance/semantic-contract-registry.json",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_semantic_assurance.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_source_layout.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:tooling/verify-capability-boundary.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-execution-allocation.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-functional-assurance.py",
+      "target": "document:docs/chohogi/plans/2026-09-03-execution-state-gate.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-03-execution-state-gate.md"
+    },
+    {
+      "source": "asset:tooling/verify-functional-assurance.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/verify-homeostasis-policy.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-learning-contract.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-model-policy.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "asset:tooling/verify-provenance.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-replay-evaluation.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-routes.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-runtime-entrypoint.py",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:tooling/verify-security-boundary.py",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "asset:tooling/verify-skills.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-source-layout.py",
+      "target": "document:docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-08-11-layout-v2-horizontal-inheritance.md"
+    },
+    {
+      "source": "asset:tooling/verify-source-layout.py",
+      "target": "document:docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-09-14-programmatic-harness-execution.md"
+    },
+    {
+      "source": "component:chohogi-organs",
+      "target": "slot:policy",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:critical-reviewer-role",
+      "target": "slot:agents",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:debugger-role",
+      "target": "slot:agents",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:evidence-scout-role",
+      "target": "slot:agents",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:execution-record-tool",
+      "target": "slot:tooling",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:final-reviewer-role",
+      "target": "slot:agents",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:global-guidance",
+      "target": "slot:hooks",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:implementation-worker-role",
+      "target": "slot:agents",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:model-catalog-tool",
+      "target": "slot:tooling",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "component:reusable-methods",
+      "target": "slot:skills",
+      "relation": "exposes",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "skill:accessibility",
+      "target": "asset:assets/agents/reusable_methods/accessibility/references/A11Y-PATTERNS.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/accessibility/SKILL.md"
+    },
+    {
+      "source": "skill:accessibility",
+      "target": "asset:assets/agents/reusable_methods/accessibility/references/WCAG.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/accessibility/SKILL.md"
+    },
+    {
+      "source": "skill:accessibility",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:accessibility",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:agent-security-audit",
+      "target": "asset:assets/agents/reusable_methods/agent-security-audit/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/agent-security-audit/SKILL.md"
+    },
+    {
+      "source": "skill:agent-security-audit",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:agent-security-audit",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:core-web-vitals",
+      "target": "asset:assets/agents/reusable_methods/core-web-vitals/references/LCP.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/core-web-vitals/SKILL.md"
+    },
+    {
+      "source": "skill:core-web-vitals",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:core-web-vitals",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:dependency-scanning",
+      "target": "asset:assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/dependency-scanning/SKILL.md"
+    },
+    {
+      "source": "skill:dependency-scanning",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:dependency-scanning",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/LICENSE",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/anti-patterns.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/assets.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/color.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/component-cookbook.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/c1-outlined-chip.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/c2-inline-form-as-cta.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/c3-typographic-link.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/c4-sticky-bottom-bar.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f1-bento-grid.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f2-sticky-scroll-stack.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f3-tabular-spec-sheet.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f4-step-sequence.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f5-annotated-screenshot.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/f6-product-card-grid.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft1-mast-headed.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft2-inline-rule-single-line.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft3-index-style-category-list.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft4-dense-typographic.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft5-statement.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft6-letter-close.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft7-newsletter-first.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/ft8-marquee-scroll.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h1-marquee.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h2-split-diptych.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h3-quote-led.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h4-stat-led.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h5-letter-hero.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h6-photographic-fold.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h7-demo-video-clipped-by-viewport-edge.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h8-mockup-split-browser-framed.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/h9-custom-illustration-centerpiece.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n1-wordmark-2-links.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n10-floating-on-scroll-morph.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n11-mega-menu.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n12-banner-retract.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n13-inline-cmdk-pill.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n1b-saas-three-section.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n2-floating-chip.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n3-side-rail.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n4-hidden-behind-k.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n5-floating-pill.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n6-newspaper-masthead.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n7-brutal-slab.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n8-terminal-command.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/n9-edge-aligned-minimal.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/s1-left-margin-numbered.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/s2-hanging.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/s3-sticky-pinned.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/s4-inline-no-break.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/s5-bottom-anchored.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/t1-pull-quote-with-marginalia.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/t2-logo-wall-hairline.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/t3-single-huge-quote.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/components/t4-numbered-stat-strip.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/contract.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/copy.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/custom-craft.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/custom-theme.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/design-md.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/export-formats.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/floating-nav.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/genres/atmospheric.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/genres/editorial.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/genres/modern-minimal.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/genres/playful.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/hero-enrichment.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/imagery-kit.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/interaction-and-states.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/layout-and-space.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/01-bento-grid.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/02-long-document.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/03-marquee-hero.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/04-stat-led.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/05-workbench.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/06-conversational-faq.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/07-manifesto.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/08-photographic.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/09-quote-led.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/10-specimen.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/11-catalogue.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/12-letter.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/13-index-first.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/14-narrative-workflow.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/15-split-studio.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/16-feature-stack.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/17-type-specimen.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/18-portfolio-grid.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/19-map-diagram.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/20-ecosystem-index.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/macrostructures/21-component-playground.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/microinteractions.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/motion.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/preview-examples.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/responsive.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/slop-test.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/structure.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/study.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/themes/carnival.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/themes/cobalt.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/themes/grid.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/themes/hum.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/themes/lumen.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/tokens.css",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/typography.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/verbs/audit.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "asset:assets/agents/reusable_methods/hallmark/references/verbs/redesign.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/hallmark/SKILL.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "document:docs/chohogi/plans/2026-10-01-chohogi-rebuild.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-10-01-chohogi-rebuild.md"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:mcp-server-review",
+      "target": "asset:assets/agents/reusable_methods/mcp-server-review/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/mcp-server-review/SKILL.md"
+    },
+    {
+      "source": "skill:mcp-server-review",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:mcp-server-review",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:performance",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:performance",
+      "target": "document:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md"
+    },
+    {
+      "source": "skill:performance",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:prompt-injection",
+      "target": "asset:assets/agents/reusable_methods/prompt-injection/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/prompt-injection/SKILL.md"
+    },
+    {
+      "source": "skill:prompt-injection",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:prompt-injection",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:secure-code-review",
+      "target": "asset:assets/agents/reusable_methods/secure-code-review/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/secure-code-review/SKILL.md"
+    },
+    {
+      "source": "skill:secure-code-review",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:secure-code-review",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:security-and-hardening",
+      "target": "asset:assets/agents/reusable_methods/security-and-hardening/references/security-checklist.md",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/security-and-hardening/SKILL.md"
+    },
+    {
+      "source": "skill:security-and-hardening",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "README.md"
+    },
+    {
+      "source": "skill:security-and-hardening",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:security-and-hardening",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:session-forensics",
+      "target": "asset:assets/agents/reusable_methods/session-forensics/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/session-forensics/SKILL.md"
+    },
+    {
+      "source": "skill:session-forensics",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:session-forensics",
+      "target": "document:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "skill:session-forensics",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "skill:threat-modeling",
+      "target": "asset:assets/agents/reusable_methods/threat-modeling/agents/openai.yaml",
+      "relation": "requires",
+      "evidence": "assets/agents/reusable_methods/threat-modeling/SKILL.md"
+    },
+    {
+      "source": "skill:threat-modeling",
+      "target": "document:README.md",
+      "relation": "documents",
+      "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:threat-modeling",
+      "target": "verifier:provenance",
+      "relation": "verifies",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "verifier:capability-boundary",
+      "target": "asset:assets/agents/trunk_orchestration/capability-selection.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-capability-boundary.py"
+    },
+    {
+      "source": "verifier:capability-boundary",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/capability-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-capability-boundary.py"
+    },
+    {
+      "source": "verifier:document-lifecycle",
+      "target": "asset:assets/agents/trunk_orchestration/document-lifecycle.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-document-lifecycle.py"
+    },
+    {
+      "source": "verifier:document-lifecycle",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/document-lifecycle-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-document-lifecycle.py"
+    },
+    {
+      "source": "verifier:execution-allocation",
+      "target": "asset:assets/agents/trunk_orchestration/context-packet.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "source": "verifier:execution-allocation",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/execution-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "source": "verifier:execution-allocation",
+      "target": "asset:assets/agents/trunk_orchestration/execution-allocation.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "source": "verifier:execution-allocation",
+      "target": "asset:assets/agents/trunk_orchestration/method-selection.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-execution-allocation.py"
+    },
+    {
+      "source": "verifier:functional-assurance",
+      "target": "asset:assets/agents/functional_assurance/registry.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-functional-assurance.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/SKILL.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/adaptive-regulation/homeostasis/references/admission-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/evaluation-budget-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/homeostasis-admission-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:homeostasis-policy",
+      "target": "asset:assets/agents/trunk_orchestration/state-transition.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-homeostasis-policy.py"
+    },
+    {
+      "source": "verifier:learning-contract",
+      "target": "asset:assets/agents/adaptive-regulation/learning/SKILL.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:learning-contract",
+      "target": "asset:assets/agents/adaptive-regulation/learning/references/learning-record.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:learning-contract",
+      "target": "asset:assets/agents/genome_inheritance/index_registry.yaml",
+      "relation": "requires",
+      "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:learning-contract",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/learning-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:learning-contract",
+      "target": "asset:assets/agents/vascular-bundle_circulation/phloem-feedback.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-learning-contract.py"
+    },
+    {
+      "source": "verifier:model-policy",
+      "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-model-policy.py"
+    },
+    {
+      "source": "verifier:model-policy",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-model-policy.py"
+    },
+    {
+      "source": "verifier:provenance",
+      "target": "asset:assets/agents/genome_inheritance/xylem_provenance/provenance.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-provenance.py"
+    },
+    {
+      "source": "verifier:routes",
+      "target": "asset:assets/agents/trunk_orchestration/conductor.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-routes.py"
+    },
+    {
+      "source": "verifier:routes",
+      "target": "asset:assets/agents/trunk_orchestration/evaluation/route-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-routes.py"
+    },
+    {
+      "source": "verifier:routes",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-routes.py"
+    },
+    {
+      "source": "verifier:runtime-entrypoint",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-runtime-entrypoint.py"
+    },
+    {
+      "source": "verifier:security-boundary",
+      "target": "asset:assets/agents/security_immune_system/boundary-fixtures.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-security-boundary.py"
+    },
+    {
+      "source": "verifier:security-boundary",
+      "target": "asset:assets/agents/security_immune_system/boundary-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-security-boundary.py"
+    },
+    {
+      "source": "verifier:security-boundary",
+      "target": "asset:assets/agents/security_immune_system/project-adapter-contract.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-security-boundary.py"
+    },
+    {
+      "source": "verifier:security-boundary",
+      "target": "asset:assets/agents/trunk_orchestration/branches_workflows/delivery.md",
+      "relation": "requires",
+      "evidence": "tooling/verify-security-boundary.py"
+    },
+    {
+      "source": "verifier:semantic-assurance",
+      "target": "asset:assets/agents/functional_assurance/semantic-contract-registry.json",
+      "relation": "requires",
+      "evidence": "tooling/verify-semantic-assurance.py"
+    }
+  ]
+}

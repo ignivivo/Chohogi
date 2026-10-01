@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "objective": "Repair two confirmed integrity defects from DBG-20260930-integrity-audit: stale single-active-plan ownership forced by the registry verifier, and Claude model card/profile/recommendations using Agent-tool aliases as the model catalog.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": [
+    "recommend and save Claude role model placement first",
+    "fix both confirmed defects"
+  ],
+  "excluded": [
+    "Codex role registration in private config.toml",
+    "raw prompts or private reasoning in records"
+  ],
+  "requestedItems": [
+    {
+      "id": "claude-profile",
+      "description": "Recommend Claude role models with exact ids, get the user's choice, save hosts.claude in the project profile and validate it."
+    },
+    {
+      "id": "model-card",
+      "description": "Claude card/recommendations use exact model ids, show catalog status unknown with user-reported picker as source, and state the alias delivery mapping (alias = latest of family)."
+    },
+    {
+      "id": "active-plan",
+      "description": "Registry and verifier allow zero active plans and reject an active plan whose owning record is finalized; registry updated to the true state."
+    },
+    {
+      "id": "verify",
+      "description": "Tests written first; all Chohogi verifiers and unittests pass."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "verified",
+      "description": "All Chohogi verifiers and the unittest suite pass after changes."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "workId": "HOM-20260930-codex-role-install-live",
+  "baseline": "542eb43de489af45dcc8ffce85c967559123b0f70cdffa1a1f53bbee76828f5f",
+  "contract": {
+    "schemaVersion": 1,
+    "objective": "Determine why the five Chohogi Codex roles were absent from ~/.codex/config.toml, classify whether that absence is an installation defect, register them under the user's explicit authorization, and verify discovery and real role delegation in fresh Codex sessions.",
+    "route": "homeostasis",
+    "execution": "direct",
+    "feedbackRegistry": ".agents/chohogi-document-registry.json",
+    "requested": [
+      "report the causal reason for absent Codex role registration",
+      "decide whether the current install path is defective",
+      "register all five canonical role TOMLs in ~/.codex/config.toml",
+      "run paid live Codex verification using gpt-5.6-luna"
+    ],
+    "excluded": [
+      "reading credentials or unrelated personal configuration",
+      "changing model profile placements",
+      "claiming plugin installation alone registers roles before a fresh-session test proves it"
+    ],
+    "requestedItems": [
+      {
+        "id": "cause",
+        "description": "Trace the role-introduction decision, current plugin schema, installer behavior, and documentation boundary."
+      },
+      {
+        "id": "registration",
+        "description": "Add the five [agents.<role>] config_file entries that reference canonical repository TOMLs."
+      },
+      {
+        "id": "live-discovery",
+        "description": "Validate TOML parsing and fresh Codex discovery without a run-only -c role override."
+      },
+      {
+        "id": "live-delegation",
+        "description": "Run real gpt-5.6-luna adherence scenarios and record role-spawn evidence."
+      },
+      {
+        "id": "repair-decision",
+        "description": "State the smallest durable source repair needed if native Codex plugin installation cannot register roles."
+      }
+    ],
+    "acceptance": [
+      {
+        "id": "five-registered",
+        "description": "All five canonical roles are present in ~/.codex/config.toml and the file parses as TOML."
+      },
+      {
+        "id": "fresh-session",
+        "description": "Fresh Codex evidence shows role discovery/delegation with no --codex-role-config override."
+      },
+      {
+        "id": "honest-classification",
+        "description": "The report distinguishes native Codex limits from Chohogi's installer/discovery failure."
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "acceptanceId": "fresh-session",
+      "kind": "live-replay-result",
+      "path": "/tmp/chohogi-live-codex-pe6ZIa/review-delegates-on-session-model.codex.chohogi.1.result.json",
+      "sha256": "8edd6d706b6bcef8efcc9173b1f71fa5a1b8f1e91037042b938fd77e2f0ed026",
+      "status": "pass"
+    }
+  ],
+  "checkpoints": []
+}

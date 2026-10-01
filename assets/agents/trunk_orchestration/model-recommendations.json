@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-09-30",
+  "purpose": "Starting recommendations shown on the Model Session Policy card before the user has saved a profile. They are not applied automatically: until the user answers, every role inherits the session model.",
+  "basis": "execution-allocation.md tier rule (mechanical work lowest fitting tier, prose implementers and reviewers at least mid tier, design judgment and final whole-change review highest tier) and model-policy.md evidence notes (Codex: GPT-6 Luna/medium as the cost-first start, Sol for complex judgment, Astra only by user choice).",
+  "hosts": {
+    "claude": {
+      "optionsSource": "exact model ids from the claude-api reference (cached 2026-09-25) and the user-reported Claude Code model picker (2026-09-30); per-role model and effort are delivered by plugin role file frontmatter (verified by a live probe on Claude Code 2.1.284)",
+      "roleAgent": {"scout": "evidence-scout", "implementer": "implementation-worker", "task-reviewer": "critical-reviewer", "final-reviewer": "final-reviewer", "debugger": "debugger"},
+      "catalog": {"status": "unknown", "reason": "Claude Code exposes no model-listing command; confirm against the model picker and record a mismatch as a user-reported correction"},
+      "deliveryAlias": {"claude-haiku-4-5": "haiku", "claude-sonnet-5-5": "sonnet", "claude-opus-5-5": "opus", "claude-fable-5-1": "fable"},
+      "deliveryNote": "The Agent tool model argument takes only a family alias, and an alias runs the latest model of that family (Claude Code 2.1.284 --model help). A model without an entry here cannot be delivered per role; re-check this map when a new model is released.",
+      "roles": {
+        "scout": {"model": "claude-haiku-4-5", "effort": "not-supported", "why": "bounded read-only collection; user-chosen cost-down below the mid tier floor; Haiku takes no effort"},
+        "implementer": {"model": "claude-sonnet-5-5", "effort": "medium", "why": "plan-driven implementation; medium is the reference starting point for agentic coding"},
+        "task-reviewer": {"model": "claude-sonnet-5-5", "effort": "high", "why": "task-scoped review; raise the model for security or payment scope"},
+        "final-reviewer": {"model": "claude-opus-5-5", "effort": "high", "why": "whole-change judgment; claude-fable-5-1 only by user choice"},
+        "debugger": {"model": "claude-opus-5-5", "effort": "high", "why": "unknown-cause investigation; judgment heavy"}
+      }
+    },
+    "codex": {
+      "optionsSource": "tooling/model-catalog.py codex",
+      "roles": {
+        "scout": {"model": "gpt-6-luna", "effort": "low", "why": "bounded read-only evidence collection"},
+        "implementer": {"model": "gpt-6-luna", "effort": "medium", "why": "cost-first start for ordinary implementation"},
+        "task-reviewer": {"model": "gpt-6-luna", "effort": "medium", "why": "task-scoped review; raise effort for security or payment scope"},
+        "final-reviewer": {"model": "gpt-6-sol", "effort": "medium", "why": "whole-change judgment; Sol is the step up from Luna"},
+        "debugger": {"model": "gpt-6-sol", "effort": "medium", "why": "unknown-cause investigation; judgment heavy"}
+      }
+    }
+  }
+}

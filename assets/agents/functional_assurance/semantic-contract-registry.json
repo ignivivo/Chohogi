@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Every active declarative asset is parsed by a strict canonical interpreter before its specialized verifier relies on its meaning.",
+  "contracts": [
+    {
+      "id": "active-skill-frontmatter",
+      "format": "yaml-frontmatter",
+      "roots": [
+        "assets/agents/reusable_methods",
+        "assets/agents/adaptive-regulation"
+      ],
+      "required": ["name", "description", "metadata.chohogi_assurance"],
+      "forbidden": ["duplicate keys at any mapping depth", "ambiguous frontmatter"]
+    },
+    {
+      "id": "active-json-declarations",
+      "format": "json",
+      "roots": ["manifest.json", "assets"],
+      "extensions": [".json"],
+      "required": ["unambiguous JSON object or array"],
+      "forbidden": ["duplicate keys at any object depth"]
+    },
+    {
+      "id": "active-yaml-declarations",
+      "format": "yaml",
+      "roots": ["assets"],
+      "extensions": [".yaml", ".yml"],
+      "required": ["unambiguous YAML document"],
+      "forbidden": ["duplicate keys at any mapping depth"]
+    }
+  ],
+  "limits": "Strict declaration parsing proves only unambiguous interpretation. Specialized schema, behavior, runtime, provider, and fresh-session evidence remain separate obligations."
+}

@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "root=\"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT}}\"; echo \"<!-- chohogi:plugin-root=$root -->\"; echo \"초호기 플러그인 루트: $root (tooling/*.py, .claude-plugin/, .codex-plugin/ 모두 이 경로 기준)\"; echo; sed \"s|~/.agents/chohogi|$root/assets/agents|g\" \"$root/assets/runtime_entrypoint/AGENTS.md\""
+          }
+        ]
+      }
+    ]
+  }
+}

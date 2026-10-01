@@ -1,0 +1,4 @@
+interface:
+  display_name: "Threat Modeling"
+  short_description: "Map threats before risky changes"
+  default_prompt: "Use $threat-modeling to create a STRIDE threat model for this design."

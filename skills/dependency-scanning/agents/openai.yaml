@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dependency Scanning"
+  short_description: "Assess dependency risk and evidence"
+  default_prompt: "Use $dependency-scanning to review this dependency change and its scan evidence."

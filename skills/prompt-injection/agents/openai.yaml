@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prompt Injection Review"
+  short_description: "Assess LLM and agent boundaries"
+  default_prompt: "Use $prompt-injection to assess this agent feature for injection risks."
