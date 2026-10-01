@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -16,8 +17,102 @@ TOOL = ROOT / "tooling/execution-record.py"
 
 
 class ExecutionRecordTests(unittest.TestCase):
+    def setUp(self) -> None:
+        # Every test gets its own learning home so no test touches the real failure ledger.
+        self._learning = tempfile.TemporaryDirectory()
+        self.learning_home = Path(self._learning.name)
+        (self.learning_home / "failure-signatures.json").write_text(json.dumps({"schemaVersion": 1, "signatures": [
+            {"id": "sig-a", "description": "first test signature"},
+            {"id": "sig-b", "description": "second test signature"}]}), encoding="utf-8")
+
+    def tearDown(self) -> None:
+        self._learning.cleanup()
+
     def invoke(self, project: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
-        return subprocess.run([sys.executable, str(TOOL), "--project", str(project), *arguments], text=True, capture_output=True, check=False)
+        env = {**os.environ, "CHOHOGI_LEARNING_HOME": str(self.learning_home)}
+        return subprocess.run([sys.executable, str(TOOL), "--project", str(project), *arguments], text=True, capture_output=True, check=False, env=env)
+
+    def assess(self, project: Path, signature: str = "sig-a", destination: str = "project-record", guard: str | None = None, work_id: str = "sample") -> subprocess.CompletedProcess[str]:
+        arguments = ["learning-assessment", "--work-id", work_id, "--signature", signature, "--destination", destination,
+                     "--cause", "confirmed cause", "--prevention", "guard", "--trigger", "when it recurs",
+                     "--non-trigger", "ordinary work", "--verification", "test", "--applicability", "project"]
+        if guard is not None:
+            arguments += ["--guard", guard]
+        return self.invoke(project, *arguments)
+
+    def test_homeostasis_record_requires_an_assessment_by_default(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            self.begin(project, {"schemaVersion": 1, "route": "homeostasis"})
+            result = self.invoke(project, "finalize", "--work-id", "sample")
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn('"missingLearningAssessment": true', result.stdout)
+
+    def test_opting_out_of_learning_needs_a_reason(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            path = project / "c.json"
+            path.write_text(json.dumps({"schemaVersion": 1, "route": "debugging", "learningRequired": False}), encoding="utf-8")
+            refused = self.invoke(project, "begin", "--work-id", "sample", "--contract", str(path))
+            self.assertNotEqual(refused.returncode, 0)
+            self.assertIn("learningOptOut", refused.stderr)
+            self.begin(project, {"schemaVersion": 1, "route": "debugging", "learningRequired": False,
+                                 "learningOptOut": "read-only investigation with no change"})
+            self.assertEqual(self.invoke(project, "finalize", "--work-id", "sample").returncode, 0)
+
+    def test_a_correction_fact_makes_an_assessment_required(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            self.begin(project, {"schemaVersion": 1, "route": "delivery"})
+            self.assertEqual(self.invoke(project, "finalize", "--work-id", "sample").returncode, 0)
+            self.invoke(project, "fact", "--work-id", "sample", "--kind", "user-correction", "--summary", "user said the claim was wrong")
+            result = self.invoke(project, "finalize", "--work-id", "sample")
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn('"missingLearningAssessment": true', result.stdout)
+
+    def test_assessment_needs_a_registered_signature(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            self.begin(project, {"schemaVersion": 1, "route": "homeostasis"})
+            result = self.assess(project, signature="unknown-kind")
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("sig-a", result.stderr)
+
+    def test_a_recurring_signature_cannot_close_without_an_existing_guard(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            self.begin(project, {"schemaVersion": 1, "route": "homeostasis"})
+            self.assertEqual(self.assess(project, signature="sig-a").returncode, 0)
+            second = project / "contract-two.json"
+            second.write_text(json.dumps({"schemaVersion": 1, "route": "homeostasis"}), encoding="utf-8")
+            self.assertEqual(self.invoke(project, "begin", "--work-id", "other", "--contract", str(second)).returncode, 0)
+            closed = self.assess(project, signature="sig-a", destination="closed-no-learning", work_id="other")
+            self.assertNotEqual(closed.returncode, 0)
+            self.assertIn("recurring", closed.stderr)
+            missing_guard = self.assess(project, signature="sig-a", guard=str(project / "absent_test.py"), work_id="other")
+            self.assertNotEqual(missing_guard.returncode, 0)
+            guard = project / "test_guard.py"
+            guard.write_text("# guard\n", encoding="utf-8")
+            self.assertEqual(self.assess(project, signature="sig-a", guard=str(guard), work_id="other").returncode, 0)
+            self.assertEqual(self.invoke(project, "finalize", "--work-id", "other").returncode, 0)
+
+    def test_learning_scan_reports_recurrence_and_guards(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            self.begin(project, {"schemaVersion": 1, "route": "homeostasis"})
+            self.assess(project, signature="sig-a")
+            second = project / "contract-two.json"
+            second.write_text(json.dumps({"schemaVersion": 1, "route": "homeostasis"}), encoding="utf-8")
+            self.invoke(project, "begin", "--work-id", "other", "--contract", str(second))
+            guard = project / "test_guard.py"
+            guard.write_text("# guard\n", encoding="utf-8")
+            self.assess(project, signature="sig-a", guard=str(guard), work_id="other")
+            report = json.loads(self.invoke(project, "learning-scan").stdout)
+        by_id = {item["signature"]: item for item in report["signatures"]}
+        self.assertEqual(by_id["sig-a"]["occurrences"], 2)
+        self.assertTrue(by_id["sig-a"]["recurring"])
+        self.assertEqual(by_id["sig-b"]["occurrences"], 0)
+        self.assertIn(str(guard), by_id["sig-a"]["guards"])
 
     def begin(self, project: Path, contract: dict[str, object]) -> None:
         path = project / "contract-input.json"
@@ -354,10 +449,10 @@ class ExecutionRecordTests(unittest.TestCase):
             missing = self.invoke(project, "finalize", "--work-id", "sample")
             self.assertNotEqual(missing.returncode, 0)
             self.assertIn("missingLearningAssessment", missing.stdout)
-            invalid = self.invoke(project, "learning-assessment", "--work-id", "sample", "--destination", "project-record", "--cause", "confirmed cause", "--prevention", "guard", "--trigger", "when it recurs", "--non-trigger", "ordinary work", "--verification", "test")
+            invalid = self.invoke(project, "learning-assessment", "--work-id", "sample", "--signature", "sig-a", "--destination", "project-record", "--cause", "confirmed cause", "--prevention", "guard", "--trigger", "when it recurs", "--non-trigger", "ordinary work", "--verification", "test")
             self.assertNotEqual(invalid.returncode, 0)
             self.assertIn("applicability", invalid.stderr)
-            recorded = self.invoke(project, "learning-assessment", "--work-id", "sample", "--destination", "project-record", "--cause", "confirmed cause", "--prevention", "guard", "--trigger", "when it recurs", "--non-trigger", "ordinary work", "--verification", "test", "--applicability", "project")
+            recorded = self.invoke(project, "learning-assessment", "--work-id", "sample", "--signature", "sig-a", "--destination", "project-record", "--cause", "confirmed cause", "--prevention", "guard", "--trigger", "when it recurs", "--non-trigger", "ordinary work", "--verification", "test", "--applicability", "project")
             self.assertEqual(recorded.returncode, 0, recorded.stderr)
             self.assertEqual(self.invoke(project, "finalize", "--work-id", "sample").returncode, 0)
 

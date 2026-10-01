@@ -1,5 +1,10 @@
 # Codex·Claude 공동작업 기록 (cowork)
 
+> **상태: 닫힘(historical, 2026-10-01).** Codex·Claude 공동작업은 이 날짜로 끝났다. 이 문서는 경위와 증거의 색인이며
+> 현재 지시가 아니다. 남은 열린 항목은 활성 계획
+> [`2026-10-01-loop-engine-and-pruning.md`](../plans/2026-10-01-loop-engine-and-pruning.md)로 옮겼다(9장).
+> 이후 인계는 실행 기록(`docs/work-log/records/`)과 registry의 활성 계획 하나로 한다.
+
 ## 0. 이 문서를 읽는 AI를 위한 규약
 
 - 1차 독자는 이 저장소에서 이어서 일할 **AI 세션(Codex·Claude Code)**이다. 사람 가독성보다 다음
@@ -26,7 +31,7 @@
     "method": "각 호스트의 로컬 플러그인 마켓플레이스로 이 저장소를 등록한다. copy-install(install.sh)은 폐기됐다.",
     "claude": "플러그인의 skills/, agents/, hooks/hooks.json을 쓴다. SessionStart hook이 AGENTS.md를 플러그인 루트 경로와 함께 주입한다.",
     "codex": "플러그인의 skills/만 쓴다. .codex-plugin/plugin.json은 \"hooks\": {}로 hook 자동 등록을 끈다. 전역 지침은 ~/.codex/AGENTS.md → assets/runtime_entrypoint/AGENTS.md, ~/.agents/chohogi → assets/agents 심볼릭 링크로 읽는다.",
-    "commitRule": "Codex는 마켓플레이스 root를 git 커밋 상태로 복사해 스킬을 읽는다(캐시는 심볼릭 링크를 복사하지 않음). 정본을 바꾸면 커밋해야 Codex 스킬에 반영된다. 링크로 읽는 AGENTS.md는 작업 트리를 바로 본다."
+    "commitRule": "Codex는 마켓플레이스 root를 git 커밋 상태로 복사한 플러그인 캐시에서 스킬과 tooling을 읽는다(캐시는 심볼릭 링크를 복사하지 않음). 정본을 바꾸면 커밋한 뒤 `codex plugin add chohogi@chohogi-marketplace`로 재설치해야 반영된다(2026-10-01 캐시에 새 tooling 2개가 없던 것을 관측, F2). 링크로 읽는 AGENTS.md는 작업 트리를 바로 본다.",
   },
   "roles": {
     "set": ["evidence-scout", "implementation-worker", "critical-reviewer", "final-reviewer", "debugger"],
@@ -307,6 +312,19 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
   frontmatter 기본값이 있어 card 없이도 위임이 성립한다. card 규칙이 Claude에서 필요한지 자체를 D1과 함께 재검토한다.
 - **Codex 영향:** Codex는 AGENTS.md를 링크로 읽으므로 축소본을 즉시 쓴다. Codex replay 전후 비교는 아직 없다.
 
+### 3.21 Codex learning 관문·manifest·impact 수리와 Claude 검토 (`9c68504`)
+
+- **Codex 작업:** (1) `HOM-20261001-learning-closure`: `confirmedDefect: true` 계약은 `learningRequired: true`가 필요하고,
+  `learningRequired` 기록은 구조화된 `learning-assessment` 없이 finalize되지 않는다. conductor·AGENTS.md에 한 문장씩.
+  (2) `HOM-20261001-manifest-impact-repair`: 폐기 자산의 원본 존재 검증(F10), impact를 직접 소비자·간접 참조로 분리(F12).
+  (3) F2 Codex 확인, F27 정리(서로 다른 실행의 관측), F23 Codex 실패 보고.
+- **Claude 검토(코드와 기록을 읽고 확인):** 테스트 147개·검증기 전체 통과. 다만 (a) 관문은 자기 신고 방식이라 원래 문제
+  (learning을 스스로 부르지 않음)를 풀지 못한다. 2026-10-01 기록 15개 중 플래그를 켠 기록 0개였다. (b) assessment는 기록 안에만
+  남고 과거 기록과 대조하지 않아 반복을 볼 수 없다. (c) `learning-record.md`의 failure signature·적용 계층이 없다. (d) AGENTS.md
+  변경에 replay 전후 비교가 없었다(6장 11번). (e) F16을 사용 증거 없이 fixed로 표시했다. → F16을 partial로 정정했다.
+- **이어받음:** 사건 트리거(사용자 교정·검증기 실패·replay 실패, debugging·homeostasis 기본 요구), 실패 유형 원장과 "반복이면
+  검사 필수" 규칙, 상태-증거 대조 검사는 활성 계획에서 진행한다.
+
 ## 4. 두 호스트 차이 (실측 기준)
 
 | 항목 | Claude Code (2.1.284) | Codex (codex-cli 0.155.0-alpha.16.3) |
@@ -424,14 +442,14 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 | F13 | fixed | — | profile 파일 커밋 | `e95323b` | — |
 | F14 | open | medium | 모델 선택 비차단을 실제 대화에서 미관측 | 3.14 | 대화형 세션 관측 |
 | F15 | fixed | — | 부분 저장 profile | `HOM-20260930-profile-gaps` | — |
-| F16 | fixed | high | Learning이 prose-only여서 종료 관문이 없었다. `confirmedDefect: true` 계약은 `learningRequired: true`와 구조화된 `learning-assessment` 없이는 begin/finalize를 통과할 수 없다 | [HOM-20261001-learning-closure](../../work-log/records/HOM-20261001-learning-closure/events.jsonl) | `closed-no-learning`도 평가 기록을 남긴다. 전역 승격은 독립 증거가 있을 때만 가능 |
+| F16 | partial | high | Codex가 `confirmedDefect`/`learningRequired` 관문과 `learning-assessment`를 추가(`9c68504`). 그러나 관문은 에이전트가 스스로 켜야 하며, 2026-10-01 기록 15개 중 켠 기록 0개(관문을 만든 기록 포함). 사용 관측 전까지 fixed가 아니다 | `HOM-20261001-learning-closure`, Claude 검토(3.21) | 사건 트리거·원장으로 이어받음(활성 계획) |
 | F17 | fixed | — | 기록을 쓰는 프로젝트의 활성 계획은 `executionRecord` 필수 | `HOM-20260930-review-fixes`, mutation M14 | — |
 | F18 | fixed | — | 시나리오 분리(자율 위임은 원래 문구, profile은 명시 문구) | 같은 기록 | replay 재측정 필요 |
 | F19 | open | medium | profile 없는 위임에서 card 미실행. Claude 역할은 frontmatter 기본값이 있어 card 없이도 위임이 성립 | C2 transcript, 3.20 replay(축소 전후 모두 실패) | Claude에서 card 규칙 필요 여부를 D1로 결정 |
 | F20 | fixed | — | 세션 모델 상속 서술 3곳을 호스트별 사실로 교체 | `HOM-20260930-review-fixes` | — |
 | F21 | open | high | replay 7/7 세션이 초호기 route 문서를 한 번도 읽지 않음. skill 호출 0. 행동은 주입 지침만으로 결정 | C2 transcript 분석 | 규칙 배치 재설계: 행동을 바꿔야 하는 규칙은 주입 지침에, 나머지는 필요 시 명령(검증기·card)으로 묶기. C3과 함께 판단 |
 | F22 | fixed | — | `verify-runtime-entrypoint.py`, mutation 17/17 | `HOM-20260930-review-fixes` | 문구 존재만 증명(준수는 C2) |
-| F23 | open | high | 오류에 허용값과 주입 지침은 추가됐지만, 2026-10-01 Codex `plan-location-no-tool-directives` replay에서 registry-consistent assertion이 exit 1로 실패 | [HOM-20260930-codex-role-install-live](../../work-log/records/HOM-20260930-codex-role-install-live/events.jsonl) | 실패한 replay의 생성 계획·registry를 보존해 원인을 재현하고, 수정 뒤 같은 assertion을 재측정 |
+| F23 | partial (호스트별) | medium | Claude: 2026-10-01 replay에서 plan-location 통과(축소 전, 복원 후). Codex: 2026-10-01 replay에서 registry-consistent 실패, 원인 미조사 | `HOM-20261001-guidance-slim`, `HOM-20260930-codex-role-install-live` | Codex 쪽 원인 조사(활성 계획) |
 | F24 | partial | medium | 주입 지침 8,520 → 3,331자, 첫 턴 컨텍스트 약 -4.5k 토큰, 4,000자 상한 | `HOM-20261001-guidance-slim` | skill·역할 설명 목록(약 4.9k자)은 미조정 |
 | F26 | fixed | — | finalize 뒤 이벤트가 상태를 reopened로 바꿈. 기존 기록 3개 소급 | 같은 기록 | — |
 | F27 | partial | medium | rollout parser가 `/session`을 역할로 오인한 문제는 고쳤고 transcript에서 실제 spawn·wait·handoff는 확인했다. 그러나 Codex 스트림에는 role/model/effort가 없어 profile assertion은 아직 판정 불가 | [HOM-20260930-codex-role-install-live](../../work-log/records/HOM-20260930-codex-role-install-live/events.jsonl) | transcript schema 또는 replay assertion을 역할 필드가 없는 host evidence에 맞게 분리하고 재측정 |
@@ -467,5 +485,20 @@ Codex 검토자는 아래를 독립적으로 확인하고, 결과를 이 문서 
 | id | 질문 | 선택지와 trade-off | 추천 |
 |---|---|---|---|
 | D1 (F21·F24) | 규칙을 어디에 둘 것인가 | (a) 행동 규칙은 주입 지침에 한 문장씩, 절차는 도구 출력으로: 3.20에서 적용·검증됨. 남은 질문은 Claude에서 card 규칙이 필요한가(F19) | (a) 유지. card 규칙의 Claude 적용 여부만 결정 필요 |
-| D2 (F16) | learning을 살릴 것인가 | (a) learning-우선을 conductor·주입 지침에 올린다. (b) 실효가 없으니 homeostasis가 예방 범위를 직접 판정하도록 규칙을 줄인다 | **완료:** (a)를 선택하고 `confirmedDefect` 시작 관문과 finalize 관문으로 실행 가능하게 만들었다. [HOM-20261001-learning-closure](../../work-log/records/HOM-20261001-learning-closure/events.jsonl) |
-| D3 (F28) | `codex-role-setup.py --apply`를 원칙 예외로 둘 것인가 | (a) 상시 예외(명시 실행·백업·추가만). (b) 점검만 허용하고 등록은 README 수동 절차 | (a). Codex는 플러그인에 역할 슬롯이 없어 설치만으로 역할이 동작하지 않는다(3.17) |
+| D2 (F16) | learning을 살릴 것인가 | (a) 살린다 / (b) 줄인다 | **사용자 결정(2026-10-01): (a) 살린다.** 근거(사용자): 이번 수정·수리는 모두 learning을 거쳤어야 했고, 그래야 반복되는 문제와 앞으로의 문제를 조기에 막는다. Codex의 관문은 첫 구현이며 실효는 3.21 참조 |
+| D3 (F28) | `codex-role-setup.py --apply`를 원칙 예외로 둘 것인가 | (a) 상시 예외 / (b) 수동 절차 | **사용자 결정(2026-10-01): (a) 예외로 둔다.** 근거(사용자): "개인 설정은 초호기가 관리하지 않는다"는 사용자를 위한 원칙인데, Codex는 명시 등록이 없으면 모델 선택 등이 깨진다 |
+
+## 9. 종료와 이관 (2026-10-01)
+
+공동작업을 끝내며 남은 항목을 활성 계획 [`2026-10-01-loop-engine-and-pruning.md`](../plans/2026-10-01-loop-engine-and-pruning.md)로
+옮겼다. 이 문서의 8.3 상태는 이 날짜의 스냅숏이며 이후 갱신하지 않는다. 현재 상태는 활성 계획과 실행 기록이 정본이다.
+
+| 이관 항목 | 이관 사유 |
+|---|---|
+| F16 learning 루프(사건 트리거·원장·반복 규칙) | 1단계의 핵심 |
+| 상태 부풀리기 방지(상태-증거 대조) | 오늘 5회 반복된 유형 |
+| F21·F24 문서 정리·총량 상한 | 2단계 |
+| F14, F19 | 대화형 관측과 card 규칙의 Claude 필요성 판단이 남음 |
+| F23(Codex), F27 | Codex 쪽 관측이 남음. 공동작업 종료로 Codex 세션에서 쓸 때 다시 연다 |
+| F25 | 정리 항목 |
+| 3단계 제품 검증 | 사용자가 제품 프로젝트에서 초호기를 직접 쓰며 진행 |

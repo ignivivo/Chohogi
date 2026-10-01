@@ -6,7 +6,7 @@ artifacts a work contract explicitly asks to verify. They never store raw
 prompts, private reasoning, credentials, or complete tool payloads.
 """
 from __future__ import annotations
-import argparse, hashlib, json, sys
+import argparse, hashlib, json, os, sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -39,9 +39,10 @@ METHOD = """recording method (details: assets/agents/trunk_orchestration/executi
              consumer with verified evidence or a deferred reason. Patch and screenshot are not
              default artifacts; declare visual evidence only when a real browser proof is required.
   checkpoint / resume  only for interruptible work; resume rejects a changed baseline.
-  learning-assessment  when contract learningRequired is true, record one verified prevention disposition
-             (or closed-no-learning) before finalize: cause, prevention, trigger, non-trigger,
-             verification, applicability, and destination are all explicit.
+  learning-assessment  due before finalize for debugging/homeostasis records and records with a
+             user-correction, verifier-failure, replay-failure, or review-finding fact (opt out only
+             with learningOptOut). Name a registered --signature; a signature seen in another work
+             needs an existing --guard and cannot be closed-no-learning. learning-scan shows recurrence.
   outcome, finalize  finalize checks scope items, feedback, reviews, and artifacts. An event
              after finalize reopens the record until it is finalized again.
 Never record secrets, raw prompts, full conversations, or private reasoning."""
@@ -100,6 +101,8 @@ def contract_errors(contract: dict) -> list[str]:
         errors.append('confirmedDefect must be a boolean')
     if contract.get('confirmedDefect') is True and contract.get('learningRequired') is not True:
         errors.append('confirmedDefect contracts must set learningRequired to true')
+    if contract.get('learningRequired') is False and not str(contract.get('learningOptOut', '')).strip():
+        errors.append('learningRequired false needs a learningOptOut reason')
     requested = contract.get('requestedItems', [])
     if requested:
         if not isinstance(requested, list): errors.append('requestedItems must be a list')
@@ -209,11 +212,37 @@ def learning_assessment_event(folder: Path):
             return item
     return None
 
+# The learning loop runs on events, not on an agent declaring itself (HOM-20261001-loop-engine-and-pruning):
+# routes that fix things and facts that record a correction or failure make an assessment due.
+LEARNING_ROUTES = {'debugging', 'homeostasis'}
+LEARNING_TRIGGER_FACTS = {'user-correction', 'user-reported-correction', 'verifier-failure', 'replay-failure', 'review-finding'}
+
+def learning_home() -> Path:
+    override = os.environ.get('CHOHOGI_LEARNING_HOME')
+    return Path(override) if override else Path(__file__).resolve().parents[1] / 'assets/agents/vascular-bundle_circulation'
+
+def known_signatures() -> dict[str, dict]:
+    path = learning_home() / 'failure-signatures.json'
+    data = json.loads(path.read_text(encoding='utf-8')) if path.is_file() else {}
+    return {item['id']: item for item in data.get('signatures', []) if isinstance(item, dict) and item.get('id')}
+
+def ledger_entries() -> list[dict]:
+    path = learning_home() / 'learning-ledger.jsonl'
+    return [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines() if line.strip()] if path.is_file() else []
+
+def learning_due(contract: dict, history: list[dict]) -> bool:
+    if contract.get('learningRequired') is True:
+        return True
+    if contract.get('learningRequired') is False:
+        return False
+    return contract.get('route') in LEARNING_ROUTES or any(
+        item.get('event') == 'fact' and item.get('kind') in LEARNING_TRIGGER_FACTS for item in history)
+
 def main() -> int:
     p=argparse.ArgumentParser(description=__doc__, epilog=METHOD, formatter_class=argparse.RawDescriptionHelpFormatter); p.add_argument('--project',type=Path,required=True); sub=p.add_subparsers(dest='cmd',required=True)
     b=sub.add_parser('begin'); b.add_argument('--work-id',required=True); b.add_argument('--contract',type=Path,required=True)
-    for name in ('artifact','checkpoint','resume','fact','prior-feedback','feedback','feedback-scan','scope-item','capability-map','decision','review-request','review-response','review-resolution','decision-report','decision-resolution','learning-assessment','outcome','review','handoff','finalize'):
-        q=sub.add_parser(name); q.add_argument('--work-id',required=name != 'feedback-scan')
+    for name in ('artifact','checkpoint','resume','fact','prior-feedback','feedback','feedback-scan','scope-item','capability-map','decision','review-request','review-response','review-resolution','decision-report','decision-resolution','learning-assessment','learning-scan','outcome','review','handoff','finalize'):
+        q=sub.add_parser(name); q.add_argument('--work-id',required=name not in ('feedback-scan','learning-scan'))
         if name=='artifact': q.add_argument('--acceptance-id',required=True); q.add_argument('--kind',required=True); q.add_argument('--path',type=Path,required=True)
         if name=='checkpoint': q.add_argument('--id',required=True); q.add_argument('--summary',required=True)
         if name=='fact': q.add_argument('--kind',required=True); q.add_argument('--summary',required=True); q.add_argument('--details',default='{}')
@@ -234,12 +263,22 @@ def main() -> int:
         if name=='decision-resolution': q.add_argument('--decision-id', required=True); q.add_argument('--selected', required=True); q.add_argument('--owner', choices=('user','authorized-owner'), required=True); q.add_argument('--summary', required=True)
         if name=='learning-assessment':
             q.add_argument('--destination', choices=sorted(LEARNING_DESTINATIONS), required=True)
+            q.add_argument('--signature', required=True); q.add_argument('--guard', default='')
             q.add_argument('--cause', required=True); q.add_argument('--prevention', required=True)
             q.add_argument('--trigger', required=True); q.add_argument('--non-trigger', required=True)
             q.add_argument('--verification', required=True); q.add_argument('--applicability', required=True)
         if name=='outcome': q.add_argument('--summary', required=True); q.add_argument('--feedback', default=''); q.add_argument('--remaining-risk', default='')
     a=p.parse_args(); project=a.project.resolve()
     if not project.is_dir(): print('project path is missing',file=sys.stderr); return 2
+    if a.cmd=='learning-scan':
+        entries=ledger_entries(); report=[]
+        for sig, meta in sorted(known_signatures().items()):
+            mine=[item for item in entries if item.get('signature')==sig]
+            works={item.get('workId') for item in mine}
+            report.append({'signature':sig,'description':meta.get('description',''),'occurrences':len(mine),'works':sorted(w for w in works if w),
+                           'recurring':len(works)>1,'guards':sorted({g for item in mine for g in [item.get('guard')] if g} | set(meta.get('guards', []))),
+                           'lastSeen':max((item.get('at','') for item in mine), default='')})
+        print(json.dumps({'ledger':str(learning_home()/'learning-ledger.jsonl'),'signatures':report},ensure_ascii=False,indent=2)); return 0
     if a.cmd=='feedback-scan':
         source_paths=[]
         if a.root:
@@ -397,10 +436,26 @@ def main() -> int:
             print('decision report is missing',file=sys.stderr); return 2
         event(folder, {'event':'decision-resolution','decisionId':a.decision_id,'selected':a.selected,'owner':a.owner,'summary':a.summary}); return 0
     if a.cmd=='learning-assessment':
-        if learning_assessment_event(folder): print('learning assessment already exists', file=sys.stderr); return 2
+        signatures=known_signatures()
+        if a.signature not in signatures:
+            print(f'unknown failure signature {a.signature!r}; registered: {sorted(signatures)}. Add a new one through homeostasis in {learning_home()/"failure-signatures.json"}', file=sys.stderr); return 2
+        if any(item.get('event')=='learning-assessment' and item.get('signature')==a.signature for item in events(folder)):
+            print('learning assessment for this signature already exists in this record', file=sys.stderr); return 2
         values = {'cause':a.cause, 'prevention':a.prevention, 'trigger':a.trigger, 'nonTrigger':a.non_trigger, 'verification':a.verification, 'applicability':a.applicability}
         if any(not value.strip() for value in values.values()): print('learning assessment fields must be non-empty', file=sys.stderr); return 2
-        event(folder, {'event':'learning-assessment', 'destination':a.destination, **values}); return 0
+        recurring=any(item.get('signature')==a.signature and item.get('workId')!=a.work_id for item in ledger_entries())
+        guard=''
+        if a.guard:
+            candidate=Path(a.guard); candidate=candidate if candidate.is_absolute() else project/candidate
+            if not candidate.exists(): print(f'guard does not exist: {a.guard}', file=sys.stderr); return 2
+            guard=a.guard
+        if recurring and (a.destination=='closed-no-learning' or not guard):
+            print(f'{a.signature} is recurring (seen in another work); it cannot close without an existing guard (test or verifier) via --guard', file=sys.stderr); return 2
+        event(folder, {'event':'learning-assessment', 'signature':a.signature, 'destination':a.destination, 'guard':guard, 'recurring':recurring, **values})
+        home=learning_home(); home.mkdir(parents=True, exist_ok=True)
+        with (home/'learning-ledger.jsonl').open('a', encoding='utf-8') as ledger:
+            ledger.write(json.dumps({'kind':'assessment','signature':a.signature,'project':project.name,'workId':a.work_id,'destination':a.destination,'guard':guard,'at':datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}, ensure_ascii=False)+'\n')
+        return 0
     if a.cmd=='outcome':
         event(folder, {'event':'outcome','summary':a.summary,'feedback':a.feedback,'remainingRisk':a.remaining_risk}); return 0
     if a.cmd=='review':
@@ -422,7 +477,7 @@ def main() -> int:
     requested_ids={item.get('id') for item in state['contract'].get('requestedItems', []) if isinstance(item, dict)}
     resolved_scope={item.get('id') for item in history if item.get('event') == 'scope-item' and item.get('status') in {'implemented','deferred','excluded'}}
     unresolved_scope=sorted(requested_ids-resolved_scope)
-    missing_learning_assessment=bool(state['contract'].get('learningRequired')) and not learning_assessment_event(folder)
+    missing_learning_assessment=learning_due(state['contract'], history) and not learning_assessment_event(folder)
     pending_feedback=[]
     feedback_registry=state['contract'].get('feedbackRegistry')
     if isinstance(feedback_registry, str):

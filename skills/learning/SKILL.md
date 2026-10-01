@@ -34,12 +34,16 @@ factory.
 5. Choose exactly one destination: `closed-no-learning`, project record,
    project leaf, provisional global candidate, genome_inheritance asset, or Homeostasis
    escalation.
-6. For a work record whose confirmed cause and verified prevention meet this
-   entry gate, set `confirmedDefect: true` and `learningRequired: true` at `begin` and record the chosen
-   disposition with `execution-record.py learning-assessment` before finalize.
-   The assessment names cause, prevention, trigger, non-trigger, verification,
-   applicability, and destination. This makes a deliberate non-promotion
-   auditable without turning it into a global asset.
+6. Record the disposition with `execution-record.py learning-assessment` before finalize.
+   `finalize` requires it for debugging and homeostasis records and for any record
+   with a user-correction, verifier-failure, replay-failure, or review-finding fact,
+   unless the contract sets `learningRequired: false` with a `learningOptOut` reason;
+   `learningRequired: true` or `confirmedDefect: true` also requires it. Each assessment names one registered `--signature` from
+   `vascular-bundle_circulation/failure-signatures.json` (new signatures go through
+   Homeostasis) and appends to the learning ledger. When the signature already appears
+   in another work, the assessment must name an existing `--guard` (test or verifier)
+   and cannot be `closed-no-learning`: a repeat means the previous prevention did not
+   hold. `execution-record.py learning-scan` shows occurrences, works, and guards.
 
 ## Rework signal
 

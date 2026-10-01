@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "bb738ff99a7929abca04894cdf08db77c2b2a610ba4aedbdf702835153842471",
+  "sourceDigest": "6c773ec940690aa2da0920c4af094b03f64f3a7478fbf1b0e1b27a895dfbe490",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -843,11 +843,6 @@
       "path": "assets/agents/trunk_orchestration/horizontal-transfer_adoption.md"
     },
     {
-      "id": "asset:assets/agents/trunk_orchestration/meristem_differentiation/capability-lifecycle.md",
-      "kind": "asset",
-      "path": "assets/agents/trunk_orchestration/meristem_differentiation/capability-lifecycle.md"
-    },
-    {
       "id": "asset:assets/agents/trunk_orchestration/method-selection.md",
       "kind": "asset",
       "path": "assets/agents/trunk_orchestration/method-selection.md"
@@ -893,14 +888,19 @@
       "path": "assets/agents/trunk_orchestration/task-loop.md"
     },
     {
+      "id": "asset:assets/agents/vascular-bundle_circulation/failure-signatures.json",
+      "kind": "asset",
+      "path": "assets/agents/vascular-bundle_circulation/failure-signatures.json"
+    },
+    {
+      "id": "asset:assets/agents/vascular-bundle_circulation/learning-ledger.jsonl",
+      "kind": "asset",
+      "path": "assets/agents/vascular-bundle_circulation/learning-ledger.jsonl"
+    },
+    {
       "id": "asset:assets/agents/vascular-bundle_circulation/phloem-feedback.md",
       "kind": "asset",
       "path": "assets/agents/vascular-bundle_circulation/phloem-feedback.md"
-    },
-    {
-      "id": "asset:assets/agents/vascular-bundle_circulation/xylem-context.md",
-      "kind": "asset",
-      "path": "assets/agents/vascular-bundle_circulation/xylem-context.md"
     },
     {
       "id": "asset:assets/runtime_entrypoint/AGENTS.md",
@@ -996,6 +996,11 @@
       "id": "asset:docs/chohogi/plans/2026-09-23-observability-closure.md",
       "kind": "asset",
       "path": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
+      "id": "asset:docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md"
     },
     {
       "id": "asset:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
@@ -1111,6 +1116,11 @@
       "id": "asset:tooling/tests/test_genome_map.py",
       "kind": "asset",
       "path": "tooling/tests/test_genome_map.py"
+    },
+    {
+      "id": "asset:tooling/tests/test_learning_ledger.py",
+      "kind": "asset",
+      "path": "tooling/tests/test_learning_ledger.py"
     },
     {
       "id": "asset:tooling/tests/test_manifest_registry.py",
@@ -1384,6 +1394,11 @@
       "id": "document:docs/chohogi/plans/2026-09-23-observability-closure.md",
       "kind": "document",
       "path": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md"
     },
     {
       "id": "document:docs/chohogi/specs/2026-08-11-horizontal-inheritance-layout-v2-design.md",
@@ -1795,6 +1810,18 @@
     },
     {
       "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/vascular-bundle_circulation/failure-signatures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
+      "target": "asset:assets/agents/vascular-bundle_circulation/learning-ledger.jsonl",
+      "relation": "requires",
+      "evidence": "assets/agents/functional_assurance/registry.json"
+    },
+    {
+      "source": "asset:assets/agents/functional_assurance/registry.json",
       "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "assets/agents/functional_assurance/registry.json"
@@ -1972,6 +1999,12 @@
       "target": "document:docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md",
       "relation": "documents",
       "evidence": "docs/chohogi/plans/2026-09-03-capability-map-decision-loop.md"
+    },
+    {
+      "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
+      "target": "asset:assets/agents/vascular-bundle_circulation/failure-signatures.json",
+      "relation": "requires",
+      "evidence": "assets/agents/trunk_orchestration/execution-record-contract.md"
     },
     {
       "source": "asset:assets/agents/trunk_orchestration/execution-record-contract.md",
@@ -2224,6 +2257,12 @@
       "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "target": "document:docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md"
     },
     {
       "source": "asset:docs/chohogi/feedback/sazu-finish-queue-handoff-20260922.md",

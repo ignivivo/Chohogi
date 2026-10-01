@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Closed list of failure signatures for the learning loop. execution-record.py learning-assessment accepts only these ids; a new id is added through homeostasis so the same failure is not filed under different names.",
+  "signatures": [
+    {"id": "derived-status-exceeds-evidence", "description": "A derived status (active plan, record pass, 'fixed' in a table) claims more than its source evidence shows.", "guards": ["tooling/tests/test_project_document_registry.py", "tooling/tests/test_execution_record.py"]},
+    {"id": "dependent-doc-not-updated", "description": "A source fact changed but documents, fixtures, or scenarios restating it were not updated.", "guards": ["tooling/tests/test_role_definitions.py", "tooling/verify-runtime-entrypoint.py"], "guardLimit": "anchors and role tests cover known restatements only"},
+    {"id": "enumeration-hardcoded", "description": "A list with a canonical source (role files, scenarios, signatures) is copied into code and drifts.", "guards": ["tooling/tests/test_adherence_replay.py", "tooling/tests/test_codex_role_setup.py"]},
+    {"id": "transport-limit-read-as-capability", "description": "A tool argument's allowed values, or its absence, is read as the limit of what the host can do.", "guards": ["tooling/tests/test_model_policy.py", "tooling/tests/test_role_definitions.py"], "guardLimit": "covers the model list and role effort cases; the reasoning error itself needs review"},
+    {"id": "guidance-edit-without-behavior-check", "description": "Injected guidance is changed without a before/after replay of the scenarios it governs.", "guards": ["tooling/verify-runtime-entrypoint.py"], "guardLimit": "cap and anchors catch deletion and growth, not behavior; the replay itself is still a manual step"},
+    {"id": "new-command-without-assurance", "description": "A new tooling command ships without its functional-assurance entry.", "guards": ["tooling/verify-functional-assurance.py"]},
+    {"id": "sample-overgeneralized", "description": "A conclusion is stated for a population its sample does not cover (small replay tasks taken for all work, one document category taken for all rule documents).", "guards": [], "guardLimit": "a reasoning error; review must ask what the sample covers"},
+    {"id": "self-declared-gate", "description": "A gate that runs only when the agent declares it applies is bypassed by not declaring it.", "guards": ["tooling/tests/test_execution_record.py"]}
+  ]
+}

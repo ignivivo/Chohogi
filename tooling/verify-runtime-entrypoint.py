@@ -18,6 +18,20 @@ T = "assets/agents/trunk_orchestration/"
 # Every session pays for the injected guidance (+11.2k first-turn tokens measured on 2026-09-30, F24).
 # Raising this cap is a deliberate homeostasis decision, not a side effect of adding a paragraph.
 GUIDANCE_CAP_CHARS = 4000
+# Orchestration rule documents (assets/agents and the runtime entrypoint, excluding linked skills and retired
+# assets) may not grow: 2,138 lines after HOM-20261001-loop-engine-and-pruning. Adding a rule means folding or
+# removing one, or raising this budget through homeostasis.
+ORCHESTRATION_LINE_BUDGET = 2138
+
+
+def orchestration_lines(root: Path) -> int:
+    total = 0
+    for base in ("assets/agents", "assets/runtime_entrypoint"):
+        for path in (root / base).rglob("*.md") if (root / base).is_dir() else ():
+            if "retired_assets" in path.parts or any(part.is_symlink() for part in (path, *path.parents)):
+                continue
+            total += len(path.read_text(encoding="utf-8").splitlines())
+    return total
 ANCHORS = {
     "assets/runtime_entrypoint/AGENTS.md": (
         "~/.agents/chohogi/trunk_orchestration/conductor.md",  # route selection entry (the red-flag text names it again)
@@ -60,6 +74,9 @@ def main() -> int:
         for anchor in anchors:
             if anchor not in text:
                 errors.append(f"{rel} lost its core-rule anchor: {anchor}")
+    lines = orchestration_lines(root)
+    if lines > ORCHESTRATION_LINE_BUDGET:
+        errors.append(f"orchestration documents have {lines} lines, over the line budget of {ORCHESTRATION_LINE_BUDGET}")
     if errors:
         print("Runtime entrypoint verification: FAIL")
         print("\n".join(f"- {error}" for error in errors))

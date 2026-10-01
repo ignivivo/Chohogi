@@ -28,7 +28,7 @@ substantial 작업에서는 아래 셋 중 정확히 하나만 고른다.
 
 `learning`과 `homeostasis`는 일상 흐름과 경쟁하는 route가 아니다.
 
-- `learning`: 종료된 Delivery 또는 Debugging에서 원인·예방 검증이 확인된 뒤에만 `../vascular-bundle_circulation/phloem-feedback.md`의 정제된 return contract를 받아 최소 예방과 귀속지를 결정한다. 이 조건을 충족한 결함 작업은 계약에 `confirmedDefect: true`, `learningRequired: true`를 넣고 `learning-assessment` 없이는 finalize하지 않는다.
+- `learning`: 종료된 Delivery 또는 Debugging에서 원인·예방 검증이 확인된 뒤에만 `../vascular-bundle_circulation/phloem-feedback.md`의 정제된 return contract를 받아 최소 예방과 귀속지를 결정한다. debugging·homeostasis 기록과 사용자 교정·검증 실패 사실이 있는 기록은 `execution-record.py`가 finalize 전에 실패 유형(signature)이 붙은 `learning-assessment`를 요구하고, 다른 작업에서 이미 나온 유형이면 존재하는 검사(`--guard`) 없이는 닫히지 않는다.
 - `homeostasis`: 초호기의 conductor, 역할·모델 정책, skill 수명, 설치·발견 또는 전역 자산 경계 자체를 바꾸는 요청·증거가 있을 때만 별도로 진입한다.
 
 "진입한다"는 해당 skill(`../adaptive-regulation/learning/SKILL.md`,

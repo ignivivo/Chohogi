@@ -56,22 +56,28 @@ items, current evidence references, the latest checkpoint, and recent material
 decisions. It is not a second history file and excludes raw prompts, private
 reasoning, credentials, complete tool payloads, and provider-native state.
 
-## Learning closure for confirmed defects
+## Learning closure
 
-When a Delivery, Debugging, or Homeostasis work item has a confirmed cause and
-a verified smallest prevention, set `confirmedDefect: true` and
-`learningRequired: true` in its contract. `begin` rejects a confirmed-defect
-contract that does not enable this gate.
-Before `finalize`, record exactly one `learning-assessment` with the cause,
-prevention, trigger, non-trigger, verification, applicability, and one
+`finalize` requires a `learning-assessment` when the contract sets
+`learningRequired: true` or `confirmedDefect: true`, when the route is `debugging`
+or `homeostasis`, or when the record holds a `user-correction`,
+`user-reported-correction`, `verifier-failure`, `replay-failure`, or
+`review-finding` fact. A contract may set `learningRequired: false` only with a
+`learningOptOut` reason. The trigger is the work's events, not the agent's
+self-declaration: a self-declared gate went unused (signature `self-declared-gate`).
+
+Each assessment names one registered signature from
+`assets/agents/vascular-bundle_circulation/failure-signatures.json` and records
+cause, prevention, trigger, non-trigger, verification, applicability, and one
 destination: `closed-no-learning`, `project-record`, `project-leaf`,
-`provisional-global-candidate`, `genome-inheritance-asset`, or `homeostasis`.
-`finalize` rejects a required record without this assessment.
-
-`closed-no-learning` is an explicit result for a prevention that must not
-become reusable memory. It still records why the observed signature is bounded.
-The command does not promote an asset, change policy, or infer that a cause is
-confirmed; the work's evidence must establish those facts first.
+`provisional-global-candidate`, `genome-inheritance-asset`, or `homeostasis`. It
+appends a redacted line (signature, project name, work id, destination, guard)
+to `learning-ledger.jsonl` beside the registry. If the signature already appears
+in another work, the assessment must name an existing `--guard` and cannot be
+`closed-no-learning`. `learning-scan` reports occurrences and guards; the learning
+verifier rejects unregistered signatures, missing guards, and recurring
+signatures without a guard. The command does not promote an asset or change
+policy; the work's evidence must establish those facts first.
 
 ## Decision-review checkpoint
 

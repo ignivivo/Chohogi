@@ -29,12 +29,12 @@
     {
       "id": "learning-method",
       "kind": "policy-gate",
-      "sources": ["assets/agents/adaptive-regulation/learning"],
+      "sources": ["assets/agents/adaptive-regulation/learning", "assets/agents/vascular-bundle_circulation/failure-signatures.json", "assets/agents/vascular-bundle_circulation/learning-ledger.jsonl"],
       "trigger": "a confirmed failure has a bounded, verified smallest prevention",
       "nonTrigger": "ordinary delivery, unconfirmed incidents, and automatic global promotion",
       "output": "bounded learning disposition and redacted phloem return",
       "execution": "assets/agents/adaptive-regulation/learning/SKILL.md",
-      "verifiers": ["tooling/verify-learning-contract.py", "tooling/verify-skills.py"],
+      "verifiers": ["tooling/verify-learning-contract.py", "tooling/verify-skills.py", "tooling/tests/test_learning_ledger.py"],
       "fixtures": ["assets/agents/trunk_orchestration/evaluation/learning-fixtures.json", "tooling/tests/test_skills.py"],
       "limits": "does not automatically promote a project observation or prove future model behavior"
     },

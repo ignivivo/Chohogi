@@ -121,6 +121,43 @@ class ProjectDocumentRegistryTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("historical", result.stdout)
 
+    def run_plan_status(self, row_status: str, evidence: str, verification: str | None) -> subprocess.CompletedProcess[str]:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            (project / "plan.md").write_text("| id | 작업 | 상태 | 증거 |\n|---|---|---|---|\n"
+                                            f"| A | do it | {row_status} | {evidence} |\n", encoding="utf-8")
+            record = project / "docs/work-log/records/HOM-20261001-sample"
+            record.mkdir(parents=True)
+            if verification is not None:
+                (record / "verification.json").write_text(json.dumps({"status": verification}), encoding="utf-8")
+            path = project / "registry.json"
+            path.write_text(json.dumps({"schemaVersion": 1, "activeExecutionPlan": "plan.md", "documents": [
+                {"path": "plan.md", "role": "active-plan", "authority": "execution-queue", "state": "active", "executionRecord": "docs/work-log/records/OPEN-20261001-x"},
+                {"path": "docs/work-log/records/OPEN-20261001-x", "role": "execution-record", "authority": "evidence", "state": "active"},
+            ]}), encoding="utf-8")
+            (project / "docs/work-log/records/OPEN-20261001-x").mkdir(parents=True)
+            return subprocess.run([sys.executable, str(TOOL), "--root", str(project), "--registry", str(path)], text=True, capture_output=True, check=False)
+
+    def test_done_row_citing_a_passed_record_and_evidence_class_passes(self) -> None:
+        result = self.run_plan_status("done", "`HOM-20261001-sample` (replay)", "pass")
+        self.assertEqual(result.returncode, 0, result.stdout)
+
+    def test_done_row_whose_record_has_not_passed_fails(self) -> None:
+        result = self.run_plan_status("done", "`HOM-20261001-sample` (static)", "reopened")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("HOM-20261001-sample", result.stdout)
+
+    def test_done_row_without_record_or_evidence_class_fails(self) -> None:
+        for evidence in ("looks good", "`HOM-20261001-sample`"):
+            with self.subTest(evidence=evidence):
+                result = self.run_plan_status("done", evidence, "pass")
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("done", result.stdout)
+
+    def test_rows_that_are_not_done_need_no_evidence(self) -> None:
+        result = self.run_plan_status("in-progress", "—", None)
+        self.assertEqual(result.returncode, 0, result.stdout)
+
     def test_nested_project_plan_directories_are_scanned(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             project = Path(temporary)

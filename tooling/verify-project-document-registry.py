@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 
@@ -21,6 +22,42 @@ def record_finalized(record_dir: Path) -> bool:
         return json.loads(verification.read_text(encoding="utf-8")).get("status") == "pass"
     except (json.JSONDecodeError, AttributeError):
         return False
+
+
+RECORD_ID = re.compile(r"\b[A-Z]{3}-\d{8}-[\w-]+")
+EVIDENCE_CLASS = re.compile(r"\b(static|replay|live)\b")
+
+
+def plan_status_errors(root: Path, plan_path: str) -> list[str]:
+    """A done row in the active plan must cite a passed execution record and an evidence class."""
+    plan = root / plan_path
+    if not plan.is_file():
+        return []
+    errors: list[str] = []
+    columns: list[str] | None = None
+    for number, line in enumerate(plan.read_text(encoding="utf-8").splitlines(), 1):
+        if not line.startswith("|"):
+            columns = None
+            continue
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if columns is None:
+            columns = [cell.lower() for cell in cells]
+            continue
+        if set("".join(cells)) <= set("-: "):
+            continue
+        status_at = next((i for i, name in enumerate(columns) if name in ("상태", "status")), None)
+        evidence_at = next((i for i, name in enumerate(columns) if name in ("증거", "evidence")), None)
+        if status_at is None or status_at >= len(cells) or cells[status_at] != "done":
+            continue
+        evidence = cells[evidence_at] if evidence_at is not None and evidence_at < len(cells) else ""
+        records = RECORD_ID.findall(evidence)
+        if not records or not EVIDENCE_CLASS.search(evidence):
+            errors.append(f"{plan_path}:{number}: a done row must cite an execution record and an evidence class (static, replay, live)")
+            continue
+        for record in records:
+            if not record_finalized(root / "docs/work-log/records" / record):
+                errors.append(f"{plan_path}:{number}: done row cites {record}, which has not passed finalize")
+    return errors
 
 
 def main() -> int:
@@ -116,6 +153,8 @@ def main() -> int:
                 errors.append(f"{path}: its execution record {record} is finalized; mark the plan historical or declare a new record")
         if item.get("role") == "execution-record" and item.get("state") == "active" and record_finalized(root / path):
             errors.append(f"{path}: execution record is finalized but declared active")
+    if isinstance(data.get("activeExecutionPlan"), str):
+        errors.extend(plan_status_errors(root, data["activeExecutionPlan"]))
     for item in documents:
         if not isinstance(item, dict) or not item.get("supersededBy"):
             continue

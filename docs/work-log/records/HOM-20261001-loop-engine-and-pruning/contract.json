@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "objective": "Close the Codex-Claude cowork log, make the learning loop run on tool-enforced triggers with a failure-signature ledger and recurrence rule, check status claims against evidence, and prune rule documents that do not reach behavior.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "learningRequired": true,
+  "requested": [
+    "phase 0: close the cowork log with final corrections and D2/D3 decisions",
+    "phase 1: learning loop engine and status-evidence check",
+    "phase 2: measure and prune unread rule documents with a document budget"
+  ],
+  "excluded": [
+    "phase 3 product validation (the user will run Chohogi in the product project)",
+    "Codex replays",
+    "raw prompts or private reasoning in records"
+  ],
+  "requestedItems": [
+    {
+      "id": "p0-cowork",
+      "description": "Final corrections (F16 partial, F23 per host, Codex reinstall rule, D2/D3 user decisions), closing summary, registry historical, active plan registered."
+    },
+    {
+      "id": "p1-triggers",
+      "description": "finalize requires a learning-assessment for debugging/homeostasis records and records with correction or failure facts, unless an explicit opt-out reason is given."
+    },
+    {
+      "id": "p1-ledger",
+      "description": "Failure-signature registry and ledger; assessments carry a known signature; a recurring signature cannot close without a guard that exists; learning-scan reports recurrence."
+    },
+    {
+      "id": "p1-seed",
+      "description": "Seed the ledger with the recurring signatures observed on 2026-09-30/10-01 and their guards."
+    },
+    {
+      "id": "p1-status",
+      "description": "A verifier rejects a done/fixed claim in an active planning document that does not cite a passed record and an evidence class."
+    },
+    {
+      "id": "p2-measure",
+      "description": "Count which Chohogi documents replay sessions read and which documents tools or verifiers depend on."
+    },
+    {
+      "id": "p2-prune",
+      "description": "Archive or fold documents that neither sessions nor tools use, with a rule-document budget that does not grow."
+    },
+    {
+      "id": "replay",
+      "description": "Claude replay of the 7 scenarios before and after the change."
+    },
+    {
+      "id": "verify",
+      "description": "Tests first; suite, verifiers, genome map pass."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "verified",
+      "description": "Suite and verifiers pass; after-replay keeps every rule that passed before."
+    }
+  ]
+}

@@ -51,6 +51,25 @@ class RuntimeEntrypointTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("size cap", result.stdout)
 
+    def test_orchestration_documents_over_the_line_budget_fail(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            copy_tree(root)
+            (root / "assets/agents/trunk_orchestration/new-policy.md").write_text("rule\n" * 3000, encoding="utf-8")
+            result = verify(root)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("line budget", result.stdout)
+
+    def test_retired_and_linked_skill_documents_do_not_count(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            copy_tree(root)
+            retired = root / "assets/agents/genome_inheritance/retired_assets"
+            retired.mkdir(parents=True)
+            (retired / "old.md").write_text("rule\n" * 3000, encoding="utf-8")
+            result = verify(root)
+        self.assertEqual(result.returncode, 0, result.stdout)
+
     def test_each_removed_core_rule_anchor_fails(self) -> None:
         cases = [("assets/runtime_entrypoint/AGENTS.md", "실패하는 테스트를 먼저"),
                  ("assets/runtime_entrypoint/AGENTS.md", "완료 주장은 처리 방식과 무관하다"),
