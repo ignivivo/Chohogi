@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "activeExecutionPlan": null,
   "documents": [
+    {"path": "docs/chohogi/plans/2026-10-01-chohogi-rebuild.md", "role": "active-plan", "authority": "execution-queue", "state": "draft", "consumers": ["next Chohogi rebuild session"], "forbiddenUse": ["current execution queue until the user starts it", "model selection"]},
     {"path": "docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md", "role": "history", "authority": "evidence", "state": "historical", "consumers": ["HOM-20261001-loop-engine-and-pruning execution record"], "forbiddenUse": ["model selection", "replacing execution evidence"]},
     {"path": "docs/work-log/records/HOM-20261001-loop-engine-and-pruning", "role": "execution-record", "authority": "evidence", "state": "historical"},
     {

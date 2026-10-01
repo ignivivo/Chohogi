@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "6c773ec940690aa2da0920c4af094b03f64f3a7478fbf1b0e1b27a895dfbe490",
+  "sourceDigest": "d9b44edd5d79a9d9874893b1070172715def45a84b1aa5f31d492fe43b79c919",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -998,6 +998,11 @@
       "path": "docs/chohogi/plans/2026-09-23-observability-closure.md"
     },
     {
+      "id": "asset:docs/chohogi/plans/2026-10-01-chohogi-rebuild.md",
+      "kind": "asset",
+      "path": "docs/chohogi/plans/2026-10-01-chohogi-rebuild.md"
+    },
+    {
       "id": "asset:docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md",
       "kind": "asset",
       "path": "docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md"
@@ -1394,6 +1399,11 @@
       "id": "document:docs/chohogi/plans/2026-09-23-observability-closure.md",
       "kind": "document",
       "path": "docs/chohogi/plans/2026-09-23-observability-closure.md"
+    },
+    {
+      "id": "document:docs/chohogi/plans/2026-10-01-chohogi-rebuild.md",
+      "kind": "document",
+      "path": "docs/chohogi/plans/2026-10-01-chohogi-rebuild.md"
     },
     {
       "id": "document:docs/chohogi/plans/2026-10-01-loop-engine-and-pruning.md",
@@ -2257,6 +2267,12 @@
       "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "docs/chohogi/feedback/codex-claude-cowork-20260928.md"
+    },
+    {
+      "source": "asset:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
+      "target": "document:docs/chohogi/plans/2026-10-01-chohogi-rebuild.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-10-01-chohogi-rebuild.md"
     },
     {
       "source": "asset:docs/chohogi/feedback/codex-claude-cowork-20260928.md",
@@ -3793,6 +3809,12 @@
       "target": "document:README.md",
       "relation": "documents",
       "evidence": "manifest.json: reusable-methods"
+    },
+    {
+      "source": "skill:hallmark",
+      "target": "document:docs/chohogi/plans/2026-10-01-chohogi-rebuild.md",
+      "relation": "documents",
+      "evidence": "docs/chohogi/plans/2026-10-01-chohogi-rebuild.md"
     },
     {
       "source": "skill:hallmark",
