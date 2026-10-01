@@ -39,6 +39,9 @@ METHOD = """recording method (details: assets/agents/trunk_orchestration/executi
              consumer with verified evidence or a deferred reason. Patch and screenshot are not
              default artifacts; declare visual evidence only when a real browser proof is required.
   checkpoint / resume  only for interruptible work; resume rejects a changed baseline.
+  learning-assessment  when contract learningRequired is true, record one verified prevention disposition
+             (or closed-no-learning) before finalize: cause, prevention, trigger, non-trigger,
+             verification, applicability, and destination are all explicit.
   outcome, finalize  finalize checks scope items, feedback, reviews, and artifacts. An event
              after finalize reopens the record until it is finalized again.
 Never record secrets, raw prompts, full conversations, or private reasoning."""
@@ -91,6 +94,12 @@ def recorded_feedback_sources(project: Path) -> set[tuple[str, str]]:
 
 def contract_errors(contract: dict) -> list[str]:
     errors: list[str] = []
+    if 'learningRequired' in contract and not isinstance(contract['learningRequired'], bool):
+        errors.append('learningRequired must be a boolean')
+    if 'confirmedDefect' in contract and not isinstance(contract['confirmedDefect'], bool):
+        errors.append('confirmedDefect must be a boolean')
+    if contract.get('confirmedDefect') is True and contract.get('learningRequired') is not True:
+        errors.append('confirmedDefect contracts must set learningRequired to true')
     requested = contract.get('requestedItems', [])
     if requested:
         if not isinstance(requested, list): errors.append('requestedItems must be a list')
@@ -188,10 +197,22 @@ def capability_map_event(folder: Path, map_id: str):
         if item.get('event') == 'capability-map' and item.get('id') == map_id:
             return item
     return None
+
+LEARNING_DESTINATIONS = {
+    'closed-no-learning', 'project-record', 'project-leaf', 'provisional-global-candidate',
+    'genome-inheritance-asset', 'homeostasis',
+}
+
+def learning_assessment_event(folder: Path):
+    for item in reversed(events(folder)):
+        if item.get('event') == 'learning-assessment':
+            return item
+    return None
+
 def main() -> int:
     p=argparse.ArgumentParser(description=__doc__, epilog=METHOD, formatter_class=argparse.RawDescriptionHelpFormatter); p.add_argument('--project',type=Path,required=True); sub=p.add_subparsers(dest='cmd',required=True)
     b=sub.add_parser('begin'); b.add_argument('--work-id',required=True); b.add_argument('--contract',type=Path,required=True)
-    for name in ('artifact','checkpoint','resume','fact','prior-feedback','feedback','feedback-scan','scope-item','capability-map','decision','review-request','review-response','review-resolution','decision-report','decision-resolution','outcome','review','handoff','finalize'):
+    for name in ('artifact','checkpoint','resume','fact','prior-feedback','feedback','feedback-scan','scope-item','capability-map','decision','review-request','review-response','review-resolution','decision-report','decision-resolution','learning-assessment','outcome','review','handoff','finalize'):
         q=sub.add_parser(name); q.add_argument('--work-id',required=name != 'feedback-scan')
         if name=='artifact': q.add_argument('--acceptance-id',required=True); q.add_argument('--kind',required=True); q.add_argument('--path',type=Path,required=True)
         if name=='checkpoint': q.add_argument('--id',required=True); q.add_argument('--summary',required=True)
@@ -211,6 +232,11 @@ def main() -> int:
         if name=='review-resolution': q.add_argument('--decision-id', required=True); q.add_argument('--disposition', choices=('accepted','revised'), required=True); q.add_argument('--summary', required=True)
         if name=='decision-report': q.add_argument('--decision-id', required=True); q.add_argument('--tradeoffs', required=True); q.add_argument('--delivery-cost', required=True); q.add_argument('--reversibility', required=True); q.add_argument('--unknowns', required=True)
         if name=='decision-resolution': q.add_argument('--decision-id', required=True); q.add_argument('--selected', required=True); q.add_argument('--owner', choices=('user','authorized-owner'), required=True); q.add_argument('--summary', required=True)
+        if name=='learning-assessment':
+            q.add_argument('--destination', choices=sorted(LEARNING_DESTINATIONS), required=True)
+            q.add_argument('--cause', required=True); q.add_argument('--prevention', required=True)
+            q.add_argument('--trigger', required=True); q.add_argument('--non-trigger', required=True)
+            q.add_argument('--verification', required=True); q.add_argument('--applicability', required=True)
         if name=='outcome': q.add_argument('--summary', required=True); q.add_argument('--feedback', default=''); q.add_argument('--remaining-risk', default='')
     a=p.parse_args(); project=a.project.resolve()
     if not project.is_dir(): print('project path is missing',file=sys.stderr); return 2
@@ -370,6 +396,11 @@ def main() -> int:
         if not any(item.get('event') == 'decision-report' and item.get('decisionId') == a.decision_id for item in history):
             print('decision report is missing',file=sys.stderr); return 2
         event(folder, {'event':'decision-resolution','decisionId':a.decision_id,'selected':a.selected,'owner':a.owner,'summary':a.summary}); return 0
+    if a.cmd=='learning-assessment':
+        if learning_assessment_event(folder): print('learning assessment already exists', file=sys.stderr); return 2
+        values = {'cause':a.cause, 'prevention':a.prevention, 'trigger':a.trigger, 'nonTrigger':a.non_trigger, 'verification':a.verification, 'applicability':a.applicability}
+        if any(not value.strip() for value in values.values()): print('learning assessment fields must be non-empty', file=sys.stderr); return 2
+        event(folder, {'event':'learning-assessment', 'destination':a.destination, **values}); return 0
     if a.cmd=='outcome':
         event(folder, {'event':'outcome','summary':a.summary,'feedback':a.feedback,'remainingRisk':a.remaining_risk}); return 0
     if a.cmd=='review':
@@ -391,6 +422,7 @@ def main() -> int:
     requested_ids={item.get('id') for item in state['contract'].get('requestedItems', []) if isinstance(item, dict)}
     resolved_scope={item.get('id') for item in history if item.get('event') == 'scope-item' and item.get('status') in {'implemented','deferred','excluded'}}
     unresolved_scope=sorted(requested_ids-resolved_scope)
+    missing_learning_assessment=bool(state['contract'].get('learningRequired')) and not learning_assessment_event(folder)
     pending_feedback=[]
     feedback_registry=state['contract'].get('feedbackRegistry')
     if isinstance(feedback_registry, str):
@@ -400,5 +432,5 @@ def main() -> int:
             pending_feedback=[str(source) for source in registry_sources(project, registry_path) if (str(source), file_sha256(source)) not in recorded]
         else:
             pending_feedback=[feedback_registry]
-    report={'status':'pass' if not missing and not missing_consumers and not stale and not unresolved_reviews and not unresolved_user_decisions and not pending_feedback and not unresolved_scope else 'fail','missingArtifacts':missing,'missingConsumerEvidence':missing_consumers,'staleArtifacts':stale,'unresolvedDecisionReviews':unresolved_reviews,'unresolvedUserDecisions':unresolved_user_decisions,'pendingFeedback':pending_feedback,'unresolvedScopeItems':unresolved_scope}; (folder/'verification.json').write_text(json.dumps(report,indent=2),encoding='utf-8'); event(folder,{'event':'finalize','status':report['status'],'staleArtifacts':stale,'missingConsumerEvidence':missing_consumers,'pendingFeedback':pending_feedback,'unresolvedScopeItems':unresolved_scope}); print(json.dumps(report)); return 0 if report['status']=='pass' else 1
+    report={'status':'pass' if not missing and not missing_consumers and not stale and not unresolved_reviews and not unresolved_user_decisions and not pending_feedback and not unresolved_scope and not missing_learning_assessment else 'fail','missingArtifacts':missing,'missingConsumerEvidence':missing_consumers,'staleArtifacts':stale,'unresolvedDecisionReviews':unresolved_reviews,'unresolvedUserDecisions':unresolved_user_decisions,'pendingFeedback':pending_feedback,'unresolvedScopeItems':unresolved_scope,'missingLearningAssessment':missing_learning_assessment}; (folder/'verification.json').write_text(json.dumps(report,indent=2),encoding='utf-8'); event(folder,{'event':'finalize','status':report['status'],'staleArtifacts':stale,'missingConsumerEvidence':missing_consumers,'pendingFeedback':pending_feedback,'unresolvedScopeItems':unresolved_scope,'missingLearningAssessment':missing_learning_assessment}); print(json.dumps(report)); return 0 if report['status']=='pass' else 1
 if __name__=='__main__': raise SystemExit(main())

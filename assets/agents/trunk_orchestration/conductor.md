@@ -28,7 +28,7 @@ substantial 작업에서는 아래 셋 중 정확히 하나만 고른다.
 
 `learning`과 `homeostasis`는 일상 흐름과 경쟁하는 route가 아니다.
 
-- `learning`: 종료된 Delivery 또는 Debugging에서 원인·예방 검증이 확인된 뒤에만 `../vascular-bundle_circulation/phloem-feedback.md`의 정제된 return contract를 받아 최소 예방과 귀속지를 결정한다.
+- `learning`: 종료된 Delivery 또는 Debugging에서 원인·예방 검증이 확인된 뒤에만 `../vascular-bundle_circulation/phloem-feedback.md`의 정제된 return contract를 받아 최소 예방과 귀속지를 결정한다. 이 조건을 충족한 결함 작업은 계약에 `confirmedDefect: true`, `learningRequired: true`를 넣고 `learning-assessment` 없이는 finalize하지 않는다.
 - `homeostasis`: 초호기의 conductor, 역할·모델 정책, skill 수명, 설치·발견 또는 전역 자산 경계 자체를 바꾸는 요청·증거가 있을 때만 별도로 진입한다.
 
 "진입한다"는 해당 skill(`../adaptive-regulation/learning/SKILL.md`,

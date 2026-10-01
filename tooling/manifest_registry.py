@@ -98,8 +98,11 @@ def validate(document: dict[str, Any]) -> list[str]:
             errors.append(f"{component_id}: retired component must use pluginSlot none")
         elif ownership != "retired" and plugin_slot == "none":
             errors.append(f"{component_id}: active component must declare a real pluginSlot")
-        if source is not None and ownership != "retired" and not (ROOT / source).exists():
-            errors.append(f"{component_id}: source does not exist: {source}")
+        if source is not None and not (ROOT / source).exists():
+            if ownership == "retired":
+                errors.append(f"{component_id}: retired source does not exist: {source}")
+            else:
+                errors.append(f"{component_id}: source does not exist: {source}")
     return errors
 
 

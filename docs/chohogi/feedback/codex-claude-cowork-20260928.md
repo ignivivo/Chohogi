@@ -414,27 +414,27 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 | id | 상태 | 심각도 | 요약 | 근거 | 제안 |
 |---|---|---|---|---|---|
 | F1 | fixed | — | 검증기가 "활성 계획 정확히 1개"를 강제해 finalize된 계획이 active로 남음 | `HOM-20260930-integrity-repair` | F17로 보완 필요 |
-| F2 | candidate(Codex) | low | homeostasis skill의 루트 없는 상대 경로. Claude는 hook 루트로 해결됨(live, $0.12) | phase2 fact | Codex에서 1회 확인 |
+| F2 | fixed | low | Codex 새 세션에서 Homeostasis Method가 정본 `execution-record.py`를 찾아 begin 성공. 설치 cache가 오래되어 새 tooling 2개가 없었던 발견 문제는 `codex plugin add` 재설치 후 해소 | [HOM-20260930-codex-role-install-live](../../work-log/records/HOM-20260930-codex-role-install-live/events.jsonl) | 새 source commit 뒤 Codex plugin 재설치를 설치 검증에 포함 |
 | F3 | fixed | — | skill-creator 호스트 매핑 | `HOM-20260930-review-fixes` | — |
 | F4 | fixed (this host) | high | Codex 역할 5종이 설치 뒤 미등록이었던 설치·발견 결함. `codex-role-setup.py --apply`로 정본 TOML을 등록하고, 새 `gpt-5.6-luna` 세션에서 5종 모두 실제 spawn | `HOM-20260930-codex-role-install-live`, `/tmp/chohogi-live-codex-pe6ZIa` | native plugin add에는 역할 lifecycle이 없으므로 setup/doctor adapter를 설치 절차에 포함 |
 | F5–F9 | fixed | — | 3.12–3.14 참조 | 각 기록 | — |
-| F10 | open | low | manifest 폐기 항목 보존 규칙 비일관, 검증기도 확인 안 함 | `manifest.json` | 규칙 하나로 정리 |
+| F10 | fixed | low | retired source도 존재 검증. 삭제된 frontend-surface는 명시적 retired record로 보존 | [HOM-20261001-manifest-impact-repair](../../work-log/records/HOM-20261001-manifest-impact-repair/events.jsonl) | — |
 | F11 | fixed | — | critical-reviewer에 Bash | `HOM-20260930-review-fixes` | — |
-| F12 | open | low | genome impact가 114개를 반환해 선별력 없음 | 명령 출력 | 소비 관계 기준으로 축소 |
+| F12 | fixed | low | impact가 전체 affected 외 directConsumers(24)와 transitiveReferences(95)를 분리 | [HOM-20261001-manifest-impact-repair](../../work-log/records/HOM-20261001-manifest-impact-repair/events.jsonl) | — |
 | F13 | fixed | — | profile 파일 커밋 | `e95323b` | — |
 | F14 | open | medium | 모델 선택 비차단을 실제 대화에서 미관측 | 3.14 | 대화형 세션 관측 |
 | F15 | fixed | — | 부분 저장 profile | `HOM-20260930-profile-gaps` | — |
-| F16 | open | high | learning이 2026-08-12 이후 미사용. 확정 실패 수리 11건이 모두 homeostasis로 직행. learning-우선 규칙은 `skills/homeostasis/SKILL.md:111`에만 있음 | phase2 fact | 규칙을 conductor·주입 지침으로 올리거나, 실효가 없으면 규칙을 줄임(사용자 판단) |
+| F16 | fixed | high | Learning이 prose-only여서 종료 관문이 없었다. `confirmedDefect: true` 계약은 `learningRequired: true`와 구조화된 `learning-assessment` 없이는 begin/finalize를 통과할 수 없다 | [HOM-20261001-learning-closure](../../work-log/records/HOM-20261001-learning-closure/events.jsonl) | `closed-no-learning`도 평가 기록을 남긴다. 전역 승격은 독립 증거가 있을 때만 가능 |
 | F17 | fixed | — | 기록을 쓰는 프로젝트의 활성 계획은 `executionRecord` 필수 | `HOM-20260930-review-fixes`, mutation M14 | — |
 | F18 | fixed | — | 시나리오 분리(자율 위임은 원래 문구, profile은 명시 문구) | 같은 기록 | replay 재측정 필요 |
 | F19 | open | medium | profile 없는 위임에서 card 미실행. Claude 역할은 frontmatter 기본값이 있어 card 없이도 위임이 성립 | C2 transcript, 3.20 replay(축소 전후 모두 실패) | Claude에서 card 규칙 필요 여부를 D1로 결정 |
 | F20 | fixed | — | 세션 모델 상속 서술 3곳을 호스트별 사실로 교체 | `HOM-20260930-review-fixes` | — |
 | F21 | open | high | replay 7/7 세션이 초호기 route 문서를 한 번도 읽지 않음. skill 호출 0. 행동은 주입 지침만으로 결정 | C2 transcript 분석 | 규칙 배치 재설계: 행동을 바꿔야 하는 규칙은 주입 지침에, 나머지는 필요 시 명령(검증기·card)으로 묶기. C3과 함께 판단 |
 | F22 | fixed | — | `verify-runtime-entrypoint.py`, mutation 17/17 | `HOM-20260930-review-fixes` | 문구 존재만 증명(준수는 C2) |
-| F23 | fixed | — | 오류에 허용값, 주입 지침에 "계획을 만들면 registry 등록·검증기 실행" | `HOM-20260930-review-fixes`, `HOM-20261001-guidance-slim` | 2026-10-01 replay에서 plan-location 통과(축소 전·복원 후) |
+| F23 | open | high | 오류에 허용값과 주입 지침은 추가됐지만, 2026-10-01 Codex `plan-location-no-tool-directives` replay에서 registry-consistent assertion이 exit 1로 실패 | [HOM-20260930-codex-role-install-live](../../work-log/records/HOM-20260930-codex-role-install-live/events.jsonl) | 실패한 replay의 생성 계획·registry를 보존해 원인을 재현하고, 수정 뒤 같은 assertion을 재측정 |
 | F24 | partial | medium | 주입 지침 8,520 → 3,331자, 첫 턴 컨텍스트 약 -4.5k 토큰, 4,000자 상한 | `HOM-20261001-guidance-slim` | skill·역할 설명 목록(약 4.9k자)은 미조정 |
 | F26 | fixed | — | finalize 뒤 이벤트가 상태를 reopened로 바꿈. 기존 기록 3개 소급 | 같은 기록 | — |
-| F27 | open(Codex) | medium | 3.17 기록의 spawn_agent 관측 두 사실이 서로 충돌 | `HOM-20260930-codex-role-install-live` events | Codex가 rollout 경로로 정리 |
+| F27 | partial | medium | rollout parser가 `/session`을 역할로 오인한 문제는 고쳤고 transcript에서 실제 spawn·wait·handoff는 확인했다. 그러나 Codex 스트림에는 role/model/effort가 없어 profile assertion은 아직 판정 불가 | [HOM-20260930-codex-role-install-live](../../work-log/records/HOM-20260930-codex-role-install-live/events.jsonl) | transcript schema 또는 replay assertion을 역할 필드가 없는 host evidence에 맞게 분리하고 재측정 |
 | F28 | decision | medium | `codex-role-setup.py --apply`가 "개인 config.toml은 관리 대상이 아니다" 원칙의 예외가 됨 | AGENTS.md, assurance nonTrigger | 사용자가 예외를 상시로 둘지 결정(8.6) |
 | F25 | open | low | `~/.claude/plugins/cache/chohogi-marketplace/chohogi/1.0.0`에 09-29 사본(agents/ 없음)이 남아 있으나 로드되지 않음 | C8 fact | 혼동 방지를 위해 기록만. 삭제는 사용자 판단 |
 
@@ -443,7 +443,7 @@ transcript에서 확인한 것만 "검증됨"으로 적는다.
 1. **재측정(Claude·Codex 각 1회):** `review-delegates-on-session-model`, `review-uses-saved-profile`,
    `plan-location-no-tool-directives`. F19·F23·F18 수정의 효과를 확인한다. 정적 검사만으로는 준수를 증명하지 못한다(F21).
 2. **F27(Codex)** — Codex 위임 실패 결론을 확정해야 Codex 쪽 F19를 다룰 수 있다.
-3. **8.6 사용자 결정** — F21·F24·F16은 규칙 배치 설계이고, F28은 원칙 예외다.
+3. **8.6 사용자 결정** — F21·F24는 규칙 배치 설계이고, F28은 원칙 예외다. F16은 [Learning 종료 게이트](../../work-log/records/HOM-20261001-learning-closure/events.jsonl)로 해소됐다.
 4. **F2(Codex 1회), F14(대화형 관측)** — 관측만 남았다.
 5. **F10·F12·F25** — 낮은 우선순위 정리. 근거: 행동에 영향이 관측되지 않았다.
 
@@ -459,7 +459,7 @@ Codex 검토자는 아래를 독립적으로 확인하고, 결과를 이 문서 
    후 rollout에서 초호기 route 문서 읽기 여부를 센다. Codex는 AGENTS.md가 링크라 경로 문서를 읽을 수 있는지가 쟁점이다.
 4. F2: 초호기 저장소 밖 프로젝트에서 homeostasis skill의 execution-record 명령이 경로를 찾는지 Codex에서 1회 확인한다.
 5. F19·F20: Codex에서 profile 없는 위임 시나리오(`review-delegates-on-session-model`)를 1회 돌려 카드 실행 여부를 본다.
-6. F16: Codex 쪽 판단 — learning-우선 규칙이 실효가 있어야 하는지, 줄여야 하는지 의견을 남긴다(수정은 하지 않는다).
+6. F16: `confirmedDefect` 계약이 `learningRequired`와 구조화된 `learning-assessment`를 강제하는지 회귀 테스트와 verifier 출력으로 확인한다.
 7. 비용은 `evaluation-budget-policy.md` 안에서 쓰고, 실행 횟수와 비용을 이 문서에 적는다.
 
 ### 8.6 사용자 결정 항목
@@ -467,5 +467,5 @@ Codex 검토자는 아래를 독립적으로 확인하고, 결과를 이 문서 
 | id | 질문 | 선택지와 trade-off | 추천 |
 |---|---|---|---|
 | D1 (F21·F24) | 규칙을 어디에 둘 것인가 | (a) 행동 규칙은 주입 지침에 한 문장씩, 절차는 도구 출력으로: 3.20에서 적용·검증됨. 남은 질문은 Claude에서 card 규칙이 필요한가(F19) | (a) 유지. card 규칙의 Claude 적용 여부만 결정 필요 |
-| D2 (F16) | learning을 살릴 것인가 | (a) learning-우선을 conductor·주입 지침에 올린다. (b) 실효가 없으니 homeostasis가 예방 범위를 직접 판정하도록 규칙을 줄인다 | 판단 보류. 6주간 미사용이 "불필요"인지 "진입 경로 부재"인지 증거가 없다 |
+| D2 (F16) | learning을 살릴 것인가 | (a) learning-우선을 conductor·주입 지침에 올린다. (b) 실효가 없으니 homeostasis가 예방 범위를 직접 판정하도록 규칙을 줄인다 | **완료:** (a)를 선택하고 `confirmedDefect` 시작 관문과 finalize 관문으로 실행 가능하게 만들었다. [HOM-20261001-learning-closure](../../work-log/records/HOM-20261001-learning-closure/events.jsonl) |
 | D3 (F28) | `codex-role-setup.py --apply`를 원칙 예외로 둘 것인가 | (a) 상시 예외(명시 실행·백업·추가만). (b) 점검만 허용하고 등록은 README 수동 절차 | (a). Codex는 플러그인에 역할 슬롯이 없어 설치만으로 역할이 동작하지 않는다(3.17) |

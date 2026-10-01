@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "a54299ae643158890ec6e23ac0e01240d8e4d477c9844dd1c72ccb70e1423633",
+  "sourceDigest": "bb738ff99a7929abca04894cdf08db77c2b2a610ba4aedbdf702835153842471",
   "nodes": [
     {
       "id": "asset:.claude-plugin/marketplace.json",
@@ -78,6 +78,11 @@
       "path": "assets/agents/genome_inheritance/index_registry.yaml"
     },
     {
+      "id": "asset:assets/agents/genome_inheritance/retired_assets/frontend-surface.md",
+      "kind": "asset",
+      "path": "assets/agents/genome_inheritance/retired_assets/frontend-surface.md"
+    },
+    {
       "id": "asset:assets/agents/genome_inheritance/retired_assets/grill-me",
       "kind": "asset",
       "path": "assets/agents/genome_inheritance/retired_assets/grill-me"
@@ -116,11 +121,6 @@
       "id": "asset:assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml",
       "kind": "asset",
       "path": "assets/agents/reusable_methods/dependency-scanning/agents/openai.yaml"
-    },
-    {
-      "id": "asset:assets/agents/reusable_methods/frontend-surface",
-      "kind": "asset",
-      "path": "assets/agents/reusable_methods/frontend-surface"
     },
     {
       "id": "asset:assets/agents/reusable_methods/hallmark/LICENSE",
@@ -1286,7 +1286,7 @@
     {
       "id": "component:frontend-surface",
       "kind": "component",
-      "path": "assets/agents/reusable_methods/frontend-surface",
+      "path": "assets/agents/genome_inheritance/retired_assets/frontend-surface.md",
       "state": "retired"
     },
     {
@@ -1836,14 +1836,14 @@
       "evidence": "manifest.json"
     },
     {
-      "source": "asset:assets/agents/genome_inheritance/retired_assets/grill-me",
-      "target": "component:grill-me",
+      "source": "asset:assets/agents/genome_inheritance/retired_assets/frontend-surface.md",
+      "target": "component:frontend-surface",
       "relation": "activates",
       "evidence": "manifest.json"
     },
     {
-      "source": "asset:assets/agents/reusable_methods/frontend-surface",
-      "target": "component:frontend-surface",
+      "source": "asset:assets/agents/genome_inheritance/retired_assets/grill-me",
+      "target": "component:grill-me",
       "relation": "activates",
       "evidence": "manifest.json"
     },
@@ -2455,6 +2455,12 @@
     },
     {
       "source": "asset:manifest.json",
+      "target": "asset:assets/agents/genome_inheritance/retired_assets/frontend-surface.md",
+      "relation": "requires",
+      "evidence": "manifest.json"
+    },
+    {
+      "source": "asset:manifest.json",
       "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "manifest.json"
@@ -2780,6 +2786,12 @@
     {
       "source": "asset:tooling/tests/test_genome_map.py",
       "target": "asset:assets/agents/trunk_orchestration/model-policy.md",
+      "relation": "requires",
+      "evidence": "tooling/tests/test_genome_map.py"
+    },
+    {
+      "source": "asset:tooling/tests/test_genome_map.py",
+      "target": "asset:assets/runtime_entrypoint/AGENTS.md",
       "relation": "requires",
       "evidence": "tooling/tests/test_genome_map.py"
     },

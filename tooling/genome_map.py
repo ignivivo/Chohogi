@@ -207,18 +207,24 @@ def impact(graph: dict[str, Any], changed_path: str) -> dict[str, Any]:
         if edge["relation"] in {"activates", "requires"}:
             reverse_consumer.setdefault(edge["target"], set()).add(edge["source"])
     affected = set(initial)
+    direct_consumers: set[str] = set()
     queue = deque(initial)
     nodes = {node["id"]: node for node in graph["nodes"]}
     while queue:
         node = queue.popleft()
         forward = set() if nodes[node]["kind"] == "document" else outgoing.get(node, set())
-        for neighbor in forward | reverse_consumer.get(node, set()):
+        neighbors = forward | reverse_consumer.get(node, set())
+        if node in initial:
+            direct_consumers.update(neighbors - initial)
+        for neighbor in neighbors:
             if neighbor not in affected:
                 affected.add(neighbor)
                 queue.append(neighbor)
     return {
         "changed": normalized,
         "affected": sorted(affected),
+        "directConsumers": sorted(direct_consumers),
+        "transitiveReferences": sorted(affected - initial - direct_consumers),
         "verification": sorted(node for node in affected if nodes[node]["kind"] == "verifier"),
         "documentation": sorted(node for node in affected if nodes[node]["kind"] == "document"),
         "repairDisposition": "inspect-before-repair",

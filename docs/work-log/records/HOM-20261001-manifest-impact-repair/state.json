@@ -1,0 +1,38 @@
+{
+  "workId": "HOM-20261001-manifest-impact-repair",
+  "baseline": "cc77de324cbffdfe965c84b3d9f379a6181d6ee0a93ad23ee6a53f6a3fb12b9e",
+  "contract": {
+    "schemaVersion": 1,
+    "objective": "Close the confirmed manifest-retirement and genome-impact precision defects with tests, source changes, generated-map evidence, and synchronized cowork status.",
+    "route": "homeostasis",
+    "execution": "direct",
+    "feedbackRegistry": ".agents/chohogi-document-registry.json",
+    "requested": [
+      "repair F10",
+      "repair F12",
+      "record evidence and cowork status"
+    ],
+    "requestedItems": [
+      {
+        "id": "f10",
+        "description": "Retired manifest sources are verified and retained as explicit records."
+      },
+      {
+        "id": "f12",
+        "description": "Genome impact separates direct consumers from transitive references."
+      },
+      {
+        "id": "evidence",
+        "description": "Tests, generated map, and cowork status match the repair."
+      }
+    ],
+    "acceptance": [
+      {
+        "id": "verified",
+        "description": "Focused tests, manifest validation, and genome-map check pass."
+      }
+    ]
+  },
+  "artifacts": [],
+  "checkpoints": []
+}

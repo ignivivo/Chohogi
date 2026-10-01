@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "objective": "Close the confirmed manifest-retirement and genome-impact precision defects with tests, source changes, generated-map evidence, and synchronized cowork status.",
+  "route": "homeostasis",
+  "execution": "direct",
+  "feedbackRegistry": ".agents/chohogi-document-registry.json",
+  "requested": ["repair F10", "repair F12", "record evidence and cowork status"],
+  "requestedItems": [
+    {"id": "f10", "description": "Retired manifest sources are verified and retained as explicit records."},
+    {"id": "f12", "description": "Genome impact separates direct consumers from transitive references."},
+    {"id": "evidence", "description": "Tests, generated map, and cowork status match the repair."}
+  ],
+  "acceptance": [{"id": "verified", "description": "Focused tests, manifest validation, and genome-map check pass."}]
+}

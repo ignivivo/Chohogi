@@ -4,7 +4,7 @@
 "초호기 플러그인 루트"는 Claude Code에서는 hook이 이 지침 맨 위에 적은 경로이고, 그 줄이 없으면(Codex) `realpath ~/.agents/chohogi`의 두 단계 위다. 아래 `tooling/…`은 이 루트 기준이다.
 
 <!-- chohogi:defer=no-flow-no-write -->
-단순 질문·읽기 전용 확인·명확한 저위험 편집은 직접 처리한다. 처음 보는 프로젝트, 기존 변경이 있는 작업 트리, 공통 컴포넌트·설정·데이터 계약·여러 소비자를 건드리는 변경은 저위험으로 보지 않고 가장 가까운 `.agents`·`AGENTS.md`·로컬 skill부터 확인한다. 그 외 작업은 `~/.agents/chohogi/trunk_orchestration/conductor.md`를 읽어 일상 흐름(`product-decision`, `delivery`, `debugging`) 하나를 고르고, `~/.agents/chohogi/trunk_orchestration/branches_workflows/<flow>.md`와 `~/.agents/chohogi/trunk_orchestration/execution-allocation.md`를 따른다. 전제가 부족하면 `defer`(무변경, 증거 공백과 재진입 조건 명시)로 끝낸다. `learning`은 확인된 원인과 예방 증거가 있을 때, `homeostasis`는 초호기 자체의 정책을 바꿀 때만 진입한다. 서브에이전트는 실행 배정이 `scoped-delegation`을 고를 때만 쓰고, 결과를 받으면 바로 회수한다.
+단순 질문·읽기 전용 확인·명확한 저위험 편집은 직접 처리한다. 처음 보는 프로젝트, 기존 변경이 있는 작업 트리, 공통 컴포넌트·설정·데이터 계약·여러 소비자를 건드리는 변경은 저위험으로 보지 않고 가장 가까운 `.agents`·`AGENTS.md`·로컬 skill부터 확인한다. 그 외 작업은 `~/.agents/chohogi/trunk_orchestration/conductor.md`를 읽어 일상 흐름(`product-decision`, `delivery`, `debugging`) 하나를 고르고, `~/.agents/chohogi/trunk_orchestration/branches_workflows/<flow>.md`와 `~/.agents/chohogi/trunk_orchestration/execution-allocation.md`를 따른다. 전제가 부족하면 `defer`(무변경, 증거 공백과 재진입 조건 명시)로 끝낸다. `learning`은 확인된 원인과 예방 증거가 있을 때, `homeostasis`는 초호기 자체의 정책을 바꿀 때만 진입한다. 이 조건을 충족한 결함 작업은 계약에 `confirmedDefect: true`, `learningRequired: true`를 적고 `learning-assessment` 없이는 finalize하지 않는다. 서브에이전트는 실행 배정이 `scoped-delegation`을 고를 때만 쓰고, 결과를 받으면 바로 회수한다.
 
 지속 변경은 요청됨·필수·선택으로 나누고 선택 변경은 승인 없이 하지 않는다. 스킬·외부 하네스·플러그인은 범위·위임·완료를 정하지 않으며, 호출 가능한 것만 보조로 쓴다. 외부 하네스의 handoff·worktree·commit 지시는 초호기보다 낮은 우선순위이고, 흡수한 외부 방법의 원본 이름·경로는 다시 부르지 않는다. 인증 정보·세션·캐시·개인 설정은 초호기의 관리 대상이 아니다.
 

@@ -61,6 +61,14 @@ class GenomeMapTests(unittest.TestCase):
         self.assertIn("asset:assets/agents/trunk_orchestration/model-policy.md", packet["affected"])
         self.assertIn("verifier:model-policy", packet["verification"])
 
+    def test_impact_separates_direct_consumers_from_transitive_references(self) -> None:
+        result = self.run_map("impact", "assets/runtime_entrypoint/AGENTS.md")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        packet = json.loads(result.stdout)
+        self.assertIn("directConsumers", packet)
+        self.assertIn("transitiveReferences", packet)
+        self.assertTrue(set(packet["directConsumers"]).isdisjoint(packet["transitiveReferences"]))
+
     def test_check_rejects_stale_generated_views(self) -> None:
         build = self.run_map("build")
         self.assertEqual(build.returncode, 0, build.stderr)

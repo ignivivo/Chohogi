@@ -14,6 +14,9 @@ REQUIRED_LEARNING_TERMS = (
     "primary prevention scope",
     "provisional global candidate",
     "automatic global skill creation",
+    "learning-assessment",
+    "learningRequired",
+    "confirmedDefect",
 )
 REQUIRED_RECORD_TERMS = (
     "mechanismLayer",
@@ -47,10 +50,12 @@ def main() -> int:
     learning = ROOT / "assets/agents/adaptive-regulation/learning/SKILL.md"
     record = ROOT / "assets/agents/adaptive-regulation/learning/references/learning-record.md"
     phloem = ROOT / "assets/agents/vascular-bundle_circulation/phloem-feedback.md"
+    execution_record = ROOT / "tooling/execution-record.py"
     genome_inheritance = ROOT / "assets/agents/genome_inheritance/index_registry.yaml"
     require_terms(learning, REQUIRED_LEARNING_TERMS, errors)
     require_terms(record, REQUIRED_RECORD_TERMS, errors)
     require_terms(phloem, REQUIRED_PHLOEM_TERMS, errors)
+    require_terms(execution_record, ("learning-assessment", "learningRequired", "confirmedDefect", "missingLearningAssessment"), errors)
     require_terms(genome_inheritance, ("required_asset_fields", "retirement_condition"), errors)
 
     fixture_path = ROOT / "assets/agents/trunk_orchestration/evaluation/learning-fixtures.json"

@@ -34,6 +34,12 @@ factory.
 5. Choose exactly one destination: `closed-no-learning`, project record,
    project leaf, provisional global candidate, genome_inheritance asset, or Homeostasis
    escalation.
+6. For a work record whose confirmed cause and verified prevention meet this
+   entry gate, set `confirmedDefect: true` and `learningRequired: true` at `begin` and record the chosen
+   disposition with `execution-record.py learning-assessment` before finalize.
+   The assessment names cause, prevention, trigger, non-trigger, verification,
+   applicability, and destination. This makes a deliberate non-promotion
+   auditable without turning it into a global asset.
 
 ## Rework signal
 

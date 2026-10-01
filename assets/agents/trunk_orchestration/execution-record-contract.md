@@ -56,6 +56,23 @@ items, current evidence references, the latest checkpoint, and recent material
 decisions. It is not a second history file and excludes raw prompts, private
 reasoning, credentials, complete tool payloads, and provider-native state.
 
+## Learning closure for confirmed defects
+
+When a Delivery, Debugging, or Homeostasis work item has a confirmed cause and
+a verified smallest prevention, set `confirmedDefect: true` and
+`learningRequired: true` in its contract. `begin` rejects a confirmed-defect
+contract that does not enable this gate.
+Before `finalize`, record exactly one `learning-assessment` with the cause,
+prevention, trigger, non-trigger, verification, applicability, and one
+destination: `closed-no-learning`, `project-record`, `project-leaf`,
+`provisional-global-candidate`, `genome-inheritance-asset`, or `homeostasis`.
+`finalize` rejects a required record without this assessment.
+
+`closed-no-learning` is an explicit result for a prevention that must not
+become reusable memory. It still records why the observed signature is bounded.
+The command does not promote an asset, change policy, or infer that a cause is
+confirmed; the work's evidence must establish those facts first.
+
 ## Decision-review checkpoint
 
 An execution checkpoint answers whether a project state can be resumed. A

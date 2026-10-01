@@ -109,8 +109,9 @@ needs a regression test, or an optional tool exists.
 
 Produce either a bounded change with the required verification evidence, or a
 decision not to change Chohogi. When a confirmed failure is being made durable,
-let `$learning` decide the smallest prevention first; use Homeostasis only if
-that decision changes Chohogi's own policy or lifecycle.
+let `$learning` decide the smallest prevention first; set `confirmedDefect: true` and `learningRequired`
+in the work contract and record its `learning-assessment` before finalization.
+Use Homeostasis only if that decision changes Chohogi's own policy or lifecycle.
 
 Close the work-id opened at step 1 with an `outcome` (result, remaining risk)
 and `finalize`. A Homeostasis change without a closed execution record is not

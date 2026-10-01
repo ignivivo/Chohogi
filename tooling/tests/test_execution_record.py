@@ -347,6 +347,29 @@ class ExecutionRecordTests(unittest.TestCase):
             self.assertEqual(self.invoke(project, "scope-item", "--work-id", "sample", "--id", "two", "--status", "deferred", "--summary", "later", "--reason", "blocked by approval").returncode, 0)
             self.assertEqual(self.invoke(project, "finalize", "--work-id", "sample").returncode, 0)
 
+    def test_learning_required_contract_cannot_finalize_without_a_structured_assessment(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            self.begin(project, {"schemaVersion": 1, "learningRequired": True, "acceptance": []})
+            missing = self.invoke(project, "finalize", "--work-id", "sample")
+            self.assertNotEqual(missing.returncode, 0)
+            self.assertIn("missingLearningAssessment", missing.stdout)
+            invalid = self.invoke(project, "learning-assessment", "--work-id", "sample", "--destination", "project-record", "--cause", "confirmed cause", "--prevention", "guard", "--trigger", "when it recurs", "--non-trigger", "ordinary work", "--verification", "test")
+            self.assertNotEqual(invalid.returncode, 0)
+            self.assertIn("applicability", invalid.stderr)
+            recorded = self.invoke(project, "learning-assessment", "--work-id", "sample", "--destination", "project-record", "--cause", "confirmed cause", "--prevention", "guard", "--trigger", "when it recurs", "--non-trigger", "ordinary work", "--verification", "test", "--applicability", "project")
+            self.assertEqual(recorded.returncode, 0, recorded.stderr)
+            self.assertEqual(self.invoke(project, "finalize", "--work-id", "sample").returncode, 0)
+
+    def test_confirmed_defect_contract_must_enable_the_learning_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            contract = project / "contract.json"
+            contract.write_text(json.dumps({"schemaVersion": 1, "confirmedDefect": True, "learningRequired": False}), encoding="utf-8")
+            result = self.invoke(project, "begin", "--work-id", "sample", "--contract", str(contract))
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("confirmedDefect", result.stderr)
+
     def test_material_tradeoff_requires_decision_report_and_user_resolution(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             project = Path(temporary)

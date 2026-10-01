@@ -65,6 +65,17 @@ class ManifestRegistryTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("source escapes repository root", result.stderr)
 
+    def test_validate_rejects_a_retired_component_with_a_missing_source(self) -> None:
+        document = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
+        retired = next(item for item in document["components"] if item["ownership"] == "retired")
+        retired["source"] = "assets/missing-retired-source"
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            manifest = Path(temporary_directory) / "manifest.json"
+            manifest.write_text(json.dumps(document), encoding="utf-8")
+            result = self.run_resolver("validate", manifest=manifest)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("retired source does not exist", result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()

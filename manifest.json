@@ -121,7 +121,7 @@
       "id": "frontend-surface",
       "organ": "epidermal-tissue-system",
       "function": "frontend-preflight",
-      "source": "assets/agents/reusable_methods/frontend-surface",
+      "source": "assets/agents/genome_inheritance/retired_assets/frontend-surface.md",
       "pluginSlot": "none",
       "ownership": "retired",
       "activation": "none",
